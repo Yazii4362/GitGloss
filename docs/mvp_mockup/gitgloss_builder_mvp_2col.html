@@ -1,0 +1,303 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.mock-shell{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary);font-family:var(--font-sans)}
+.mock-topbar{height:40px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;padding:0 14px;gap:10px}
+.mock-logo{font-size:13px;font-weight:500;color:#D4537E}
+.mock-sep{width:0.5px;height:16px;background:var(--color-border-secondary)}
+.mock-title{font-size:11px;color:var(--color-text-secondary)}
+.mock-export{margin-left:auto;font-size:11px;padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);color:var(--color-text-primary);cursor:pointer;background:transparent}
+.mock-body{display:grid;grid-template-columns:260px 1fr;min-height:480px}
+.mock-left{border-right:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);overflow:hidden;display:flex;flex-direction:column}
+.mock-right{background:var(--color-background-secondary);display:flex;flex-direction:column}
+
+.section-label{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);padding:12px 14px 6px}
+
+.type-row{display:flex;gap:5px;padding:0 14px 12px}
+.type-chip{flex:1;padding:7px 4px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);font-size:10px;font-weight:500;text-align:center;cursor:pointer;color:var(--color-text-secondary);background:transparent;transition:.12s}
+.type-chip.on{background:#FBEAF0;border-color:#ED93B1;color:#72243E}
+
+.preset-tabs-row{display:flex;gap:3px;padding:0 14px 8px}
+.ptab{flex:1;padding:4px;border-radius:var(--border-radius-md);font-size:9px;font-weight:500;text-align:center;border:none;cursor:pointer;color:var(--color-text-tertiary);background:transparent;transition:.12s}
+.ptab.on{background:#FBEAF0;color:#72243E}
+
+.preset-scroll{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:0 14px 12px;overflow-x:auto}
+.p-thumb{height:32px;border-radius:5px;cursor:pointer;border:0.5px solid var(--color-border-tertiary);transition:.12s}
+.p-thumb:hover{border-color:#ED93B1}
+.p-thumb.on{border:1.5px solid #ED93B1}
+.p-thumb.gl{background:linear-gradient(135deg,rgba(237,147,177,.3),rgba(155,143,232,.2))}
+.p-thumb.gd{background:linear-gradient(135deg,rgba(45,31,66,.85),rgba(80,40,80,.7))}
+.p-thumb.nm{background:#F0E6F0}
+.p-thumb.vv{background:linear-gradient(135deg,#ED93B1,#9B8FE8)}
+
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:0 14px 12px}
+
+.field-group{padding:0 14px 10px}
+.field-label{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px}
+.field-input{width:100%;height:32px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:12px;background:var(--color-background-primary);color:var(--color-text-primary);outline:none}
+.field-input:focus{border-color:#ED93B1;box-shadow:0 0 0 2px rgba(237,147,177,.15)}
+
+.color-row{display:flex;gap:6px;padding:0 14px 12px}
+.sw{width:20px;height:20px;border-radius:50%;cursor:pointer;border:1.5px solid transparent;transition:.12s}
+.sw:hover,.sw.on{border-color:var(--color-text-primary)}
+.sw-pk{background:#ED93B1}.sw-pu{background:#9B8FE8}.sw-sk{background:#7EC8E3}.sw-sf{background:#F4C0D1}.sw-dk{background:#2D1F42}
+
+.tag-wrap{display:flex;flex-wrap:wrap;gap:4px;padding:0 14px 10px}
+.tag{display:inline-flex;align-items:center;gap:3px;padding:3px 7px;border-radius:20px;font-size:10px;font-weight:500}
+.tag-pk{background:#FBEAF0;color:#72243E}
+.tag-pu{background:#EEEDFE;color:#3C3489}
+.tag-sk{background:#E6F1FB;color:#0C447C}
+.tag-x{background:none;border:none;cursor:pointer;color:inherit;font-size:11px;padding:0;line-height:1;opacity:.6}
+.tag-add{font-size:11px;padding:0 14px 10px;color:var(--color-text-tertiary);cursor:pointer}
+
+.spacer{flex:1}
+.mock-left-footer{border-top:0.5px solid var(--color-border-tertiary);padding:10px 14px;font-size:10px;color:var(--color-text-tertiary);text-align:center}
+.ad-slot-left{margin:0 14px 10px;height:52px;border:0.5px dashed rgba(212,83,126,.3);border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--color-text-tertiary)}
+
+.preview-area{flex:1;display:flex;align-items:center;justify-content:center;padding:32px;position:relative}
+.preview-bg-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(237,147,177,.18) 1px,transparent 1px);background-size:18px 18px;border-radius:0}
+.widget-card{position:relative;z-index:1;background:rgba(253,240,246,.75);border:0.5px solid rgba(237,147,177,.35);border-radius:16px;padding:20px;width:100%;max-width:340px}
+.w-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.w-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ED93B1,#9B8FE8);flex-shrink:0}
+.w-name{font-size:13px;font-weight:500;color:#2D1F42}
+.w-handle{font-size:10px;color:#A78B9A}
+.w-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.w-stat{background:rgba(255,255,255,.6);border:0.5px solid rgba(237,147,177,.2);border-radius:8px;padding:8px 4px;text-align:center}
+.w-num{font-size:16px;font-weight:500;color:#D4537E}
+.w-lbl{font-size:8px;color:#A78B9A;margin-top:2px}
+.w-tags{display:flex;gap:5px;flex-wrap:wrap}
+.w-badge{font-size:9px;padding:2px 7px;border-radius:12px}
+.w-badge-pk{background:#FBEAF0;color:#72243E}
+.w-badge-pu{background:#EEEDFE;color:#3C3489}
+.w-badge-sk{background:#E6F1FB;color:#0C447C}
+
+.code-strip{background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary)}
+.code-tabs-row{display:flex;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ctab{padding:8px 14px;font-size:11px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;transition:.12s}
+.ctab.on{border-bottom-color:#ED93B1;color:var(--color-text-primary)}
+.code-body{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.code-pre{flex:1;font-family:var(--font-mono);font-size:10px;color:var(--color-text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy-btn{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:11px;font-weight:500;cursor:pointer;background:transparent;color:var(--color-text-primary);transition:.15s;white-space:nowrap;flex-shrink:0}
+.copy-btn:hover{background:var(--color-background-secondary)}
+.copy-btn.done{background:#E6F1FB;border-color:#85B7EB;color:#0C447C}
+
+.annotation{position:absolute;font-size:10px;color:var(--color-text-tertiary);display:flex;align-items:center;gap:4px}
+.ann-dot{width:6px;height:6px;border-radius:50%;background:#ED93B1;flex-shrink:0}
+
+.note-row{display:flex;gap:8px;flex-wrap:wrap;padding:10px 14px;background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary)}
+.note-chip{font-size:10px;padding:3px 8px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.note-chip.cut{text-decoration:line-through;opacity:.45}
+</style>
+
+<h2 class="sr-only">GitGloss 빌더 MVP 2단 레이아웃 목업 — 설정 패널(좌) + 미리보기·코드(우)</h2>
+
+<p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:10px">인터랙티브 목업 — 버튼을 직접 눌러볼 수 있어요.</p>
+
+<div class="mock-shell">
+  <div class="mock-topbar">
+    <span class="mock-logo">GitGloss</span>
+    <div class="mock-sep"></div>
+    <span class="mock-title">Widget Builder</span>
+    <button class="mock-export" onclick="triggerExport(this)">Export SVG</button>
+  </div>
+
+  <div class="mock-body">
+    <!-- LEFT: Config -->
+    <div class="mock-left">
+      <div class="section-label">Widget type</div>
+      <div class="type-row" id="type-row">
+        <button class="type-chip on" onclick="selectType(this)">Stats</button>
+        <button class="type-chip" onclick="selectType(this)">Tech</button>
+        <button class="type-chip" onclick="selectType(this)">Profile</button>
+        <button class="type-chip" onclick="selectType(this)">Streak</button>
+      </div>
+
+      <div class="section-label">Preset</div>
+      <div class="preset-tabs-row" id="ptabs">
+        <button class="ptab on" onclick="selPtab(this,'gl')">Glass</button>
+        <button class="ptab" onclick="selPtab(this,'gd')">Dark</button>
+        <button class="ptab" onclick="selPtab(this,'nm')">Neu</button>
+        <button class="ptab" onclick="selPtab(this,'vv')">Grad</button>
+      </div>
+      <div class="preset-scroll" id="preset-scroll">
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-label">Accent color</div>
+      <div class="color-row" id="color-row">
+        <div class="sw sw-pk on" onclick="selColor(this,'#ED93B1')"></div>
+        <div class="sw sw-pu" onclick="selColor(this,'#9B8FE8')"></div>
+        <div class="sw sw-sk" onclick="selColor(this,'#7EC8E3')"></div>
+        <div class="sw sw-sf" onclick="selColor(this,'#F4C0D1')"></div>
+        <div class="sw sw-dk" onclick="selColor(this,'#2D1F42')"></div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">GitHub username</div>
+        <input class="field-input" placeholder="octocat" oninput="updateName(this.value)">
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Tech stack</div>
+        <div class="tag-wrap" id="tag-wrap">
+          <span class="tag tag-pk">React <button class="tag-x" onclick="removeTag(this)">x</button></span>
+          <span class="tag tag-pu">TypeScript <button class="tag-x" onclick="removeTag(this)">x</button></span>
+          <span class="tag tag-sk">Node.js <button class="tag-x" onclick="removeTag(this)">x</button></span>
+        </div>
+        <input class="field-input" placeholder="Add tag, press Enter" style="font-size:11px;height:28px" onkeydown="addTag(event,this)">
+      </div>
+
+      <div class="spacer"></div>
+      <div class="ad-slot-left">AD — 160 × 52 · 쿠팡 파트너스</div>
+      <div class="mock-left-footer">© GitGloss · Privacy · Terms</div>
+    </div>
+
+    <!-- RIGHT: Preview + Code -->
+    <div class="mock-right">
+      <div class="preview-area" id="preview-area">
+        <div class="preview-bg-dots"></div>
+        <div class="widget-card" id="widget-card">
+          <div class="w-header">
+            <div class="w-avatar" id="w-avatar"></div>
+            <div>
+              <div class="w-name" id="w-name">octocat</div>
+              <div class="w-handle" id="w-handle">@octocat · GitHub</div>
+            </div>
+          </div>
+          <div class="w-stats">
+            <div class="w-stat"><div class="w-num" id="s-num" style="color:#D4537E">2.8k</div><div class="w-lbl">Stars</div></div>
+            <div class="w-stat"><div class="w-num" style="color:#D4537E">142</div><div class="w-lbl">Repos</div></div>
+            <div class="w-stat"><div class="w-num" style="color:#D4537E">98%</div><div class="w-lbl">Commits</div></div>
+          </div>
+          <div class="w-tags" id="w-tags">
+            <span class="w-badge w-badge-pk">React</span>
+            <span class="w-badge w-badge-pu">TypeScript</span>
+            <span class="w-badge w-badge-sk">Node.js</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-strip">
+        <div class="code-tabs-row" id="ctabs">
+          <button class="ctab on" onclick="selCtab(this,'md')">Markdown</button>
+          <button class="ctab" onclick="selCtab(this,'html')">HTML</button>
+          <button class="ctab" onclick="selCtab(this,'svg')">SVG</button>
+        </div>
+        <div class="code-body">
+          <div class="code-pre" id="code-pre">![GitGloss](https://gitgloss.io/api/stats?user=octocat&theme=cotton-candy)</div>
+          <button class="copy-btn" id="copy-btn" onclick="doCopy()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="note-row" style="margin-top:12px;border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary)">
+  <span style="font-size:10px;color:var(--color-text-secondary);font-weight:500;align-self:center">MVP 컷:</span>
+  <span class="note-chip cut">Zoom 슬라이더</span>
+  <span class="note-chip cut">SVG 실시간 렌더</span>
+  <span class="note-chip cut">다크모드 토글</span>
+  <span class="note-chip cut">프리셋 NEW/PRO 배지</span>
+  <span class="note-chip">코드 복사 3탭 ✓</span>
+  <span class="note-chip">프리셋 카테고리탭 ✓</span>
+  <span class="note-chip">태그 추가/삭제 ✓</span>
+</div>
+
+<script>
+const codes = {
+  md: '![GitGloss](https://gitgloss.io/api/stats?user=octocat&theme=cotton-candy)',
+  html: '<img src="https://gitgloss.io/api/stats?user=octocat&theme=cotton-candy">',
+  svg: '<svg xmlns="http://www.w3.org/2000/svg"><!-- gitgloss widget --></svg>'
+};
+
+function buildPresets(cls) {
+  const g = document.getElementById('preset-scroll');
+  g.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const d = document.createElement('div');
+    d.className = 'p-thumb ' + cls + (i === 0 ? ' on' : '');
+    d.onclick = function() {
+      document.querySelectorAll('.p-thumb').forEach(x => x.classList.remove('on'));
+      this.classList.add('on');
+    };
+    g.appendChild(d);
+  }
+}
+buildPresets('gl');
+
+function selPtab(el, cls) {
+  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  buildPresets(cls);
+}
+
+function selectType(el) {
+  document.querySelectorAll('.type-chip').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function selColor(el, hex) {
+  document.querySelectorAll('.sw').forEach(s => s.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.w-num').forEach(n => n.style.color = hex);
+  document.getElementById('w-avatar').style.background = 'linear-gradient(135deg,' + hex + ',#9B8FE8)';
+}
+
+function updateName(v) {
+  const n = v || 'octocat';
+  document.getElementById('w-name').textContent = n;
+  document.getElementById('w-handle').textContent = '@' + n + ' · GitHub';
+  const pre = document.getElementById('code-pre');
+  pre.textContent = pre.textContent.replace(/user=[^&]+/, 'user=' + n);
+}
+
+function removeTag(btn) {
+  btn.parentElement.remove();
+  syncTags();
+}
+
+const colors = ['w-badge-pk','w-badge-pu','w-badge-sk'];
+let tagCount = 3;
+
+function addTag(e, inp) {
+  if (e.key !== 'Enter' || !inp.value.trim()) return;
+  const wrap = document.getElementById('tag-wrap');
+  const tag = document.createElement('span');
+  const cls = colors[tagCount % 3];
+  tagCount++;
+  tag.className = 'tag tag-' + cls.split('-')[2];
+  tag.innerHTML = inp.value.trim() + ' <button class="tag-x" onclick="removeTag(this)">x</button>';
+  wrap.appendChild(tag);
+  inp.value = '';
+  syncTags();
+}
+
+function syncTags() {
+  const labels = Array.from(document.querySelectorAll('#tag-wrap .tag')).map(t => t.textContent.replace('x','').trim());
+  const wt = document.getElementById('w-tags');
+  wt.innerHTML = labels.map((l, i) => '<span class="w-badge ' + colors[i%3] + '">' + l + '</span>').join('');
+}
+
+function selCtab(el, key) {
+  document.querySelectorAll('.ctab').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('code-pre').textContent = codes[key];
+}
+
+let copyTimer;
+function doCopy() {
+  const btn = document.getElementById('copy-btn');
+  btn.textContent = '✓ Copied!';
+  btn.classList.add('done');
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(() => {
+    btn.textContent = 'Copy';
+    btn.classList.remove('done');
+  }, 2000);
+}
+
+function triggerExport(btn) {
+  btn.textContent = 'Exporting...';
+  setTimeout(() => btn.textContent = 'Export SVG', 1200);
+}
+</script>

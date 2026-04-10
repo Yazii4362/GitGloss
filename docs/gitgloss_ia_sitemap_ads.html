@@ -1,0 +1,217 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.tabs{display:flex;gap:4px;margin-bottom:14px}
+.tab{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:.12s}
+.tab.on{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.pane{display:none}.pane.on{display:block}
+
+.sitemap-wrap{display:flex;flex-direction:column;gap:6px}
+.sm-row{display:flex;gap:6px;align-items:stretch}
+.sm-node{padding:10px 14px;border-radius:var(--border-radius-md);font-size:12px;font-weight:500;border:0.5px solid var(--color-border-tertiary);flex:1}
+.sm-node .kw{font-size:10px;font-weight:400;color:var(--color-text-secondary);margin-top:4px;line-height:1.5}
+.sm-node.root{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.sm-node.core{background:var(--color-background-primary)}
+.sm-node.legal{background:var(--color-background-warning);border-color:var(--color-border-warning);color:var(--color-text-warning)}
+.sm-node.new{background:var(--color-background-success);border-color:var(--color-border-success);color:var(--color-text-success)}
+.sm-connector{display:flex;justify-content:center;padding:2px 0;color:var(--color-text-tertiary);font-size:11px}
+.badge{display:inline-block;font-size:9px;font-weight:500;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+.badge-must{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-seo{background:var(--color-background-info);color:var(--color-text-info)}
+
+.ad-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ad-page-title{font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:10px}
+.page-mock{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
+.pm-nav{height:28px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;padding:0 10px;font-size:10px;font-weight:500;color:var(--color-text-tertiary)}
+.pm-section{padding:8px 10px;font-size:10px;color:var(--color-text-secondary)}
+.ad-slot{border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500}
+.ad-slot.pink{background:rgba(212,83,126,.08);border:1px dashed rgba(212,83,126,.4);color:#993556}
+.ad-slot.purple{background:rgba(127,119,221,.08);border:1px dashed rgba(127,119,221,.4);color:#3C3489}
+.pm-hero{height:44px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--color-text-tertiary)}
+.pm-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:6px 0}
+.pm-card{height:36px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:4px}
+.pm-2col{display:grid;grid-template-columns:88px 1fr;min-height:140px}
+.pm-left{border-right:0.5px solid var(--color-border-tertiary);padding:6px}
+.pm-right{padding:6px;display:flex;flex-direction:column;gap:4px}
+.pm-preview{flex:1;background:var(--color-background-primary);border-radius:4px;border:0.5px solid var(--color-border-tertiary)}
+.pm-code{height:26px;background:var(--color-background-primary);border-radius:4px;border:0.5px solid var(--color-border-tertiary)}
+
+.css-box{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:14px;font-size:11px;line-height:1.9;font-family:var(--font-mono)}
+.css-comment{color:var(--color-text-tertiary)}
+.css-prop{color:var(--color-text-info)}
+.css-val{color:var(--color-text-success)}
+.css-rule{margin-bottom:10px}
+</style>
+
+<h2 class="sr-only">GitGloss IA, 사이트맵, 광고 배치 설계</h2>
+
+<div class="tabs">
+  <button class="tab on" onclick="show('sitemap',this)">사이트맵 & SEO</button>
+  <button class="tab" onclick="show('ads',this)">광고 배치</button>
+  <button class="tab" onclick="show('css',this)">광고 CSS 가이드</button>
+</div>
+
+<div id="pane-sitemap" class="pane on">
+  <div class="sitemap-wrap">
+    <div class="sm-row">
+      <div class="sm-node root">
+        index.html — 랜딩 + 갤러리
+        <div class="kw">Primary: github readme widget generator<br>Secondary: github profile widget, readme badge maker free</div>
+      </div>
+    </div>
+    <div class="sm-connector">↓ &nbsp; 유저 흐름: 갤러리 카드 클릭 → builder</div>
+    <div class="sm-row">
+      <div class="sm-node core">
+        builder.html — 위젯 에디터
+        <div class="kw">Primary: github stats card maker<br>Secondary: github widget builder free, notion widget generator</div>
+      </div>
+      <div class="sm-node new">
+        gallery.html — 전체 갤러리 <span class="badge badge-seo">SEO</span>
+        <div class="kw">Primary: readme widget templates<br>Secondary: github profile readme ideas 2025</div>
+      </div>
+      <div class="sm-node new">
+        docs/ — 가이드 허브 <span class="badge badge-must">AdSense 필수</span>
+        <div class="kw">Primary: how to add widget github readme<br>Secondary: github readme customization guide</div>
+      </div>
+    </div>
+    <div class="sm-connector">↓ &nbsp; docs/ 하위 페이지 (최소 2개 필요)</div>
+    <div class="sm-row">
+      <div class="sm-node core">
+        docs/quickstart.html
+        <div class="kw">github readme widget 5 minute setup</div>
+      </div>
+      <div class="sm-node core">
+        docs/themes.html
+        <div class="kw">glassmorphism github stats card themes</div>
+      </div>
+    </div>
+    <div class="sm-connector">── AdSense 심사 통과 필수 법적 페이지 ──</div>
+    <div class="sm-row">
+      <div class="sm-node legal">privacy.html <span class="badge badge-must">필수</span><div class="kw">개인정보처리방침 · Privacy Policy</div></div>
+      <div class="sm-node legal">terms.html <span class="badge badge-must">필수</span><div class="kw">이용약관 · Terms of Service</div></div>
+      <div class="sm-node legal">about.html <span class="badge badge-must">필수</span><div class="kw">서비스/팀 소개 · About GitGloss</div></div>
+      <div class="sm-node legal">contact.html <span class="badge badge-must">필수</span><div class="kw">이메일 문의 · Contact</div></div>
+    </div>
+  </div>
+  <div style="margin-top:12px;padding:10px 14px;background:var(--color-background-warning);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-warning)">
+    AdSense 신청 전 체크리스트: privacy · terms · about · contact 4개 + docs/ 콘텐츠 최소 2페이지가 있어야 심사 통과 확률이 높아요. 법적 페이지는 내용이 얇아도 존재 자체가 중요합니다.
+  </div>
+</div>
+
+<div id="pane-ads" class="pane">
+  <div class="ad-grid">
+    <div>
+      <div class="ad-page-title">index.html 광고 구좌</div>
+      <div class="page-mock">
+        <div class="pm-nav">GitGloss &nbsp;·&nbsp; nav</div>
+        <div style="padding:8px 10px">
+          <div class="pm-hero">Hero — CTA</div>
+          <div class="ad-slot pink" style="height:22px;margin-bottom:6px">AD-1 &nbsp;728×90 Leaderboard (AdSense) — hero 직후</div>
+          <div style="font-size:9px;color:var(--color-text-tertiary);margin-bottom:4px">갤러리 그리드</div>
+          <div class="pm-gallery-grid">
+            <div class="pm-card"></div>
+            <div class="pm-card"></div>
+            <div class="ad-slot pink" style="border-radius:4px;font-size:8px">AD-2 Native<br>300×250</div>
+            <div class="pm-card"></div>
+            <div class="pm-card"></div>
+            <div class="ad-slot purple" style="border-radius:4px;font-size:8px">AD-3 쿠팡<br>Native</div>
+          </div>
+          <div class="ad-slot pink" style="height:18px;margin-top:6px;font-size:8px">AD-4 &nbsp;728×90 Leaderboard — 갤러리 하단</div>
+        </div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--color-text-secondary);line-height:1.6">
+        AD-1: 히어로 직후 — 가장 높은 노출<br>
+        AD-2: 갤러리 3번째 슬롯 — 네이티브 형태로<br>
+        AD-3: 갤러리 6번째 슬롯 — 쿠팡 파트너스<br>
+        AD-4: 푸터 직전 — 스크롤 완료 유저 대상
+      </div>
+    </div>
+    <div>
+      <div class="ad-page-title">builder.html 광고 구좌</div>
+      <div class="page-mock">
+        <div class="pm-nav">GitGloss Builder</div>
+        <div class="pm-2col">
+          <div class="pm-left">
+            <div style="font-size:8px;color:var(--color-text-tertiary);margin-bottom:4px">Config panel</div>
+            <div style="height:20px;background:var(--color-background-primary);border-radius:3px;border:0.5px solid var(--color-border-tertiary);margin-bottom:3px"></div>
+            <div style="height:20px;background:var(--color-background-primary);border-radius:3px;border:0.5px solid var(--color-border-tertiary);margin-bottom:3px"></div>
+            <div style="height:20px;background:var(--color-background-primary);border-radius:3px;border:0.5px solid var(--color-border-tertiary);margin-bottom:6px"></div>
+            <div class="ad-slot purple" style="height:40px;font-size:8px">AD-B1<br>160×52<br>쿠팡</div>
+          </div>
+          <div class="pm-right">
+            <div class="pm-preview"></div>
+            <div class="pm-code"></div>
+          </div>
+        </div>
+        <div class="ad-slot pink" style="height:18px;margin:0 10px 8px;font-size:8px">AD-B2 &nbsp;728×90 — 코드 복사 완료 직후 (트리거 기반)</div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--color-text-secondary);line-height:1.6">
+        AD-B1: 설정 패널 하단 — 스크롤 후 자연 노출<br>
+        AD-B2: Copy 버튼 클릭 후 코드 하단에 슬라이드인<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(전환 완료 직후 = 광고 수용도 최고점)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pane-css" class="pane">
+  <div class="css-box">
+    <div class="css-rule">
+<span class="css-comment">/* 광고 슬롯 공통 — 글래스모피즘 유지 */</span><br>
+<span class="css-prop">.ad-slot</span> {<br>
+&nbsp;&nbsp;margin: <span class="css-val">16px 0</span>;<br>
+&nbsp;&nbsp;padding: <span class="css-val">12px</span>;<br>
+&nbsp;&nbsp;background: <span class="css-val">rgba(253,240,246, 0.55)</span>;<br>
+&nbsp;&nbsp;backdrop-filter: <span class="css-val">blur(8px)</span>;<br>
+&nbsp;&nbsp;-webkit-backdrop-filter: <span class="css-val">blur(8px)</span>;<br>
+&nbsp;&nbsp;border: <span class="css-val">0.5px dashed rgba(237,147,177, 0.35)</span>;<br>
+&nbsp;&nbsp;border-radius: <span class="css-val">10px</span>;<br>
+&nbsp;&nbsp;position: <span class="css-val">relative</span>;<br>
+}
+    </div>
+    <div class="css-rule">
+<span class="css-comment">/* "Sponsored" 레이블 — 필수 표시 */</span><br>
+<span class="css-prop">.ad-slot::before</span> {<br>
+&nbsp;&nbsp;content: <span class="css-val">'Sponsored'</span>;<br>
+&nbsp;&nbsp;position: <span class="css-val">absolute</span>;<br>
+&nbsp;&nbsp;top: <span class="css-val">6px</span>; left: <span class="css-val">10px</span>;<br>
+&nbsp;&nbsp;font-size: <span class="css-val">9px</span>;<br>
+&nbsp;&nbsp;letter-spacing: <span class="css-val">.06em</span>;<br>
+&nbsp;&nbsp;color: <span class="css-val">rgba(154,122,154, 0.7)</span>;<br>
+&nbsp;&nbsp;font-family: <span class="css-val">var(--font-mono)</span>;<br>
+}
+    </div>
+    <div class="css-rule">
+<span class="css-comment">/* 네이티브 광고 카드 — 갤러리 그리드 내 */</span><br>
+<span class="css-prop">.ad-native-card</span> {<br>
+&nbsp;&nbsp;background: <span class="css-val">rgba(253,240,246, 0.72)</span>;<br>
+&nbsp;&nbsp;border: <span class="css-val">0.5px dashed rgba(155,143,232, 0.38)</span>;<br>
+&nbsp;&nbsp;border-radius: <span class="css-val">14px</span>;<br>
+&nbsp;&nbsp;padding: <span class="css-val">16px</span>;<br>
+&nbsp;&nbsp;transition: <span class="css-val">border-color .2s</span>;<br>
+}
+    </div>
+    <div class="css-rule">
+<span class="css-comment">/* Copy 후 슬라이드인 배너 (builder AD-B2) */</span><br>
+<span class="css-prop">.ad-slide</span> {<br>
+&nbsp;&nbsp;max-height: <span class="css-val">0</span>;<br>
+&nbsp;&nbsp;overflow: <span class="css-val">hidden</span>;<br>
+&nbsp;&nbsp;transition: <span class="css-val">max-height .4s cubic-bezier(.34,1.56,.64,1)</span>;<br>
+}<br>
+<span class="css-prop">.ad-slide.show</span> { max-height: <span class="css-val">120px</span>; }
+    </div>
+  </div>
+  <div style="margin-top:10px;padding:10px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:11px;color:var(--color-text-secondary);line-height:1.7">
+    핵심 원칙: 광고 영역도 글래스 카드처럼 보이게. dashed border + 반투명 배경으로 "Sponsored" 콘텐츠임을 자연스럽게 표시하되, 디자인 이질감 없이 흡수시킴.
+  </div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('pane-' + id).classList.add('on');
+  el.classList.add('on');
+}
+</script>

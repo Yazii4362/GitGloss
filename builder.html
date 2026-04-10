@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitGloss Builder — 위젯 빌더</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/builder.css">
+  <link rel="stylesheet" href="assets/css/presets.css">
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a href="index.html" class="topbar-logo">GitGloss</a>
+    <div class="topbar-sep"></div>
+    <span class="topbar-title">Widget Builder</span>
+    <div class="topbar-actions">
+      <a href="gallery.html" style="font-size:11px;color:var(--gg-text-sub);text-decoration:none">← 갤러리</a>
+      <button class="btn-export" onclick="exportWidget()">Export SVG</button>
+    </div>
+  </header>
+
+  <!-- 2-COLUMN BODY -->
+  <div class="builder-body">
+
+    <!-- ══ LEFT: Config ══ -->
+    <aside class="panel-left">
+
+      <!-- Widget type -->
+      <div class="section-label">위젯 타입</div>
+      <div class="type-row" id="type-row">
+        <button class="type-chip on" onclick="selectType(this,'stats')">Stats</button>
+        <button class="type-chip"    onclick="selectType(this,'tech')">Tech</button>
+        <button class="type-chip"    onclick="selectType(this,'profile')">Profile</button>
+        <button class="type-chip"    onclick="selectType(this,'streak')">Streak</button>
+      </div>
+
+      <!-- Presets -->
+      <div class="section-label">테마</div>
+      <div class="preset-tabs-row" id="ptabs">
+        <button class="ptab on" onclick="selPtab(this,'gl')">Glass</button>
+        <button class="ptab"    onclick="selPtab(this,'gd')">Dark</button>
+        <button class="ptab"    onclick="selPtab(this,'nm')">Neu</button>
+        <button class="ptab"    onclick="selPtab(this,'vv')">Grad</button>
+      </div>
+      <div class="preset-scroll" id="preset-scroll">
+        <!-- JS로 렌더 -->
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Accent color -->
+      <div class="section-label">Accent 색상</div>
+      <div class="color-row" id="color-row">
+        <div class="sw sw-pk on" title="#ED93B1" onclick="selColor(this,'#ED93B1')"></div>
+        <div class="sw sw-pu"    title="#9B8FE8" onclick="selColor(this,'#9B8FE8')"></div>
+        <div class="sw sw-sk"    title="#7EC8E3" onclick="selColor(this,'#7EC8E3')"></div>
+        <div class="sw sw-sf"    title="#F4C0D1" onclick="selColor(this,'#F4C0D1')"></div>
+        <div class="sw sw-dk"    title="#2D1F42" onclick="selColor(this,'#2D1F42')"></div>
+      </div>
+
+      <!-- GitHub username -->
+      <div class="field-group">
+        <div class="field-label">GitHub 사용자명</div>
+        <input class="field-input" id="inp-username" placeholder="octocat" oninput="updateName(this.value)">
+      </div>
+
+      <!-- Dynamic fields per widget type -->
+      <div id="fields-stats">
+        <div class="field-group">
+          <div class="field-label">카드 타이틀</div>
+          <input class="field-input" id="inp-title" placeholder="GitHub Stats">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Stat 1 — 라벨 / 값</div>
+          <div style="display:flex;gap:5px">
+            <input class="field-input" id="s1-label" placeholder="Stars"  style="flex:1">
+            <input class="field-input" id="s1-val"   placeholder="2.8k"   style="flex:1">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Stat 2 — 라벨 / 값</div>
+          <div style="display:flex;gap:5px">
+            <input class="field-input" id="s2-label" placeholder="Repos"  style="flex:1">
+            <input class="field-input" id="s2-val"   placeholder="142"    style="flex:1">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Stat 3 — 라벨 / 값</div>
+          <div style="display:flex;gap:5px">
+            <input class="field-input" id="s3-label" placeholder="Commits" style="flex:1">
+            <input class="field-input" id="s3-val"   placeholder="98%"     style="flex:1">
+          </div>
+        </div>
+      </div>
+
+      <div id="fields-tech" style="display:none">
+        <div class="section-label">기술 스택</div>
+        <div class="tag-wrap" id="tag-wrap">
+          <span class="tag tag-pk">React     <button class="tag-x" onclick="removeTag(this)">×</button></span>
+          <span class="tag tag-pu">TypeScript <button class="tag-x" onclick="removeTag(this)">×</button></span>
+          <span class="tag tag-sk">Node.js   <button class="tag-x" onclick="removeTag(this)">×</button></span>
+        </div>
+        <div class="field-group" style="padding-top:0">
+          <input class="field-input" placeholder="태그 입력 후 Enter" style="font-size:11px;height:28px"
+            onkeydown="addTag(event,this)">
+        </div>
+      </div>
+
+      <div id="fields-profile" style="display:none">
+        <div class="field-group">
+          <div class="field-label">이름</div>
+          <input class="field-input" id="inp-pname" placeholder="The Octocat">
+        </div>
+        <div class="field-group">
+          <div class="field-label">핸들</div>
+          <input class="field-input" id="inp-handle" placeholder="@octocat">
+        </div>
+        <div class="field-group">
+          <div class="field-label">직함</div>
+          <input class="field-input" id="inp-role" placeholder="Full-stack Developer">
+        </div>
+        <div class="section-label">기술 스택</div>
+        <div class="tag-wrap" id="tag-wrap-profile">
+          <span class="tag tag-pk">React     <button class="tag-x" onclick="removeTag(this)">×</button></span>
+          <span class="tag tag-pu">TypeScript <button class="tag-x" onclick="removeTag(this)">×</button></span>
+        </div>
+        <div class="field-group" style="padding-top:0">
+          <input class="field-input" placeholder="태그 입력 후 Enter" style="font-size:11px;height:28px"
+            onkeydown="addTagTo(event,this,'tag-wrap-profile')">
+        </div>
+      </div>
+
+      <div id="fields-streak" style="display:none">
+        <div class="field-group">
+          <div class="field-label">현재 스트릭 (일)</div>
+          <input class="field-input" id="inp-streak" placeholder="42">
+        </div>
+      </div>
+
+      <!-- Spacer + AD-B1 + footer -->
+      <div class="panel-left-spacer"></div>
+
+      <div class="ad-slot-left" id="ad-b1">
+        <!-- 쿠팡 파트너스 160×52 -->
+        160 × 52 · 쿠팡 파트너스
+      </div>
+
+      <div class="panel-left-footer">
+        © 2025 GitGloss ·
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">Terms</a>
+      </div>
+
+    </aside>
+
+    <!-- ══ RIGHT: Preview + Code ══ -->
+    <div class="panel-right">
+
+      <!-- Preview -->
+      <div class="preview-area" id="preview-area">
+        <div class="preview-bg-dots"></div>
+
+        <div class="widget-card" id="widget-card">
+          <div class="w-header">
+            <div class="w-avatar" id="w-avatar"></div>
+            <div>
+              <div class="w-name"   id="w-name">octocat</div>
+              <div class="w-handle" id="w-handle">@octocat · GitHub</div>
+            </div>
+          </div>
+          <div class="w-stats" id="w-stats">
+            <div class="w-stat">
+              <div class="w-num" id="w-s1-val">2.8k</div>
+              <div class="w-lbl" id="w-s1-lbl">Stars</div>
+            </div>
+            <div class="w-stat">
+              <div class="w-num" id="w-s2-val">142</div>
+              <div class="w-lbl" id="w-s2-lbl">Repos</div>
+            </div>
+            <div class="w-stat">
+              <div class="w-num" id="w-s3-val">98%</div>
+              <div class="w-lbl" id="w-s3-lbl">Commits</div>
+            </div>
+          </div>
+          <div class="w-tags" id="w-tags">
+            <span class="w-badge w-badge-pk">React</span>
+            <span class="w-badge w-badge-pu">TypeScript</span>
+            <span class="w-badge w-badge-sk">Node.js</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code strip -->
+      <div class="code-strip">
+        <div class="code-tabs-row" id="ctabs">
+          <button class="ctab on"  onclick="selCtab(this,'md')">Markdown</button>
+          <button class="ctab"     onclick="selCtab(this,'html')">HTML</button>
+          <button class="ctab"     onclick="selCtab(this,'svg')">SVG</button>
+        </div>
+        <div class="code-body">
+          <div class="code-pre" id="code-pre">![GitGloss](https://gitgloss.io/api/stats?user=octocat&theme=cotton-candy)</div>
+          <button class="copy-btn" id="copy-btn" onclick="doCopy()">Copy</button>
+        </div>
+
+        <!-- AD-B2: Copy 후 슬라이드인 -->
+        <div class="ad-slide" id="ad-b2">
+          <div class="ad-slide-inner">
+            <!-- Google AdSense 728×90 — 복사 완료 후 자동 노출 -->
+            Advertisement — 복사 완료 후 자동 노출
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/widget-engine.js"></script>
+  <script src="assets/js/builder.js"></script>
+</body>
+</html>

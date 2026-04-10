@@ -1,1652 +1,405 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitGloss Pitch Deck</title>
+  <title>GitGloss | Premium Identity Studio Pitch Deck</title>
+  <style>
+    :root {
+      /* iOS & Toss Style System + Brand Identity */
+      --primary-v: #6C5CE7; /* Electric Violet */
+      --primary-b: #0033FF; /* Hyper Blue */
+      --sub-mint: #00D2AD;
+      --sub-pink: #FF2D55;
+      --sub-amber: #FF9F0A;
+      
+      --bg: #F2F2F7;
+      --glass: rgba(255, 255, 255, 0.45);
+      --glass-heavy: rgba(255, 255, 255, 0.75);
+      --blur: blur(30px) saturate(180%);
+      --border: 1px solid rgba(255, 255, 255, 0.5);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      --shadow-25d: 12px 12px 35px rgba(0, 0, 0, 0.06), -6px -6px 15px rgba(255, 255, 255, 0.9);
+      
+      --text-t1: #1C1C1E;
+      --text-t2: #636366;
+      --radius-lg: 32px;
+      --radius-md: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    body { background-color: var(--bg); font-family: 'SF Pro Display', 'Pretendard', sans-serif; color: var(--text-t1); overflow: hidden; }
+
+    /* Scroll Container */
+    .deck { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+    section { height: 100vh; scroll-snap-align: start; position: relative; display: flex; align-items: center; padding: 0 8%; overflow: hidden; }
+
+    /* Glass Elements */
+    .glass { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-25d); z-index: 10; padding: 40px; }
+    .glass-dark { background: var(--glass-heavy); backdrop-filter: var(--blur); border-radius: var(--radius-md); border: var(--border); }
+    .glass-card { background: var(--glass); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow); z-index: 1; }
+
+    /* Typography */
+    .label { font-size: 13px; font-weight: 800; color: var(--primary-b); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; display: block; }
+    .h-title { font-size: clamp(34px, 4.2vw, 54px); font-weight: 900; line-height: 1.15; letter-spacing: -0.05em; margin-bottom: 24px; word-break: keep-all; }
+    .h-title span.v { color: var(--primary-v); }
+    .h-title span.b { color: var(--primary-b); }
+    .p-body { font-size: 18px; color: var(--text-t2); line-height: 1.6; max-width: 650px; }
+
+    /* UI & Grid */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; width: 100%; align-items: center; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; }
+    .icon-25d { width: 80px; height: 80px; background: linear-gradient(145deg, #ffffff, #f0f0f0); border-radius: 20px; box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 24px; }
+    
+    .mockup { border-radius: 18px; box-shadow: var(--shadow-25d); background: #fff; overflow: hidden; border: 1px solid #E1E4E8; position: relative; }
+    .gh-header { background: #24292E; height: 40px; display: flex; align-items: center; padding: 0 15px; gap: 8px; }
+    .gh-dot { width: 8px; height: 8px; border-radius: 50%; background: #4B5157; }
+
+    /* SWOT & Map */
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
+    .map-container { width: 100%; height: 400px; position: relative; border-left: 2px solid var(--text-t2); border-bottom: 2px solid var(--text-t2); margin-top: 40px; }
+    .dot-map { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--text-t2); }
+    .dot-map.main { background: var(--primary-b); width: 24px; height: 24px; box-shadow: 0 0 20px var(--primary-b); z-index: 10; }
+
+    /* Background Decorations */
+    .blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; z-index: 0; pointer-events: none; }
+    
+    /* Navigation */
+    nav { position: fixed; left: 30px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+    nav a { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.15); transition: 0.4s; text-decoration: none; }
+    nav a.on { height: 24px; border-radius: 3px; background: var(--primary-v); }
+  </style>
 </head>
 <body>
-<style>
-/* ===== RESET & VARIABLES ===== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-:root {
-  /* Scaling Factor for Consistent Responsiveness */
-  --scale: clamp(0.7, 100vw / 1200, 1);
-
-  /* Background Colors */
-  --bg: #f5f4f0;
-  --s1: #ffffff;
-  --s2: #f9f8f5;
-  --s3: #f0eeea;
-
-  /* Border Colors */
-  --b1: rgba(0, 0, 0, 0.06);
-  --b2: rgba(0, 0, 0, 0.1);
-  --b3: rgba(0, 0, 0, 0.16);
-
-  /* Text Colors */
-  --t1: #0f0f14;
-  --t2: #555566;
-  --t3: #aaaabc;
-
-  /* Brand Colors - Violet */
-  --v: #6c5ce7;
-  --v2: #8b7fff;
-  --vl: rgba(108, 92, 231, 0.09);
-  --vb: rgba(108, 92, 231, 0.18);
-
-  /* Teal */
-  --tl: #0d9488;
-  --tlb: rgba(13, 148, 136, 0.1);
-
-  /* Pink */
-  --pk: #db2777;
-  --pkb: rgba(219, 39, 119, 0.08);
-
-  /* Green */
-  --gn: #059669;
-  --gnb: rgba(5, 150, 105, 0.08);
-
-  /* Amber */
-  --am: #d97706;
-  --amb: rgba(217, 119, 6, 0.08);
-
-  /* Red for SWOT */
-  --re: #dc2626;
-  --reb: rgba(220, 38, 38, 0.08);
-
-  /* Gradients */
-  --gv: linear-gradient(135deg, #6c5ce7, #a78bfa);
-  --gt: linear-gradient(135deg, #0d9488, #6c5ce7);
-  --gp: linear-gradient(135deg, #db2777, #a78bfa);
-  --gg: linear-gradient(135deg, #059669, #0d9488);
-}
-
-body {
-  background: var(--bg);
-  font-family: 'SF Pro Display', -apple-system, 'Segoe UI', sans-serif;
-  color: var(--t1);
-  line-height: 1.4;
-}
-
-/* ===== RESPONSIVE MEDIA QUERIES ===== */
-@media (max-width: 1024px) {
-  /* Tablet scaling: 0.85x */
-  .h1 { font-size: calc(clamp(16px, 3.8vw, 50px) * 0.85); }
-  .h2 { font-size: calc(clamp(10px, 2vw, 25px) * 0.85); }
-  .h3 { font-size: calc(clamp(8px, 1.2vw, 14px) * 0.85); }
-  .body { font-size: calc(clamp(6px, 0.95vw, 12px) * 0.85); }
-  .cap { font-size: calc(clamp(6px, 0.8vw, 9px) * 0.85); }
-  .eye { font-size: calc(clamp(6px, 0.85vw, 10px) * 0.85); }
-  .knum { font-size: calc(clamp(24px, 7vw, 92px) * 0.85); }
-  .snum { font-size: calc(clamp(10px, 2.6vw, 32px) * 0.85); }
-  .tnum { font-size: calc(clamp(8px, 1.5vw, 18px) * 0.85); }
-  .card { padding: calc(4% * 0.85); }
-  .circle-center { 
-    width: calc(clamp(100px, 18vw, 230px) * 0.85); 
-    height: calc(clamp(100px, 18vw, 230px) * 0.85); 
-  }
-  .si { padding: calc(4.5% * 0.85) calc(5.5% * 0.85); }
-}
-
-@media (max-width: 768px) {
-  /* Mobile scaling: 0.75x */
-  .h1 { font-size: calc(clamp(16px, 3.8vw, 50px) * 0.75); }
-  .h2 { font-size: calc(clamp(10px, 2vw, 25px) * 0.75); }
-  .h3 { font-size: calc(clamp(8px, 1.2vw, 14px) * 0.75); }
-  .body { font-size: calc(clamp(6px, 0.95vw, 12px) * 0.75); }
-  .cap { font-size: calc(clamp(6px, 0.8vw, 9px) * 0.75); }
-  .eye { font-size: calc(clamp(6px, 0.85vw, 10px) * 0.75); }
-  .knum { font-size: calc(clamp(24px, 7vw, 92px) * 0.75); }
-  .snum { font-size: calc(clamp(10px, 2.6vw, 32px) * 0.75); }
-  .tnum { font-size: calc(clamp(8px, 1.5vw, 18px) * 0.75); }
-  .card { padding: calc(4% * 0.75); }
-  .circle-center { 
-    width: calc(clamp(100px, 18vw, 230px) * 0.75); 
-    height: calc(clamp(100px, 18vw, 230px) * 0.75); 
-  }
-  .si { padding: calc(4.5% * 0.75) calc(5.5% * 0.75); }
-
-  .nav {
-    padding: 6px 12px;
-    gap: 3px;
-  }
-
-  .nav-logo {
-    font-size: calc(13px * 0.75);
-  }
-
-  .nb {
-    font-size: calc(10px * 0.75);
-    padding: 3px 8px;
-  }
-
-  /* Adjust grids for mobile */
-  .g2, .g3, .g4 {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-
-  .circle-wrap {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .orbit-item {
-    position: static;
-    width: 100%;
-    max-width: 180px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Extra small mobile scaling: 0.7x */
-  .h1 { font-size: calc(clamp(16px, 3.8vw, 50px) * 0.7); }
-  .knum { font-size: calc(clamp(24px, 7vw, 92px) * 0.7); }
-  .card { padding: calc(4% * 0.7); }
-  .circle-center { 
-    width: calc(clamp(100px, 18vw, 230px) * 0.7); 
-    height: calc(clamp(100px, 18vw, 230px) * 0.7); 
-  }
-  .si { padding: calc(4.5% * 0.7) calc(5.5% * 0.7); }
-}
-
-/* ===== NAVIGATION ===== */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  background: rgba(245, 244, 240, 0.94);
-  backdrop-filter: blur(1rem); /* 16px */
-  border-bottom: 1px solid var(--b1);
-  padding: 0.5rem 1rem; /* 8px 16px */
-  display: flex;
-  align-items: center;
-  gap: 0.1875rem; /* 3px */
-  flex-wrap: wrap;
-}
-
-.nav-logo {
-  font-size: 0.8125rem; /* 13px */
-  font-weight: 900;
-  background: var(--gv);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 0.5rem; /* 8px */
-  letter-spacing: -0.04em;
-}
-
-.nb {
-  font-size: 0.625rem; /* 10px */
-  padding: 0.25rem 0.625rem; /* 4px 10px */
-  border-radius: 1.25rem; /* 20px */
-  border: 1px solid var(--b2);
-  background: transparent;
-  color: var(--t3);
-  cursor: pointer;
-  transition: 0.18s;
-  font-weight: 600;
-}
-
-.nb:hover {
-  color: var(--t1);
-  border-color: var(--b3);
-}
-
-.nb.on {
-  background: var(--v);
-  color: #fff;
-  border-color: var(--v);
-}
-
-/* ===== SLIDE LAYOUT ===== */
-.slide {
-  width: 100%;
-  max-width: 1320px; /* Inner max width for large screens */
-  margin: 0 auto; /* Center the slide */
-  aspect-ratio: 16/9;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border-bottom: 3px solid var(--bg);
-}
-
-.si {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 4.5% 5.5%;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.sn {
-  position: absolute;
-  bottom: 14px;
-  right: 18px;
-  z-index: 10;
-  font-size: 9px;
-  color: var(--t3);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-}
-
-/* ===== TYPOGRAPHY ===== */
-.eye {
-  font-size: clamp(0.375rem, 0.85vw, 0.625rem); /* 6px, 10px */
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--v);
-  margin-bottom: 0.5rem; /* 8px */
-}
-
-.h1 {
-  font-size: clamp(1rem, 3.8vw, 3.125rem); /* 16px, 50px */
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1.04;
-  color: var(--t1);
-}
-
-.h2 {
-  font-size: clamp(0.625rem, 2vw, 1.5625rem); /* 10px, 25px */
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--t1);
-}
-
-.h3 {
-  font-size: clamp(0.5rem, 1.2vw, 0.875rem); /* 8px, 14px */
-  font-weight: 700;
-  color: var(--t1);
-  margin-bottom: 0.1875rem; /* 3px */
-}
-
-.body {
-  font-size: clamp(0.375rem, 0.95vw, 0.75rem); /* 6px, 12px */
-  color: var(--t2);
-  line-height: 1.55;
-}
-
-.cap {
-  font-size: clamp(0.375rem, 0.8vw, 0.5625rem); /* 6px, 9px */
-  color: var(--t3);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-/* ===== METRIC TIERS ===== */
-.knum {
-  font-size: clamp(1.5rem, 7vw, 5.75rem); /* 24px, 92px */
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 0.92;
-}
-
-.knum.v {
-  background: var(--gv);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.knum.t {
-  background: var(--gt);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.knum.g {
-  background: var(--gg);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.knum.p {
-  background: var(--gp);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.snum {
-  font-size: clamp(0.625rem, 2.6vw, 2rem); /* 10px, 32px */
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--t1);
-}
-
-.tnum {
-  font-size: clamp(0.5rem, 1.5vw, 1.125rem); /* 8px, 18px */
-  font-weight: 700;
-  color: var(--t2);
-}
-
-/* ===== CARDS ===== */
-.card {
-  background: #fff;
-  border: 1px solid var(--b1);
-  border-radius: 1.125rem; /* 18px */
-  padding: 1rem; /* 16px */
-  box-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.05); /* 2px 12px */
-}
-
-.card-v {
-  background: var(--vl);
-  border-color: var(--vb);
-}
-
-.card-t {
-  background: var(--tlb);
-  border-color: rgba(13, 148, 136, 0.2);
-}
-
-.card-g {
-  background: var(--gnb);
-  border-color: rgba(5, 150, 105, 0.2);
-}
-
-.card-p {
-  background: var(--pkb);
-  border-color: rgba(219, 39, 119, 0.2);
-}
-
-/* ===== CIRCLE LAYOUT ===== */
-.circle-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.circle-outer {
-  border-radius: 50%;
-  border: 1.5px dashed var(--b2);
-  position: absolute;
-}
-
-.circle-center {
-  border-radius: 50%;
-  background: #fff;
-  border: 0.09375rem solid var(--b2); /* 1.5px */
-  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.08); /* 4px 20px */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  z-index: 2;
-  position: relative;
-  width: clamp(6.25rem, 18vw, 14.375rem); /* 100px, 230px */
-  height: clamp(6.25rem, 18vw, 14.375rem);
-}
-
-.orbit-item {
-  position: absolute;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid var(--b1);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  z-index: 3;
-}
-
-/* ===== TAGS ===== */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  font-size: clamp(7px, 0.75vw, 9px);
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 20px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.tv {
-  background: var(--vl);
-  color: #6c5ce7;
-  border: 1px solid var(--vb);
-}
-
-.tt {
-  background: var(--tlb);
-  color: var(--tl);
-  border: 1px solid rgba(13, 148, 136, 0.2);
-}
-
-.tg {
-  background: var(--gnb);
-  color: var(--gn);
-  border: 1px solid rgba(5, 150, 105, 0.2);
-}
-
-.tp {
-  background: var(--pkb);
-  color: var(--pk);
-  border: 1px solid rgba(219, 39, 119, 0.2);
-}
-
-.ta {
-  background: var(--amb);
-  color: var(--am);
-  border: 1px solid rgba(217, 119, 6, 0.2);
-}
-
-/* ===== DOT / CHECK ===== */
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 4px;
-}
-
-.xmark {
-  color: #f43f5e;
-  font-size: 10px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-/* ===== UTILITIES ===== */
-.g2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem; /* 16px */
-}
-
-.g3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.75rem; /* 12px */
-}
-
-.g4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.625rem; /* 10px */
-}
-
-.col {
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-}
-
-.grow {
-  flex: 1;
-}
-
-.gap4 {
-  gap: 4px;
-}
-
-.gap6 {
-  gap: 6px;
-}
-
-.gap8 {
-  gap: 8px;
-}
-
-.gap12 {
-  gap: 12px;
-}
-
-.mt4 {
-  margin-top: 4px;
-}
-
-.mt8 {
-  margin-top: 8px;
-}
-
-.mt12 {
-  margin-top: 12px;
-}
-
-.mt-a {
-  margin-top: auto;
-}
-
-.hdr {
-  margin-bottom: 2.5%;
-}
-
-.divl {
-  height: 1px;
-  background: var(--b1);
-  margin: 10px 0;
-}
-
-/* ===== COMPETITION TABLE ===== */
-.ctbl {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.ctbl th {
-  font-size: clamp(7px, 0.8vw, 9px);
-  font-weight: 700;
-  color: var(--t3);
-  text-align: left;
-  padding: 7px 10px;
-  border-bottom: 1.5px solid var(--b2);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.ctbl td {
-  font-size: clamp(7px, 0.9vw, 11px);
-  color: var(--t2);
-  padding: 8px 10px;
-  border-bottom: 1px solid var(--b1);
-  vertical-align: middle;
-}
-
-.ctbl tr:last-child td {
-  border-bottom: none;
-}
-
-.ctbl td.us {
-  color: var(--t1);
-  font-weight: 700;
-  background: var(--vl);
-}
-
-.yes {
-  color: var(--gn);
-  font-weight: 800;
-}
-
-.no {
-  color: var(--t3);
-}
-
-.par {
-  color: var(--am);
-}
-
-/* ===== BUILDER PANELS ===== */
-.panel {
-  background: #fff;
-  border: 1px solid var(--b2);
-  border-radius: 14px;
-  padding: 3%;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-}
-
-.inp-m {
-  background: var(--s2);
-  border: 1px solid var(--b2);
-  border-radius: 8px;
-  padding: 5px 9px;
-  font-size: 9px;
-  color: var(--t2);
-  width: 100%;
-}
-
-.btn-m {
-  background: var(--vl);
-  border: 1px solid var(--vb);
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-size: 9px;
-  color: var(--v);
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-}
-
-.md-l {
-  font-size: 8px;
-  color: var(--tl);
-  line-height: 1.5;
-  font-family: monospace;
-}
-
-/* ===== ROADMAP ===== */
-.rcard {
-  background: #fff;
-  border: 1px solid var(--b1);
-  border-radius: 14px;
-  padding: 3.5%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.rcard.hl {
-  background: var(--pkb);
-  border-color: rgba(219, 39, 119, 0.25);
-}
-
-.pbar-w {
-  height: 5px;
-  background: var(--b1);
-  border-radius: 5px;
-  overflow: hidden;
-  margin-top: 2%;
-}
-
-.pbar {
-  height: 100%;
-  border-radius: 5px;
-  background: var(--gv);
-}
-
-/* ===== GLASS WIDGET ===== */
-.gw {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 18px;
-  padding: 12px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(108, 92, 231, 0.1);
-}
-
-.badge {
-  font-size: 8px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 5px;
-  display: inline-block;
-  margin: 2px;
-}
-
-.bd-js {
-  background: #f7df1e;
-  color: #000;
-}
-
-.bd-ts {
-  background: #3178c6;
-  color: #fff;
-}
-
-.bd-py {
-  background: #3776ab;
-  color: #fff;
-}
-
-.bd-rs {
-  background: #ce422b;
-  color: #fff;
-}
-
-.bd-re {
-  background: #61dafb;
-  color: #000;
-}
-
-.bd-go {
-  background: #00add8;
-  color: #fff;
-}
-
-/* ===== DECORATIVE RING ===== */
-.ring {
-  border-radius: 50%;
-  border: 1px solid var(--b1);
-  position: absolute;
-  pointer-events: none;
-}
-
-/* ===== COMPETITIVE ANALYSIS STYLES ===== */
-/* Positioning Matrix */
-.matrix-wrap {
-  flex: 1;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr auto;
-  gap: 0;
-}
-
-.y-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding-right: 10px;
-}
-
-.y-label-text {
-  font-size: clamp(7px, 0.8vw, 10px);
-  font-weight: 700;
-  color: var(--t3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
-
-.y-arrow {
-  width: 1px;
-  flex: 1;
-  background: var(--b2);
-  position: relative;
-}
-
-.y-arrow::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 6px solid var(--b2);
-}
-
-.y-arrow::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid var(--b2);
-}
-
-.matrix-area {
-  position: relative;
-  border-left: 2px solid var(--b2);
-  border-bottom: 2px solid var(--b2);
-}
-
-.quad-label {
-  position: absolute;
-  font-size: clamp(7px, 0.75vw, 9px);
-  font-weight: 600;
-  color: var(--t3);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.quad {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.q1 {
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 50%;
-  background: rgba(108, 92, 231, 0.04);
-  border-left: 1px dashed var(--b1);
-  border-bottom: 1px dashed var(--b1);
-}
-
-.q2 {
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
-  border-right: 0;
-  border-bottom: 1px dashed var(--b1);
-}
-
-.q3 {
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
-}
-
-.q4 {
-  bottom: 0;
-  right: 0;
-  width: 50%;
-  height: 50%;
-  border-left: 1px dashed var(--b1);
-}
-
-.comp-dot {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  cursor: default;
-  z-index: 5;
-}
-
-.dot-circle {
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(6px, 0.7vw, 8px);
-  font-weight: 800;
-  white-space: nowrap;
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
-.dot-name {
-  font-size: clamp(6px, 0.7vw, 9px);
-  font-weight: 700;
-  white-space: nowrap;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 1px 5px;
-  border-radius: 4px;
-  border: 0.5px solid var(--b2);
-}
-
-.gg-dot {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.gg-circle {
-  width: clamp(28px, 4vw, 48px);
-  height: clamp(28px, 4vw, 48px);
-  border-radius: 50%;
-  background: var(--v);
-  border: 2.5px solid #fff;
-  box-shadow: 0 4px 16px rgba(108, 92, 231, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(7px, 0.85vw, 11px);
-  font-weight: 900;
-  color: #fff;
-}
-
-.gg-name {
-  font-size: clamp(7px, 0.8vw, 10px);
-  font-weight: 800;
-  color: var(--v);
-  background: #fff;
-  padding: 2px 7px;
-  border-radius: 5px;
-  border: 1px solid var(--vb);
-  box-shadow: 0 2px 6px rgba(108, 92, 231, 0.15);
-}
-
-.x-axis-wrap {
-  grid-column: 2;
-  display: flex;
-  align-items: center;
-  padding-top: 8px;
-  gap: 6px;
-}
-
-.x-arrow {
-  flex: 1;
-  height: 1px;
-  background: var(--b2);
-  position: relative;
-}
-
-.x-arrow::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid var(--b2);
-}
-
-.x-arrow::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-right: 6px solid var(--b2);
-}
-
-.x-label-text {
-  font-size: clamp(7px, 0.8vw, 10px);
-  font-weight: 700;
-  color: var(--t3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.legend-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* SWOT Analysis */
-.swot-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1.5%;
-}
-
-.swot-cell {
-  border-radius: 14px;
-  padding: 4%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  position: relative;
-  overflow: hidden;
-}
-
-.swot-letter {
-  position: absolute;
-  top: -8px;
-  right: 10px;
-  font-size: clamp(40px, 7vw, 90px);
-  font-weight: 900;
-  opacity: 0.06;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: currentColor;
-}
-
-.swot-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: clamp(7px, 0.8vw, 10px);
-  font-weight: 800;
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  align-self: flex-start;
-  margin-bottom: 2px;
-}
-
-.swot-items {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.swot-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-.swot-icon {
-  font-size: clamp(8px, 0.9vw, 11px);
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.s-cell {
-  background: rgba(108, 92, 231, 0.07);
-  border: 1px solid rgba(108, 92, 231, 0.18);
-  color: var(--v);
-}
-
-.w-cell {
-  background: rgba(220, 38, 38, 0.05);
-  border: 1px solid rgba(220, 38, 38, 0.15);
-  color: var(--re);
-}
-
-.o-cell {
-  background: rgba(5, 150, 105, 0.06);
-  border: 1px solid rgba(5, 150, 105, 0.15);
-  color: var(--gn);
-}
-
-.t-cell {
-  background: rgba(217, 119, 6, 0.06);
-  border: 1px solid rgba(217, 119, 6, 0.18);
-  color: var(--am);
-}
-</style>
-
-<div class="nav">
-  <span class="nav-logo">GitGloss</span>
-  <button class="nb on" onclick="go('s1')">01</button>
-  <button class="nb" onclick="go('s2')">02 Problem</button>
-  <button class="nb" onclick="go('s3')">03 Solution</button>
-  <button class="nb" onclick="go('s4')">04 Market</button>
-  <button class="nb" onclick="go('s5')">05 Sizing</button>
-  <button class="nb" onclick="go('s6')">06 Competition</button>
-  <button class="nb" onclick="go('s7')">07 Positioning</button>
-  <button class="nb" onclick="go('s8')">08 SWOT</button>
-  <button class="nb" onclick="go('s9')">09 Product</button>
-  <button class="nb" onclick="go('s10')">10 Builder</button>
-  <button class="nb" onclick="go('s11')">11 Business</button>
-  <button class="nb" onclick="go('s12')">12 Roadmap</button>
-  <button class="nb" onclick="go('s13')">13 Team</button>
-  <button class="nb" onclick="go('s14')">14 Ask</button>
-</div>
-
-<!-- ===== S1 TITLE — circle orbit ===== -->
-<!-- ===== S1 TITLE ===== -->
-<div class="slide" style="background:linear-gradient(145deg,#faf9ff,#f0eeff)" id="s1">
-  <div class="ring" style="width:55%;padding-top:55%;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-  <div class="ring" style="width:75%;padding-top:75%;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.5"></div>
-  <div class="si" style="align-items:center;justify-content:center;text-align:center;gap:12px">
-    <!-- center glass circle -->
-    <div style="width:clamp(120px,18vw,230px);height:clamp(120px,18vw,230px);border-radius:50%;background:rgba(255,255,255,0.8);border:1.5px solid rgba(108,92,231,0.2);box-shadow:0 8px 40px rgba(108,92,231,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;z-index:3">
-      <div style="font-size:clamp(28px,5.5vw,70px);font-weight:900;letter-spacing:-.06em;background:var(--gv);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:.9">GG</div>
-      <div style="font-size:clamp(9px,1vw,12px);font-weight:800;color:var(--v);letter-spacing:.06em;text-transform:uppercase">GitGloss</div>
-    </div>
-    <!-- orbit pills -->
-    <div style="position:absolute;top:18%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--vb);border-radius:20px;padding:4px 12px;font-size:clamp(7px,.8vw,10px);font-weight:700;color:var(--v);white-space:nowrap;box-shadow:0 2px 8px rgba(108,92,231,0.1)">⌨️ GitHub README</div>
-    <div style="position:absolute;bottom:22%;left:18%;background:#fff;border:1px solid rgba(13,148,136,0.25);border-radius:20px;padding:4px 12px;font-size:clamp(7px,.8vw,10px);font-weight:700;color:var(--tl);white-space:nowrap;box-shadow:0 2px 8px rgba(13,148,136,0.1)">📋 Notion Pages</div>
-    <div style="position:absolute;bottom:22%;right:18%;background:#fff;border:1px solid rgba(219,39,119,0.2);border-radius:20px;padding:4px 12px;font-size:clamp(7px,.8vw,10px);font-weight:700;color:var(--pk);white-space:nowrap;box-shadow:0 2px 8px rgba(219,39,119,0.1)">✨ Glass Widgets</div>
-    <div style="position:absolute;top:30%;left:10%;background:#fff;border:1px solid var(--b2);border-radius:20px;padding:4px 12px;font-size:clamp(7px,.8vw,10px);font-weight:700;color:var(--t2);white-space:nowrap">🏪 Marketplace</div>
-    <div style="position:absolute;top:30%;right:10%;background:#fff;border:1px solid var(--b2);border-radius:20px;padding:4px 12px;font-size:clamp(7px,.8vw,10px);font-weight:700;color:var(--t2);white-space:nowrap">🤖 AI Stylist</div>
-
-    <div style="position:absolute;bottom:10%;text-align:center">
-      <div class="body" style="color:var(--t2);margin-bottom:8px">GitHub README & Notion을 빛내는 프리미엄 유리알 위젯 스튜디오</div>
-      <div class="row gap6" style="justify-content:center;flex-wrap:wrap">
-        <span class="tag tv">Freemium SaaS</span>
-        <span class="tag tt">Developer Tools</span>
-        <span class="tag tp">Creator Economy</span>
-        <span style="font-size:9px;color:var(--t3);margin-left:4px">Seed Round · 2025</span>
-      </div>
-    </div>
-  </div>
-  <div class="sn">01 / 14</div>
-</div>
-
-<!-- ===== S2 PROBLEM ===== -->
-<div class="slide" style="background:var(--s1)" id="s2">
-  <div class="blob" style="width:38%;height:55%;background:rgba(244,63,94,0.05);top:-10%;left:-5%;filter:blur(60px)"></div>
-  <div class="blob" style="width:32%;height:45%;background:rgba(108,92,231,0.06);bottom:-5%;right:0;filter:blur(60px)"></div>
-  <div class="si">
-    <div class="hdr"><div class="eye">The Problem</div><div class="h1">개발자의 프로필,<br>아직도 1998년에 머물러 있다</div></div>
-    <div class="g2 grow">
-      <div class="card col gap6">
-        <div class="cap" style="color:#f43f5e;letter-spacing:.08em">현재 상황</div>
-        <div class="col gap6 grow">
-          <div class="row gap8"><span class="xmark">✕</span><div class="body">URL 파라미터 수동 수정 — 직관성 제로</div></div>
-          <div class="row gap8"><span class="xmark">✕</span><div class="body">shields.io / gh-stats — 칙칙한 flat 이미지 나열</div></div>
-          <div class="row gap8"><span class="xmark">✕</span><div class="body">README·Notion·이력서 파편화 관리</div></div>
-          <div class="row gap8"><span class="xmark">✕</span><div class="body">모두 똑같은 생김새, 차별화 불가능</div></div>
+  <nav id="nav">
+    <a href="#s1" class="on"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a>
+    <a href="#s5"></a><a href="#s6"></a><a href="#s7"></a><a href="#s8"></a>
+    <a href="#s9"></a><a href="#s10"></a><a href="#s11"></a><a href="#s12"></a>
+    <a href="#s13"></a><a href="#s14"></a>
+  </nav>
+
+  <main class="deck">
+    
+    <section id="s1">
+      <div class="blob" style="width:600px; height:600px; background:var(--primary-v); top:-100px; right:-100px;"></div>
+      <div class="grid-2">
+        <div class="glass">
+          <span class="label">v1.2 Premium Edition</span>
+          <h1 class="h-title">당신의 개발 커리어,<br><span class="v">유리처럼</span> 빛나는<br>브랜드가 되다</h1>
+          <p class="p-body">GitHub와 Notion을 위한 하이엔드 글래스모피즘 위젯 빌더, <b>GitGloss</b> 피치덱입니다.</p>
         </div>
-        <div style="padding:10px;background:#fff5f7;border:1px solid rgba(244,63,94,0.15);border-radius:10px;margin-top:auto">
-          <div class="body" style="color:#e11d48;font-style:italic">"README는 중요한데, 제대로 된 툴이 없다"</div>
-        </div>
-      </div>
-      <div class="card card-v col gap6">
-        <div class="cap" style="color:var(--v);letter-spacing:.08em">GitGloss 이후</div>
-        <div class="col gap6 grow">
-          <div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">드래그 & 드롭 — <strong style="color:var(--t1)">코딩 없이 5분 완성</strong></div></div>
-          <div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">iOS 유리알 Glass — <strong style="color:var(--t1)">업계 최초 프리미엄 감성</strong></div></div>
-          <div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">GitHub + Notion <strong style="color:var(--t1)">완벽 크로스 플랫폼</strong></div></div>
-          <div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">나만의 브랜드 컬러로 <strong style="color:var(--t1)">차별화</strong></div></div>
-        </div>
-        <div style="padding:10px;background:var(--vl);border:1px solid var(--vb);border-radius:10px;margin-top:auto">
-          <div class="body" style="color:var(--v);font-style:italic">"GitHub 프로필을 개발자의 '브랜드'로"</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sn">02 / 14</div>
-</div>
-
-<!-- ===== S3 SOLUTION ===== -->
-<div class="slide" style="background:var(--s2)" id="s3">
-  <div class="blob" style="width:32%;height:42%;background:rgba(108,92,231,0.08);top:-8%;left:0;filter:blur(60px)"></div>
-  <div class="blob" style="width:28%;height:35%;background:rgba(16,185,129,0.08);bottom:-7%;right:0;filter:blur(60px)"></div>
-  <div class="si">
-    <div class="hdr"><div class="eye">The Solution</div><div class="h1">Turn your GitHub profile into a personal brand.</div></div>
-    <div class="g2 grow">
-      <div class="card col gap7">
-        <div class="cap" style="color:#f43f5e;letter-spacing:.08em">Problem → Solution</div>
-        <div class="row gap10"><span class="xmark">✕</span><div class="body"><strong>Manual README customization</strong> → <strong>Drag & drop builder</strong></div></div>
-        <div class="row gap10"><span class="xmark">✕</span><div class="body"><strong>Ugly generic design</strong> → <strong>Premium glass UI</strong></div></div>
-        <div class="row gap10"><span class="xmark">✕</span><div class="body"><strong>Fragmented GitHub / Notion workflows</strong> → <strong>Cross-platform sync</strong></div></div>
-        <div class="row gap10"><span class="xmark">✕</span><div class="body"><strong>No personal branding</strong> → <strong>Profile identity toolkit</strong></div></div>
-      </div>
-      <div class="card card-v col gap6" style="justify-content:space-between">
-        <div class="body" style="color:var(--t2);font-size:clamp(11px,1.2vw,14px);line-height:1.6">GitGloss fixes the broken developer profile stack with one product that makes beautiful, branded README and Notion profiles instantly available.</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div class="card" style="padding:14px;background:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.9);"><div class="cap">Builder</div><div class="h3">Visual drag & drop</div></div>
-          <div class="card" style="padding:14px;background:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.9);"><div class="cap">Design</div><div class="h3">Premium glass widgets</div></div>
-          <div class="card" style="padding:14px;background:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.9);"><div class="cap">Platform</div><div class="h3">GitHub + Notion</div></div>
-          <div class="card" style="padding:14px;background:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.9);"><div class="cap">Brand</div><div class="h3">Profile identity</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sn">03 / 14</div>
-</div>
-
-<!-- ===== S4 MARKET — circle diagram ===== -->
-<!-- ===== S3 TARGET MARKET ===== -->
-<div class="slide" style="background:var(--s2)" id="s4">
-  <div class="si" style="flex-direction:row;gap:4%">
-    <!-- LEFT TEXT -->
-    <div class="col" style="width:35%;justify-content:center;gap:16px">
-      <div><div class="eye">Target Market</div><div class="h1">두 거대<br>생태계의<br>교집합</div></div>
-      <div class="body" style="color:var(--t2)">퍼스널 브랜딩에 투자하는 개발자와 지식 노동자를 동시에 공략하는 유일한 플랫폼</div>
-      <div class="card" style="padding:12px 16px">
-        <div class="cap">Total Addressable Market</div>
-        <div class="snum mt4" style="background:var(--gv);-webkit-background-clip:text;-webkit-text-fill-color:transparent">80,000,000명</div>
-        <div class="cap mt4">GitHub + Notion 합산</div>
-      </div>
-    </div>
-    <!-- RIGHT CIRCLE DIAGRAM -->
-    <div class="grow" style="position:relative;display:flex;align-items:center;justify-content:center">
-      <!-- outer ring label -->
-      <div style="position:absolute;width:88%;height:88%;border-radius:50%;border:1.5px dashed var(--b2)"></div>
-      <!-- GitHub circle -->
-      <div style="position:absolute;left:8%;top:50%;transform:translateY(-50%);width:clamp(90px,16vw,200px);height:clamp(90px,16vw,200px);border-radius:50%;background:var(--vl);border:1.5px solid var(--vb);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;box-shadow:0 4px 20px rgba(108,92,231,0.1)">
-        <div style="font-size:clamp(14px,2.5vw,18px)">⌨️</div>
-        <div style="font-size:clamp(8px,1.1vw,13px);font-weight:800;color:var(--t1)">GitHub</div>
-        <div class="knum v" style="font-size:clamp(20px,3.8vw,48px)">30M</div>
-        <div class="cap">MAU</div>
-      </div>
-      <!-- Notion circle -->
-      <div style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(90px,16vw,200px);height:clamp(90px,16vw,200px);border-radius:50%;background:var(--tlb);border:1.5px solid rgba(13,148,136,0.22);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;box-shadow:0 4px 20px rgba(13,148,136,0.1)">
-        <div style="font-size:clamp(14px,2.5vw,18px)">📋</div>
-        <div style="font-size:clamp(8px,1.1vw,13px);font-weight:800;color:var(--t1)">Notion</div>
-        <div class="knum t" style="font-size:clamp(20px,3.8vw,48px)">50M</div>
-        <div class="cap">MAU</div>
-      </div>
-      <!-- intersection circle -->
-      <div style="position:relative;z-index:5;width:clamp(60px,10vw,120px);height:clamp(60px,10vw,120px);border-radius:50%;background:#fff;border:2px solid rgba(108,92,231,0.25);box-shadow:0 4px 24px rgba(108,92,231,0.18);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px">
-        <div style="font-size:clamp(6px,.8vw,9px);font-weight:700;color:var(--v);text-transform:uppercase;letter-spacing:.06em">교집합</div>
-        <div style="font-size:clamp(12px,2vw,24px);font-weight:900;background:var(--gv);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.04em">12M</div>
-        <div class="cap">Core TAM</div>
-      </div>
-    </div>
-  </div>
-  <div class="sn">04 / 14</div>
-</div>
-
-<!-- ===== S4 SIZING ===== -->
-<!-- ===== S4 MARKET SIZING ===== -->
-<div class="slide" style="background:var(--s1)" id="s5">
-  <div class="blob" style="width:35%;height:40%;background:rgba(5,150,105,0.05);bottom:0;right:0;filter:blur(70px)"></div>
-  <div class="si">
-    <div class="hdr"><div class="eye">Market Sizing</div><div class="h1">압도적인 잠재 수익</div></div>
-    <div class="g3 grow">
-      <div class="card col">
-        <span class="tag tv" style="align-self:flex-start">TAM</span>
-        <div class="body mt8">GitHub + Notion 전체 시장</div>
-        <div class="mt-a" style="padding-top:12px;border-top:1px solid var(--b1)">
-          <div class="tnum" style="color:var(--t2)">80M명</div>
-          <div class="cap mt4">전체 잠재 시장</div>
-        </div>
-      </div>
-      <div class="card card-v col">
-        <span class="tag tv" style="align-self:flex-start">SAM</span>
-        <div class="body mt8">퍼스널 브랜딩에 적극적인 코어 타겟</div>
-        <div class="mt-a" style="padding-top:12px;border-top:1px solid var(--vb)">
-          <div class="snum">12M명</div>
-          <div class="cap mt4">TAM의 15%</div>
-        </div>
-      </div>
-      <div class="card card-g col" style="border-width:1.5px">
-        <span class="tag tg" style="align-self:flex-start">연간 잠재 수익</span>
-        <div class="body mt8">SOM 10% 유료 전환 기준 최소 목표</div>
-        <div class="mt-a" style="padding-top:12px;border-top:1px solid rgba(5,150,105,0.2)">
-          <div class="knum g">$7M<span style="font-size:55%;opacity:.7">+</span></div>
-          <div class="cap mt4">ARR · Annual Recurring Revenue</div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:1.8%;padding:10px 18px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <div class="cap">SOM 초기 확보 목표</div>
-      <div class="tnum">1,200,000명</div>
-      <div class="cap" style="color:var(--t3)">SAM의 10% · 18개월 목표</div>
-    </div>
-  </div>
-  <div class="sn">05 / 14</div>
-</div>
-
-<!-- ===== S6 COMPETITION ===== -->
-<!-- ===== S5 COMPETITIVE LANDSCAPE ===== -->
-<div class="slide" style="background:var(--s2)" id="s6">
-  <div class="si">
-    <div class="hdr"><div class="eye">Competitive Landscape</div><div class="h1">디자인 & 커뮤니티로<br>시장 재정의</div></div>
-    <div class="grow" style="overflow:auto">
-      <table class="ctbl">
-        <thead><tr><th>기능</th><th>Shields.io</th><th>GH Stats</th><th>Readme.so</th><th style="color:var(--v)">✦ GitGloss</th></tr></thead>
-        <tbody>
-          <tr><td>디자인 퀄리티</td><td>단색 flat</td><td>기본 다크/라이트</td><td>템플릿 기반</td><td class="us"><span class="tag tv" style="font-size:8px">프리미엄 Glass</span></td></tr>
-          <tr><td>설정 방식</td><td><span class="no">● URL 파라미터</span></td><td><span class="no">● URL 파라미터</span></td><td><span class="par">● 제한적 UI</span></td><td class="us"><span class="yes">● 드래그 & 드롭</span></td></tr>
-          <tr><td>Notion 지원</td><td><span class="no">● 미지원</span></td><td><span class="no">● 미지원</span></td><td><span class="no">● 미지원</span></td><td class="us"><span class="yes">● 완벽 지원</span></td></tr>
-          <tr><td>실시간 프리뷰</td><td><span class="no">● 없음</span></td><td><span class="par">● 부분</span></td><td><span class="par">● 부분</span></td><td class="us"><span class="yes">● 완전 실시간</span></td></tr>
-          <tr><td>커뮤니티 마켓</td><td><span class="no">● 없음</span></td><td><span class="no">● 없음</span></td><td><span class="no">● 없음</span></td><td class="us"><span class="yes">● 수익 창출 마켓</span></td></tr>
-          <tr><td>비즈니스 모델</td><td>광고 / OSS</td><td>OSS</td><td>Freemium</td><td class="us">Freemium + 마켓 + B2B</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row gap16 mt8 cap" style="flex-wrap:wrap">
-      <span><span class="yes">●</span> 지원</span>
-      <span><span class="par">●</span> 부분</span>
-      <span><span class="no">●</span> 미지원</span>
-    </div>
-  </div>
-  <div class="sn">06 / 14</div>
-</div>
-
-<!-- ===== S7 POSITIONING MATRIX ===== -->
-<div class="slide" style="background:var(--s1)" id="s7">
-  <div class="blob" style="width:30%;height:40%;background:rgba(108,92,231,0.07);top:-5%;right:0"></div>
-  <div class="si">
-    <div class="hdr">
-      <div class="eye">Competitive Positioning</div>
-      <div class="h1">GitGloss는 유일하게<br>1사분면을 점유한다</div>
-    </div>
-
-    <div class="matrix-wrap">
-      <div class="y-label">
-        <div class="cap" style="writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.12em">HIGH</div>
-        <div class="y-arrow" style="flex:1;width:1px;background:var(--b2);position:relative;margin:4px 0">
-          <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid var(--b2)"></div>
-          <div style="position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid var(--b2)"></div>
-        </div>
-        <div class="y-label-text">Design Quality</div>
-        <div class="y-arrow" style="flex:1;width:1px;background:var(--b2);position:relative;margin:4px 0"></div>
-        <div class="cap" style="writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.12em">LOW</div>
-      </div>
-      <div class="matrix-area" id="mx">
-        <div class="quad q1"></div>
-        <div class="quad q2"></div>
-        <div class="quad q3"></div>
-        <div class="quad q4"></div>
-        <div class="quad-label" style="top:3%;right:2%;color:rgba(108,92,231,0.5);font-size:clamp(7px,.75vw,9px)">HIGH DESIGN · VISUAL BUILDER</div>
-        <div class="quad-label" style="top:3%;left:2%">LOW CODE · HIGH DESIGN</div>
-        <div class="quad-label" style="bottom:3%;left:2%">MANUAL · FLAT DESIGN</div>
-        <div class="quad-label" style="bottom:3%;right:2%">VISUAL · FLAT DESIGN</div>
-        <div class="comp-dot" style="left:18%;top:80%"><div class="dot-circle" style="width:clamp(16px,2.2vw,26px);height:clamp(16px,2.2vw,26px);background:#e2e2e2;color:#444">S</div><div class="dot-name">Shields.io</div></div>
-        <div class="comp-dot" style="left:22%;top:55%"><div class="dot-circle" style="width:clamp(16px,2.2vw,26px);height:clamp(16px,2.2vw,26px);background:#cfe2ff;color:#0a3880">GS</div><div class="dot-name">GH Stats</div></div>
-        <div class="comp-dot" style="left:55%;top:75%"><div class="dot-circle" style="width:clamp(16px,2.2vw,26px);height:clamp(16px,2.2vw,26px);background:#ffd6a5;color:#7c4700">RS</div><div class="dot-name">readme.so</div></div>
-        <div class="comp-dot" style="left:62%;top:52%"><div class="dot-circle" style="width:clamp(16px,2.2vw,26px);height:clamp(16px,2.2vw,26px);background:#d1fae5;color:#065f46">GP</div><div class="dot-name">GPRM</div></div>
-        <div class="comp-dot" style="left:50%;top:68%"><div class="dot-circle" style="width:clamp(16px,2.2vw,26px);height:clamp(16px,2.2vw,26px);background:#fce7f3;color:#9d174d">PR</div><div class="dot-name">Profilinator</div></div>
-        <div class="comp-dot" style="left:70%;top:72%"><div class="dot-circle" style="width:clamp(16px,2.2vw,26px);height:clamp(16px,2.2vw,26px);background:#fef9c3;color:#78350f">RG</div><div class="dot-name">README Gen</div></div>
-        <div class="gg-dot" style="left:82%;top:14%"><div class="gg-circle">GG</div><div class="gg-name">✦ GitGloss</div></div>
-        <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--b1)"></div>
-        <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--b1)"></div>
-      </div>
-      <div style="grid-column:2;display:flex;align-items:center;gap:6px;padding-top:6px"><div class="cap">LOW UX</div><div style="flex:1;height:1px;background:var(--b2);position:relative"><div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:7px solid var(--b2)"></div><div style="position:absolute;left:-1px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:7px solid var(--b2)"></div></div><div class="cap">HIGH UX · Visual Builder</div></div>
-    </div>
-    <div style="margin-top:8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-      <div class="legend"><div class="legend-item"><div class="legend-dot" style="background:#e2e2e2"></div><span class="cap">Shields.io</span></div><div class="legend-item"><div class="legend-dot" style="background:#cfe2ff"></div><span class="cap">GH Stats</span></div><div class="legend-item"><div class="legend-dot" style="background:#ffd6a5"></div><span class="cap">readme.so</span></div><div class="legend-item"><div class="legend-dot" style="background:#d1fae5"></div><span class="cap">GPRM</span></div><div class="legend-item"><div class="legend-dot" style="background:#fce7f3"></div><span class="cap">Profilinator</span></div><div class="legend-item"><div class="legend-dot" style="background:#fef9c3"></div><span class="cap">README Gen</span></div><div class="legend-item"><div class="legend-dot" style="background:var(--v)"></div><span class="cap" style="color:var(--v);font-weight:700">✦ GitGloss</span></div></div><div style="margin-left:auto;padding:6px 14px;background:var(--vl);border:1px solid var(--vb);border-radius:8px"><div class="body" style="color:var(--v);font-weight:600">1사분면 = <strong style="color:var(--t1)">경쟁자 없음</strong> · 블루오션</div></div>
-    </div>
-  </div>
-  <div class="sn">07 / 14</div>
-</div>
-
-<!-- ===== S8 SWOT ===== -->
-<div class="slide" style="background:var(--s2)" id="s8">
-  <div class="blob" style="width:35%;height:45%;background:rgba(108,92,231,0.06);top:-5%;right:0"></div>
-  <div class="si">
-    <div class="hdr">
-      <div class="eye">SWOT Analysis</div>
-      <div class="h1">기회는 크고, 위협은<br>실행력으로 넘는다</div>
-    </div>
-
-    <div class="swot-grid">
-      <div class="swot-cell s-cell">
-        <div class="swot-letter">S</div>
-        <div class="swot-tag" style="background:var(--vl);color:#3C3489;border:1px solid var(--vb)">S · Strengths</div>
-        <div class="swot-items">
-          <div class="swot-row"><div class="swot-icon">◆</div><div class="body"><strong style="color:var(--t1)">업계 유일</strong> 프리미엄 Glassmorphism 디자인</div></div>
-          <div class="swot-row"><div class="swot-icon">◆</div><div class="body"><strong style="color:var(--t1)">GitHub + Notion</strong> 크로스 플랫폼 지원</div></div>
-          <div class="swot-row"><div class="swot-icon">◆</div><div class="body">코딩 없는 <strong style="color:var(--t1)">드래그 & 드롭</strong> 빌더 UX</div></div>
-          <div class="swot-row"><div class="swot-icon">◆</div><div class="body">커뮤니티 마켓 + Freemium <strong style="color:var(--t1)">수익 다각화</strong></div></div>
-        </div>
-      </div>
-      <div class="swot-cell w-cell">
-        <div class="swot-letter">W</div>
-        <div class="swot-tag" style="background:var(--reb);color:#7f1d1d;border:1px solid rgba(220,38,38,0.2)">W · Weaknesses</div>
-        <div class="swot-items">
-          <div class="swot-row"><div class="swot-icon">▸</div><div class="body">초기 <strong style="color:var(--t1)">브랜드 인지도 없음</strong> — 신규 진입자</div></div>
-          <div class="swot-row"><div class="swot-icon">▸</div><div class="body">SVG 렌더링 서버 운영 <strong style="color:var(--t1)">고정비 부담</strong></div></div>
-          <div class="swot-row"><div class="swot-icon">▸</div><div class="body">마켓플레이스는 <strong style="color:var(--t1)">콘텐츠 공급자</strong> 선확보 필요</div></div>
-          <div class="swot-row"><div class="swot-icon">▸</div><div class="body">Notion iframe 정책 <strong style="color:var(--t1)">외부 의존성</strong></div></div>
-        </div>
-      </div>
-      <div class="swot-cell o-cell">
-        <div class="swot-letter">O</div>
-        <div class="swot-tag" style="background:var(--gnb);color:#064e3b;border:1px solid rgba(5,150,105,0.2)">O · Opportunities</div>
-        <div class="swot-items">
-          <div class="swot-row"><div class="swot-icon">▲</div><div class="body"><strong style="color:var(--t1)">퍼스널 브랜딩</strong> 트렌드 급성장 — Z세대 취준 문화</div></div>
-          <div class="swot-row"><div class="swot-icon">▲</div><div class="body"><strong style="color:var(--t1)">80M+ TAM</strong> 중 프리미엄 툴 공백 확인</div></div>
-          <div class="swot-row"><div class="swot-icon">▲</div><div class="body">AI README Stylist로 <strong style="color:var(--t1)">V2 차별화</strong> 선점</div></div>
-          <div class="swot-row"><div class="swot-icon">▲</div><div class="body">코딩 부트캠프 B2B 납품 <strong style="color:var(--t1)">안정 수익</strong></div></div>
-        </div>
-      </div>
-      <div class="swot-cell t-cell">
-        <div class="swot-letter">T</div>
-        <div class="swot-tag" style="background:var(--amb);color:#78350f;border:1px solid rgba(217,119,6,0.25)">T · Threats</div>
-        <div class="swot-items">
-          <div class="swot-row"><div class="swot-icon">▼</div><div class="body">GPRM·Profilinator 등 <strong style="color:var(--t1)">무료 OSS</strong> 경쟁 심화</div></div>
-          <div class="swot-row"><div class="swot-icon">▼</div><div class="body">GitHub 자체 <strong style="color:var(--t1)">프로필 위젯 기능</strong> 내재화 가능성</div></div>
-          <div class="swot-row"><div class="swot-icon">▼</div><div class="body">대형 테크 기업의 <strong style="color:var(--t1)">유사 서비스</strong> 빠른 모방</div></div>
-          <div class="swot-row"><div class="swot-icon">▼</div><div class="body">Glassmorphism 트렌드 <strong style="color:var(--t1)">진부화</strong> 리스크</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sn">08 / 14</div>
-</div>
-
-<!-- ===== S9 PRODUCT ===== -->
-<!-- ===== S9 PRODUCT MVP ===== -->
-<div class="slide" style="background:var(--s1)" id="s9">
-  <div class="blob" style="width:30%;height:40%;background:rgba(108,92,231,0.06);bottom:0;left:0;filter:blur(60px)"></div>
-  <div class="si">
-    <div class="hdr"><div class="eye">Product · MVP</div><div class="h1">README Hero Builder</div></div>
-    <div class="g2 grow">
-      <div class="col gap7">
-        <div class="card row gap10" style="padding:3%"><div style="font-size:clamp(11px,1.4vw,16px);font-weight:800;color:var(--v);min-width:22px">01</div><div><div class="h3">Hero Header & Skill Badge</div><div class="body">shields.io 뱃지 자동 생성 · Glass 라운드 스타일</div></div></div>
-        <div class="card row gap10" style="padding:3%"><div style="font-size:clamp(11px,1.4vw,16px);font-weight:800;color:var(--v);min-width:22px">02</div><div><div class="h3">Profile Widget Card</div><div class="body">About Me / Currently Learning 모듈형 카드</div></div></div>
-        <div class="card row gap10" style="padding:3%"><div style="font-size:clamp(11px,1.4vw,16px);font-weight:800;color:var(--v);min-width:22px">03</div><div><div class="h3">GitHub Stats UI Wrapper</div><div class="body">기존 통계 위젯을 Glass UI로 래핑</div></div></div>
-        <div class="card row gap10" style="padding:3%"><div style="font-size:clamp(11px,1.4vw,16px);font-weight:800;color:var(--v);min-width:22px">04</div><div><div class="h3">Markdown & JSON Export</div><div class="body">클릭 한 번으로 복붙 · 커스텀 테마 저장</div></div></div>
-        <div class="card card-t row gap10" style="padding:3%"><div style="font-size:clamp(11px,1.4vw,16px);font-weight:800;color:var(--tl);min-width:22px">05</div><div><div class="h3">Notion Embed 지원</div><div class="body">동일 위젯 Notion 페이지에 즉시 삽입</div></div></div>
-      </div>
-      <div class="col" style="align-items:center;justify-content:center">
-        <div class="gw" style="width:90%;max-width:260px">
-          <div class="cap" style="margin-bottom:8px">Preview · Profile Widget</div>
-          <div style="background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.9);border-radius:10px;padding:9px 11px;display:flex;align-items:center;gap:8px;margin-bottom:7px">
-            <div style="width:26px;height:26px;border-radius:50%;background:var(--gv);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0">JL</div>
-            <div><div style="font-size:11px;font-weight:700;color:var(--t1)">Jungkyu Lee</div><div class="cap">Full-Stack Developer</div></div>
+        <div style="display:flex; justify-content:center; align-items:center; position:relative;">
+          <div class="icon-25d" style="width:240px; height:240px; font-size:100px; transform: rotate(-10deg);">💎</div>
+          <div class="glass" style="position:absolute; padding:20px 40px; bottom:40px; transform: rotate(5deg);">
+            <span style="font-weight:900; color:var(--primary-v);"># Premium_Branding</span>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px">
-            <span class="badge bd-js">JavaScript</span><span class="badge bd-ts">TypeScript</span><span class="badge bd-py">Python</span><span class="badge bd-rs">Rust</span><span class="badge bd-re">React</span><span class="badge bd-go">Go</span>
-          </div>
-          <div style="display:flex;gap:4px;margin-bottom:7px">
-            <div style="flex:1;background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.8);border-radius:7px;padding:5px;text-align:center"><div style="font-size:10px;font-weight:800;color:var(--t1)">1.2k</div><div class="cap">Commits</div></div>
-            <div style="flex:1;background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.8);border-radius:7px;padding:5px;text-align:center"><div style="font-size:10px;font-weight:800;color:var(--t1)">48</div><div class="cap">Repos</div></div>
-            <div style="flex:1;background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.8);border-radius:7px;padding:5px;text-align:center"><div style="font-size:10px;font-weight:800;color:var(--t1)">312</div><div class="cap">Stars</div></div>
-          </div>
-          <div style="padding:5px 9px;background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.15);border-radius:7px;font-size:8px;color:var(--v)">🟢 Learning: Rust & WebAssembly</div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="sn">09 / 14</div>
-</div>
+    </section>
 
-<!-- ===== S10 BUILDER MVP ===== -->
-<!-- ===== S10 BUILDER MVP ===== -->
-<div class="slide" style="background:var(--s2)" id="s10">
-  <div class="si">
-    <div class="hdr"><div class="eye">Builder MVP · 3-Panel Architecture</div><div class="h1">Build your developer identity.<br><span style="color:var(--t3)">Without writing code.</span></div></div>
-    <div style="display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:1.5%;flex:1;min-height:0">
-      <div class="panel">
-        <div style="font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--b1)">Controls</div>
-        <div class="col gap4"><div class="cap">GitHub username</div><div class="inp-m">octocat</div></div>
-        <div class="col gap4"><div class="cap">Add skill badge</div><div class="inp-m">React</div><div class="btn-m">+ Add Skill</div></div>
-        <div class="col gap4 mt4"><div class="cap">Add widget</div><div class="btn-m" style="background:var(--tlb);border-color:rgba(13,148,136,0.25);color:var(--tl)">📊 GitHub Stats</div><div class="btn-m" style="background:var(--pkb);border-color:rgba(219,39,119,0.2);color:var(--pk)">🃏 Profile Card</div></div>
-        <div class="mt-a"><div style="font-size:8px;color:var(--t3);padding:5px 0;border-top:1px solid var(--b1)">state.widgets: 3 items</div></div>
-      </div>
-      <div class="panel" style="border-color:rgba(108,92,231,0.25)">
-        <div style="font-size:9px;font-weight:700;color:var(--v);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--vb)">Live Preview — Real-time · &lt;200ms</div>
-        <div class="gw" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:10px">
-          <div style="display:flex;align-items:center;gap:7px">
-            <div style="width:24px;height:24px;border-radius:50%;background:var(--gv);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0">OC</div>
-            <div style="font-size:10px;font-weight:700;color:var(--t1)">octocat</div>
-            <div class="tag tv" style="font-size:7px;margin-left:auto">Pro</div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px"><span class="badge bd-js">JavaScript</span><span class="badge bd-ts">TypeScript</span><span class="badge bd-re">React</span><span class="badge bd-py">Python</span></div>
-          <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.9);border-radius:8px;padding:8px">
-            <div class="cap" style="margin-bottom:5px">GitHub Stats</div>
-            <div style="display:flex;gap:4px">
-              <div style="flex:1;text-align:center"><div style="font-size:10px;font-weight:800;color:var(--t1)">1.2k</div><div class="cap">commits</div></div>
-              <div style="flex:1;text-align:center"><div style="font-size:10px;font-weight:800;color:var(--v)">A+</div><div class="cap">rank</div></div>
-              <div style="flex:1;text-align:center"><div style="font-size:10px;font-weight:800;color:var(--tl)">48</div><div class="cap">repos</div></div>
-            </div>
-          </div>
-          <div style="padding:6px 8px;background:rgba(108,92,231,0.07);border:1px solid rgba(108,92,231,0.15);border-radius:7px;font-size:8px;color:var(--v)">🟢 Currently learning: Rust & WebAssembly</div>
-        </div>
-      </div>
-      <div class="panel">
-        <div style="font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--b1)">Markdown Output</div>
-        <div style="flex:1;background:var(--s2);border-radius:8px;padding:8px;overflow:hidden">
-          <div class="md-l">&lt;!-- GitGloss --&gt;</div>
-          <div class="md-l">&lt;div align="center"&gt;</div>
-          <div class="md-l">&nbsp;&nbsp;![js](shields.io/...)</div>
-          <div class="md-l">&nbsp;&nbsp;![ts](shields.io/...)</div>
-          <div class="md-l">&lt;/div&gt;</div>
-          <div class="md-l">&nbsp;</div>
-          <div class="md-l">![stats](github-readme</div>
-          <div class="md-l">&nbsp;&nbsp;-stats.vercel.app/</div>
-          <div class="md-l">&nbsp;&nbsp;api?username=octocat)</div>
-        </div>
-        <div class="btn-m mt8" style="background:var(--gnb);border-color:rgba(5,150,105,0.25);color:var(--gn)">📋 Copy to Clipboard</div>
-        <div class="cap mt4" style="text-align:center">JSON export 지원</div>
-      </div>
-    </div>
-    <div style="margin-top:1.5%;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-      <div class="cap">Stack:</div>
-      <span class="tag tv" style="font-size:7px">Vanilla JS</span>
-      <span class="tag tt" style="font-size:7px">jQuery</span>
-      <span class="tag tg" style="font-size:7px">shields.io API</span>
-      <span class="tag tv" style="font-size:7px">gh-readme-stats</span>
-      <span class="tag tp" style="font-size:7px">Glassmorphism CSS</span>
-    </div>
-  </div>
-  <div class="sn">10 / 14</div>
-</div>
-
-<!-- ===== S11 BUSINESS MODEL — circle orbit ===== -->
-<!-- ===== S11 BUSINESS MODEL ===== -->
-<div class="slide" style="background:var(--s1)" id="s11">
-  <div class="si" style="flex-direction:row;gap:4%">
-    <!-- LEFT: heading + hero number -->
-    <div class="col" style="width:32%;justify-content:center;gap:14px">
-      <div><div class="eye">Business Model</div><div class="h1">Freemium × Creator Marketplace<br>수익과 확장의 두 축</div></div>
-      <div class="card card-g" style="padding:14px 16px">
-        <div class="cap">Revenue strategy</div>
-        <div class="h3 mt4" style="color:var(--v)">Freemium + Premium themes</div>
-        <div class="cap mt4">기본 무료 경험 + 유료 테마/위젯 판매</div>
-      </div>
-    </div>
-    <!-- RIGHT: business model drivers -->
-    <div class="grow col" style="align-items:center;justify-content:center;gap:16px">
-      <!-- Business driver 1 -->
-      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fff;border:1px solid var(--b2);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.05);width:100%;max-width:300px">
-        <div style="width:clamp(40px,6vw,60px);height:clamp(40px,6vw,60px);border-radius:50%;background:linear-gradient(135deg,var(--v),var(--v2));display:flex;align-items:center;justify-content:center;font-size:clamp(16px,2.5vw,24px)">💰</div>
+    <section id="s2" style="background:#fff;">
+      <div class="grid-2">
         <div>
-          <div class="h3" style="color:var(--t1);font-size:clamp(14px,2vw,18px)">Premium theme marketplace</div>
-          <div class="cap" style="color:var(--t2);font-size:clamp(10px,1.5vw,12px)">Creators monetize designs</div>
-          <div class="body" style="color:var(--t3);font-size:clamp(9px,1.2vw,11px);margin-top:2px">유료 테마·위젯 판매로 플랫폼 수익과 공급자 참여를 동시에 확장</div>
+          <span class="label">The Logic of Branding</span>
+          <h1 class="h-title">왜 GenZ 개발자는<br><span class="b">'깃꾸'</span>에 열광할까요?</h1>
+          <p class="p-body">디지털 네이티브에게 깃허브는 단순한 저장소가 아닙니다. 나를 증명하는 <b>'디지털 자아'</b>의 확장이며, 성장을 전시하는 가장 세련된 방식입니다.</p>
+        </div>
+        <div class="glass-card">
+          <div style="margin-bottom: 24px;">
+            <h3 style="font-size: 18px; margin-bottom: 8px;">소비 트렌드: Value Shot</h3>
+            <p style="font-size: 15px; color: var(--text-t2);">본인의 전문성을 시각적으로 즉각 증명하는 도구에 투자</p>
+          </div>
+          <div style="margin-bottom: 24px;">
+            <h3 style="font-size: 18px; margin-bottom: 8px;">셀프 브랜딩: Identity Tool</h3>
+            <p style="font-size: 15px; color: var(--text-t2);">다꾸 문화가 IT 생태계로 전이된 '깃꾸' 현상</p>
+          </div>
+          <div class="glass-dark" style="padding: 20px; border-radius: 12px; background: rgba(0,51,255,0.05);">
+            <p style="font-size: 14px; font-weight: 700; color: var(--primary-b);">"잘 꾸며진 깃허브는 연봉 협상의 첫 번째 무기입니다"</p>
+          </div>
         </div>
       </div>
-      <!-- Business driver 2 -->
-      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fff;border:1px solid var(--b2);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.05);width:100%;max-width:300px">
-        <div style="width:clamp(40px,6vw,60px);height:clamp(40px,6vw,60px);border-radius:50%;background:linear-gradient(135deg,var(--tl),#0f9488);display:flex;align-items:center;justify-content:center;font-size:clamp(16px,2.5vw,24px)">🚀</div>
+    </section>
+
+    <section id="s3">
+      <div class="grid-2">
+        <div class="mockup" style="height:350px; background:#F6F8FA;">
+          <div class="gh-header"><div class="gh-dot"></div><div class="gh-dot"></div><div class="gh-dot"></div></div>
+          <div style="padding:40px; color:#D1D5DA; font-family:monospace; line-height:1.8;">
+            # My Profile<br>
+            - Java, Spring, React<br>
+            - 3 Projects done.<br>
+            [Dull text here...]
+          </div>
+          <div style="position:absolute; top:20%; right:20px; transform:rotate(10deg);" class="glass">
+             <span style="font-weight:900; color:var(--sub-pink);">BORING ❌</span>
+          </div>
+        </div>
         <div>
-          <div class="h3" style="color:var(--t1);font-size:clamp(14px,2vw,18px)">Platform growth flywheel</div>
-          <div class="cap" style="color:var(--t2);font-size:clamp(10px,1.5vw,12px)">GitHub · Notion · creators</div>
-          <div class="body" style="color:var(--t3);font-size:clamp(9px,1.2vw,11px);margin-top:2px">사용자 프로필과 Notion 배포 경로를 통해 자연스러운 확장과 재방문을 이끕니다.</div>
+          <span class="label">The Pain Point</span>
+          <h1 class="h-title">아무도 읽지 않는<br>텍스트 중심의 프로필</h1>
+          <p class="p-body">현재의 깃허브 프로필은 정보를 나열할 뿐, 감동을 주지 못합니다. 수동으로 마크다운을 수정하는 번거로움은 브랜딩의 진입장벽이 됩니다.</p>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="sn">11 / 14</div>
-</div>
+    </section>
 
-<!-- ===== S12 ROADMAP ===== -->
-<!-- ===== S12 PRODUCT ROADMAP ===== -->
-<div class="slide" style="background:var(--s2)" id="s12">
-  <div class="si">
-    <div class="hdr"><div class="eye">Product Roadmap</div><div class="h1">위젯을 넘어 AI 프로필 스타일리스트로</div></div>
-    <div class="g4 grow">
-      <div class="rcard"><div class="cap" style="color:var(--v)">V1.0 · Now</div><div class="h3">MVP 런칭</div><div class="col gap5 mt8"><div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">3-Panel Builder UI</div></div><div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">Skill Badge 자동 생성</div></div><div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">Markdown Export</div></div><div class="row gap8"><div class="dot" style="background:var(--v)"></div><div class="body">기본 Glass 테마 3종</div></div></div></div>
-      <div class="rcard"><div class="cap" style="color:var(--tl)">V1.1 · Q3 2025</div><div class="h3">Notion & 디테일</div><div class="col gap5 mt8"><div class="row gap8"><div class="dot" style="background:var(--tl)"></div><div class="body">Notion Embed 완벽 지원</div></div><div class="row gap8"><div class="dot" style="background:var(--tl)"></div><div class="body">Gradient / Glow 조절</div></div><div class="row gap8"><div class="dot" style="background:var(--tl)"></div><div class="body">다크/라이트 프리셋</div></div></div></div>
-      <div class="rcard"><div class="cap" style="color:var(--pk)">V1.2 · Q4 2025</div><div class="h3">커뮤니티 마켓</div><div class="col gap5 mt8"><div class="row gap8"><div class="dot" style="background:var(--pk)"></div><div class="body">Theme Gallery 오픈</div></div><div class="row gap8"><div class="dot" style="background:var(--pk)"></div><div class="body">크리에이터 수익화</div></div><div class="row gap8"><div class="dot" style="background:var(--pk)"></div><div class="body">Auto Layout 추천</div></div></div></div>
-      <div class="rcard hl"><div class="cap" style="color:var(--pk)">V2.0 · 2026</div><div class="h3">AI README Stylist</div><div class="col gap5 mt8"><div class="row gap8"><div class="dot" style="background:var(--pk)"></div><div class="body">GitHub 분석 → 위젯 추천</div></div><div class="row gap8"><div class="dot" style="background:var(--pk)"></div><div class="body">정보 배치 자동 최적화</div></div><div class="row gap8"><div class="dot" style="background:var(--pk)"></div><div class="body">한 줄 카피 AI 자동 생성</div></div></div><div class="mt-a" style="padding-top:8px"><span class="tag tp" style="font-size:8px">Big Moat</span></div></div>
-    </div>
-    <div class="pbar-w"><div class="pbar" style="width:25%"></div></div>
-  </div>
-  <div class="sn">12 / 14</div>
-</div>
+    <section id="s4" style="background:var(--primary-b);">
+      <div style="text-align:center; color:#fff; width:100%;">
+        <span class="label" style="color:rgba(255,255,255,0.7);">The Solution</span>
+        <h1 class="h-title" style="color:#fff;">코드 한 줄 없이,<br><span>스튜디오급 퀄리티</span>를 완성하세요</h1>
+        <div class="grid-2" style="margin-top:50px; text-align:left;">
+          <div class="glass" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2);">
+            <div class="icon-25d">🎨</div>
+            <h3 style="color:#fff; margin-bottom:10px;">Visual Builder</h3>
+            <p style="font-size:14px; opacity:0.8;">실시간 프리뷰를 보며 드래그로 위젯을 구성합니다.</p>
+          </div>
+          <div class="glass" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2);">
+            <div class="icon-25d">✨</div>
+            <h3 style="color:#fff; margin-bottom:10px;">Glassmorphism</h3>
+            <p style="font-size:14px; opacity:0.8;">iOS 감성의 깊이감 있는 유리알 디자인을 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-
-<!-- ===== S13 TEAM ===== -->
-<div class="slide" style="background:var(--s2)" id="s13">
-  <div class="blob" style="width:30%;height:35%;background:rgba(108,92,231,0.06);top:-6%;left:0;filter:blur(60px)"></div>
-  <div class="blob" style="width:28%;height:30%;background:rgba(59,130,246,0.07);bottom:-6%;right:0;filter:blur(60px)"></div>
-  <div class="si" style="align-items:center;justify-content:center;text-align:center">
-    <div class="hdr"><div class="eye">Team</div><div class="h1">Design-led founder,<br>product-first execution</div></div>
-    <div class="card" style="max-width:520px;padding:28px 26px;margin-top:24px;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;box-shadow:0 28px 80px rgba(108,92,231,0.12);background:rgba(255,255,255,0.88);border:1px solid rgba(255,255,255,0.9)">
-      <div style="display:flex;align-items:center;gap:16px;flex-direction:column">
-        <div style="width:clamp(80px,12vw,110px);height:clamp(80px,12vw,110px);border-radius:50%;background:linear-gradient(135deg,var(--v),var(--v2));display:flex;align-items:center;justify-content:center;font-size:clamp(24px,4vw,36px)">👩‍💻</div>
+    <section id="s5" style="background:#fff;">
+      <div class="grid-2">
         <div>
-          <div class="h3" style="color:var(--t1)">임예지</div>
-          <div class="cap" style="color:var(--t2)">Founder / Product Designer</div>
+          <span class="label">GitHub Environment</span>
+          <h1 class="h-title">GitHub의 모든 영역을<br><span class="b">커스터마이징</span></h1>
+          <p class="p-body">README 상단의 Hero 섹션부터, 사이드바의 Bio 뱃지까지. GitGloss는 마크다운 환경에 최적화된 SVG 위젯을 렌더링합니다.</p>
+        </div>
+        <div class="mockup" style="height:480px;">
+           <div class="gh-header"><div class="gh-dot"></div><div style="font-size:10px; color:#888; margin-left:10px;">github.com/developer</div></div>
+           <div style="padding:20px; display:flex; gap:20px;">
+              <div style="width:140px; border-right:1px solid #EEE; padding-right:10px;">
+                 <div style="width:100px; height:100px; border-radius:50%; background:#F2F2F7; margin-bottom:15px;"></div>
+                 <div class="glass-dark" style="height:30px; margin-bottom:5px;"></div>
+                 <div class="glass-dark" style="height:30px;"></div>
+              </div>
+              <div style="flex:1;">
+                 <div class="glass" style="height:150px; border-color:var(--primary-v); display:flex; align-items:center; justify-content:center;">
+                    <h4 style="color:var(--primary-v); font-weight:900;">2.5D GLASS HERO</h4>
+                 </div>
+                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:15px;">
+                    <div class="glass-dark" style="height:80px;"></div>
+                    <div class="glass-dark" style="height:80px;"></div>
+                 </div>
+              </div>
+           </div>
         </div>
       </div>
-      <div class="body" style="color:var(--t2);line-height:1.7">서울시립대학교 도시행정학과 졸업. 서비스 기획과 사용자 경험을 연결하는 디자인 중심 실행력으로 GitGloss를 빠르게 검증하고 확장합니다.</div>
-      <div class="row gap10" style="justify-content:center;flex-wrap:wrap">
-        <span class="tag tp">디자인 경쟁력</span>
-        <span class="tag tv">서비스 기획</span>
-        <span class="tag tg">AI 경험</span>
-        <span class="tag tv">빠른 실행</span>
+    </section>
+
+    <section id="s6">
+       <div class="grid-2">
+          <div class="mockup" style="height:400px; padding:30px; background:#fff; border-left:12px solid var(--sub-amber);">
+             <div class="icon-25d" style="background:var(--bg);">📒</div>
+             <h3 style="font-size:24px; margin-bottom:15px;">Notion Portfolio</h3>
+             <div class="glass-dark" style="height:120px; border-color:var(--sub-amber); display:flex; align-items:center; justify-content:center;">
+                <span style="font-size:12px; font-weight:800; color:var(--sub-amber);">Embed: Identity_Card.svg</span>
+             </div>
+          </div>
+          <div>
+            <span class="label">Notion Integration</span>
+            <h1 class="h-title">문서를 넘어선<br><span>포트폴리오 경험</span></h1>
+            <p class="p-body">노션 임베드 기능을 통해 실시간 동기화되는 글래스 위젯을 삽입하세요. 텍스트뿐이던 페이지가 전문 웹사이트로 변모합니다.</p>
+          </div>
+       </div>
+    </section>
+
+    <section id="s7" style="background:#fff;">
+      <div style="width:100%;">
+        <span class="label">Product MVP</span>
+        <h1 class="h-title" style="text-align:center;">디자이너의 감각을<br><span>드래그 앤 드롭</span>으로</h1>
+        <div class="glass-dark" style="width:100%; height:450px; margin-top:30px; display:flex; overflow:hidden; border: 8px solid #1c1c1e;">
+           <div style="width:220px; background:#F9F9FB; border-right:1px solid #EEE; padding:20px;">
+              <div class="label" style="font-size:10px;">Theme Selection</div>
+              <div class="glass" style="height:40px; margin-bottom:10px; padding:0 10px; display:flex; align-items:center; font-size:12px;">Crystal Clear</div>
+              <div class="glass" style="height:40px; border-color:var(--primary-b); padding:0 10px; display:flex; align-items:center; font-size:12px;">Hyper Blue</div>
+           </div>
+           <div style="flex:1; padding:40px; background:#FFF; display:flex; align-items:center; justify-content:center;">
+              <div class="glass" style="width:80%; height:200px; border-color:var(--primary-b); border-width:2px; display:flex; align-items:center; justify-content:center;">
+                 <div class="icon-25d" style="margin:0; margin-right:20px;">🚀</div>
+                 <div>
+                    <h2 style="font-size:24px;">Yeji Lim</h2>
+                    <p style="font-size:14px; color:var(--text-t2);">UI/UX Designer</p>
+                 </div>
+              </div>
+           </div>
+           <div style="width:250px; background:#F2F2F7; border-left:1px solid #EEE; padding:20px;">
+              <div class="label" style="font-size:10px;">Generated Code</div>
+              <div style="background:#1C1C1E; color:#7EE787; font-family:monospace; font-size:11px; padding:15px; border-radius:10px; height:300px;">
+                 &lt;img src="https://gitgloss.com/api/..." /&gt;
+              </div>
+           </div>
+        </div>
       </div>
-    </div>
-    </div>
-  </div>
-  <div class="sn">13 / 14</div>
-</div>
+    </section>
 
+    <section id="s8">
+       <div class="grid-2">
+          <div>
+            <span class="label">Market Opportunity</span>
+            <h1 class="h-title">급성장하는<br><span>'퍼스널 브랜딩'</span> 시장</h1>
+            <p class="p-body">전 세계 1억 명의 GitHub 사용자. GitGloss는 그중 자신의 가치를 시각적으로 증명하고 싶어 하는 모든 이를 타겟팅합니다.</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:20px;">
+             <div class="glass-dark" style="padding:30px; border-left:8px solid var(--primary-b);">
+                <span class="label">TAM</span>
+                <h3 style="font-size:24px;">Global Developers (100M+)</h3>
+             </div>
+             <div class="glass-dark" style="padding:30px; border-left:8px solid var(--primary-v); margin-left:30px;">
+                <span class="label">SAM</span>
+                <h3 style="font-size:24px;">Portfolio Creators (15M+)</h3>
+             </div>
+             <div class="glass-dark" style="padding:30px; border-left:8px solid var(--sub-mint); margin-left:60px;">
+                <span class="label">SOM</span>
+                <h3 style="font-size:24px;">Active Git-Kku Users (1M+)</h3>
+             </div>
+          </div>
+       </div>
+    </section>
 
-<!-- ===== S14 ASK — circle focal ===== -->
-<!-- ===== S14 SEED ROUND ===== -->
-<div class="slide" style="background:linear-gradient(145deg,#faf9ff,#f0eeff)" id="s14">
-  <div class="ring" style="width:60%;padding-top:60%;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-  <div class="ring" style="width:82%;padding-top:82%;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.4"></div>
-  <div class="si" style="align-items:center;justify-content:center;text-align:center;gap:12px">
-    <div class="eye">Seed Round</div>
-    <!-- hero circle -->
-    <div style="position:relative;z-index:3;width:clamp(130px,20vw,250px);height:clamp(130px,20vw,250px);border-radius:50%;background:#fff;border:2px solid rgba(108,92,231,0.2);box-shadow:0 8px 48px rgba(108,92,231,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
-      <div class="cap">목표 투자 유치</div>
-      <div class="knum v" style="font-size:clamp(32px,6.5vw,80px)">$150K</div>
-      <div class="cap">Seed Round</div>
-    </div>
-    <div class="body" style="max-width:420px;color:var(--t2)">고성능 렌더링 서버 구축 · 공격적 마케팅 · AI 기능 선행 개발</div>
-    <!-- three stat circles -->
-    <div class="row gap12" style="justify-content:center;flex-wrap:wrap">
-      <div style="width:clamp(72px,11vw,120px);height:clamp(72px,11vw,120px);border-radius:50%;background:#fff;border:1.5px solid var(--b2);box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-        <div class="snum" style="font-size:clamp(12px,2vw,22px)">18mo</div>
-        <div class="cap mt4">목표 기간</div>
+    <section id="s9" style="background:#fff;">
+      <div style="width:100%;">
+        <span class="label">Strategic Analysis</span>
+        <h1 class="h-title">위기를 기회로 바꾸는<br><span>전략적 접근 (SWOT)</span></h1>
+        <div class="swot-grid" style="margin-top:30px;">
+          <div class="glass" style="border-top:8px solid var(--sub-mint);">
+            <h3 style="color:var(--sub-mint); margin-bottom:12px;">Strengths</h3>
+            <p style="font-size:14px; color:var(--text-t2);">• 독보적인 iOS 감성 UI 라이브러리<br>• 노코드 기반의 압도적 편의성<br>• SVG 기반의 고해상도 렌더링</p>
+          </div>
+          <div class="glass" style="border-top:8px solid var(--sub-pink);">
+            <h3 style="color:var(--sub-pink); margin-bottom:12px;">Weaknesses</h3>
+            <p style="font-size:14px; color:var(--text-t2);">• 초기 서비스의 인지도 부족<br>• 깃허브 마크다운 제한 사항 준수</p>
+          </div>
+          <div class="glass" style="border-top:8px solid var(--primary-b);">
+            <h3 style="color:var(--primary-b); margin-bottom:12px;">Opportunities</h3>
+            <p style="font-size:14px; color:var(--text-t2);">• GenZ 개발자의 브랜딩 시장 확대<br>• 노션 포트폴리오 시장 급성장</p>
+          </div>
+          <div class="glass" style="border-top:8px solid var(--sub-amber);">
+            <h3 style="color:var(--sub-amber); margin-bottom:12px;">Threats</h3>
+            <p style="font-size:14px; color:var(--text-t2);">• 유사 오픈소스 서비스의 추격<br>• 깃허브 프로필 자체 기능 고도화</p>
+          </div>
+        </div>
       </div>
-      <div style="width:clamp(72px,11vw,120px);height:clamp(72px,11vw,120px);border-radius:50%;background:var(--vl);border:1.5px solid var(--vb);box-shadow:0 2px 12px rgba(108,92,231,0.1);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-        <div class="snum" style="font-size:clamp(12px,2vw,22px);background:var(--gv);-webkit-background-clip:text;-webkit-text-fill-color:transparent">50K</div>
-        <div class="cap mt4">목표 MAU</div>
+    </section>
+
+    <section id="s10">
+      <div style="width:100%;">
+        <span class="label">Market Positioning</span>
+        <h1 class="h-title">성능 중심의 도구에서<br><span>미학 중심의 스튜디오</span>로</h1>
+        <div class="map-container">
+          <span style="position:absolute; top:-30px; left:50%; transform:translateX(-50%); font-weight:800; color:var(--primary-v);">High Aesthetic (미학)</span>
+          <span style="position:absolute; bottom:-30px; left:50%; transform:translateX(-50%); font-weight:800; color:var(--text-t2);">Functional Only (기능)</span>
+          
+          <div class="dot-map" style="top: 80%; left: 20%;" title="Shields.io"></div>
+          <span style="position:absolute; top:82%; left:22%; font-size:12px;">Shields.io</span>
+          
+          <div class="dot-map" style="top: 60%; left: 60%;" title="Readme.so"></div>
+          <span style="position:absolute; top:62%; left:62%; font-size:12px;">Readme.so</span>
+          
+          <div style="position:absolute; top:10%; right:10%; width:160px; height:160px; background:rgba(108,92,231,0.05); border-radius:50%; border:2px dashed var(--primary-v);"></div>
+          <div class="dot-map main" style="top: 20%; right: 20%;"></div>
+          <span style="position:absolute; top:20%; right:25%; font-size:18px; font-weight:900; color:var(--primary-v);">✦ GitGloss</span>
+        </div>
       </div>
-      <div style="width:clamp(72px,11vw,120px);height:clamp(72px,11vw,120px);border-radius:50%;background:var(--tlb);border:1.5px solid rgba(13,148,136,0.22);box-shadow:0 2px 12px rgba(13,148,136,0.1);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-        <div class="snum" style="font-size:clamp(12px,2vw,22px);background:var(--gt);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$30K+</div>
-        <div class="cap mt4">목표 MRR</div>
+    </section>
+
+    <section id="s11" style="background:#fff;">
+      <div style="width: 100%;">
+        <span class="label">Business Model</span>
+        <h1 class="h-title">지속 가능한<br><span>성장 엔진</span></h1>
+        <div class="grid-4" style="margin-top: 40px;">
+          <div class="glass" style="text-align:center; padding:30px;">
+            <h3 style="font-size:16px;">Starter</h3>
+            <p style="font-size:28px; font-weight:900; margin:15px 0;">Free</p>
+            <p style="font-size:12px; color:var(--text-t2);">기본 위젯 & 뱃지</p>
+          </div>
+          <div class="glass" style="text-align:center; padding:30px; border-color:var(--primary-b); transform: scale(1.05);">
+            <h3 style="font-size:16px; color:var(--primary-b);">Pro</h3>
+            <p style="font-size:28px; font-weight:900; margin:15px 0;">$4.99</p>
+            <p style="font-size:12px; color:var(--text-t2);">고급 글래스 위젯</p>
+          </div>
+          <div class="glass" style="text-align:center; padding:30px;">
+            <h3 style="font-size:16px;">Market</h3>
+            <p style="font-size:28px; font-weight:900; margin:15px 0;">Fee</p>
+            <p style="font-size:12px; color:var(--text-t2);">테마 판매 수수료</p>
+          </div>
+          <div class="glass" style="text-align:center; padding:30px;">
+            <h3 style="font-size:16px;">B2B</h3>
+            <p style="font-size:28px; font-weight:900; margin:15px 0;">Custom</p>
+            <p style="font-size:12px; color:var(--text-t2);">기업용 테크 블로그</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div style="padding:10px 22px;background:#fff;border:1px solid var(--b2);border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05)">
-      <div class="body">GitGloss와 함께 디지털 프로필 생태계를 혁신할 파트너를 찾습니다</div>
-      <div class="h3 mt4" style="color:var(--v)">image4362@gmail.com</div>
-    </div>
-  </div>
-  <div class="sn">14 / 14</div>
-</div>
+    </section>
 
-<script>
-// ===== NAVIGATION FUNCTIONS =====
+    <section id="s12">
+      <div>
+        <span class="label">Future Vision</span>
+        <h1 class="h-title">개발자의 모든 순간을<br><span>기록하고 전시</span>합니다</h1>
+        <div style="position:relative; padding-left:40px; border-left:3px solid var(--primary-v);">
+          <div style="margin-bottom:40px;">
+            <h3 style="font-size:22px; color:var(--primary-v);">2025.Q3: Premium Launch</h3>
+            <p class="p-body">iOS 18 감성의 위젯 세트 50종 출시 및 노션 임베드 공식 지원</p>
+          </div>
+          <div style="margin-bottom:40px;">
+            <h3 style="font-size:22px; color:var(--primary-v);">2026.Q1: AI Branding</h3>
+            <p class="p-body">사용자의 커밋 로그를 분석하여 어울리는 디자인 자동 추천</p>
+          </div>
+          <div>
+            <h3 style="font-size:22px; color:var(--primary-v);">2026.Q3: Global Marketplace</h3>
+            <p class="p-body">전 세계 디자이너들이 위젯 테마를 판매하는 오픈 생태계 구축</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// Navigate to a specific slide by ID
-function go(id) {
-  // Smooth scroll to the slide
-  document.getElementById(id)?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
+    <section id="s13" style="background:var(--primary-b);">
+      <div style="text-align:center; color:#fff; width:100%;">
+        <h1 class="h-title" style="color:#fff; font-size:64px; margin-bottom:20px;">Let's Gloss Your Career</h1>
+        <p style="font-size:22px; opacity:0.8; margin-bottom:60px;">함께 새로운 개발 문화를 만들어갈 파트너를 찾습니다.</p>
+        <div class="glass" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); display:inline-block; padding:30px 80px;">
+          <h3 style="font-size:28px; letter-spacing:-0.02em;">임예지 | image4362@gmail.com</h3>
+        </div>
+      </div>
+    </section>
 
-  // Update navigation button states
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+    <section id="s14">
+      <div class="blob" style="width:800px; height:800px; background:var(--primary-v); bottom:-200px; left:-200px;"></div>
+      <div style="text-align:center; width:100%;">
+        <div class="icon-25d" style="margin: 0 auto 40px; width:120px; height:120px; font-size:60px;">💎</div>
+        <h1 class="h-title">경청해주셔서 감사합니다</h1>
+        <p class="p-body" style="margin: 0 auto;"><b>GitGloss</b>: The New Standard of Developer Identity</p>
+      </div>
+    </section>
 
-  // Map slide IDs to navigation button indices
-  const map = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's12', 's13', 's14'];
-  const i = map.indexOf(id);
-  if (i >= 0) {
-    document.querySelectorAll('.nb')[i]?.classList.add('on');
-  }
-}
+  </main>
 
-// ===== INTERSECTION OBSERVER =====
+  <script>
+    const nav = document.getElementById('nav');
+    const dots = nav.querySelectorAll('a');
+    const deck = document.querySelector('.deck');
+    const sections = document.querySelectorAll('section');
 
-// Create observer to detect which slide is currently in view
-const obs = new IntersectionObserver(es => {
-  es.forEach(e => {
-    // If slide is intersecting and more than 45% visible
-    if (e.isIntersecting && e.intersectionRatio > 0.45) {
-      // Map slide IDs to navigation button indices
-      const map = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's12', 's13', 's14'];
-      const i = map.indexOf(e.target.id);
-      if (i >= 0) {
-        // Update navigation button states
-        document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
-        document.querySelectorAll('.nb')[i]?.classList.add('on');
-      }
-    }
-  });
-}, {
-  threshold: 0.45
-});
+    deck.onscroll = () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (deck.scrollTop >= sectionTop - window.innerHeight / 2) {
+          current = section.getAttribute("id");
+        }
+      });
 
-// Observe all slides for intersection changes
-document.querySelectorAll('.slide').forEach(s => obs.observe(s));
-</script>
+      dots.forEach((a) => {
+        a.classList.remove("on");
+        if (a.getAttribute("href") === `#${current}`) {
+          a.classList.add("on");
+        }
+      });
+    };
+  </script>
 </body>
 </html>

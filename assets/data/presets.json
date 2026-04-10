@@ -1,0 +1,291 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    { "id": "glass-light",  "label": "Glass Light",  "color": "#ED93B1" },
+    { "id": "glass-dark",   "label": "Glass Dark",   "color": "#2D1F42" },
+    { "id": "neumorphic",   "label": "Neu Candy",    "color": "#9B8FE8" },
+    { "id": "gradient",     "label": "Gradient",     "color": "#7EC8E3" }
+  ],
+  "presets": [
+    {
+      "id": "preset-01", "no": 1,
+      "name": "Cotton Candy",    "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#ED93B1",
+      "widgetType": "stats",     "isNew": true,  "isPro": false,
+      "tags": ["pink", "purple", "glass"]
+    },
+    {
+      "id": "preset-02", "no": 2,
+      "name": "Lavender Sky",    "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#9B8FE8",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["purple", "sky", "glass"]
+    },
+    {
+      "id": "preset-03", "no": 3,
+      "name": "Sky Mist",        "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#7EC8E3",
+      "widgetType": "tech",      "isNew": false, "isPro": false,
+      "tags": ["sky", "light", "glass"]
+    },
+    {
+      "id": "preset-04", "no": 4,
+      "name": "Soft Petal",      "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#F4C0D1",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["pink", "soft", "glass"]
+    },
+    {
+      "id": "preset-05", "no": 5,
+      "name": "Lilac Dream",     "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#C8B8F0",
+      "widgetType": "streak",    "isNew": true,  "isPro": false,
+      "tags": ["purple", "soft", "glass"]
+    },
+    {
+      "id": "preset-06", "no": 6,
+      "name": "Cream Glass",     "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#ED93B1",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["cream", "minimal", "glass"]
+    },
+    {
+      "id": "preset-07", "no": 7,
+      "name": "Frosted Rose",    "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#D4537E",
+      "widgetType": "profile",   "isNew": false, "isPro": true,
+      "tags": ["rose", "frosted", "glass"]
+    },
+    {
+      "id": "preset-08", "no": 8,
+      "name": "Iris Blur",       "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#9B8FE8",
+      "widgetType": "tech",      "isNew": false, "isPro": true,
+      "tags": ["iris", "blur", "glass"]
+    },
+    {
+      "id": "preset-09", "no": 9,
+      "name": "Aqua Veil",       "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#7EC8E3",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["aqua", "veil", "glass"]
+    },
+    {
+      "id": "preset-10", "no": 10,
+      "name": "Pearl White",     "category": "glass-light",
+      "theme": "cotton-candy",   "accent": "#F4C0D1",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["pearl", "white", "glass"]
+    },
+    {
+      "id": "preset-11", "no": 11,
+      "name": "Dark Candy",      "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#ED93B1",
+      "widgetType": "stats",     "isNew": true,  "isPro": false,
+      "tags": ["dark", "pink", "glass"]
+    },
+    {
+      "id": "preset-12", "no": 12,
+      "name": "Midnight Iris",   "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#C8B8F0",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["dark", "purple", "glass"]
+    },
+    {
+      "id": "preset-13", "no": 13,
+      "name": "Deep Violet",     "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#9B8FE8",
+      "widgetType": "tech",      "isNew": false, "isPro": false,
+      "tags": ["dark", "violet", "glass"]
+    },
+    {
+      "id": "preset-14", "no": 14,
+      "name": "Abyss Sky",       "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#7EC8E3",
+      "widgetType": "streak",    "isNew": false, "isPro": true,
+      "tags": ["dark", "sky", "glass"]
+    },
+    {
+      "id": "preset-15", "no": 15,
+      "name": "Plum Night",      "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#D4537E",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["dark", "plum", "glass"]
+    },
+    {
+      "id": "preset-16", "no": 16,
+      "name": "Obsidian Candy",  "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#C8B8F0",
+      "widgetType": "profile",   "isNew": false, "isPro": true,
+      "tags": ["dark", "obsidian", "glass"]
+    },
+    {
+      "id": "preset-17", "no": 17,
+      "name": "Dusk Purple",     "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#9B8FE8",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["dark", "dusk", "glass"]
+    },
+    {
+      "id": "preset-18", "no": 18,
+      "name": "Noir Rose",       "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#ED93B1",
+      "widgetType": "tech",      "isNew": true,  "isPro": false,
+      "tags": ["dark", "rose", "glass"]
+    },
+    {
+      "id": "preset-19", "no": 19,
+      "name": "Twilight Aqua",   "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#7EC8E3",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["dark", "aqua", "glass"]
+    },
+    {
+      "id": "preset-20", "no": 20,
+      "name": "Void Lilac",      "category": "glass-dark",
+      "theme": "cotton-dark",    "accent": "#C8B8F0",
+      "widgetType": "streak",    "isNew": false, "isPro": true,
+      "tags": ["dark", "lilac", "glass"]
+    },
+    {
+      "id": "preset-21", "no": 21,
+      "name": "Neu Candy",       "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#9B8FE8",
+      "widgetType": "stats",     "isNew": true,  "isPro": false,
+      "tags": ["neu", "candy", "soft"]
+    },
+    {
+      "id": "preset-22", "no": 22,
+      "name": "Neu Plum",        "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#7F77DD",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["neu", "plum", "soft"]
+    },
+    {
+      "id": "preset-23", "no": 23,
+      "name": "Neu Petal",       "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#ED93B1",
+      "widgetType": "tech",      "isNew": false, "isPro": false,
+      "tags": ["neu", "petal", "soft"]
+    },
+    {
+      "id": "preset-24", "no": 24,
+      "name": "Neu Iris",        "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#C8B8F0",
+      "widgetType": "streak",    "isNew": false, "isPro": true,
+      "tags": ["neu", "iris", "soft"]
+    },
+    {
+      "id": "preset-25", "no": 25,
+      "name": "Neu Rose",        "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#D4537E",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["neu", "rose", "soft"]
+    },
+    {
+      "id": "preset-26", "no": 26,
+      "name": "Neu Sky",         "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#7EC8E3",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["neu", "sky", "soft"]
+    },
+    {
+      "id": "preset-27", "no": 27,
+      "name": "Neu Lavender",    "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#9B8FE8",
+      "widgetType": "tech",      "isNew": false, "isPro": true,
+      "tags": ["neu", "lavender", "soft"]
+    },
+    {
+      "id": "preset-28", "no": 28,
+      "name": "Neu Blush",       "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#F4C0D1",
+      "widgetType": "stats",     "isNew": true,  "isPro": false,
+      "tags": ["neu", "blush", "soft"]
+    },
+    {
+      "id": "preset-29", "no": 29,
+      "name": "Neu Aqua",        "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#7EC8E3",
+      "widgetType": "streak",    "isNew": false, "isPro": false,
+      "tags": ["neu", "aqua", "soft"]
+    },
+    {
+      "id": "preset-30", "no": 30,
+      "name": "Neu Mist",        "category": "neumorphic",
+      "theme": "neumorphic-candy","accent": "#C8B8F0",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["neu", "mist", "soft"]
+    },
+    {
+      "id": "preset-31", "no": 31,
+      "name": "Candy Burst",     "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#ED93B1",
+      "widgetType": "stats",     "isNew": true,  "isPro": false,
+      "tags": ["gradient", "vivid", "pink"]
+    },
+    {
+      "id": "preset-32", "no": 32,
+      "name": "Aurora",          "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#9B8FE8",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["gradient", "aurora", "purple"]
+    },
+    {
+      "id": "preset-33", "no": 33,
+      "name": "Tropical",        "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#7EC8E3",
+      "widgetType": "tech",      "isNew": false, "isPro": false,
+      "tags": ["gradient", "tropical", "sky"]
+    },
+    {
+      "id": "preset-34", "no": 34,
+      "name": "Pastel Wave",     "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#F4C0D1",
+      "widgetType": "streak",    "isNew": false, "isPro": true,
+      "tags": ["gradient", "pastel", "wave"]
+    },
+    {
+      "id": "preset-35", "no": 35,
+      "name": "Deep Fuchsia",    "category": "gradient",
+      "theme": "cotton-dark",    "accent": "#D4537E",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["gradient", "fuchsia", "vivid"]
+    },
+    {
+      "id": "preset-36", "no": 36,
+      "name": "Tricolor",        "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#ED93B1",
+      "widgetType": "profile",   "isNew": true,  "isPro": false,
+      "tags": ["gradient", "tricolor", "rainbow"]
+    },
+    {
+      "id": "preset-37", "no": 37,
+      "name": "Dark Rainbow",    "category": "gradient",
+      "theme": "cotton-dark",    "accent": "#9B8FE8",
+      "widgetType": "tech",      "isNew": false, "isPro": true,
+      "tags": ["gradient", "dark", "rainbow"]
+    },
+    {
+      "id": "preset-38", "no": 38,
+      "name": "Sherbet",         "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#C8B8F0",
+      "widgetType": "stats",     "isNew": false, "isPro": false,
+      "tags": ["gradient", "sherbet", "pastel"]
+    },
+    {
+      "id": "preset-39", "no": 39,
+      "name": "Blossom",         "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#F4C0D1",
+      "widgetType": "profile",   "isNew": false, "isPro": false,
+      "tags": ["gradient", "blossom", "pink"]
+    },
+    {
+      "id": "preset-40", "no": 40,
+      "name": "Prism",           "category": "gradient",
+      "theme": "cotton-candy",   "accent": "#ED93B1",
+      "widgetType": "streak",    "isNew": true,  "isPro": true,
+      "tags": ["gradient", "prism", "conic"]
+    }
+  ]
+}

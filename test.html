@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Widget Engine — Cotton Candy Glass Test</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body { margin: 24px; }
+    h1 { font-size: 1.1rem; margin-bottom: 6px; color: var(--gg-text); }
+    .subtitle { font-size: 12px; color: var(--gg-text-hint); margin-bottom: 24px; }
+    .test-section { margin-bottom: 32px; }
+    .test-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--gg-pink);
+      margin-bottom: 10px;
+    }
+    #out {
+      padding: 20px;
+      background: var(--glass-bg-light);
+      border: 0.5px solid var(--glass-border);
+      border-radius: 16px;
+      display: inline-block;
+      backdrop-filter: blur(20px);
+    }
+    pre {
+      margin-top: 12px; padding: 14px;
+      background: var(--gg-bg-dark);
+      color: var(--gg-text-on-dark);
+      border-radius: 10px; font-size: 11px;
+      overflow: auto; max-width: 100%;
+      font-family: var(--font-mono);
+    }
+    .theme-switcher { display: flex; gap: 8px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <h1>GitGloss Widget Engine — Cotton Candy Glass</h1>
+  <p class="subtitle">widget-engine.js 테스트 페이지</p>
+
+  <div class="theme-switcher">
+    <button class="btn-primary" style="padding:6px 14px;font-size:11px" onclick="renderAll('cotton-candy')">Cotton Candy</button>
+    <button class="btn-ghost" style="padding:6px 14px;font-size:11px" onclick="renderAll('cotton-dark')">Cotton Dark</button>
+    <button class="btn-ghost" style="padding:6px 14px;font-size:11px" onclick="renderAll('neumorphic-candy')">Neu Candy</button>
+  </div>
+
+  <div class="test-section">
+    <div class="test-label">Stats Card</div>
+    <div id="out-stats" aria-live="polite"></div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-label">Tech Stack Badge</div>
+    <div id="out-badge" aria-live="polite"></div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-label">Profile Card</div>
+    <div id="out-profile" aria-live="polite"></div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-label">SVG Source (Stats)</div>
+    <pre id="snippet"></pre>
+  </div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/widget-engine.js"></script>
+  <script>
+    function renderAll(theme) {
+      const stats = generateStatsSVG({ username: 'octocat', stars: 2847, commits: 1203, repos: 42, themeName: theme });
+      const badge = generateBadgeSVG({ techs: ['React', 'TypeScript', 'Next.js', 'Node.js', 'Rust'], themeName: theme });
+      const profile = generateProfileSVG({ username: 'octocat', name: 'The Octocat', bio: 'GitHub mascot & open source enthusiast', themeName: theme });
+
+      document.getElementById('out-stats').innerHTML = stats;
+      document.getElementById('out-badge').innerHTML = badge;
+      document.getElementById('out-profile').innerHTML = profile;
+      document.getElementById('snippet').textContent = stats.slice(0, 600) + (stats.length > 600 ? '\n…' : '');
+    }
+
+    renderAll('cotton-candy');
+  </script>
+</body>
+</html>

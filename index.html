@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitGloss — GitHub README & Notion 위젯 스튜디오</title>
+  <meta name="description" content="GitHub README와 Notion 페이지를 빛내는 Cotton Candy Glass 위젯 스튜디오. 드래그 앤 드롭으로 5분 만에 완성.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    html { scroll-behavior: smooth }
+
+    /* ── NAV ── */
+    .nav-links { display: flex; gap: 18px; margin-left: 16px; }
+    .nav-link {
+      font-size: 12px; color: var(--gg-text-hint);
+      text-decoration: none; cursor: pointer; transition: .12s;
+    }
+    .nav-link:hover { color: var(--gg-text); }
+    .nav-cta {
+      margin-left: auto;
+      padding: 7px 18px;
+      background: linear-gradient(135deg, #D4537E, #534AB7);
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      font-family: var(--font-sans); transition: .13s;
+    }
+    .nav-cta:hover { opacity: .88; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+      padding: 52px 40px 48px;
+      background:
+        linear-gradient(160deg, rgba(237,147,177,.10) 0%, transparent 50%),
+        linear-gradient(200deg, rgba(155,143,232,.08) 30%, transparent 70%);
+    }
+    .eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gg-pink-deep); margin-bottom: 12px;
+    }
+    .hero-h1 {
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 500; color: var(--gg-text);
+      line-height: 1.18; letter-spacing: -.02em; margin-bottom: 14px;
+    }
+    .hero-h1 em {
+      font-style: normal; color: var(--gg-pink-deep);
+    }
+    .hero-desc {
+      font-size: 13px; color: var(--gg-text-sub);
+      line-height: 1.65; margin-bottom: 24px;
+    }
+    .hero-btns { display: flex; gap: 10px; }
+    .btn-primary-hero {
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #D4537E, #534AB7);
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      font-family: var(--font-sans); transition: .13s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary-hero:hover { opacity: .88; }
+    .btn-ghost-hero {
+      padding: 10px 18px;
+      background: transparent;
+      border: 0.5px solid rgba(237,147,177,.5);
+      color: #72243E; border-radius: 8px;
+      font-size: 13px; cursor: pointer;
+      font-family: var(--font-sans);
+      text-decoration: none; display: inline-block;
+    }
+
+    /* Hero right — float cards */
+    .hero-right { display: flex; flex-direction: column; gap: 10px; }
+    .float-card {
+      padding: 14px 16px; border-radius: 14px;
+      background: rgba(253,240,246,.75);
+      border: 0.5px solid rgba(237,147,177,.32);
+    }
+    .card-label {
+      font-size: 9px; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gg-text-hint); margin-bottom: 6px;
+    }
+    .card-stat {
+      font-size: 22px; font-weight: 500;
+      color: var(--gg-pink-deep); letter-spacing: -.02em;
+    }
+    .card-sub { font-size: 10px; color: var(--gg-text-hint); margin-top: 3px; }
+    .badge-row { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+    .badge-sm { font-size: 9px; padding: 2px 8px; border-radius: 10px; }
+    .badge-sm-pk { background: #FBEAF0; color: #72243E; }
+    .badge-sm-pu { background: #EEEDFE; color: #3C3489; }
+    .badge-sm-sk { background: #E6F1FB; color: #0C447C; }
+
+    /* ── AD BANNER ── */
+    .ad-banner {
+      margin: 0 24px;
+      padding: 10px 16px;
+      background: rgba(253,240,246,.55);
+      border: 0.5px dashed rgba(237,147,177,.35);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative;
+    }
+    .ad-banner::before {
+      content: 'Sponsored';
+      position: absolute; top: 4px; left: 10px;
+      font-size: 8px; color: rgba(154,122,154,.6);
+      letter-spacing: .06em; font-family: var(--font-mono);
+    }
+    .ad-banner-text { font-size: 11px; color: var(--gg-text-sub); padding-top: 8px; }
+    .ad-banner-slot { font-size: 9px; color: var(--gg-text-hint); font-family: var(--font-mono); }
+
+    /* ── GALLERY ── */
+    .gallery-section { padding: 32px 24px; }
+    .section-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gg-pink-deep); margin-bottom: 8px;
+    }
+    .section-title { font-size: 20px; font-weight: 500; color: var(--gg-text); margin-bottom: 4px; }
+    .section-desc  { font-size: 12px; color: var(--gg-text-hint); margin-bottom: 20px; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+
+    .g-card {
+      background: rgba(255,255,255,.65);
+      border: 0.5px solid rgba(237,147,177,.22);
+      border-radius: 14px; padding: 14px;
+      cursor: pointer; transition: .15s; position: relative;
+    }
+    .g-card:hover {
+      border-color: rgba(237,147,177,.55);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(237,147,177,.15);
+    }
+    .g-thumb {
+      height: 64px; border-radius: 8px;
+      margin-bottom: 10px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .g-thumb-bars { width: 75%; display: flex; flex-direction: column; gap: 4px; }
+    .thumb-bar { height: 6px; border-radius: 3px; }
+    .g-title { font-size: 12px; font-weight: 500; color: var(--gg-text); margin-bottom: 5px; }
+    .g-meta  { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+    .card-new {
+      position: absolute; top: 8px; right: 8px;
+      font-size: 8px; font-weight: 500;
+      background: rgba(126,200,227,.2); color: #0C447C;
+      border: 0.5px solid rgba(126,200,227,.4);
+      border-radius: 4px; padding: 1px 5px;
+    }
+    .use-btn {
+      display: block; width: 100%; padding: 7px;
+      background: linear-gradient(135deg, rgba(212,83,126,.12), rgba(83,74,183,.10));
+      border: 0.5px solid rgba(237,147,177,.35);
+      border-radius: 7px; font-size: 11px; font-weight: 500;
+      color: #72243E; text-align: center; cursor: pointer;
+      font-family: var(--font-sans); transition: .13s;
+      text-decoration: none;
+    }
+    .use-btn:hover {
+      background: linear-gradient(135deg, rgba(212,83,126,.2), rgba(83,74,183,.18));
+    }
+
+    /* Native ad card */
+    .ad-native-card {
+      background: rgba(253,240,246,.72);
+      border: 0.5px dashed rgba(155,143,232,.38);
+      border-radius: 14px; padding: 14px; position: relative;
+    }
+    .ad-native-card::before {
+      content: 'Sponsored'; position: absolute; top: 8px; left: 12px;
+      font-size: 8px; color: rgba(154,122,154,.6);
+      letter-spacing: .06em; font-family: var(--font-mono);
+    }
+    .ad-native-title { font-size: 12px; font-weight: 500; color: var(--gg-text); margin-top: 12px; margin-bottom: 4px; }
+    .ad-native-desc  { font-size: 11px; color: var(--gg-text-sub); line-height: 1.5; margin-bottom: 10px; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: rgba(253,240,246,.6);
+      border-top: 0.5px solid rgba(237,147,177,.2);
+      padding: 14px 24px;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 10px; color: var(--gg-text-hint);
+    }
+    .footer-links { display: flex; gap: 12px; }
+    .footer-link { color: var(--gg-text-hint); text-decoration: none; }
+    .footer-link:hover { color: var(--gg-pink-deep); }
+
+    @media (max-width: 768px) {
+      .hero         { grid-template-columns: 1fr; gap: 32px; padding: 32px 20px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links    { display: none; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav-logo">GitGloss</span>
+    <div class="nav-links">
+      <a href="gallery.html" class="nav-link">갤러리</a>
+      <a href="#guide"       class="nav-link">가이드</a>
+      <a href="#about"       class="nav-link">소개</a>
+    </div>
+    <a href="builder.html"><button class="nav-cta">위젯 만들기</button></a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Cotton Candy Glass Design System</div>
+      <h1 class="hero-h1">GitHub README를<br><em>유리알처럼</em><br>빛내세요</h1>
+      <p class="hero-desc">갤러리에서 마음에 드는 위젯을 골라<br>클릭 한 번으로 README에 붙여넣기.</p>
+      <div class="hero-btns">
+        <a href="gallery.html" class="btn-primary-hero">갤러리 보기 →</a>
+        <a href="builder.html" class="btn-ghost-hero">직접 만들기</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="float-card">
+        <div class="card-label">GitHub Stats</div>
+        <div class="card-stat">2,847</div>
+        <div class="card-sub">Total Stars · 지난 30일</div>
+        <div class="badge-row">
+          <span class="badge-sm badge-sm-pk">React</span>
+          <span class="badge-sm badge-sm-pu">TypeScript</span>
+          <span class="badge-sm badge-sm-sk">Node.js</span>
+        </div>
+      </div>
+      <div class="float-card" style="background:rgba(238,237,254,.6);border-color:rgba(155,143,232,.3)">
+        <div class="card-label">Contribution Graph</div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:4px">
+          <div style="height:7px;border-radius:2px;background:rgba(212,83,126,.18)"></div>
+          <div style="height:7px;border-radius:2px;background:#ED93B1"></div>
+          <div style="height:7px;border-radius:2px;background:rgba(155,143,232,.3)"></div>
+          <div style="height:7px;border-radius:2px;background:#9B8FE8"></div>
+          <div style="height:7px;border-radius:2px;background:rgba(212,83,126,.15)"></div>
+          <div style="height:7px;border-radius:2px;background:#ED93B1"></div>
+          <div style="height:7px;border-radius:2px;background:rgba(155,143,232,.25)"></div>
+          <div style="height:7px;border-radius:2px;background:rgba(126,200,227,.3)"></div>
+          <div style="height:7px;border-radius:2px;background:#7EC8E3"></div>
+          <div style="height:7px;border-radius:2px;background:#9B8FE8"></div>
+          <div style="height:7px;border-radius:2px;background:rgba(212,83,126,.18)"></div>
+          <div style="height:7px;border-radius:2px;background:#ED93B1"></div>
+        </div>
+        <div class="card-sub" style="margin-top:6px">342 contributions this year</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AD-1: Hero 직후 Leaderboard -->
+  <div class="ad-banner" style="margin:16px 24px">
+    <div class="ad-banner-text">728×90 Leaderboard — Google AdSense · Hero 직후 최상단 노출</div>
+    <div class="ad-banner-slot">AD-1</div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="section-eyebrow">위젯 갤러리</div>
+    <div class="section-title">마음에 드는 위젯을 골라보세요</div>
+    <div class="section-desc">클릭하면 바로 빌더에서 커스터마이징할 수 있어요</div>
+
+    <div class="gallery-grid">
+
+      <!-- 1 -->
+      <div class="g-card">
+        <div class="card-new">NEW</div>
+        <div class="g-thumb" style="background:linear-gradient(135deg,rgba(237,147,177,.2),rgba(155,143,232,.15))">
+          <div class="g-thumb-bars">
+            <div class="thumb-bar" style="width:100%;background:rgba(155,143,232,.4)"></div>
+            <div class="thumb-bar" style="width:70%;background:rgba(237,147,177,.35)"></div>
+            <div class="thumb-bar" style="width:85%;background:rgba(155,143,232,.3)"></div>
+          </div>
+        </div>
+        <div class="g-title">GitHub Stats Card</div>
+        <div class="g-meta"><span class="badge-sm badge-sm-pk">Glass Light</span></div>
+        <a href="builder.html?type=stats&theme=cotton-candy" class="use-btn">이 위젯 사용하기 →</a>
+      </div>
+
+      <!-- 2 -->
+      <div class="g-card">
+        <div class="g-thumb" style="background:linear-gradient(135deg,rgba(45,31,66,.8),rgba(80,40,80,.6))">
+          <div class="badge-row" style="justify-content:center">
+            <span class="badge-sm badge-sm-pk" style="font-size:8px">React</span>
+            <span class="badge-sm badge-sm-pu" style="font-size:8px">TS</span>
+            <span class="badge-sm badge-sm-sk" style="font-size:8px">Node</span>
+          </div>
+        </div>
+        <div class="g-title">Tech Stack Badge</div>
+        <div class="g-meta"><span class="badge-sm badge-sm-pu">Neumorphic</span></div>
+        <a href="builder.html?type=tech&theme=neumorphic-candy" class="use-btn">이 위젯 사용하기 →</a>
+      </div>
+
+      <!-- AD-2: 갤러리 3번째 슬롯 네이티브 -->
+      <div class="ad-native-card">
+        <div class="ad-native-title">쿠팡 파트너스</div>
+        <div class="ad-native-desc">개발자를 위한 추천 상품 · 쿠팡 파트너스 연동</div>
+        <a href="builder.html" class="use-btn" style="background:linear-gradient(135deg,rgba(155,143,232,.15),rgba(83,74,183,.12));border-color:rgba(155,143,232,.4);color:#3C3489">
+          광고 보기
+        </a>
+      </div>
+
+      <!-- 4 -->
+      <div class="g-card">
+        <div class="g-thumb" style="background:linear-gradient(135deg,rgba(126,200,227,.2),rgba(155,143,232,.15))">
+          <div class="g-thumb-bars">
+            <div class="thumb-bar" style="width:90%;background:rgba(126,200,227,.45)"></div>
+            <div class="thumb-bar" style="width:60%;background:rgba(155,143,232,.35)"></div>
+          </div>
+        </div>
+        <div class="g-title">Contribution Graph</div>
+        <div class="g-meta"><span class="badge-sm badge-sm-sk">Glass Dark</span></div>
+        <a href="builder.html?type=stats&theme=cotton-dark" class="use-btn">이 위젯 사용하기 →</a>
+      </div>
+
+      <!-- 5 -->
+      <div class="g-card">
+        <div class="g-thumb" style="background:linear-gradient(135deg,rgba(237,147,177,.18),rgba(155,143,232,.18))">
+          <div style="display:flex;gap:6px;align-items:center;padding:4px">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#ED93B1,#9B8FE8)"></div>
+            <div style="flex:1">
+              <div class="thumb-bar" style="width:80%;background:rgba(155,143,232,.3);margin-bottom:4px"></div>
+              <div class="thumb-bar" style="width:50%;background:rgba(237,147,177,.25)"></div>
+            </div>
+          </div>
+        </div>
+        <div class="g-title">Profile Card</div>
+        <div class="g-meta"><span class="badge-sm badge-sm-pu">Cotton Candy</span></div>
+        <a href="builder.html?type=profile&theme=cotton-candy" class="use-btn">이 위젯 사용하기 →</a>
+      </div>
+
+      <!-- AD-3: 갤러리 6번째 슬롯 쿠팡 -->
+      <div class="ad-native-card">
+        <div class="ad-native-title">GitGloss Pro</div>
+        <div class="ad-native-desc">무제한 위젯 · 커스텀 도메인 · 우선 지원</div>
+        <a href="builder.html" class="use-btn">Pro 알아보기</a>
+      </div>
+
+    </div>
+
+    <!-- AD-4: 갤러리 하단 Leaderboard -->
+    <div class="ad-banner" style="margin:16px 0 0">
+      <div class="ad-banner-text">728×90 Leaderboard — 갤러리 하단 · 스크롤 완료 유저 대상</div>
+      <div class="ad-banner-slot">AD-4</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="page-footer" id="about">
+    <span>© 2025 GitGloss</span>
+    <div class="footer-links">
+      <a href="privacy.html" class="footer-link">Privacy</a>
+      <a href="terms.html"   class="footer-link">Terms</a>
+      <a href="about.html"   class="footer-link">About</a>
+      <a href="contact.html" class="footer-link">Contact</a>
+      <a href="docs/"        class="footer-link">Docs</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+</body>
+</html>

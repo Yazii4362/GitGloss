@@ -1,0 +1,304 @@
+/* =============================================
+   GITGLOSS — 40 WIDGET PRESETS
+   각 프리셋의 썸네일 배경 & 컬러 정의
+   ============================================= */
+
+/* ── 공통 프리셋 썸네일 베이스 ── */
+.preset-thumb {
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preset-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.06) 100%);
+}
+
+/* ============================================
+   CATEGORY 1 — GLASS LIGHT (01–10)
+   ============================================ */
+
+.preset-01 .preset-thumb {
+  background: linear-gradient(135deg, rgba(237,147,177,0.25), rgba(155,143,232,0.20));
+  border: 0.5px solid rgba(237,147,177,0.35);
+}
+.preset-01 .preset-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(4px);
+}
+
+.preset-02 .preset-thumb {
+  background: linear-gradient(135deg, rgba(155,143,232,0.22), rgba(126,200,227,0.18));
+  border: 0.5px solid rgba(155,143,232,0.38);
+}
+
+.preset-03 .preset-thumb {
+  background: linear-gradient(135deg, rgba(126,200,227,0.25), rgba(181,232,247,0.20));
+  border: 0.5px solid rgba(126,200,227,0.38);
+}
+
+.preset-04 .preset-thumb {
+  background: linear-gradient(135deg, rgba(244,192,209,0.30), rgba(237,147,177,0.22));
+  border: 0.5px solid rgba(244,192,209,0.45);
+}
+
+.preset-05 .preset-thumb {
+  background: linear-gradient(135deg, rgba(200,184,240,0.25), rgba(237,147,177,0.18));
+  border: 0.5px solid rgba(200,184,240,0.40);
+}
+
+.preset-06 .preset-thumb {
+  background: linear-gradient(135deg, rgba(253,240,246,0.80), rgba(255,255,255,0.60));
+  border: 0.5px solid rgba(237,147,177,0.30);
+}
+
+.preset-07 .preset-thumb {
+  background: linear-gradient(135deg, rgba(237,147,177,0.15), rgba(126,200,227,0.15));
+  border: 0.5px solid rgba(255,255,255,0.58);
+}
+
+.preset-08 .preset-thumb {
+  background: linear-gradient(135deg, rgba(155,143,232,0.18), rgba(244,192,209,0.18));
+  border: 0.5px solid rgba(155,143,232,0.36);
+}
+
+.preset-09 .preset-thumb {
+  background: linear-gradient(135deg, rgba(126,200,227,0.20), rgba(155,143,232,0.15));
+  border: 0.5px solid rgba(126,200,227,0.38);
+}
+
+.preset-10 .preset-thumb {
+  background: linear-gradient(135deg, rgba(255,255,255,0.70), rgba(253,240,246,0.55));
+  border: 0.5px solid rgba(255,255,255,0.65);
+}
+
+/* ============================================
+   CATEGORY 2 — GLASS DARK (11–20)
+   ============================================ */
+
+.preset-11 .preset-thumb {
+  background: linear-gradient(135deg, rgba(45,31,66,0.85), rgba(80,40,80,0.70));
+  border: 0.5px solid rgba(237,147,177,0.28);
+}
+
+.preset-12 .preset-thumb {
+  background: linear-gradient(135deg, rgba(45,31,66,0.90), rgba(63,45,90,0.80));
+  border: 0.5px solid rgba(200,184,240,0.30);
+}
+
+.preset-13 .preset-thumb {
+  background: linear-gradient(135deg, rgba(30,18,55,0.92), rgba(45,31,66,0.85));
+  border: 0.5px solid rgba(155,143,232,0.35);
+}
+
+.preset-14 .preset-thumb {
+  background: linear-gradient(135deg, rgba(45,31,66,0.88), rgba(20,10,40,0.80));
+  border: 0.5px solid rgba(126,200,227,0.25);
+}
+
+.preset-15 .preset-thumb {
+  background: linear-gradient(135deg, rgba(58,40,80,0.90), rgba(45,31,66,0.85));
+  border: 0.5px solid rgba(237,147,177,0.22);
+}
+
+.preset-16 .preset-thumb {
+  background: linear-gradient(135deg, rgba(20,10,40,0.95), rgba(45,31,66,0.88));
+  border: 0.5px solid rgba(200,184,240,0.25);
+}
+
+.preset-17 .preset-thumb {
+  background: linear-gradient(135deg, rgba(45,31,66,0.80), rgba(80,55,100,0.65));
+  border: 0.5px solid rgba(155,143,232,0.30);
+}
+
+.preset-18 .preset-thumb {
+  background: linear-gradient(135deg, rgba(35,22,58,0.92), rgba(60,40,85,0.80));
+  border: 0.5px solid rgba(237,147,177,0.20);
+}
+
+.preset-19 .preset-thumb {
+  background: linear-gradient(135deg, rgba(45,31,66,0.85), rgba(30,18,55,0.90));
+  border: 0.5px solid rgba(126,200,227,0.22);
+}
+
+.preset-20 .preset-thumb {
+  background: linear-gradient(135deg, rgba(25,14,48,0.95), rgba(45,31,66,0.90));
+  border: 0.5px solid rgba(200,184,240,0.28);
+}
+
+/* ============================================
+   CATEGORY 3 — NEUMORPHIC CANDY (21–30)
+   ============================================ */
+
+.preset-21 .preset-thumb {
+  background: #F0E6F0;
+  box-shadow: 4px 4px 8px rgba(183,140,172,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-22 .preset-thumb {
+  background: #EDE0F0;
+  box-shadow: 4px 4px 8px rgba(170,130,165,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-23 .preset-thumb {
+  background: #F5E8F5;
+  box-shadow: 4px 4px 8px rgba(190,150,180,0.30), -4px -4px 8px rgba(255,255,255,0.90);
+  border: none;
+}
+
+.preset-24 .preset-thumb {
+  background: #EAE0F2;
+  box-shadow: 4px 4px 8px rgba(160,130,185,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-25 .preset-thumb {
+  background: #F2E8EC;
+  box-shadow: 4px 4px 8px rgba(180,140,155,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-26 .preset-thumb {
+  background: #E8EEF5;
+  box-shadow: 4px 4px 8px rgba(140,155,180,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-27 .preset-thumb {
+  background: #F0EEF8;
+  box-shadow: 4px 4px 8px rgba(155,143,200,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-28 .preset-thumb {
+  background: #F8EEF2;
+  box-shadow: 4px 4px 8px rgba(200,143,165,0.30), -4px -4px 8px rgba(255,255,255,0.90);
+  border: none;
+}
+
+.preset-29 .preset-thumb {
+  background: #EEF5F8;
+  box-shadow: 4px 4px 8px rgba(143,175,200,0.35), -4px -4px 8px rgba(255,255,255,0.85);
+  border: none;
+}
+
+.preset-30 .preset-thumb {
+  background: #F5F0F8;
+  box-shadow: 4px 4px 8px rgba(165,143,200,0.30), -4px -4px 8px rgba(255,255,255,0.90);
+  border: none;
+}
+
+/* ============================================
+   CATEGORY 4 — GRADIENT VIVID (31–40)
+   ============================================ */
+
+.preset-31 .preset-thumb {
+  background: linear-gradient(135deg, #ED93B1 0%, #9B8FE8 100%);
+}
+
+.preset-32 .preset-thumb {
+  background: linear-gradient(135deg, #9B8FE8 0%, #7EC8E3 100%);
+}
+
+.preset-33 .preset-thumb {
+  background: linear-gradient(135deg, #7EC8E3 0%, #ED93B1 100%);
+}
+
+.preset-34 .preset-thumb {
+  background: linear-gradient(135deg, #F4C0D1 0%, #C8B8F0 100%);
+}
+
+.preset-35 .preset-thumb {
+  background: linear-gradient(135deg, #D4537E 0%, #7F77DD 100%);
+}
+
+.preset-36 .preset-thumb {
+  background: linear-gradient(135deg, #ED93B1 0%, #7EC8E3 50%, #9B8FE8 100%);
+}
+
+.preset-37 .preset-thumb {
+  background: linear-gradient(135deg, #2D1F42 0%, #9B8FE8 50%, #ED93B1 100%);
+}
+
+.preset-38 .preset-thumb {
+  background: linear-gradient(135deg, #C8B8F0 0%, #ED93B1 50%, #7EC8E3 100%);
+}
+
+.preset-39 .preset-thumb {
+  background: linear-gradient(135deg, #F4C0D1 0%, #9B8FE8 100%);
+}
+
+.preset-40 .preset-thumb {
+  background: conic-gradient(from 0deg, #ED93B1, #9B8FE8, #7EC8E3, #F4C0D1, #ED93B1);
+}
+
+/* ── 프리셋 카테고리 탭 ── */
+.preset-tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 10px;
+  background: var(--glass-bg-light);
+  border: 0.5px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.preset-tab {
+  flex: 1;
+  padding: 5px 4px;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--gg-text-hint);
+  border: none;
+  background: transparent;
+  transition: .15s;
+  letter-spacing: .04em;
+}
+
+.preset-tab.active {
+  background: var(--gg-pink-dim);
+  color: #72243E;
+}
+
+/* ── 프리셋 NEW 뱃지 ── */
+.preset-new {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 7px;
+  font-weight: 700;
+  background: rgba(126,200,227,0.25);
+  color: #0C447C;
+  border: 0.5px solid rgba(126,200,227,0.45);
+  border-radius: 4px;
+  padding: 1px 4px;
+  letter-spacing: .04em;
+  z-index: 2;
+}
+
+/* ── 프리셋 PRO 뱃지 ── */
+.preset-pro {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 7px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gg-pink), var(--gg-purple));
+  color: #fff;
+  border-radius: 4px;
+  padding: 1px 5px;
+  letter-spacing: .04em;
+  z-index: 2;
+}
