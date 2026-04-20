@@ -1,184 +1,388 @@
-// GitGloss Widget Engine — Cotton Candy Glass Design System
+/* ═══════════════════════════════════════════════════════
+   GitGloss — widget-engine.js
+   테마 클래스 적용 + 위젯 DOM 렌더링 엔진
+   ═══════════════════════════════════════════════════════ */
 
-const THEMES = {
-  'cotton-candy': {
-    bg:         'rgba(255, 255, 255, 0.42)',
-    bgSolid:    '#FDF0F6',
-    border:     'rgba(237, 147, 177, 0.42)',
-    accent:     '#ED93B1',
-    accentAlt:  '#9B8FE8',
-    accentGlow: 'rgba(237, 147, 177, 0.30)',
-    text:       '#2D1F42',
-    textSub:    'rgba(45, 31, 66, 0.58)',
-    gradStart:  '#ED93B1',
-    gradEnd:    '#9B8FE8',
-    blur:       true,
-    shadow:     '0 4px 20px rgba(155,143,232,0.18)'
-  },
-  'cotton-dark': {
-    bg:         'rgba(45, 31, 66, 0.65)',
-    bgSolid:    '#2D1F42',
-    border:     'rgba(237, 147, 177, 0.28)',
-    accent:     '#ED93B1',
-    accentAlt:  '#C8B8F0',
-    accentGlow: 'rgba(200, 184, 240, 0.25)',
-    text:       '#FDF0F6',
-    textSub:    'rgba(253, 240, 246, 0.60)',
-    gradStart:  '#C8B8F0',
-    gradEnd:    '#ED93B1',
-    blur:       true,
-    shadow:     '0 4px 20px rgba(45,31,66,0.50)'
-  },
-  'neumorphic-candy': {
-    bg:         '#F0E6F0',
-    bgSolid:    '#F0E6F0',
-    border:     'transparent',
-    accent:     '#9B8FE8',
-    accentAlt:  '#ED93B1',
-    accentGlow: 'rgba(155, 143, 232, 0.18)',
-    text:       '#2D1F42',
-    textSub:    'rgba(45, 31, 66, 0.55)',
-    gradStart:  '#9B8FE8',
-    gradEnd:    '#ED93B1',
-    shadow1:    '#D4BED4',
-    shadow2:    '#FFFFFF',
-    blur:       false,
-    shadow:     '6px 6px 14px rgba(183,140,172,0.35), -6px -6px 14px rgba(255,255,255,0.85)'
-  }
+'use strict';
+
+/* ── 현재 상태 ───────────────────────────────────────── */
+const WE = {
+  type:    'stats',
+  theme:   'cotton-candy',
+  layout:  '',
+  emoji:   '👨‍💻',
+  accent:  '#ED93B1',
+  username: 'octocat',
+  title:   'GitHub Stats',
+  stats:   [
+    { label: 'Stars',  val: '2.8k' },
+    { label: 'Repos',  val: '142'  },
+    { label: 'Active', val: '98%'  }
+  ],
+  tags:    ['React', 'TypeScript', 'Node.js'],
+  // profile-only
+  pname:   '',
+  handle:  '@octocat',
+  role:    'Full-stack Developer',
+  bio:     'Building amazing things with code',
+  // streak-only
+  streak:  '42',
+  longest: '87',
+  total:   '1,247'
 };
 
-// ── Shared SVG defs builder ──
-function buildDefs(theme) {
-  return `
-    <defs>
-      <linearGradient id="candyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%"   style="stop-color:${theme.gradStart};stop-opacity:1"/>
-        <stop offset="100%" style="stop-color:${theme.gradEnd};stop-opacity:1"/>
-      </linearGradient>
-      <linearGradient id="glassBg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%"   style="stop-color:rgba(255,255,255,0.18);stop-opacity:1"/>
-        <stop offset="100%" style="stop-color:rgba(255,255,255,0.06);stop-opacity:1"/>
-      </linearGradient>
-      <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="8"/>
-      </filter>
-      <filter id="shadow">
-        <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="${theme.accentGlow}"/>
-      </filter>
-    </defs>`;
+/* 모든 테마/레이아웃 클래스 목록 */
+const ALL_THEME_CLASSES = TEMPLATES.map(t => [
+  `theme-${t.theme}`,
+  t.layout
+]).flat().filter(Boolean);
+
+const ALL_THEME_UNIQUE = [...new Set(ALL_THEME_CLASSES)];
+
+/* ── 핵심: 테마 적용 ─────────────────────────────────── */
+function applyTheme(templateId) {
+  const tpl = getById(templateId);
+  if (!tpl) return;
+
+  WE.type   = tpl.type;
+  WE.theme  = tpl.theme;
+  WE.layout = tpl.layout || '';
+  WE.accent = tpl.accentColor;
+
+  const card = document.getElementById('widget-card');
+  if (!card) return;
+
+  /* 기존 테마 클래스 전부 제거 */
+  card.classList.remove(...ALL_THEME_UNIQUE);
+
+  /* 새 테마 + 레이아웃 클래스 추가 */
+  card.classList.add(`theme-${WE.theme}`);
+  if (WE.layout) card.classList.add(WE.layout);
+
+  /* 위젯 타입에 따라 DOM 구조 전환 */
+  renderWidgetDOM();
+
+  /* 코드 스트립 업데이트 */
+  updateCodeStrip();
 }
 
-// ── Badge pill fill by theme ──
-function badgeFill(themeName) {
-  if (themeName === 'cotton-candy')    return { fill: 'rgba(237,147,177,0.18)', stroke: 'rgba(237,147,177,0.42)' };
-  if (themeName === 'cotton-dark')     return { fill: 'rgba(200,184,240,0.22)', stroke: 'rgba(200,184,240,0.40)' };
-  if (themeName === 'neumorphic-candy') return { fill: '#F0E6F0', stroke: 'none', filter: 'url(#shadow)' };
-  return { fill: 'rgba(237,147,177,0.18)', stroke: 'rgba(237,147,177,0.42)' };
+/* ── DOM 렌더링 ─────────────────────────────────────── */
+function renderWidgetDOM() {
+  const card = document.getElementById('widget-card');
+  if (!card) return;
+
+  switch (WE.type) {
+    case 'stats':   renderStats(card);   break;
+    case 'tech':    renderTech(card);    break;
+    case 'profile': renderProfile(card); break;
+    case 'streak':  renderStreak(card);  break;
+  }
 }
 
-// ── generateBadgeSVG ──
-function generateBadgeSVG({ techs = [], themeName = 'cotton-candy', width = 480 } = {}) {
-  const theme = THEMES[themeName] || THEMES['cotton-candy'];
-  const pill = badgeFill(themeName);
-  const pillW = 80, pillH = 24, gap = 10, startX = 16, startY = 38;
-  const rows = Math.ceil(techs.length / 5);
-  const height = 32 + rows * (pillH + gap) + 16;
-
-  const pills = techs.map((tech, i) => {
-    const col = i % 5, row = Math.floor(i / 5);
-    const x = startX + col * (pillW + gap);
-    const y = startY + row * (pillH + gap);
-    return `
-      <rect x="${x}" y="${y}" width="${pillW}" height="${pillH}" rx="12"
-        fill="${pill.fill}" stroke="${pill.stroke}" stroke-width="0.5"
-        ${pill.filter ? `filter="${pill.filter}"` : ''}/>
-      <text x="${x + pillW/2}" y="${y + 15}" text-anchor="middle"
-        font-family="'Pretendard','Noto Sans KR',sans-serif" font-size="11"
-        font-weight="600" fill="${theme.text}">${tech}</text>`;
-  }).join('');
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-    ${buildDefs(theme)}
-    <!-- Background -->
-    <rect width="${width}" height="${height}" rx="16" fill="${theme.bg}" stroke="${theme.border}" stroke-width="0.5"/>
-    <!-- Header bar -->
-    <rect width="${width}" height="28" rx="16" fill="url(#candyGrad)"/>
-    <rect y="12" width="${width}" height="16" fill="url(#candyGrad)"/>
-    <text x="14" y="19" font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="11" font-weight="700" fill="#fff" letter-spacing="0.06em">TECH STACK</text>
-    ${pills}
-  </svg>`;
+/* Stats 위젯 */
+function renderStats(card) {
+  card.innerHTML = `
+    <div class="w-header">
+      <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
+      <div>
+        <div class="w-name" id="w-name">${WE.username || 'octocat'}</div>
+        <div class="w-handle" id="w-handle">@${WE.username || 'octocat'} · GitHub</div>
+      </div>
+    </div>
+    <div class="w-stats" id="w-stats">
+      ${WE.stats.map((s, i) => `
+        <div class="w-stat">
+          <div class="w-num" id="w-s${i+1}-val">${s.val}</div>
+          <div class="w-lbl" id="w-s${i+1}-lbl">${s.label}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="w-tags" id="w-tags">
+      ${renderBadges(WE.tags)}
+    </div>
+  `;
 }
 
-// ── generateProfileSVG ──
-function generateProfileSVG({ username = 'octocat', name = '', bio = '', themeName = 'cotton-candy', width = 480 } = {}) {
-  const theme = THEMES[themeName] || THEMES['cotton-candy'];
-  const height = 160;
-  const displayName = name || username;
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-    ${buildDefs(theme)}
-    <rect width="${width}" height="${height}" rx="16" fill="${theme.bg}" stroke="${theme.border}" stroke-width="0.5"/>
-    <!-- Avatar circle -->
-    <circle cx="56" cy="80" r="36" fill="url(#candyGrad)"/>
-    <circle cx="56" cy="80" r="34" fill="${theme.bgSolid}" opacity="0.3"/>
-    <text x="56" y="86" text-anchor="middle"
-      font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="22" font-weight="900" fill="#fff">${displayName.charAt(0).toUpperCase()}</text>
-    <!-- Name -->
-    <text x="108" y="68" font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="16" font-weight="800" fill="${theme.text}">${displayName}</text>
-    <text x="108" y="86" font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="11" fill="${theme.textSub}">@${username}</text>
-    ${bio ? `<text x="108" y="106" font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="11" fill="${theme.textSub}">${bio.slice(0, 50)}</text>` : ''}
-    <!-- Accent bar -->
-    <rect x="108" y="118" width="120" height="3" rx="2" fill="url(#candyGrad)"/>
-  </svg>`;
+/* Tech 위젯 */
+function renderTech(card) {
+  card.innerHTML = `
+    <div class="w-header">
+      <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
+      <div>
+        <div class="w-name" id="w-name">${WE.username || 'octocat'}</div>
+        <div class="w-handle" id="w-handle">Tech Stack</div>
+      </div>
+    </div>
+    <div class="w-tags" id="w-tags">
+      ${renderBadges(WE.tags)}
+    </div>
+  `;
 }
 
-// ── generateStatsSVG ──
-function generateStatsSVG({ username = 'octocat', stars = 0, commits = 0, repos = 0, themeName = 'cotton-candy', width = 480 } = {}) {
-  const theme = THEMES[themeName] || THEMES['cotton-candy'];
-  const height = 200;
-  const stats = [
-    { label: 'Stars',   value: stars   > 999 ? (stars/1000).toFixed(1)+'k'   : stars },
-    { label: 'Commits', value: commits > 999 ? (commits/1000).toFixed(1)+'k' : commits },
-    { label: 'Repos',   value: repos }
-  ];
-  const colW = (width - 32) / 3;
+/* Profile 위젯 */
+function renderProfile(card) {
+  const theme = WE.theme;
+  const isTypography = theme === 'profile-typography';
+  const hasRole = ['profile-portfolio','profile-glass-grid','profile-soft'].includes(theme);
 
-  const statCols = stats.map((s, i) => {
-    const x = 16 + i * colW;
-    return `
-      <rect x="${x + 4}" y="60" width="${colW - 8}" height="100" rx="12"
-        fill="${theme.bg}" stroke="${theme.border}" stroke-width="0.5"/>
-      <text x="${x + colW/2}" y="108" text-anchor="middle"
-        font-family="'Pretendard','Noto Sans KR',sans-serif"
-        font-size="28" font-weight="900" fill="${theme.accent}">${s.value}</text>
-      <text x="${x + colW/2}" y="128" text-anchor="middle"
-        font-family="'Pretendard','Noto Sans KR',sans-serif"
-        font-size="10" fill="${theme.textSub}">${s.label}</text>
-      <!-- Bar -->
-      <rect x="${x + 20}" y="148" width="${colW - 48}" height="4" rx="2" fill="url(#candyGrad)"/>`;
-  }).join('');
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-    ${buildDefs(theme)}
-    <rect width="${width}" height="${height}" rx="16" fill="${theme.bg}" stroke="${theme.border}" stroke-width="0.5"/>
-    <!-- Header -->
-    <rect width="${width}" height="52" rx="16" fill="url(#candyGrad)"/>
-    <rect y="36" width="${width}" height="16" fill="url(#candyGrad)"/>
-    <text x="16" y="32" font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="14" font-weight="800" fill="#fff">${username}</text>
-    <text x="${width - 16}" y="32" text-anchor="end"
-      font-family="'Pretendard','Noto Sans KR',sans-serif"
-      font-size="10" fill="rgba(255,255,255,0.75)">GitHub Stats</text>
-    ${statCols}
-  </svg>`;
+  card.innerHTML = `
+    <div class="w-header">
+      <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
+      <div>
+        <div class="w-name" id="w-name">${WE.pname || WE.username || 'octocat'}</div>
+        ${hasRole ? `<div class="w-role">${WE.role}</div>` : ''}
+        <div class="w-handle" id="w-handle">${WE.handle || '@octocat'}</div>
+      </div>
+    </div>
+    <div class="w-bio" id="w-bio">${WE.bio}</div>
+    <div class="w-tags" id="w-tags">
+      ${renderBadges(WE.tags)}
+    </div>
+  `;
 }
 
-// Export
-if (typeof module !== 'undefined') {
-  module.exports = { THEMES, generateBadgeSVG, generateProfileSVG, generateStatsSVG };
+/* Streak 위젯 */
+function renderStreak(card) {
+  card.innerHTML = `
+    <div class="w-header">
+      <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
+      <div>
+        <div class="w-name" id="w-name">${WE.username || 'octocat'}</div>
+        <div class="w-handle" id="w-handle">@${WE.username || 'octocat'} · GitHub</div>
+      </div>
+    </div>
+    <div class="w-streak-main">
+      <div class="w-streak-num">${WE.streak}</div>
+      <div class="w-streak-label">Day Streak 🔥</div>
+    </div>
+    <div class="w-streak-sub">
+      <div class="w-stat">
+        <div class="w-num">${WE.longest}</div>
+        <div class="w-lbl">Longest</div>
+      </div>
+      <div class="w-stat">
+        <div class="w-num">${WE.total}</div>
+        <div class="w-lbl">Total</div>
+      </div>
+    </div>
+  `;
 }
+
+/* 배지 HTML 생성 */
+function renderBadges(tags) {
+  const colors = ['pk','pu','sk','pk','pu','sk'];
+  return tags.map((tag, i) =>
+    `<span class="w-badge w-badge-${colors[i % 3]}" data-tech="${tag}">${tag}</span>`
+  ).join('');
+}
+
+/* ── 코드 스트립 ─────────────────────────────────────── */
+function updateCodeStrip() {
+  const pre = document.getElementById('code-pre');
+  if (!pre) return;
+
+  const tab = document.querySelector('.ctab.on');
+  const fmt = tab ? tab.dataset.fmt || tab.textContent.trim().toLowerCase() : 'md';
+  const user = WE.username || 'octocat';
+  const theme = WE.theme;
+  const type = WE.type;
+
+  const url = `https://gitgloss.io/api/${type}?user=${user}&theme=${theme}`;
+
+  const codes = {
+    md:   `![GitGloss](${url})`,
+    html: `<img src="${url}" alt="GitGloss Widget" />`,
+    svg:  `<image href="${url}" width="360" height="180" />`
+  };
+
+  pre.textContent = codes[fmt] || codes.md;
+}
+
+/* ── 입력 바인딩 ─────────────────────────────────────── */
+function bindInputs() {
+  const bind = (id, key, render = true) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', () => {
+      WE[key] = el.value;
+      if (render) renderWidgetDOM();
+    });
+  };
+
+  bind('inp-username', 'username');
+  bind('inp-title',    'title', false);
+  bind('inp-pname',    'pname');
+  bind('inp-handle',   'handle');
+  bind('inp-role',     'role');
+  bind('inp-bio',      'bio');
+  bind('inp-streak',   'streak');
+  bind('inp-longest-streak', 'longest');
+  bind('inp-total-contributions', 'total');
+
+  /* Stat 라벨/값 */
+  [1,2,3].forEach(n => {
+    const lbl = document.getElementById(`s${n}-label`);
+    const val = document.getElementById(`s${n}-val`);
+    if (lbl) lbl.addEventListener('input', () => {
+      WE.stats[n-1].label = lbl.value || WE.stats[n-1].label;
+      renderWidgetDOM();
+    });
+    if (val) val.addEventListener('input', () => {
+      WE.stats[n-1].val = val.value || WE.stats[n-1].val;
+      renderWidgetDOM();
+    });
+  });
+}
+
+/* ── 퍼블릭 함수들 ───────────────────────────────────── */
+
+/* 이모지 선택 */
+function selectEmoji(btn, emoji) {
+  document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  WE.emoji = emoji;
+  const avatar = document.getElementById('w-avatar');
+  if (avatar) avatar.textContent = emoji;
+}
+
+/* 액센트 색상 선택 */
+function selColor(el, color) {
+  document.querySelectorAll('.sw').forEach(s => s.classList.remove('on'));
+  el.classList.add('on');
+  WE.accent = color;
+  /* accent는 CSS custom property가 아닌 테마 클래스로 제어 */
+}
+
+/* 위젯 타입 선택 (Config 패널 타입 버튼) */
+function selectType(btn, type) {
+  document.querySelectorAll('.type-chip').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  WE.type = type;
+
+  /* 필드 패널 전환 먼저 */
+  ['stats','tech','profile','streak'].forEach(t => {
+    const el = document.getElementById(`fields-${t}`);
+    if (el) el.style.display = t === type ? '' : 'none';
+  });
+
+  /* 해당 타입 썸네일 그리드 재렌더 */
+  if (typeof renderTemplateThumbs === 'function') {
+    renderTemplateThumbs(type);
+  }
+
+  /* 썸네일 렌더 완료 후 첫 번째 템플릿 자동 적용 */
+  setTimeout(() => {
+    const first = TEMPLATES.find(t => t.type === type);
+    if (first) {
+      applyTheme(first.id);
+      document.querySelectorAll('.tpl-thumb').forEach(t => t.classList.remove('active'));
+      const firstThumb = document.querySelector(`.tpl-thumb[data-id="${first.id}"]`);
+      if (firstThumb) firstThumb.classList.add('active');
+    }
+  }, 10);
+}
+
+/* 코드 탭 선택 */
+function selCtab(btn, fmt) {
+  document.querySelectorAll('.ctab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  btn.dataset.fmt = fmt;
+  updateCodeStrip();
+}
+
+/* 복사 */
+function doCopy() {
+  const pre = document.getElementById('code-pre');
+  if (!pre) return;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ 복사됨';
+    btn.classList.add('copied');
+    /* 광고 슬라이드인 */
+    const ad = document.getElementById('ad-b2');
+    if (ad) ad.classList.add('show');
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+/* 태그 추가 */
+function addTag(e, input) {
+  if (e.key !== 'Enter') return;
+  const val = input.value.trim();
+  if (!val) return;
+  WE.tags.push(val);
+  const wrap = document.getElementById('tag-wrap');
+  if (wrap) {
+    const span = document.createElement('span');
+    span.className = 'tag tag-pk';
+    span.innerHTML = `${val} <button class="tag-x" onclick="removeTag(this)">×</button>`;
+    wrap.appendChild(span);
+  }
+  input.value = '';
+  renderWidgetDOM();
+}
+
+function addTagTo(e, input, wrapId) {
+  if (e.key !== 'Enter') return;
+  const val = input.value.trim();
+  if (!val) return;
+  WE.tags.push(val);
+  const wrap = document.getElementById(wrapId);
+  if (wrap) {
+    const span = document.createElement('span');
+    span.className = 'tag tag-pk';
+    span.innerHTML = `${val} <button class="tag-x" onclick="removeTag(this)">×</button>`;
+    wrap.appendChild(span);
+  }
+  input.value = '';
+  renderWidgetDOM();
+}
+
+function removeTag(btn) {
+  const tag = btn.parentElement;
+  const text = tag.textContent.replace('×','').trim();
+  WE.tags = WE.tags.filter(t => t !== text);
+  tag.remove();
+  renderWidgetDOM();
+}
+
+/* SVG Export */
+function exportWidget() {
+  const card = document.getElementById('widget-card');
+  if (!card) return;
+
+  /* 현재 computed style 기준 SVG foreignObject 래핑 */
+  const rect = card.getBoundingClientRect();
+  const w = Math.round(rect.width);
+  const h = Math.round(rect.height);
+
+  const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      ${card.outerHTML}
+    </div>
+  </foreignObject>
+</svg>`;
+
+  const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  a.download = `gitgloss-${WE.theme}.svg`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ── 초기화 ─────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  bindInputs();
+  /* 기본 템플릿 적용 */
+  applyTheme('stats-01');
+  /* 첫 번째 썸네일 active */
+  const first = document.querySelector('.tpl-thumb');
+  if (first) first.classList.add('active');
+});
