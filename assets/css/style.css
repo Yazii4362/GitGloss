@@ -295,7 +295,7 @@ body {
 }
 
 .nav-cta:hover {
-  background: var(--gradient-blue-red);
+  background: #3367d6;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(66, 133, 244, 0.35);
 }
@@ -746,10 +746,7 @@ body {
 ══════════════════════════════ */
 /* Handled in main .nav styles above */
 
-/* Hide old nav-links */
-.nav-links {
-  display: none;
-}
+
 
 /* ══════════════════════════════
    Footer Styles

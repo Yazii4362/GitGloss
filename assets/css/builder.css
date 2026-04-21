@@ -2093,3 +2093,43 @@
   align-items: flex-start;
   gap: 10px;
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   BANNER 레이아웃
+   ═══════════════════════════════════════════════════════ */
+
+/* banner-layout: 카드 너비를 미리보기 영역에 맞게 확장 */
+.widget-card.banner-layout {
+  width: 100%;
+  max-width: 600px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.widget-card.banner-layout:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* banner 테마별 배경 — renderBanner()가 인라인으로 처리하므로
+   카드 자체는 투명하게 두고 내부 div가 배경을 담당 */
+.widget-card.banner-layout > div {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LINKS 레이아웃
+   ═══════════════════════════════════════════════════════ */
+
+.widget-card.links-layout {
+  width: 360px;
+}
+/* links 카드에서 stats 영역 숨김 */
+.widget-card.links-layout .w-stats { display: none; }
+.widget-card.links-layout .w-header { margin-bottom: 8px; }

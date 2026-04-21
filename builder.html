@@ -2,6 +2,47 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <!-- ================== 기본 메타 태그 (SEO) ================== -->
+  <meta name="title" content="위젯 빌더 — GitGloss | GitHub README 위젯 만들기">
+  <meta name="description" content="GitGloss 빌더에서 GitHub README 위젯을 직접 만들어보세요. 테마 선택, 사용자명 입력 후 Markdown 코드 한 줄 복사로 완성.">
+  <meta name="keywords" content="GitHub README 위젯 만들기, 깃허브 위젯 빌더, README 커스터마이징, GitHub Stats 카드 만들기">
+  <meta name="author" content="GitGloss">
+  <meta name="robots" content="noindex, follow">
+  <!-- ================== Open Graph ================== -->
+  <meta property="og:title" content="위젯 빌더 — GitGloss | GitHub README 위젯 만들기">
+  <meta property="og:description" content="GitGloss 빌더에서 GitHub README 위젯을 직접 만들어보세요. 테마 선택, 사용자명 입력 후 Markdown 코드 한 줄 복사로 완성.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gitgloss.io/builder.html">
+  <meta property="og:image" content="https://gitgloss.io/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GitGloss 위젯 빌더">
+  <meta property="og:site_name" content="GitGloss">
+  <meta property="og:locale" content="ko_KR">
+  <!-- ================== Twitter 카드 ================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="위젯 빌더 — GitGloss | GitHub README 위젯 만들기">
+  <meta name="twitter:description" content="GitGloss 빌더에서 GitHub README 위젯을 직접 만들어보세요. 테마 선택, 사용자명 입력 후 Markdown 코드 한 줄 복사로 완성.">
+  <meta name="twitter:image" content="https://gitgloss.io/assets/images/og-image.png">
+  <meta name="twitter:image:alt" content="GitGloss 위젯 빌더">
+  <meta name="twitter:site" content="@gitgloss">
+  <meta name="twitter:creator" content="@gitgloss">
+  <!-- ================== SEO 보완 ================== -->
+  <meta name="language" content="ko">
+  <meta name="distribution" content="global">
+  <meta name="rating" content="general">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="canonical" href="https://gitgloss.io/builder.html">
+  <!-- ================== 웹앱 최적화 ================== -->
+  <meta name="theme-color" content="#4285F4">
+  <meta name="application-name" content="GitGloss">
+  <meta name="msapplication-TileColor" content="#4285F4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="GitGloss">
+  <!-- ================== 아이콘 ================== -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GitGloss Builder — Premium Widget Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +63,6 @@
     <span class="topbar-title">Widget Builder</span>
     <div class="topbar-actions">
       <a href="gallery.html" style="font-size:11px;color:var(--gg-text-sub);text-decoration:none">← 갤러리</a>
-      <button class="btn-export" onclick="exportWidget()">Export SVG</button>
     </div>
   </header>
 
@@ -34,10 +74,12 @@
 
       <!-- Widget type -->
       <div class="section-label">위젯 타입</div>
-      <div class="type-row" id="type-row">
+      <div class="type-row" id="type-row" style="flex-wrap:wrap;gap:6px;">
         <button class="type-chip on" onclick="selectType(this,'stats')">Stats</button>
         <button class="type-chip"    onclick="selectType(this,'tech')">Tech</button>
         <button class="type-chip"    onclick="selectType(this,'profile')">Profile</button>
+        <button class="type-chip"    onclick="selectType(this,'links')">Links</button>
+        <button class="type-chip"    onclick="selectType(this,'banner')">Banner</button>
       </div>
 
       <!-- Template Thumbnails -->
@@ -46,10 +88,10 @@
         <!-- JS로 렌더 -->
       </div>
 
-      <div class="divider"></div>
+      <div class="divider" id="divider-emoji"></div>
 
       <!-- Emoji Selector -->
-      <div class="section-label">프로필 이모지</div>
+      <div class="section-label" id="label-emoji">프로필 이모지</div>
       <div class="emoji-grid" id="emoji-grid">
         <button class="emoji-btn active" onclick="selectEmoji(this, '👨‍💻')" data-emoji="👨‍💻">👨‍💻</button>
         <button class="emoji-btn" onclick="selectEmoji(this, '👩‍💻')" data-emoji="👩‍💻">👩‍💻</button>
@@ -69,10 +111,10 @@
         <button class="emoji-btn" onclick="selectEmoji(this, '🌈')" data-emoji="🌈">🌈</button>
       </div>
 
-      <div class="divider"></div>
+      <div class="divider" id="divider-username"></div>
 
       <!-- GitHub username -->
-      <div class="field-group">
+      <div class="field-group" id="field-username">
         <div class="field-label">GitHub 사용자명</div>
         <input class="field-input" id="inp-username" placeholder="octocat">
       </div>
@@ -162,6 +204,51 @@
         </div>
       </div>
 
+      <!-- ── Links 필드 ─────────────────────────────── -->
+      <div id="fields-links" style="display:none">
+        <div class="section-label">링크 목록</div>
+        <div id="link-rows-wrap">
+          <!-- JS로 렌더 -->
+        </div>
+        <div class="field-group" style="padding-top:6px;">
+          <button onclick="addLinkRow()" style="
+            width:100%;padding:8px;border-radius:8px;
+            border:1.5px dashed rgba(66,133,244,.4);
+            background:rgba(66,133,244,.05);
+            color:var(--gg-blue,#4285F4);font-size:12px;font-weight:600;cursor:pointer;">
+            + 링크 추가
+          </button>
+        </div>
+        <div class="divider"></div>
+        <div class="field-group">
+          <div class="field-label">표시 이름 (선택)</div>
+          <input class="field-input" id="inp-pname" placeholder="octocat">
+        </div>
+      </div>
+
+      <!-- ── Banner 필드 ─────────────────────────────── -->
+      <div id="fields-banner" style="display:none">
+        <div class="field-group">
+          <div class="field-label">배너 텍스트</div>
+          <input class="field-input" id="inp-banner-text" placeholder="Hi! Welcome!" value="Hi! Welcome!">
+        </div>
+        <div class="field-group">
+          <div class="field-label">GitHub 사용자명 (트로피·스네이크 등)</div>
+          <input class="field-input" id="inp-username-banner" placeholder="octocat">
+        </div>
+        <div class="field-group">
+          <div class="field-label">높이 (px, capsule-render용)</div>
+          <input class="field-input" id="inp-banner-height" placeholder="160" value="160">
+        </div>
+        <div style="background:rgba(66,133,244,.07);border-radius:10px;padding:12px;margin:8px 0;font-size:11px;color:#555;line-height:1.7;">
+          💡 <b>Banner 위젯은 외부 무료 API를 사용합니다</b><br>
+          capsule-render · readme-typing-svg<br>
+          github-readme-stats · seeyoufarm Hits<br>
+          github-profile-trophy · contribution-snake<br>
+          <b>백엔드 없이 Markdown 한 줄로 바로 사용 가능!</b>
+        </div>
+      </div>
+
       <!-- Spacer + AD-B1 + footer -->
       <div class="panel-left-spacer"></div>
 
@@ -220,7 +307,6 @@
         <div class="code-tabs-row" id="ctabs">
           <button class="ctab on"  onclick="selCtab(this,'md')">Markdown</button>
           <button class="ctab"     onclick="selCtab(this,'html')">HTML</button>
-          <button class="ctab"     onclick="selCtab(this,'svg')">SVG</button>
         </div>
         <div class="code-body">
           <div class="code-pre" id="code-pre">![GitGloss](https://gitgloss.io/api/stats?user=octocat&theme=cotton-candy)</div>
@@ -239,10 +325,237 @@
     </div>
   </div>
 
+  <!-- 로드 순서 중요: data → engine → loader → glue -->
   <script src="assets/js/common.js"></script>
-  <script src="assets/data/templates.js"></script>
-  <script src="assets/js/template-loader.js"></script>
-  <script src="assets/js/widget-engine.js"></script>
-  <script src="assets/js/builder.js"></script>
+  <script src="assets/data/templates.js"></script>   <!-- 1. 데이터 (TEMPLATES, getById) -->
+  <script src="assets/js/widget-engine.js"></script> <!-- 2. 렌더링 엔진 (applyTheme, renderWidgetDOM) -->
+  <script src="assets/js/template-loader.js"></script> <!-- 3. UI 로더 (renderTemplateThumbs, onThumbClick) -->
+  <script src="assets/js/builder.js"></script>       <!-- 4. 복사 폴백 -->
+  <script>
+    /* Links 패널 초기화 — widget-engine 로드 후 실행 */
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderLinkRows === 'function') renderLinkRows();
+    });
+  </script>
+
+  <!-- ☕ 커피챗 플로팅 버튼 + 모달 (builder 전용) -->
+  <style>
+    .coffee-fab {
+      position: fixed;
+      right: 24px;
+      bottom: 28px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid rgba(0,0,0,0.09);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 999;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .coffee-fab:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 28px rgba(0,0,0,0.15); }
+    .coffee-fab:active { transform: scale(0.95); }
+
+    .gg-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(8,8,15,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .gg-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .gg-modal {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 36px 32px;
+      max-width: 400px;
+      width: calc(100% - 48px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.14);
+      position: relative;
+      transform: translateY(16px) scale(0.97);
+      transition: transform .28s cubic-bezier(0.34,1.56,0.64,1);
+      text-align: center;
+    }
+    .gg-modal-overlay.open .gg-modal { transform: translateY(0) scale(1); }
+    .gg-modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: none; border: none; font-size: 20px;
+      color: rgba(8,8,15,0.35); cursor: pointer; padding: 4px;
+      transition: color .15s;
+    }
+    .gg-modal-close:hover { color: #08080F; }
+
+    /* 커피챗 모달 */
+    .coffee-modal-icon { font-size: 52px; margin-bottom: 16px; display: block; }
+    .coffee-modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.02em; margin-bottom: 8px; }
+    .coffee-modal-desc { font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.65; margin-bottom: 28px; font-weight: 500; }
+    .coffee-modal-btns { display: flex; flex-direction: column; gap: 10px; }
+    .coffee-btn-chat {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 24px; border-radius: 14px;
+      background: rgba(255,255,255,0.22); backdrop-filter: blur(8px);
+      color: #fff; font-size: 15px; font-weight: 700; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .coffee-btn-chat:hover { background: rgba(255,255,255,0.32); transform: translateY(-1px); }
+    .coffee-btn-buy {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 24px; border-radius: 14px; background: rgba(255,255,255,0.92); color: #6f4e37;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .coffee-btn-buy:hover { background: #fff; transform: translateY(-1px); }
+    .coffee-modal-note { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 16px; font-weight: 500; }
+
+    /* 커피 모달 갈색 그라디언트 */
+    #coffee-modal-overlay .gg-modal {
+      background: linear-gradient(145deg, #6f4e37 0%, #a0522d 40%, #c8813a 75%, #d4956a 100%);
+      box-shadow: 0 24px 64px rgba(111,78,55,0.35), 0 4px 16px rgba(0,0,0,0.12);
+    }
+    #coffee-modal-overlay .gg-modal-close { color: rgba(255,255,255,.5); }
+    #coffee-modal-overlay .gg-modal-close:hover { color: #fff; }
+
+    /* 축하 모달 */
+    .congrats-emoji-wrap { font-size: 56px; margin-bottom: 12px; display: block; }
+    .congrats-title { font-size: 24px; font-weight: 800; color: #08080F; letter-spacing: -.02em; margin-bottom: 8px; }
+    .congrats-sub { font-size: 14px; color: rgba(8,8,15,.65); line-height: 1.65; margin-bottom: 24px; font-weight: 500; }
+    .congrats-tips { background: #FBFBFB; border-radius: 14px; padding: 16px 18px; text-align: left; margin-bottom: 24px; }
+    .congrats-tips-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(8,8,15,.4); margin-bottom: 10px; }
+    .congrats-tip-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(8,8,15,.65); font-weight: 500; margin-bottom: 7px; line-height: 1.5; }
+    .congrats-tip-item:last-child { margin-bottom: 0; }
+    .congrats-tip-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .congrats-btn-primary {
+      display: block; width: 100%; padding: 14px; border-radius: 14px;
+      background: #4285F4; color: #fff; font-size: 15px; font-weight: 700;
+      text-align: center; text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .15s; margin-bottom: 8px;
+    }
+    .congrats-btn-primary:hover { background: #3367d6; transform: translateY(-1px); }
+    .congrats-btn-ghost {
+      display: block; width: 100%; padding: 12px; border-radius: 14px;
+      background: transparent; color: rgba(8,8,15,.4); font-size: 13px; font-weight: 600;
+      text-align: center; border: none; cursor: pointer; transition: color .15s;
+    }
+    .congrats-btn-ghost:hover { color: #08080F; }
+
+    /* 컨페티 */
+    .confetti-wrap { position: absolute; top: 0; left: 0; right: 0; height: 0; overflow: visible; pointer-events: none; }
+    .confetti-dot { position: absolute; border-radius: 2px; animation: confetti-fall 1.2s ease-out forwards; opacity: 0; }
+    @keyframes confetti-fall {
+      0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(80px) rotate(360deg); }
+    }
+  </style>
+
+  <button class="coffee-fab" onclick="openCoffeeModal()" aria-label="개발자와 커피챗하기">
+    <img src="assets/images/coffeeicon.webp" alt="커피" width="26" height="26" style="object-fit:contain;">
+  </button>
+
+  <!-- 커피챗 모달 -->
+  <div class="gg-modal-overlay" id="coffee-modal-overlay" onclick="closeCoffeeModal(event)">
+    <div class="gg-modal" role="dialog" aria-modal="true">
+      <button class="gg-modal-close" onclick="closeCoffeeModal()">✕</button>
+      <div class="coffee-modal-title">개발자와 이야기해요</div>
+      <img src="assets/images/coffeeicon.webp" alt="커피" width="120" height="120" style="object-fit:contain;display:block;margin:12px auto 20px;">
+      <p class="coffee-modal-desc">GitGloss를 만든 개발자와 직접 대화할 수 있어요.<br>피드백, 협업 제안, 아이디어 모두 환영합니다.</p>
+      <div class="coffee-modal-btns">
+        <a href="#" class="coffee-btn-chat" target="_blank" rel="noopener">💬 커피챗 신청하기</a>
+        <a href="#" class="coffee-btn-buy" target="_blank" rel="noopener">☕ 커피 한 잔 사주기</a>
+      </div>
+      <p class="coffee-modal-note">링크는 추후 업데이트 예정이에요 🙏</p>
+    </div>
+  </div>
+
+  <!-- 위젯 완성 축하 모달 -->
+  <div class="gg-modal-overlay" id="congrats-modal-overlay" onclick="closeCongratsModal(event)">
+    <div class="gg-modal" role="dialog" aria-modal="true">
+      <div class="confetti-wrap" id="confetti-wrap"></div>
+      <button class="gg-modal-close" onclick="closeCongratsModal()">✕</button>
+      <!-- 추후 3D 박수 이모지로 교체 예정 -->
+      <span class="congrats-emoji-wrap">🎉</span>
+      <div class="congrats-title">위젯 완성!</div>
+      <p class="congrats-sub">코드가 복사됐어요.<br>이제 GitHub README를 예쁘게 꾸며볼 시간이에요 ✨</p>
+      <div class="congrats-tips">
+        <div class="congrats-tips-title">이렇게 꾸며보세요</div>
+        <div class="congrats-tip-item"><span class="congrats-tip-icon">📌</span><span>README 상단에 배너 위젯을 먼저 배치하면 첫인상이 달라져요</span></div>
+        <div class="congrats-tip-item"><span class="congrats-tip-icon">🎨</span><span>Stats + Tech Stack + Profile 세 가지를 조합하면 완성도가 높아져요</span></div>
+        <div class="congrats-tip-item"><span class="congrats-tip-icon">🌙</span><span>다크 테마 위젯은 GitHub 다크모드 사용자에게 특히 잘 어울려요</span></div>
+      </div>
+      <a href="gallery.html" class="congrats-btn-primary">더 많은 위젯 구경하기 →</a>
+      <button class="congrats-btn-ghost" onclick="closeCongratsModal()">닫기</button>
+    </div>
+  </div>
+
+  <script>
+    /* 커피챗 모달 */
+    function openCoffeeModal() {
+      document.getElementById('coffee-modal-overlay').classList.add('open');
+    }
+    function closeCoffeeModal(e) {
+      if (e && e.target !== document.getElementById('coffee-modal-overlay')) return;
+      document.getElementById('coffee-modal-overlay').classList.remove('open');
+    }
+
+    /* 축하 모달 */
+    function openCongratsModal() {
+      const overlay = document.getElementById('congrats-modal-overlay');
+      overlay.classList.add('open');
+      spawnConfetti();
+    }
+    function closeCongratsModal(e) {
+      if (e && e.target !== document.getElementById('congrats-modal-overlay')) return;
+      document.getElementById('congrats-modal-overlay').classList.remove('open');
+    }
+
+    /* 컨페티 */
+    function spawnConfetti() {
+      const wrap = document.getElementById('confetti-wrap');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      const colors = ['#ED93B1','#9B8FE8','#7EC8E3','#FBBC05','#34A853','#EA4335'];
+      for (let i = 0; i < 22; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'confetti-dot';
+        dot.style.cssText = `
+          left:${10 + Math.random() * 80}%;
+          top:${-8 - Math.random() * 12}px;
+          background:${colors[Math.floor(Math.random() * colors.length)]};
+          animation-delay:${Math.random() * 0.5}s;
+          animation-duration:${0.9 + Math.random() * 0.6}s;
+          width:${5 + Math.random() * 5}px;
+          height:${5 + Math.random() * 5}px;
+          border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+        `;
+        wrap.appendChild(dot);
+      }
+    }
+
+    /* doCopy 완료 후 축하 모달 트리거 — widget-engine.js의 doCopy를 래핑 */
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyBtn = document.getElementById('copy-btn');
+      if (!copyBtn) return;
+      copyBtn.addEventListener('click', () => {
+        /* 복사 성공 후 1.2초 뒤 모달 오픈 (복사 피드백 애니메이션 끝난 후) */
+        setTimeout(() => openCongratsModal(), 1200);
+      });
+    });
+
+    /* ESC 닫기 */
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      closeCoffeeModal();
+      closeCongratsModal();
+    });
+  </script>
 </body>
 </html>
