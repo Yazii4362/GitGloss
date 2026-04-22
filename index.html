@@ -1835,34 +1835,33 @@
       position: fixed;
       right: 28px;
       bottom: 32px;
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: #fff;
-      border: 1.5px solid rgba(0,0,0,0.09);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06);
+      background: linear-gradient(145deg, #6f4e37, #c8813a);
+      border: none;
+      box-shadow: 0 6px 24px rgba(111,78,55,0.4), 0 2px 8px rgba(0,0,0,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
       cursor: pointer;
       z-index: 999;
-      transition: transform .2s, box-shadow .2s;
+      transition: transform .25s cubic-bezier(0.34,1.56,0.64,1), box-shadow .2s;
       user-select: none;
     }
     .coffee-fab:hover {
-      transform: translateY(-3px) scale(1.06);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 12px 32px rgba(111,78,55,0.5);
     }
-    .coffee-fab:active { transform: scale(0.95); }
+    .coffee-fab:active { transform: scale(0.93); }
 
     /* ── 모달 공통 오버레이 ── */
     .gg-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(8,8,15,0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(8,8,15,0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -1877,14 +1876,14 @@
     }
     .gg-modal {
       background: #fff;
-      border-radius: 24px;
+      border-radius: 28px;
       padding: 40px 36px 32px;
       max-width: 400px;
       width: calc(100% - 48px);
-      box-shadow: 0 24px 64px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08);
       position: relative;
-      transform: translateY(16px) scale(0.97);
-      transition: transform .28s cubic-bezier(0.34,1.56,0.64,1);
+      transform: translateY(20px) scale(0.96);
+      transition: transform .32s cubic-bezier(0.34,1.56,0.64,1);
       text-align: center;
     }
     .gg-modal-overlay.open .gg-modal {
@@ -1894,34 +1893,59 @@
       position: absolute;
       top: 16px;
       right: 18px;
-      background: none;
+      background: rgba(255,255,255,0.15);
       border: none;
-      font-size: 20px;
-      color: rgba(8,8,15,0.35);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
       cursor: pointer;
-      line-height: 1;
-      padding: 4px;
-      transition: color .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, color .15s;
     }
-    .gg-modal-close:hover { color: var(--text-main); }
+    .gg-modal-close:hover { background: rgba(255,255,255,0.25); color: #fff; }
 
     /* ── 커피챗 모달 ── */
-    .coffee-modal-icon {
-      font-size: 52px;
-      margin-bottom: 16px;
+    #coffee-modal-overlay .gg-modal {
+      background: linear-gradient(160deg, #3d1f0a 0%, #6f4e37 35%, #a0522d 70%, #c8813a 100%);
+      box-shadow: 0 32px 80px rgba(111,78,55,0.45), 0 4px 16px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    #coffee-modal-overlay .gg-modal::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -40px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .coffee-modal-img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
       display: block;
+      margin: 0 auto 20px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+      animation: coffee-float 3s ease-in-out infinite;
+    }
+    @keyframes coffee-float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
     .coffee-modal-title {
       font-size: 22px;
       font-weight: 800;
       color: #fff;
       letter-spacing: -.02em;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .coffee-modal-desc {
       font-size: 14px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
       margin-bottom: 28px;
       font-weight: 500;
     }
@@ -1935,53 +1959,49 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 14px 24px;
+      padding: 15px 24px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.22);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.18);
       color: #fff;
       font-size: 15px;
       font-weight: 700;
       text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.35);
+      border: 1.5px solid rgba(255,255,255,0.3);
       cursor: pointer;
-      transition: background .2s, transform .15s;
+      transition: background .2s, transform .15s, box-shadow .2s;
     }
-    .coffee-btn-chat:hover { background: rgba(255,255,255,0.32); transform: translateY(-1px); }
+    .coffee-btn-chat:hover {
+      background: rgba(255,255,255,0.28);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
     .coffee-btn-buy {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 14px 24px;
+      padding: 15px 24px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.92);
-      color: #6f4e37;
+      background: rgba(255,255,255,0.95);
+      color: #5c3317;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: background .2s, transform .15s;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
-    .coffee-btn-buy:hover { background: #fff; transform: translateY(-1px); }
+    .coffee-btn-buy:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
     .coffee-modal-note {
       font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 16px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 18px;
       font-weight: 500;
-    }
-
-    /* 커피 모달 전용 — 갈색 그라디언트 배경 */
-    #coffee-modal-overlay .gg-modal {
-      background: linear-gradient(145deg, #6f4e37 0%, #a0522d 40%, #c8813a 75%, #d4956a 100%);
-      box-shadow: 0 24px 64px rgba(111,78,55,0.35), 0 4px 16px rgba(0,0,0,0.12);
-    }
-    #coffee-modal-overlay .gg-modal-close {
-      color: rgba(255,255,255,0.5);
-    }
-    #coffee-modal-overlay .gg-modal-close:hover {
-      color: #fff;
     }
 
     /* ── 위젯 완성 축하 모달 ── */
@@ -2089,15 +2109,15 @@
 
   <!-- 플로팅 커피 버튼 -->
   <button class="coffee-fab" onclick="openCoffeeModal()" aria-label="개발자와 커피챗하기">
-    <img src="assets/images/coffeeicon.webp" alt="커피" width="28" height="28" style="object-fit:contain;">
+    <img src="assets/images/coffeeicon.webp" alt="커피" width="30" height="30" style="object-fit:contain;">
   </button>
 
   <!-- 커피챗 모달 -->
   <div class="gg-modal-overlay" id="coffee-modal-overlay" onclick="closeCoffeeModal(event)">
     <div class="gg-modal" role="dialog" aria-modal="true" aria-labelledby="coffee-modal-title">
       <button class="gg-modal-close" onclick="closeCoffeeModal()" aria-label="닫기">✕</button>
-      <div class="coffee-modal-title" id="coffee-modal-title">개발자와 이야기해요</div>
-      <img src="assets/images/coffeeicon.webp" alt="커피" width="120" height="120" style="object-fit:contain;display:block;margin:12px auto 20px;">
+      <img src="assets/images/coffeeicon.webp" alt="커피" class="coffee-modal-img">
+      <div class="coffee-modal-title" id="coffee-modal-title">개발자와 이야기해요 ☕</div>
       <p class="coffee-modal-desc">
         GitGloss를 만든 개발자와 직접 대화할 수 있어요.<br>
         피드백, 협업 제안, 아이디어 모두 환영합니다.
