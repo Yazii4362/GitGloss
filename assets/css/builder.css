@@ -15,7 +15,7 @@
   padding: 0 20px;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 201;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 .topbar-logo {
@@ -56,7 +56,7 @@
 
 .builder-body {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 340px 1fr;
   height: calc(100vh - 52px);
   overflow: hidden;
 }
@@ -318,6 +318,99 @@
 .sw-sk { background: #7EC8E3; }
 .sw-sf { background: #F4C0D1; }
 .sw-dk { background: #2D1F42; }
+
+/* ── Choice Rows (Size, Radius, Dir) ── */
+.size-row, .radius-row, .dir-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.size-btn, .radius-btn, .dir-btn {
+  flex: 1;
+  padding: 8px 4px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all .2s;
+}
+.size-btn:hover, .radius-btn:hover, .dir-btn:hover {
+  background: rgba(66,133,244,0.04);
+  border-color: var(--google-blue);
+}
+.size-btn.active, .radius-btn.active, .dir-btn.active {
+  background: var(--google-blue);
+  color: #fff !important;
+  border-color: var(--google-blue);
+}
+
+/* ── Toggle Switch (Shadow) ── */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sub);
+  cursor: pointer;
+  padding: 4px 0;
+}
+.toggle-row input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--google-blue);
+}
+
+/* ── Stack Controls ── */
+.btn-stack-add {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px dashed var(--google-blue);
+  border-radius: 10px;
+  background: rgba(66,133,244,0.03);
+  color: var(--google-blue);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  margin-bottom: 8px;
+}
+.btn-stack-add:hover {
+  background: rgba(66,133,244,0.08);
+  transform: translateY(-1px);
+}
+
+.stack-empty {
+  padding: 16px 12px;
+  text-align: center;
+  background: rgba(0,0,0,0.02);
+  border: 1px dashed rgba(0,0,0,0.06);
+  border-radius: 10px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.btn-stack-clear {
+  width: 100%;
+  padding: 10px;
+  margin-top: 16px;
+  border: none;
+  background: none;
+  color: #aaa;
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color .2s;
+}
+.btn-stack-clear:hover {
+  color: #EA4335;
+}
+
 
 /* Field inputs */
 .field-group { padding: 10px 0; }
@@ -2133,3 +2226,169 @@
 /* links 카드에서 stats 영역 숨김 */
 .widget-card.links-layout .w-stats { display: none; }
 .widget-card.links-layout .w-header { margin-bottom: 8px; }
+
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — 반응형
+   ═══════════════════════════════════════════════════════ */
+
+/* ── 모바일 패널 토글 버튼 ─────────────────────────── */
+.panel-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-sub);
+  transition: all .2s;
+  flex-shrink: 0;
+}
+.panel-toggle-btn:hover {
+  background: rgba(66,133,244,0.06);
+  border-color: var(--google-blue);
+  color: var(--google-blue);
+}
+
+/* 오버레이 */
+.panel-overlay {
+  display: block; /* Always block to allow transition, but use pointer-events */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 199;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+.panel-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ── 태블릿 (≤ 1024px) ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .builder-body {
+    grid-template-columns: 240px 1fr;
+  }
+  .widget-card {
+    width: 300px;
+  }
+  .widget-card.links-layout {
+    width: 300px;
+  }
+}
+
+
+/* ── 모바일 (≤ 768px) ──────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* 토글 버튼 표시 */
+  .panel-toggle-btn {
+    display: flex;
+  }
+
+  /* topbar 조정 */
+  .topbar {
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .topbar-title {
+    font-size: 12px;
+  }
+
+  /* 빌더 바디: 단일 컬럼, 높이 auto */
+  .builder-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    height: calc(100dvh - 52px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 왼쪽 패널: 드로어로 변환 */
+  .panel-left {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 88vw;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform .28s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+  }
+  .panel-left.open {
+    transform: translateX(0);
+  }
+
+
+  /* 오른쪽 패널: 전체 너비 */
+  .panel-right {
+    grid-column: 1;
+    overflow: hidden;
+  }
+
+  /* 미리보기 패딩 축소 */
+  .preview-area {
+    padding: 20px 16px;
+  }
+
+  /* 위젯 카드 크기 조정 */
+  .widget-card {
+    width: min(300px, calc(100vw - 32px));
+  }
+  .widget-card.links-layout {
+    width: min(300px, calc(100vw - 32px));
+  }
+  .widget-card.banner-layout {
+    max-width: calc(100vw - 32px);
+  }
+
+  /* 코드 스트립 조정 */
+  .code-body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .copy-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* 사이드 광고 슬롯 숨김 */
+  .panel-left-spacer,
+  .ad-slot-left {
+    display: none;
+  }
+}
+
+
+/* ── 초소형 (≤ 480px) ──────────────────────────────── */
+@media (max-width: 480px) {
+  .topbar-sep,
+  .topbar-title {
+    display: none;
+  }
+  .topbar {
+    padding: 0 12px;
+  }
+  .preview-area {
+    padding: 16px 12px;
+  }
+  .widget-card {
+    width: min(280px, calc(100vw - 24px));
+  }
+}
+

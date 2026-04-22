@@ -81,6 +81,14 @@ const PREVIEW_STYLES = {
   'banner-typing':         'background:#0d1117;',
   'banner-github-trophy':  'background:linear-gradient(135deg,#fff9e6,#fff3c0);',
   'banner-snake':          'background:linear-gradient(135deg,#EAF3DE,#C0DD97);',
+  /* New Creative Themes */
+  'blog-card':             'background:linear-gradient(135deg,#e8fdf5,#20c99711);',
+  'progress-100':          'background:linear-gradient(135deg,#fff0f7,#ff006e08);',
+  'radar-chart':           'background:linear-gradient(135deg,#f0f4ff,#4285f408);',
+  'spotify-glass':         'background:linear-gradient(135deg,#edfff4,#1db95408);',
+  'coffee-meter':          'background:linear-gradient(135deg,#fdf9f6,#6f4e3708);',
+  'mbti-status':           'background:linear-gradient(135deg,#f8f0ff,#9b8fe808);',
+  'premium-hit':           'background:linear-gradient(135deg,#f0f4ff,#4285f408);',
 };
 
 /* ── 카드 렌더 ───────────────────────────────────────── */
@@ -248,13 +256,58 @@ function buildGalleryPreview(tpl) {
           <div style="font-size:9px;color:#555;">contribution snake</div>
         </div>`;
       }
-      return `<div style="width:85%;height:70px;border-radius:14px;background:${grad};display:flex;align-items:center;justify-content:center;">
-        <div style="font-size:14px;font-weight:700;color:#fff;opacity:.9;text-shadow:0 1px 4px rgba(0,0,0,.2);">
-          ${tpl.title}
-        </div>
-      </div>`;
+      if (tpl.theme === 'premium-hit') {
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;background:rgba(255,255,255,0.4);padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,0.6);backdrop-filter:blur(4px);">
+          <div style="font-size:8px;font-weight:700;color:var(--google-blue);opacity:0.6;letter-spacing:1px;">VISITORS</div>
+          <div style="font-size:24px;font-weight:800;color:var(--text-main);">1,247</div>
+        </div>`;
+      }
+      return `<div style="width:80%;height:35px;background:${grad};border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,0.1)">BANNER</div>`;
 
-    default: return '';
+    /* Creative Theme Specific Mockups */
+    default:
+      if (tpl.theme === 'blog-card') {
+        return `<div style="width:85%;background:rgba(255,255,255,0.8);border-radius:12px;padding:10px;border:1px solid rgba(0,0,0,0.05);">
+          <div style="height:6px;width:60%;background:rgba(0,0,0,0.1);border-radius:3px;margin-bottom:8px;"></div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="width:30px;height:30px;background:var(--google-green);border-radius:6px;opacity:0.4;"></div>
+            <div style="flex:1;">
+              <div style="height:5px;width:80%;background:rgba(0,0,0,0.1);border-radius:2px;margin-bottom:4px;"></div>
+              <div style="height:4px;width:40%;background:rgba(0,0,0,0.05);border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>`;
+      }
+      if (tpl.theme === 'progress-100') {
+        return `<div style="width:85%;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><div style="height:6px;width:40px;background:rgba(0,0,0,0.1);border-radius:3px;"></div><div style="font-size:8px;font-weight:700;color:#ff006e;">42%</div></div>
+          <div style="height:8px;background:rgba(0,0,0,0.05);border-radius:4px;overflow:hidden;"><div style="width:42%;height:100%;background:linear-gradient(90deg,#ff006e,#9b8fe8);border-radius:4px;"></div></div>
+        </div>`;
+      }
+      if (tpl.theme === 'radar-chart') {
+        return `<div style="width:60px;height:60px;background:rgba(66,133,244,0.1);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);border:1px solid var(--google-blue);display:flex;align-items:center;justify-content:center;">
+          <div style="width:35px;height:35px;background:rgba(66,133,244,0.3);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);"></div>
+        </div>`;
+      }
+      if (tpl.theme === 'spotify-glass') {
+        return `<div style="display:flex;gap:10px;align-items:center;background:rgba(255,255,255,0.6);padding:8px 12px;border-radius:12px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.8);">
+          <div style="width:30px;height:30px;border-radius:50%;background:#1db954;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;">🎵</div>
+          <div style="flex:1;"><div style="height:6px;width:40px;background:rgba(0,0,0,0.1);border-radius:3px;margin-bottom:4px;"></div><div style="height:4px;width:25px;background:rgba(0,0,0,0.05);border-radius:2px;"></div></div>
+        </div>`;
+      }
+      if (tpl.theme === 'coffee-meter') {
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="font-size:18px;">☕☕<span style="opacity:0.2;">☕☕</span></div>
+          <div style="height:5px;width:40px;background:rgba(111,78,55,0.2);border-radius:3px;"></div>
+        </div>`;
+      }
+      if (tpl.theme === 'mbti-status') {
+        return `<div style="display:flex;flex-direction:column;gap:6px;width:80%;">
+          <div style="height:14px;background:rgba(155,143,232,0.15);border-radius:6px;border:1px solid rgba(155,143,232,0.2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#9B8FE8;">INTP</div>
+          <div style="height:14px;background:rgba(237,147,177,0.15);border-radius:6px;border:1px solid rgba(237,147,177,0.2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#ED93B1;">WORKING...</div>
+        </div>`;
+      }
+      return `<div style="font-size:24px;">✨</div>`;
   }
 }
 
@@ -263,24 +316,53 @@ function goToBuilder(id) {
   window.location.href = `builder.html?template=${id}`;
 }
 
+/* ── 갤러리 렌더링 (필터 + 검색) ─────────────────────── */
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  const searchInput = document.getElementById('gallery-search');
+  if (!grid) return;
+
+  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  
+  // 1. 카테고리 필터
+  let list = getByType(currentFilter);
+  
+  // 2. 검색 필터
+  if (query) {
+    list = list.filter(t => 
+      t.title.toLowerCase().includes(query) || 
+      t.desc.toLowerCase().includes(query) ||
+      t.type.toLowerCase().includes(query)
+    );
+  }
+
+  grid.innerHTML = list.map(renderCard).join('');
+  
+  const statsEl = document.getElementById('gallery-stats');
+  if (statsEl) statsEl.textContent = `${list.length}개 템플릿 표시 중`;
+}
+
 /* ── 필터 탭 ─────────────────────────────────────────── */
 function applyFilter(filter) {
   currentFilter = filter;
   document.querySelectorAll('.filter-tab').forEach(tab => {
     tab.classList.toggle('active', tab.dataset.filter === filter);
   });
-  const grid = document.getElementById('gallery-grid');
-  if (!grid) return;
-  const list = getByType(filter);
-  grid.innerHTML = list.map(renderCard).join('');
-  const statsEl = document.getElementById('gallery-stats');
-  if (statsEl) statsEl.textContent = `${list.length}개 템플릿 표시 중`;
+  renderGallery();
 }
 
 /* ── 초기화 ─────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  // 필터 클릭
   document.querySelectorAll('.filter-tab').forEach(tab => {
     tab.addEventListener('click', () => applyFilter(tab.dataset.filter));
   });
+
+  // 검색 입력
+  const searchInput = document.getElementById('gallery-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', renderGallery);
+  }
+
   applyFilter('all');
 });

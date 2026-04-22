@@ -115,8 +115,117 @@ function renderWidgetDOM() {
   }
 }
 
-/* Stats 위젯 */
+/* ── SPECIAL THEMES RENDERING ────────────────────────── */
+const SPECIAL_THEMES = {
+  /* Stats */
+  'blog-card': (card) => {
+    card.innerHTML = `
+      <div class="w-header" style="margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;color:var(--google-blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Latest Blog Post</div>
+        <div class="w-name" style="font-size:16px;">Restoring GitGloss Architecture</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;background:rgba(255,255,255,0.4);padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,0.05);">
+        <div style="width:60px;height:60px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;">📝</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:600;color:var(--text-main);margin-bottom:4px;">How we fixed the gallery...</div>
+          <div style="font-size:11px;color:var(--text-sub);">2025.04.22 · 5 min read</div>
+        </div>
+      </div>
+    `;
+  },
+  'progress-100': (card) => {
+    card.innerHTML = `
+      <div class="w-header">
+        <div class="w-name">100 Days of Code</div>
+        <div class="w-handle">Challenge Progress</div>
+      </div>
+      <div style="margin:16px 0;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px;">
+          <span style="color:var(--accent);">Day 42</span>
+          <span style="color:var(--text-sub);">42%</span>
+        </div>
+        <div style="height:10px;background:rgba(0,0,0,0.05);border-radius:5px;overflow:hidden;">
+          <div style="width:42%;height:100%;background:linear-gradient(90deg, var(--accent), #9B8FE8);border-radius:5px;"></div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text-hint);text-align:center;">Keep going! You're doing great. 🚀</div>
+    `;
+  },
+  'radar-chart': (card) => {
+    card.innerHTML = `
+      <div class="w-header" style="margin-bottom:10px;">
+        <div class="w-name">Skill Radar</div>
+        <div class="w-handle">Competency Map</div>
+      </div>
+      <div style="display:flex;justify-content:center;padding:10px;">
+        <div style="width:100px;height:100px;background:rgba(66,133,244,0.1);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent);">
+          <div style="width:60px;height:60px;background:rgba(66,133,244,0.3);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px;">
+        <div style="font-size:9px;text-align:center;font-weight:700;color:var(--text-sub);">Frontend</div>
+        <div style="font-size:9px;text-align:center;font-weight:700;color:var(--text-sub);">Backend</div>
+        <div style="font-size:9px;text-align:center;font-weight:700;color:var(--text-sub);">Design</div>
+      </div>
+    `;
+  },
+  /* Profile */
+  'mbti-status': (card) => {
+    card.innerHTML = `
+      <div class="w-header">
+        <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
+        <div>
+          <div class="w-name">INTP Developer</div>
+          <div class="w-handle">MBTI / Current Status</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <div style="flex:1;background:rgba(155,143,232,0.1);padding:10px;border-radius:12px;text-align:center;border:1px solid rgba(155,143,232,0.2);">
+          <div style="font-size:10px;font-weight:700;color:#9B8FE8;margin-bottom:4px;">MOOD</div>
+          <div style="font-size:13px;font-weight:600;">버그 잡는 중 🐛</div>
+        </div>
+        <div style="flex:1;background:rgba(237,147,177,0.1);padding:10px;border-radius:12px;text-align:center;border:1px solid rgba(237,147,177,0.2);">
+          <div style="font-size:10px;font-weight:700;color:#ED93B1;margin-bottom:4px;">FUEL</div>
+          <div style="font-size:13px;font-weight:600;">커피 필요함 ☕</div>
+        </div>
+      </div>
+    `;
+  },
+  /* Links */
+  'spotify-glass': (card) => {
+    card.innerHTML = `
+      <div style="display:flex;gap:16px;align-items:center;">
+        <div style="width:70px;height:70px;border-radius:50%;background:url('https://i.scdn.co/image/ab67616d0000b273b251a37c012876f1e5828468') no-repeat center;background-size:cover;border:3px solid #1DB954;animation:rotate 10s linear infinite;box-shadow:0 8px 24px rgba(29,185,84,0.3);"></div>
+        <div style="flex:1;">
+          <div style="font-size:10px;font-weight:800;color:#1DB954;text-transform:uppercase;margin-bottom:4px;">Now Playing</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-main);margin-bottom:2px;">Cruel Summer</div>
+          <div style="font-size:12px;color:var(--text-sub);">Taylor Swift</div>
+          <div style="margin-top:8px;height:3px;background:rgba(29,185,84,0.2);border-radius:2px;">
+            <div style="width:65%;height:100%;background:#1DB954;border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+      <style>@keyframes rotate { from { transform:rotate(0); } to { transform:rotate(360deg); } }</style>
+    `;
+  },
+  'coffee-meter': (card) => {
+    card.innerHTML = `
+      <div class="w-header" style="margin-bottom:12px;">
+        <div class="w-name">Today's Fuel</div>
+        <div class="w-handle">Caffeine Intake</div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:8px;font-size:28px;">
+        <span>☕</span><span>☕</span><span style="opacity:0.2;">☕</span><span style="opacity:0.2;">☕</span>
+      </div>
+      <div style="text-align:center;font-size:12px;font-weight:700;color:var(--accent);margin-top:10px;">2 / 4 Cups Done</div>
+    `;
+  }
+};
+
+/* ── Stats 위젯 ── */
 function renderStats(card) {
+  if (SPECIAL_THEMES[WE.theme]) return SPECIAL_THEMES[WE.theme](card);
+
   card.innerHTML = `
     <div class="w-header">
       <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
@@ -133,13 +242,11 @@ function renderStats(card) {
         </div>
       `).join('')}
     </div>
-    <div class="w-tags" id="w-tags">
-      ${renderBadges(WE.tags)}
-    </div>
+    <div class="w-tags" id="w-tags">${renderBadges(WE.tags)}</div>
   `;
 }
 
-/* Tech 위젯 */
+/* ── Tech 위젯 ── */
 function renderTech(card) {
   card.innerHTML = `
     <div class="w-header">
@@ -149,16 +256,15 @@ function renderTech(card) {
         <div class="w-handle" id="w-handle">Tech Stack</div>
       </div>
     </div>
-    <div class="w-tags" id="w-tags">
-      ${renderBadges(WE.tags)}
-    </div>
+    <div class="w-tags" id="w-tags">${renderBadges(WE.tags)}</div>
   `;
 }
 
-/* Profile 위젯 */
+/* ── Profile 위젯 ── */
 function renderProfile(card) {
-  const theme = WE.theme;
-  const hasRole = ['profile-portfolio','profile-glass-grid','profile-soft'].includes(theme);
+  if (SPECIAL_THEMES[WE.theme]) return SPECIAL_THEMES[WE.theme](card);
+
+  const hasRole = ['profile-portfolio','profile-glass-grid','profile-soft'].includes(WE.theme);
   card.innerHTML = `
     <div class="w-header">
       <div class="w-avatar" id="w-avatar">${WE.emoji}</div>
@@ -169,13 +275,11 @@ function renderProfile(card) {
       </div>
     </div>
     <div class="w-bio" id="w-bio">${WE.bio}</div>
-    <div class="w-tags" id="w-tags">
-      ${renderBadges(WE.tags)}
-    </div>
+    <div class="w-tags" id="w-tags">${renderBadges(WE.tags)}</div>
   `;
 }
 
-/* Streak 위젯 */
+/* ── Streak 위젯 ── */
 function renderStreak(card) {
   card.innerHTML = `
     <div class="w-header">
@@ -202,13 +306,13 @@ function renderStreak(card) {
   `;
 }
 
-/* ── Links 위젯 렌더 ─────────────────────────────────── */
+/* ── Links 위젯 ── */
 function renderLinks(card) {
-  const theme = WE.theme;
-  const isDark = theme === 'links-dark-row';
-  const items = WE.linkItems;
+  if (SPECIAL_THEMES[WE.theme]) return SPECIAL_THEMES[WE.theme](card);
 
-  /* 테마별 버튼 레이아웃 결정 */
+  const theme = WE.theme;
+  const items = WE.linkItems;
+  
   let wrapStyle = 'display:flex;flex-wrap:wrap;gap:10px;justify-content:center;';
   let btnRenderer = renderLinkBtnPill;
 
@@ -396,6 +500,7 @@ function renderBanner(card) {
     'banner-typing':         'background:#0d1117;',
     'banner-github-trophy':  'background:linear-gradient(135deg,#fff9e6,#fff3c0);',
     'banner-snake':          'background:linear-gradient(135deg,#EAF3DE,#C0DD97);',
+    'premium-hit':           'background:linear-gradient(135deg,#f0f4ff,#4285f408);',
   };
 
   const isDark = ['banner-shark','banner-typing'].includes(theme);
@@ -437,6 +542,15 @@ function renderBanner(card) {
         <div style="position:absolute;width:16px;height:16px;background:#66BB6A;border-radius:3px;top:20px;left:60px;"></div>
         <div style="position:absolute;width:8px;height:8px;background:#FF5252;border-radius:50%;top:24px;left:90px;"></div>
         <div style="font-size:11px;color:${textColor};opacity:.6;position:absolute;bottom:4px;right:8px;">contribution snake 애니메이션</div>
+      </div>`;
+  } else if (theme === 'premium-hit') {
+    innerContent = `
+      <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.1);padding:16px 24px;border-radius:24px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.15);">
+        <div style="font-size:12px;font-weight:700;color:${textColor};opacity:0.7;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">${text || 'Visitors'}</div>
+        <div style="font-size:44px;font-weight:800;color:${textColor};font-family:'Inter', sans-serif;">1,247</div>
+        <div style="margin-top:10px;width:100px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;overflow:hidden;">
+          <div style="width:70%;height:100%;background:var(--accent);"></div>
+        </div>
       </div>`;
   } else {
     innerContent = `
@@ -486,6 +600,18 @@ function updateCodeStrip() {
 
 function genStatsCode(fmt) {
   const user  = WE.username || 'octocat';
+  const theme = WE.theme;
+
+  if (theme === 'blog-card') {
+    return `<!-- Blog Feed Widget: Use a tool like blog-post-workflow -->\n[![Latest Blog Post](https://img.shields.io/badge/Latest_Blog_Post-20c997?style=for-the-badge&logo=velog&logoColor=white)](https://github.com/gautamkrishnar/blog-post-workflow)`;
+  }
+  if (theme === 'progress-100') {
+    return `<!-- 100 Days of Code: Use a progress bar SVG generator -->\n![Progress](https://geps.dev/progress/42)`;
+  }
+  if (theme === 'radar-chart') {
+    return `<!-- Skill Radar: Use a radar chart generator -->\n![Radar Chart](https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact)`;
+  }
+
   /* github-readme-stats 실제 API */
   const statsUrl = `https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&include_all_commits=true&theme=default&hide_title=false&hide_border=false`;
   const topLangUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&theme=default`;
@@ -568,6 +694,13 @@ function genLinksCode(fmt) {
   const items = WE.linkItems;
   const theme = WE.theme;
 
+  if (theme === 'spotify-glass') {
+    return `<!-- Spotify Now Playing: Use spotify-github-profile-readme -->\n[![Spotify](https://novatide.vercel.app/api/spotify?background_color=1db954&border_color=ffffff&github_username=${WE.username || 'octocat'})](https://github.com/kittinan/spotify-github-profile-readme)`;
+  }
+  if (theme === 'coffee-meter') {
+    return `<!-- Buy Me A Coffee: Use buy-me-a-coffee badge -->\n[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/)`;
+  }
+
   /* shields.io 기반 링크 버튼 생성 */
   const LINK_SHIELD = {
     github:    { logo: 'github',    color: '181717', label: 'GitHub' },
@@ -629,6 +762,7 @@ function genBannerCode(fmt) {
     'banner-typing':         `https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=4285F4&width=435&lines=${text}`,
     'banner-github-trophy':  `https://github-profile-trophy.vercel.app/?username=${user}&theme=flat&no-frame=true&margin-w=4`,
     'banner-snake':          `https://github.com/${user}/${user}/blob/output/snake.svg`,
+    'premium-hit':           `https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2F${user}&count_bg=%234285F4&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=visitors&edge_flat=false`,
   };
 
   const url = bannerUrls[theme] || bannerUrls['banner-wave-pink'];

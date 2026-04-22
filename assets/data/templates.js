@@ -77,6 +77,15 @@ const TEMPLATES = [
   { id:'banner-08', type:'banner', theme:'banner-typing',         layout:'banner-layout', title:'Typing SVG',      desc:'readme-typing-svg 애니메이션 타이핑 텍스트',    badge:null,  accentColor:'#4285F4', config:{text:"I'm a Developer;I love Open Source"} },
   { id:'banner-09', type:'banner', theme:'banner-github-trophy',  layout:'banner-layout', title:'GitHub Trophy',   desc:'github-profile-trophy 업적 배지 모음',           badge:null,  accentColor:'#FFD700', config:{text:''} },
   { id:'banner-10', type:'banner', theme:'banner-snake',          layout:'banner-layout', title:'Snake Game',      desc:'contribution-snake SVG 게임 애니메이션',         badge:'NEW', accentColor:'#34A853', config:{text:''} },
+
+  /* ── NEW: CREATIVE & INTERACTIVE (7) ─────────────── */
+  { id:'stats-11',   type:'stats',   theme:'blog-card',    layout:'', title:'Tech Blog Feed', desc:'Velog/Tistory 최신 글 반투명 연동 카드', badge:'PRO', accentColor:'#20c997', config:{stats:['Recent Post','Views','Likes']} },
+  { id:'stats-12',   type:'stats',   theme:'progress-100', layout:'', title:'100 Days Code',  desc:'100일 코딩 챌린지 진행률 프로그레스 바',   badge:'NEW', accentColor:'#FF006E', config:{stats:['Progress','Day','Left']} },
+  { id:'stats-13',   type:'stats',   theme:'radar-chart',  layout:'', title:'Skill Radar',    desc:'육각형 역량 능력치 시각화 차트 위젯',      badge:'HOT', accentColor:'#4285F4', config:{stats:['Frontend','Backend','Design']} },
+  { id:'links-11',   type:'links',   theme:'spotify-glass',layout:'links-layout', title:'Spotify Playing', desc:'현재 듣고 있는 음악 (유리 질감 카드)', badge:'HOT', accentColor:'#1DB954', config:{links:['spotify']} },
+  { id:'links-12',   type:'links',   theme:'coffee-meter', layout:'links-layout', title:'Today Fuel',    desc:'오늘 마신 커피/음료 잔 수 카운터 뱃지',     badge:null,  accentColor:'#6f4e37', config:{links:['kakao']} },
+  { id:'profile-11', type:'profile', theme:'mbti-status',  layout:'profile-layout', title:'MBTI & Mood', desc:'개발자 MBTI 및 오늘의 상태 표현 뱃지',  badge:'NEW', accentColor:'#9B8FE8', config:{} },
+  { id:'banner-11',  type:'banner',  theme:'premium-hit',  layout:'banner-layout', title:'Premium Hit',  desc:'세련된 타이포그래피 유리 질감 카운터',      badge:'NEW', accentColor:'#4285F4', config:{text:'Visitors',height:100} },
 ];
 
 /* ── 헬퍼 함수 ───────────────────────────────────────── */

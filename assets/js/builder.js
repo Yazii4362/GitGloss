@@ -1,59 +1,28 @@
 /* ═══════════════════════════════════════════════════════
-   GitGloss — builder.js  (slim glue layer)
-
-   이 파일이 담당하는 것:
-     - 클립보드 복사 폴백 (구형 브라우저 대응)
-     - SVG Export 버튼 피드백
-
-   나머지 모든 기능은 아래 파일에서 처리:
-     widget-engine.js  → selectType, selectEmoji, selCtab,
-                         doCopy, addTag, addTagTo, removeTag,
-                         exportWidget, applyTheme, renderWidgetDOM,
-                         bindInputs, updateCodeStrip
-     template-loader.js → renderTemplateThumbs, onThumbClick,
-                          handleUrlParams
+   GitGloss — builder.js  (얇은 글루 레이어)
+   
+   역할: 구형 브라우저 클립보드 폴백만 담당
+   나머지 모든 기능은 badge-engine.js에서 처리함
+   
+   EXTERNAL DEPS:
+     doCopy() → badge-engine.js
    ═══════════════════════════════════════════════════════ */
-
 'use strict';
 
-/* ── 클립보드 복사 폴백 보강 ─────────────────────────────
-   widget-engine.js의 doCopy()가 navigator.clipboard API를
-   지원하지 않는 환경에서도 동작하도록 패치.              */
+/* navigator.clipboard 미지원 환경 추가 보강
+   badge-engine.js의 doCopy()가 이미 fallbackCopy()를 내장하므로
+   여기서는 이벤트 중복을 방지하고 SVG 내보내기 피드백만 추가 */
 document.addEventListener('DOMContentLoaded', () => {
-  const copyBtn = document.getElementById('copy-btn');
-  if (!copyBtn) return;
+  const svgBtn = document.getElementById('export-svg-btn');
+  if (!svgBtn) return;
 
-  copyBtn.addEventListener('click', () => {
-    const pre = document.getElementById('code-pre');
-    if (!pre) return;
-
-    const text = pre.textContent;
-
-    /* navigator.clipboard 지원 여부 확인 */
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      /* widget-engine.js의 doCopy()가 이미 처리 — 중복 실행 방지 */
-      return;
-    }
-
-    /* 폴백: execCommand */
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-      copyBtn.textContent = '✓ 복사됨';
-      copyBtn.classList.add('copied');
-      const adB2 = document.getElementById('ad-b2');
-      if (adB2) adB2.classList.add('show');
-      setTimeout(() => {
-        copyBtn.textContent = 'Copy';
-        copyBtn.classList.remove('copied');
-      }, 2000);
-    } catch (err) {
-      console.warn('복사 실패:', err);
-    }
-    document.body.removeChild(ta);
+  svgBtn.addEventListener('click', () => {
+    const original = svgBtn.textContent;
+    svgBtn.textContent = '✓ 다운로드됨';
+    svgBtn.classList.add('copied');
+    setTimeout(() => {
+      svgBtn.textContent = original;
+      svgBtn.classList.remove('copied');
+    }, 2000);
   });
 });

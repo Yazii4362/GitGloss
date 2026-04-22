@@ -1,70 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
-  <!-- ================== 기본 메타 태그 (SEO) ================== -->
-  <meta name="title" content="위젯 빌더 — GitGloss | GitHub README 위젯 만들기">
-  <meta name="description" content="GitGloss 빌더에서 GitHub README 위젯을 직접 만들어보세요. 테마 선택, 사용자명 입력 후 Markdown 코드 한 줄 복사로 완성.">
-  <meta name="keywords" content="GitHub README 위젯 만들기, 깃허브 위젯 빌더, README 커스터마이징, GitHub Stats 카드 만들기">
-  <meta name="author" content="GitGloss">
+  <meta name="title" content="위젯 빌더 — GitGloss | 프로필 카드 & 배지 스튜디오">
+  <meta name="description"
+    content="GitGloss 위젯 빌더에서 60가지 이상의 프리미엄 프로필 카드와 테크 스택 배지를 커스터마이징하세요.">
   <meta name="robots" content="noindex, follow">
-  <!-- ================== Open Graph ================== -->
-  <meta property="og:title" content="위젯 빌더 — GitGloss | GitHub README 위젯 만들기">
-  <meta property="og:description" content="GitGloss 빌더에서 GitHub README 위젯을 직접 만들어보세요. 테마 선택, 사용자명 입력 후 Markdown 코드 한 줄 복사로 완성.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://gitgloss.io/builder.html">
-  <meta property="og:image" content="https://gitgloss.io/assets/images/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="GitGloss 위젯 빌더">
-  <meta property="og:site_name" content="GitGloss">
-  <meta property="og:locale" content="ko_KR">
-  <!-- ================== Twitter 카드 ================== -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="위젯 빌더 — GitGloss | GitHub README 위젯 만들기">
-  <meta name="twitter:description" content="GitGloss 빌더에서 GitHub README 위젯을 직접 만들어보세요. 테마 선택, 사용자명 입력 후 Markdown 코드 한 줄 복사로 완성.">
-  <meta name="twitter:image" content="https://gitgloss.io/assets/images/og-image.png">
-  <meta name="twitter:image:alt" content="GitGloss 위젯 빌더">
-  <meta name="twitter:site" content="@gitgloss">
-  <meta name="twitter:creator" content="@gitgloss">
-  <!-- ================== SEO 보완 ================== -->
-  <meta name="language" content="ko">
-  <meta name="distribution" content="global">
-  <meta name="rating" content="general">
-  <meta name="format-detection" content="telephone=no">
-  <link rel="canonical" href="https://gitgloss.io/builder.html">
-  <!-- ================== 웹앱 최적화 ================== -->
-  <meta name="theme-color" content="#4285F4">
-  <meta name="application-name" content="GitGloss">
-  <meta name="msapplication-TileColor" content="#4285F4">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="GitGloss">
-  <!-- ================== 아이콘 ================== -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitGloss Builder — Premium Widget Studio</title>
+  <meta name="theme-color" content="#4285F4">
+
+  <title>GitGloss Builder — Widget Studio</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/builder.css">
   <style>
-    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    @font-face {
+      font-family: 'HsGultokki';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/HSGooltokki.woff2') format('woff2');
+      font-weight: normal;
+      font-display: swap;
+    }
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .topbar-logo {
+      font-family: 'HsGultokki', sans-serif;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- TOPBAR -->
   <header class="topbar">
+    <button class="panel-toggle-btn" id="panel-toggle" aria-label="설정 패널 열기" title="설정 패널">☰</button>
     <a href="index.html" class="topbar-logo">GitGloss</a>
     <div class="topbar-sep"></div>
-    <span class="topbar-title">Widget Builder</span>
+    <span class="topbar-title">Widget Studio</span>
     <div class="topbar-actions">
-      <a href="gallery.html" style="font-size:11px;color:var(--gg-text-sub);text-decoration:none">← 갤러리</a>
+      <a href="gallery.html" style="font-size:11px;color:var(--gg-text-sub,#888);text-decoration:none;">← 갤러리</a>
     </div>
   </header>
+
+  <!-- 모바일 오버레이 -->
+  <div class="panel-overlay" id="panel-overlay"></div>
 
   <!-- 2-COLUMN BODY -->
   <div class="builder-body">
@@ -72,191 +55,160 @@
     <!-- ══ LEFT: Config ══ -->
     <aside class="panel-left">
 
-      <!-- Widget type -->
-      <div class="section-label">위젯 타입</div>
-      <div class="type-row" id="type-row" style="flex-wrap:wrap;gap:6px;">
-        <button class="type-chip on" onclick="selectType(this,'stats')">Stats</button>
-        <button class="type-chip"    onclick="selectType(this,'tech')">Tech</button>
-        <button class="type-chip"    onclick="selectType(this,'profile')">Profile</button>
-        <button class="type-chip"    onclick="selectType(this,'links')">Links</button>
-        <button class="type-chip"    onclick="selectType(this,'banner')">Banner</button>
+      <!-- 유형 선택 -->
+      <div class="section-label">위젯 유형</div>
+      <div class="type-row">
+        <button class="type-chip on" onclick="selectType(this, 'stats')">Stats</button>
+        <button class="type-chip" onclick="selectType(this, 'tech')">Tech</button>
+        <button class="type-chip" onclick="selectType(this, 'profile')">Profile</button>
+        <button class="type-chip" onclick="selectType(this, 'streak')">Streak</button>
+        <button class="type-chip" onclick="selectType(this, 'links')">Links</button>
+        <button class="type-chip" onclick="selectType(this, 'banner')">Banner</button>
       </div>
 
-      <!-- Template Thumbnails -->
+      <!-- 템플릿 그리드 -->
       <div class="section-label">템플릿 선택</div>
-      <div class="template-grid" id="template-grid">
-        <!-- JS로 렌더 -->
+      <div class="template-grid" id="template-thumbs">
+        <!-- widget-engine.js가 렌더 -->
       </div>
 
-      <div class="divider" id="divider-emoji"></div>
+      <div class="divider"></div>
 
-      <!-- Emoji Selector -->
-      <div class="section-label" id="label-emoji">프로필 이모지</div>
-      <div class="emoji-grid" id="emoji-grid">
-        <button class="emoji-btn active" onclick="selectEmoji(this, '👨‍💻')" data-emoji="👨‍💻">👨‍💻</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '👩‍💻')" data-emoji="👩‍💻">👩‍💻</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🚀')" data-emoji="🚀">🚀</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '⚡')" data-emoji="⚡">⚡</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🎨')" data-emoji="🎨">🎨</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🔥')" data-emoji="🔥">🔥</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '💎')" data-emoji="💎">💎</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🌟')" data-emoji="🌟">🌟</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🎯')" data-emoji="🎯">🎯</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🦄')" data-emoji="🦄">🦄</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🐙')" data-emoji="🐙">🐙</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🤖')" data-emoji="🤖">🤖</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '👾')" data-emoji="👾">👾</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🎮')" data-emoji="🎮">🎮</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '☕')" data-emoji="☕">☕</button>
-        <button class="emoji-btn" onclick="selectEmoji(this, '🌈')" data-emoji="🌈">🌈</button>
+      <!-- 공통 설정: 이모지 & 사용자명 -->
+      <div id="divider-emoji" class="section-label">캐릭터 / 이모지</div>
+      <div id="emoji-grid" class="emoji-grid">
+        <button class="emoji-btn active" onclick="selectEmoji(this, '👨‍💻')">👨‍💻</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '🚀')">🚀</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '🔥')">🔥</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '⭐')">⭐</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '🎨')">🎨</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '⚡')">⚡</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '🎮')">🎮</button>
+        <button class="emoji-btn" onclick="selectEmoji(this, '📚')">📚</button>
       </div>
 
-      <div class="divider" id="divider-username"></div>
+      <div id="divider-username" class="divider"></div>
 
-      <!-- GitHub username -->
-      <div class="field-group" id="field-username">
-        <div class="field-label">GitHub 사용자명</div>
-        <input class="field-input" id="inp-username" placeholder="octocat">
-      </div>
-
-      <!-- Dynamic fields per widget type -->
+      <!-- 필드: Stats -->
       <div id="fields-stats">
         <div class="field-group">
-          <div class="field-label">카드 타이틀</div>
-          <input class="field-input" id="inp-title" placeholder="GitHub Stats">
+          <div class="field-label">GitHub 사용자명</div>
+          <input class="field-input" id="inp-username" placeholder="octocat">
         </div>
-        <div class="field-group">
-          <div class="field-label">Stat 1 — 라벨 / 값</div>
-          <div style="display:flex;gap:5px">
-            <input class="field-input" id="s1-label" placeholder="Stars"  style="flex:1">
-            <input class="field-input" id="s1-val"   placeholder="2.8k"   style="flex:1">
+        <div class="field-group" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <div class="field-label">라벨 1</div>
+            <input class="field-input" id="s1-label" value="Stars">
+          </div>
+          <div>
+            <div class="field-label">값 1</div>
+            <input class="field-input" id="s1-val" value="2.8k">
           </div>
         </div>
-        <div class="field-group">
-          <div class="field-label">Stat 2 — 라벨 / 값</div>
-          <div style="display:flex;gap:5px">
-            <input class="field-input" id="s2-label" placeholder="Repos"  style="flex:1">
-            <input class="field-input" id="s2-val"   placeholder="142"    style="flex:1">
+        <div class="field-group" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <div class="field-label">라벨 2</div>
+            <input class="field-input" id="s2-label" value="Repos">
+          </div>
+          <div>
+            <div class="field-label">값 2</div>
+            <input class="field-input" id="s2-val" value="142">
           </div>
         </div>
-        <div class="field-group">
-          <div class="field-label">Stat 3 — 라벨 / 값</div>
-          <div style="display:flex;gap:5px">
-            <input class="field-input" id="s3-label" placeholder="Commits" style="flex:1">
-            <input class="field-input" id="s3-val"   placeholder="98%"     style="flex:1">
+        <div class="field-group" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <div class="field-label">라벨 3</div>
+            <input class="field-input" id="s3-label" value="Active">
+          </div>
+          <div>
+            <div class="field-label">값 3</div>
+            <input class="field-input" id="s3-val" value="98%">
           </div>
         </div>
       </div>
 
-      <div id="fields-tech" style="display:none">
-        <div class="section-label">기술 스택</div>
-        <div class="tag-wrap" id="tag-wrap">
-          <span class="tag tag-pk">React     <button class="tag-x" onclick="removeTag(this)">×</button></span>
-          <span class="tag tag-pu">TypeScript <button class="tag-x" onclick="removeTag(this)">×</button></span>
-          <span class="tag tag-sk">Node.js   <button class="tag-x" onclick="removeTag(this)">×</button></span>
-        </div>
-        <div class="field-group" style="padding-top:0">
-          <input class="field-input" placeholder="태그 입력 후 Enter" style="font-size:11px;height:28px"
-            onkeydown="addTag(event,this)">
+      <!-- 필드: Tech -->
+      <div id="fields-tech" style="display:none;">
+        <div class="field-group">
+          <div class="field-label">기술 스택 추가 (Enter)</div>
+          <input class="field-input" id="tech-input" placeholder="e.g. React" onkeydown="addTagTo(event, this, 'tech-tags-wrap')">
+          <div class="tag-wrap" id="tech-tags-wrap">
+            <span class="tag tag-pk">React <button class="tag-x" onclick="removeTag(this)">×</button></span>
+            <span class="tag tag-pu">TypeScript <button class="tag-x" onclick="removeTag(this)">×</button></span>
+            <span class="tag tag-sk">Node.js <button class="tag-x" onclick="removeTag(this)">×</button></span>
+          </div>
         </div>
       </div>
 
-      <div id="fields-profile" style="display:none">
+      <!-- 필드: Profile -->
+      <div id="fields-profile" style="display:none;">
         <div class="field-group">
-          <div class="field-label">이름</div>
+          <div class="field-label">이름 / 닉네임</div>
           <input class="field-input" id="inp-pname" placeholder="The Octocat">
         </div>
         <div class="field-group">
-          <div class="field-label">핸들</div>
+          <div class="field-label">핸들 (e.g. @username)</div>
           <input class="field-input" id="inp-handle" placeholder="@octocat">
         </div>
         <div class="field-group">
-          <div class="field-label">직함</div>
+          <div class="field-label">역할 / 직무</div>
           <input class="field-input" id="inp-role" placeholder="Full-stack Developer">
         </div>
         <div class="field-group">
-          <div class="field-label">소개</div>
-          <input class="field-input" id="inp-bio" placeholder="Building amazing things with code">
-        </div>
-        <div class="section-label">기술 스택</div>
-        <div class="tag-wrap" id="tag-wrap-profile">
-          <span class="tag tag-pk">React     <button class="tag-x" onclick="removeTag(this)">×</button></span>
-          <span class="tag tag-pu">TypeScript <button class="tag-x" onclick="removeTag(this)">×</button></span>
-        </div>
-        <div class="field-group" style="padding-top:0">
-          <input class="field-input" placeholder="태그 입력 후 Enter" style="font-size:11px;height:28px"
-            onkeydown="addTagTo(event,this,'tag-wrap-profile')">
+          <div class="field-label">자기소개</div>
+          <textarea class="field-input" id="inp-bio" rows="2" style="resize:none;">Building amazing things with code</textarea>
         </div>
       </div>
 
-      <div id="fields-streak" style="display:none">
+      <!-- 필드: Streak -->
+      <div id="fields-streak" style="display:none;">
         <div class="field-group">
-          <div class="field-label">현재 스트릭 (일)</div>
-          <input class="field-input" id="inp-streak" placeholder="42">
+          <div class="field-label">현재 스트릭</div>
+          <input class="field-input" id="inp-streak" value="42">
         </div>
         <div class="field-group">
-          <div class="field-label">최장 스트릭 (일)</div>
-          <input class="field-input" id="inp-longest-streak" placeholder="87">
+          <div class="field-label">최대 스트릭</div>
+          <input class="field-input" id="inp-longest-streak" value="87">
         </div>
         <div class="field-group">
-          <div class="field-label">총 기여 수</div>
-          <input class="field-input" id="inp-total-contributions" placeholder="1247">
+          <div class="field-label">총 기여도</div>
+          <input class="field-input" id="inp-total-contributions" value="1,247">
         </div>
       </div>
 
-      <!-- ── Links 필드 ─────────────────────────────── -->
-      <div id="fields-links" style="display:none">
-        <div class="section-label">링크 목록</div>
-        <div id="link-rows-wrap">
-          <!-- JS로 렌더 -->
+      <!-- 필드: Links -->
+      <div id="fields-links" style="display:none;">
+        <div class="field-label" style="margin-bottom:8px;">소셜 링크 목록</div>
+        <div id="link-rows-wrap" style="display:flex; flex-direction:column; gap:8px;">
+          <!-- widget-engine.js renderLinkRows() -->
         </div>
-        <div class="field-group" style="padding-top:6px;">
-          <button onclick="addLinkRow()" style="
-            width:100%;padding:8px;border-radius:8px;
-            border:1.5px dashed rgba(66,133,244,.4);
-            background:rgba(66,133,244,.05);
-            color:var(--gg-blue,#4285F4);font-size:12px;font-weight:600;cursor:pointer;">
-            + 링크 추가
-          </button>
-        </div>
-        <div class="divider"></div>
-        <div class="field-group">
-          <div class="field-label">표시 이름 (선택)</div>
-          <input class="field-input" id="inp-pname" placeholder="octocat">
-        </div>
+        <button class="btn-stack-add" onclick="addLinkRow()" style="margin-top:10px; border-style:solid; border-width:1px;">+ 링크 추가</button>
       </div>
 
-      <!-- ── Banner 필드 ─────────────────────────────── -->
-      <div id="fields-banner" style="display:none">
+      <!-- 필드: Banner -->
+      <div id="fields-banner" style="display:none;">
         <div class="field-group">
           <div class="field-label">배너 텍스트</div>
-          <input class="field-input" id="inp-banner-text" placeholder="Hi! Welcome!" value="Hi! Welcome!">
+          <input class="field-input" id="inp-banner-text" value="Hi! Welcome!">
         </div>
         <div class="field-group">
-          <div class="field-label">GitHub 사용자명 (트로피·스네이크 등)</div>
+          <div class="field-label">사용자명 (히트카운터용)</div>
           <input class="field-input" id="inp-username-banner" placeholder="octocat">
         </div>
         <div class="field-group">
-          <div class="field-label">높이 (px, capsule-render용)</div>
-          <input class="field-input" id="inp-banner-height" placeholder="160" value="160">
-        </div>
-        <div style="background:rgba(66,133,244,.07);border-radius:10px;padding:12px;margin:8px 0;font-size:11px;color:#555;line-height:1.7;">
-          💡 <b>Banner 위젯은 외부 무료 API를 사용합니다</b><br>
-          capsule-render · readme-typing-svg<br>
-          github-readme-stats · seeyoufarm Hits<br>
-          github-profile-trophy · contribution-snake<br>
-          <b>백엔드 없이 Markdown 한 줄로 바로 사용 가능!</b>
+          <div class="field-label">배너 높이 (px)</div>
+          <input class="field-input" id="inp-banner-height" value="160">
         </div>
       </div>
 
-      <!-- Spacer + AD-B1 + footer -->
       <div class="panel-left-spacer"></div>
-
-      <div class="ad-slot-left" id="ad-b1">
-        <!-- 쿠팡 파트너스 160×52 -->
-        160 × 52 · 쿠팡 파트너스
+      <div class="ad-slot-left" id="ad-b1" style="border:none; background:none; padding:0; margin:16px 0;">
+        <ins class="kakao_ad_area" style="display:none;"
+        data-ad-unit = "DAN-Ephj9mjHyqtTY59G"
+        data-ad-width = "300"
+        data-ad-height = "250"></ins>
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
       </div>
-
       <div class="panel-left-footer">
         © 2025 GitGloss ·
         <a href="privacy.html">Privacy</a> ·
@@ -268,56 +220,31 @@
     <!-- ══ RIGHT: Preview + Code ══ -->
     <div class="panel-right">
 
-      <!-- Preview -->
+      <!-- 미리보기 -->
       <div class="preview-area" id="preview-area">
         <div class="preview-bg-dots"></div>
-
-        <div class="widget-card" id="widget-card">
-          <div class="w-header">
-            <div class="w-avatar" id="w-avatar"></div>
-            <div>
-              <div class="w-name"   id="w-name">octocat</div>
-              <div class="w-handle" id="w-handle">@octocat · GitHub</div>
-            </div>
-          </div>
-          <div class="w-stats" id="w-stats">
-            <div class="w-stat">
-              <div class="w-num" id="w-s1-val">2.8k</div>
-              <div class="w-lbl" id="w-s1-lbl">Stars</div>
-            </div>
-            <div class="w-stat">
-              <div class="w-num" id="w-s2-val">142</div>
-              <div class="w-lbl" id="w-s2-lbl">Repos</div>
-            </div>
-            <div class="w-stat">
-              <div class="w-num" id="w-s3-val">98%</div>
-              <div class="w-lbl" id="w-s3-lbl">Commits</div>
-            </div>
-          </div>
-          <div class="w-tags" id="w-tags">
-            <span class="w-badge w-badge-pk">React</span>
-            <span class="w-badge w-badge-pu">TypeScript</span>
-            <span class="w-badge w-badge-sk">Node.js</span>
-          </div>
+        
+        <!-- 위젯 카드 컨테이너 -->
+        <div class="widget-card theme-cotton-candy" id="widget-card">
+          <!-- widget-engine.js가 렌더 -->
         </div>
       </div>
 
-      <!-- Code strip -->
+      <!-- 코드 스트립 -->
       <div class="code-strip">
-        <div class="code-tabs-row" id="ctabs">
-          <button class="ctab on"  onclick="selCtab(this,'md')">Markdown</button>
-          <button class="ctab"     onclick="selCtab(this,'html')">HTML</button>
+        <div class="code-tabs-row">
+          <button class="ctab on" onclick="selCtab(this, 'md')">Markdown</button>
+          <button class="ctab" onclick="selCtab(this, 'html')">HTML</button>
         </div>
         <div class="code-body">
-          <div class="code-pre" id="code-pre">![GitGloss](https://gitgloss.io/api/stats?user=octocat&theme=cotton-candy)</div>
+          <pre id="code-pre"></pre>
           <button class="copy-btn" id="copy-btn" onclick="doCopy()">Copy</button>
         </div>
 
-        <!-- AD-B2: Copy 후 슬라이드인 -->
+        <!-- 복사 후 광고 슬라이드인 -->
         <div class="ad-slide" id="ad-b2">
           <div class="ad-slide-inner">
-            <!-- Google AdSense 728×90 — 복사 완료 후 자동 노출 -->
-            Advertisement — 복사 완료 후 자동 노출
+            광고 슬롯 — 복사 완료 후 노출
           </div>
         </div>
       </div>
@@ -325,237 +252,41 @@
     </div>
   </div>
 
-  <!-- 로드 순서 중요: data → engine → loader → glue -->
-  <script src="assets/js/common.js"></script>
-  <script src="assets/data/templates.js"></script>   <!-- 1. 데이터 (TEMPLATES, getById) -->
-  <script src="assets/js/widget-engine.js"></script> <!-- 2. 렌더링 엔진 (applyTheme, renderWidgetDOM) -->
-  <script src="assets/js/template-loader.js"></script> <!-- 3. UI 로더 (renderTemplateThumbs, onThumbClick) -->
-  <script src="assets/js/builder.js"></script>       <!-- 4. 복사 폴백 -->
+  <!-- SCRIPTS -->
+  <script src="assets/data/templates.js"></script>
+  <script src="assets/js/widget-engine.js"></script>
   <script>
-    /* Links 패널 초기화 — widget-engine 로드 후 실행 */
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof renderLinkRows === 'function') renderLinkRows();
-    });
-  </script>
+    /* ── 모바일 드로어 토글 ── */
+    (function () {
+      const btn     = document.getElementById('panel-toggle');
+      const panel   = document.querySelector('.panel-left');
+      const overlay = document.getElementById('panel-overlay');
+      if (!btn || !panel || !overlay) return;
 
-  <!-- ☕ 커피챗 플로팅 버튼 + 모달 (builder 전용) -->
-  <style>
-    .coffee-fab {
-      position: fixed;
-      right: 24px;
-      bottom: 28px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1.5px solid rgba(0,0,0,0.09);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      cursor: pointer;
-      z-index: 999;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .coffee-fab:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 28px rgba(0,0,0,0.15); }
-    .coffee-fab:active { transform: scale(0.95); }
-
-    .gg-modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(8,8,15,0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity .25s;
-    }
-    .gg-modal-overlay.open { opacity: 1; pointer-events: all; }
-    .gg-modal {
-      background: #fff;
-      border-radius: 24px;
-      padding: 40px 36px 32px;
-      max-width: 400px;
-      width: calc(100% - 48px);
-      box-shadow: 0 24px 64px rgba(0,0,0,0.14);
-      position: relative;
-      transform: translateY(16px) scale(0.97);
-      transition: transform .28s cubic-bezier(0.34,1.56,0.64,1);
-      text-align: center;
-    }
-    .gg-modal-overlay.open .gg-modal { transform: translateY(0) scale(1); }
-    .gg-modal-close {
-      position: absolute; top: 16px; right: 18px;
-      background: none; border: none; font-size: 20px;
-      color: rgba(8,8,15,0.35); cursor: pointer; padding: 4px;
-      transition: color .15s;
-    }
-    .gg-modal-close:hover { color: #08080F; }
-
-    /* 커피챗 모달 */
-    .coffee-modal-icon { font-size: 52px; margin-bottom: 16px; display: block; }
-    .coffee-modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.02em; margin-bottom: 8px; }
-    .coffee-modal-desc { font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.65; margin-bottom: 28px; font-weight: 500; }
-    .coffee-modal-btns { display: flex; flex-direction: column; gap: 10px; }
-    .coffee-btn-chat {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 24px; border-radius: 14px;
-      background: rgba(255,255,255,0.22); backdrop-filter: blur(8px);
-      color: #fff; font-size: 15px; font-weight: 700; text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .coffee-btn-chat:hover { background: rgba(255,255,255,0.32); transform: translateY(-1px); }
-    .coffee-btn-buy {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 24px; border-radius: 14px; background: rgba(255,255,255,0.92); color: #6f4e37;
-      font-size: 15px; font-weight: 700; text-decoration: none;
-      border: none; cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .coffee-btn-buy:hover { background: #fff; transform: translateY(-1px); }
-    .coffee-modal-note { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 16px; font-weight: 500; }
-
-    /* 커피 모달 갈색 그라디언트 */
-    #coffee-modal-overlay .gg-modal {
-      background: linear-gradient(145deg, #6f4e37 0%, #a0522d 40%, #c8813a 75%, #d4956a 100%);
-      box-shadow: 0 24px 64px rgba(111,78,55,0.35), 0 4px 16px rgba(0,0,0,0.12);
-    }
-    #coffee-modal-overlay .gg-modal-close { color: rgba(255,255,255,.5); }
-    #coffee-modal-overlay .gg-modal-close:hover { color: #fff; }
-
-    /* 축하 모달 */
-    .congrats-emoji-wrap { font-size: 56px; margin-bottom: 12px; display: block; }
-    .congrats-title { font-size: 24px; font-weight: 800; color: #08080F; letter-spacing: -.02em; margin-bottom: 8px; }
-    .congrats-sub { font-size: 14px; color: rgba(8,8,15,.65); line-height: 1.65; margin-bottom: 24px; font-weight: 500; }
-    .congrats-tips { background: #FBFBFB; border-radius: 14px; padding: 16px 18px; text-align: left; margin-bottom: 24px; }
-    .congrats-tips-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(8,8,15,.4); margin-bottom: 10px; }
-    .congrats-tip-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(8,8,15,.65); font-weight: 500; margin-bottom: 7px; line-height: 1.5; }
-    .congrats-tip-item:last-child { margin-bottom: 0; }
-    .congrats-tip-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-    .congrats-btn-primary {
-      display: block; width: 100%; padding: 14px; border-radius: 14px;
-      background: #4285F4; color: #fff; font-size: 15px; font-weight: 700;
-      text-align: center; text-decoration: none; border: none; cursor: pointer;
-      transition: background .2s, transform .15s; margin-bottom: 8px;
-    }
-    .congrats-btn-primary:hover { background: #3367d6; transform: translateY(-1px); }
-    .congrats-btn-ghost {
-      display: block; width: 100%; padding: 12px; border-radius: 14px;
-      background: transparent; color: rgba(8,8,15,.4); font-size: 13px; font-weight: 600;
-      text-align: center; border: none; cursor: pointer; transition: color .15s;
-    }
-    .congrats-btn-ghost:hover { color: #08080F; }
-
-    /* 컨페티 */
-    .confetti-wrap { position: absolute; top: 0; left: 0; right: 0; height: 0; overflow: visible; pointer-events: none; }
-    .confetti-dot { position: absolute; border-radius: 2px; animation: confetti-fall 1.2s ease-out forwards; opacity: 0; }
-    @keyframes confetti-fall {
-      0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
-      100% { opacity: 0; transform: translateY(80px) rotate(360deg); }
-    }
-  </style>
-
-  <button class="coffee-fab" onclick="openCoffeeModal()" aria-label="개발자와 커피챗하기">
-    <img src="assets/images/coffeeicon.webp" alt="커피" width="26" height="26" style="object-fit:contain;">
-  </button>
-
-  <!-- 커피챗 모달 -->
-  <div class="gg-modal-overlay" id="coffee-modal-overlay" onclick="closeCoffeeModal(event)">
-    <div class="gg-modal" role="dialog" aria-modal="true">
-      <button class="gg-modal-close" onclick="closeCoffeeModal()">✕</button>
-      <div class="coffee-modal-title">개발자와 이야기해요</div>
-      <img src="assets/images/coffeeicon.webp" alt="커피" width="120" height="120" style="object-fit:contain;display:block;margin:12px auto 20px;">
-      <p class="coffee-modal-desc">GitGloss를 만든 개발자와 직접 대화할 수 있어요.<br>피드백, 협업 제안, 아이디어 모두 환영합니다.</p>
-      <div class="coffee-modal-btns">
-        <a href="#" class="coffee-btn-chat" target="_blank" rel="noopener">💬 커피챗 신청하기</a>
-        <a href="#" class="coffee-btn-buy" target="_blank" rel="noopener">☕ 커피 한 잔 사주기</a>
-      </div>
-      <p class="coffee-modal-note">링크는 추후 업데이트 예정이에요 🙏</p>
-    </div>
-  </div>
-
-  <!-- 위젯 완성 축하 모달 -->
-  <div class="gg-modal-overlay" id="congrats-modal-overlay" onclick="closeCongratsModal(event)">
-    <div class="gg-modal" role="dialog" aria-modal="true">
-      <div class="confetti-wrap" id="confetti-wrap"></div>
-      <button class="gg-modal-close" onclick="closeCongratsModal()">✕</button>
-      <!-- 추후 3D 박수 이모지로 교체 예정 -->
-      <span class="congrats-emoji-wrap">🎉</span>
-      <div class="congrats-title">위젯 완성!</div>
-      <p class="congrats-sub">코드가 복사됐어요.<br>이제 GitHub README를 예쁘게 꾸며볼 시간이에요 ✨</p>
-      <div class="congrats-tips">
-        <div class="congrats-tips-title">이렇게 꾸며보세요</div>
-        <div class="congrats-tip-item"><span class="congrats-tip-icon">📌</span><span>README 상단에 배너 위젯을 먼저 배치하면 첫인상이 달라져요</span></div>
-        <div class="congrats-tip-item"><span class="congrats-tip-icon">🎨</span><span>Stats + Tech Stack + Profile 세 가지를 조합하면 완성도가 높아져요</span></div>
-        <div class="congrats-tip-item"><span class="congrats-tip-icon">🌙</span><span>다크 테마 위젯은 GitHub 다크모드 사용자에게 특히 잘 어울려요</span></div>
-      </div>
-      <a href="gallery.html" class="congrats-btn-primary">더 많은 위젯 구경하기 →</a>
-      <button class="congrats-btn-ghost" onclick="closeCongratsModal()">닫기</button>
-    </div>
-  </div>
-
-  <script>
-    /* 커피챗 모달 */
-    function openCoffeeModal() {
-      document.getElementById('coffee-modal-overlay').classList.add('open');
-    }
-    function closeCoffeeModal(e) {
-      if (e && e.target !== document.getElementById('coffee-modal-overlay')) return;
-      document.getElementById('coffee-modal-overlay').classList.remove('open');
-    }
-
-    /* 축하 모달 */
-    function openCongratsModal() {
-      const overlay = document.getElementById('congrats-modal-overlay');
-      overlay.classList.add('open');
-      spawnConfetti();
-    }
-    function closeCongratsModal(e) {
-      if (e && e.target !== document.getElementById('congrats-modal-overlay')) return;
-      document.getElementById('congrats-modal-overlay').classList.remove('open');
-    }
-
-    /* 컨페티 */
-    function spawnConfetti() {
-      const wrap = document.getElementById('confetti-wrap');
-      if (!wrap) return;
-      wrap.innerHTML = '';
-      const colors = ['#ED93B1','#9B8FE8','#7EC8E3','#FBBC05','#34A853','#EA4335'];
-      for (let i = 0; i < 22; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'confetti-dot';
-        dot.style.cssText = `
-          left:${10 + Math.random() * 80}%;
-          top:${-8 - Math.random() * 12}px;
-          background:${colors[Math.floor(Math.random() * colors.length)]};
-          animation-delay:${Math.random() * 0.5}s;
-          animation-duration:${0.9 + Math.random() * 0.6}s;
-          width:${5 + Math.random() * 5}px;
-          height:${5 + Math.random() * 5}px;
-          border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
-        `;
-        wrap.appendChild(dot);
+      function openPanel() {
+        panel.classList.add('open');
+        overlay.classList.add('visible');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = '✕';
       }
-    }
+      function closePanel() {
+        panel.classList.remove('open');
+        overlay.classList.remove('visible');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '☰';
+      }
 
-    /* doCopy 완료 후 축하 모달 트리거 — widget-engine.js의 doCopy를 래핑 */
-    document.addEventListener('DOMContentLoaded', () => {
-      const copyBtn = document.getElementById('copy-btn');
-      if (!copyBtn) return;
-      copyBtn.addEventListener('click', () => {
-        /* 복사 성공 후 1.2초 뒤 모달 오픈 (복사 피드백 애니메이션 끝난 후) */
-        setTimeout(() => openCongratsModal(), 1200);
+      btn.addEventListener('click', function () {
+        panel.classList.contains('open') ? closePanel() : openPanel();
       });
-    });
+      overlay.addEventListener('click', closePanel);
 
-    /* ESC 닫기 */
-    document.addEventListener('keydown', e => {
-      if (e.key !== 'Escape') return;
-      closeCoffeeModal();
-      closeCongratsModal();
-    });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) closePanel();
+      });
+    })();
   </script>
+
 </body>
+
 </html>
