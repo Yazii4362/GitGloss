@@ -12,7 +12,7 @@ const WE = {
 
   /* 블록 배열 — 순서가 곧 렌더 순서 */
   blocks: [
-    { id: 'b1', type: 'avatar',  data: { emoji: '👨‍💻' } },
+    { id: 'b1', type: 'avatar',  data: { emoji: 'fluent:Technologist|👨‍💻' } },
     { id: 'b2', type: 'name',    data: { username: '', name: 'The Octocat', role: 'Full-stack Developer', handle: '@octocat' } },
     { id: 'b3', type: 'stats',   data: { items: [{ label:'Stars', val:'2.8k' }, { label:'Repos', val:'142' }, { label:'Active', val:'98%' }] } },
     { id: 'b4', type: 'badges',  data: { tags: ['React', 'TypeScript', 'Node.js'] } },
@@ -20,6 +20,33 @@ const WE = {
 
   _uid: 10,
 };
+
+/* ── 이모지 & 아이콘 데이터 ────────────────────────────── */
+const AVATAR_DATA = {
+  // Microsoft Fluent 3D Emojis (Official 3D Style)
+  fluentEmojis: [
+    { c: '👨‍💻', n: 'Technologist' }, { c: '🚀', n: 'Rocket' }, { c: '🔥', n: 'Fire' }, { c: '⚡', n: 'High Voltage' },
+    { c: '💎', n: 'Gem Stone' }, { c: '🌟', n: 'Star' }, { c: '🎯', n: 'Direct Hit' }, { c: '💡', n: 'Light Bulb' },
+    { c: '🎨', n: 'Artist Palette' }, { c: '🎮', n: 'Video Game' }, { c: '👾', n: 'Alien Monster' }, { c: '🤖', n: 'Robot' },
+    { c: '☕', n: 'Hot Beverage' }, { c: '🌈', n: 'Rainbow' }, { c: '🦄', n: 'Unicorn' }, { c: '🐙', n: 'Octopus' },
+    { c: '🦊', n: 'Fox' }, { c: '🐧', n: 'Penguin' }, { c: '🍕', n: 'Pizza' }, { c: '🍩', n: 'Doughnut' },
+    { c: '🥑', n: 'Avocado' }, { c: '🎁', n: 'Wrapped Gift' }, { c: '😎', n: 'Smiling Face with Sunglasses' },
+    { c: '💻', n: 'Laptop' }, { c: '📱', n: 'Mobile Phone' }, { c: '🔒', n: 'Locked' },
+    { c: '👋', n: 'Waving Hand' }, { c: '✨', n: 'Sparkles' }, { c: '🔗', n: 'Link' }, { c: '⚙️', n: 'Gear' }
+  ],
+  icons: {
+    'Solid (Material)': ['home','person','settings','favorite','star','bolt','rocket','terminal','code','database','cloud','shield','verified','campaign','mail','explore','build','smart_toy'],
+    'Solid (FA)': ['house','user','gear','heart','star','bolt','rocket','terminal','code','database','cloud','shield','check','bell','envelope','compass','wrench','robot']
+  }
+};
+
+function getFluentUrl(name) {
+  // Folder: Title Case with spaces (e.g. Hot Beverage)
+  // File: snake_case (e.g. hot_beverage_3d.png)
+  const folder = name.replace(/_/g, ' '); 
+  const file = name.toLowerCase().replace(/ /g, '_').replace(/%20/g, '_');
+  return `https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/${folder}/3D/${file}_3d.png`;
+}
 
 function uid() { return 'b' + (++WE._uid); }
 
@@ -36,6 +63,8 @@ const STYLE_CLASS = {
 /* ══════════════════════════════════════════════════════
    BLOCK PANEL — 왼쪽 패널 렌더
 ══════════════════════════════════════════════════════ */
+
+
 function renderBlockList() {
   const list = document.getElementById('block-list');
   if (!list) return;
@@ -59,7 +88,22 @@ function renderBlockList() {
   initDrag();
 }
 
-const BLOCK_ICON  = { avatar:'😀', name:'✏️', stats:'📊', badges:'🏷️', streak:'🔥', links:'🔗', bio:'📝', divider:'➖', trophy:'🏆', snake:'🐍', hits:'👁️', coffee:'☕', banner:'🎨', typing:'⌨️' };
+const BLOCK_ICON  = { 
+  avatar: `<img src="${getFluentUrl('Technologist')}" style="width:18px;height:18px;">`, 
+  name:   `<img src="${getFluentUrl('Writing Hand')}" style="width:18px;height:18px;">`, 
+  stats:  `<img src="${getFluentUrl('Bar Chart')}" style="width:18px;height:18px;">`, 
+  badges: `<img src="${getFluentUrl('Label')}" style="width:18px;height:18px;">`, 
+  streak: `<img src="${getFluentUrl('Fire')}" style="width:18px;height:18px;">`, 
+  links:  `<img src="${getFluentUrl('Link')}" style="width:18px;height:18px;">`, 
+  bio:    `<img src="${getFluentUrl('Memo')}" style="width:18px;height:18px;">`, 
+  divider:`<img src="${getFluentUrl('Horizontal Line')}" style="width:18px;height:18px;">`, 
+  trophy: `<img src="${getFluentUrl('Trophy')}" style="width:18px;height:18px;">`, 
+  snake:  `<img src="${getFluentUrl('Snake')}" style="width:18px;height:18px;">`, 
+  hits:   `<img src="${getFluentUrl('Eye')}" style="width:18px;height:18px;">`, 
+  coffee: `<img src="${getFluentUrl('Hot Beverage')}" style="width:18px;height:18px;">`, 
+  banner: `<img src="${getFluentUrl('Artist Palette')}" style="width:18px;height:18px;">`, 
+  typing: `<img src="${getFluentUrl('Keyboard')}" style="width:18px;height:18px;">` 
+};
 const BLOCK_LABEL = { avatar:'이모지 아바타', name:'이름 / 직무', stats:'Stats 숫자', badges:'기술 배지', streak:'스트릭', links:'링크 버튼', bio:'소개글', divider:'구분선', trophy:'GitHub Trophy', snake:'Snake Game', hits:'Hits 카운터', coffee:'커피 카운터', banner:'배너', typing:'타이핑 SVG' };
 
 function renderBlockFields(b) {
@@ -67,15 +111,52 @@ function renderBlockFields(b) {
   switch (b.type) {
 
     case 'avatar':
-      return `
-        <div class="field-row">
-          <div class="emoji-picker">
-            ${['👨‍💻','👩‍💻','🚀','⚡','🎨','🔥','💎','🌟','🎯','🦄','🐙','🤖','👾','🎮','☕','🌈','😎','🦊','🐱','🐧'].map(e => `
-              <button class="ep-btn ${d.emoji === e ? 'on' : ''}"
-                      onclick="setBlockData('${b.id}','emoji','${e}')">${e}</button>
-            `).join('')}
-          </div>
+      let emojiTabs = '<div class="emoji-picker-scroll">';
+      
+      // Fluent 3D Emojis
+      emojiTabs += `
+        <div class="field-label" style="margin:4px 0 8px">Premium 3D Emojis</div>
+        <div class="emoji-picker" style="grid-template-columns: repeat(4, 1fr); gap: 8px;">
+          ${AVATAR_DATA.fluentEmojis.map(e => {
+            const val = `fluent:${e.n}|${e.c}`; // name|char
+            const isSelected = d.emoji === val;
+            return `
+              <button class="ep-btn ${isSelected ? 'on' : ''}" style="height:60px;"
+                      onclick="setBlockData('${b.id}','emoji','${val}')">
+                <img src="${getFluentUrl(e.n)}" style="width:40px; height:40px; object-fit:contain;" alt="${e.c}">
+              </button>`;
+          }).join('')}
         </div>`;
+      // 아이콘 탭 (Material Symbols)
+      emojiTabs += `
+        <div class="field-label" style="margin:16px 0 6px">Solid Icons (Material)</div>
+        <div class="emoji-picker">
+          ${AVATAR_DATA.icons['Solid (Material)'].map(i => {
+            const val = `ms:${i}`;
+            return `
+              <button class="ep-btn ${d.emoji === val ? 'on' : ''}"
+                      onclick="setBlockData('${b.id}','emoji','${val}')">
+                <span class="material-symbols-rounded" style="font-size:20px">${i}</span>
+              </button>`;
+          }).join('')}
+        </div>`;
+      // 아이콘 탭 (Font Awesome)
+      emojiTabs += `
+        <div class="field-label" style="margin:16px 0 6px">Solid Icons (Font Awesome)</div>
+        <div class="emoji-picker">
+          ${AVATAR_DATA.icons['Solid (FA)'].map(i => {
+            const val = `fa:${i}`;
+            return `
+              <button class="ep-btn ${d.emoji === val ? 'on' : ''}"
+                      onclick="setBlockData('${b.id}','emoji','${val}')">
+                <i class="fa-solid fa-${i}" style="font-size:16px"></i>
+              </button>`;
+          }).join('')}
+        </div>`;
+      
+      emojiTabs += '</div>'; // close scroll container
+
+      return `<div class="field-row">${emojiTabs}</div>`;
 
     case 'name':
       return `
@@ -240,8 +321,11 @@ function renderBlockFields(b) {
         <div class="field-row">
           <label class="field-label">음료 이모지</label>
           <select class="field-select" onchange="setBlockData('${b.id}','drinkEmoji',this.value)">
-            ${['☕','🧋','🍵','🥤','🧃','🍺','🥛'].map(e =>
-              `<option value="${e}" ${(d.drinkEmoji||'☕')===e?'selected':''}>${e}</option>`
+            ${[
+              { c:'☕', n:'Hot Beverage' }, { c:'🧋', n:'Bubble Tea' }, { c:'🍵', n:'Teacup Without Handle' }, 
+              { c:'🥤', n:'Cup with Straw' }, { c:'🧃', n:'Beverage Box' }, { c:'🍺', n:'Beer Mug' }, { c:'🥛', n:'Glass of Milk' }
+            ].map(e =>
+              `<option value="fluent:${e.n}|${e.c}" ${(d.drinkEmoji||'').includes(e.n)?'selected':''}>${e.c} ${e.c === '☕' ? 'Coffee' : ''}</option>`
             ).join('')}
           </select>
         </div>`;
@@ -322,38 +406,41 @@ const THEME_TO_STYLE = {
 // 타입 → 기본 블록 구성
 const TYPE_TO_BLOCKS = {
   stats: () => [
-    { id: uid(), type: 'avatar',  data: { emoji: '👨‍💻' }, collapsed: false },
+    { id: uid(), type: 'avatar',  data: { emoji: 'fluent:technologist|👨‍💻' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'Full-stack Developer', handle: '@octocat' }, collapsed: false },
     { id: uid(), type: 'stats',   data: { items: [{ label:'Stars', val:'2.8k' }, { label:'Repos', val:'142' }, { label:'Active', val:'98%' }] }, collapsed: false },
     { id: uid(), type: 'badges',  data: { tags: ['React', 'TypeScript', 'Node.js'] }, collapsed: true },
   ],
   tech: () => [
-    { id: uid(), type: 'avatar',  data: { emoji: '🚀' }, collapsed: false },
+    { id: uid(), type: 'avatar',  data: { emoji: 'fluent:rocket|🚀' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'Tech Stack', handle: '' }, collapsed: false },
     { id: uid(), type: 'badges',  data: { tags: ['React', 'TypeScript', 'Node.js', 'Python', 'Docker'] }, collapsed: false },
   ],
   profile: () => [
-    { id: uid(), type: 'avatar',  data: { emoji: '👨‍💻' }, collapsed: false },
+    { id: uid(), type: 'avatar',  data: { emoji: 'fluent:technologist|👨‍💻' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'Full-stack Developer', handle: '@octocat' }, collapsed: false },
     { id: uid(), type: 'bio',     data: { text: 'Building amazing things with code ✨' }, collapsed: false },
     { id: uid(), type: 'badges',  data: { tags: ['React', 'TypeScript'] }, collapsed: false },
     { id: uid(), type: 'links',   data: { items: [{ type:'github', url:'' }, { type:'blog', url:'' }] }, collapsed: false },
   ],
   links: () => [
-    { id: uid(), type: 'avatar',  data: { emoji: '🔗' }, collapsed: false },
+    { id: uid(), type: 'avatar',  data: { emoji: 'fluent:link|🔗' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: '링크 모음', handle: '' }, collapsed: false },
     { id: uid(), type: 'links',   data: { items: [{ type:'github', url:'' }, { type:'blog', url:'' }, { type:'email', url:'' }] }, collapsed: false },
   ],
-  streak: () => [
-    { id: uid(), type: 'avatar',  data: { emoji: '🔥' }, collapsed: false },
-    { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'GitHub Streak', handle: '@octocat' }, collapsed: false },
-    { id: uid(), type: 'streak',  data: { current: '42', longest: '87', total: '1,247' }, collapsed: false },
-  ],
   banner: () => [
-    { id: uid(), type: 'avatar',  data: { emoji: '👋' }, collapsed: false },
+    { id: uid(), type: 'avatar',  data: { emoji: 'fluent:waving_hand|👋' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'Hi! Welcome!', role: '', handle: '' }, collapsed: false },
     { id: uid(), type: 'bio',     data: { text: 'GitHub 프로필에 오신 것을 환영합니다.' }, collapsed: false },
   ],
+  creative: (tplId) => {
+    // 템플릿 ID에 따라 적절한 블록 구성
+    if (tplId === 'banner-10') return [{ id: uid(), type: 'snake', data: { username: '' } }];
+    if (tplId === 'banner-09') return [{ id: uid(), type: 'trophy', data: { username: '' } }];
+    if (tplId === 'banner-07' || tplId === 'banner-11') return [{ id: uid(), type: 'hits', data: { username: '' } }];
+    if (tplId === 'links-11') return [{ id: uid(), type: 'coffee', data: { cups: '2', maxCups: '4' } }];
+    return [{ id: uid(), type: 'avatar', data: { emoji: 'fluent:sparkles|✨' } }];
+  }
 };
 
 function applyPreset(templateId) {
@@ -369,9 +456,9 @@ function applyPreset(templateId) {
   WE.preset = templateId;
 
   // 2. 블록 구성 — 타입에 맞는 팩토리 사용
-  const typeKey = ['stats','tech','profile','links','streak','banner'].includes(tpl.type)
+  const typeKey = ['stats','tech','profile','links','creative','banner'].includes(tpl.type)
     ? tpl.type : 'stats';
-  WE.blocks = TYPE_TO_BLOCKS[typeKey]();
+  WE.blocks = typeKey === 'creative' ? TYPE_TO_BLOCKS.creative(templateId) : TYPE_TO_BLOCKS[typeKey]();
 
   // 3. 스타일 버튼 UI 동기화
   document.querySelectorAll('.style-btn').forEach(b => {
@@ -473,7 +560,7 @@ function getPresetThumbBg(tpl) {
 ══════════════════════════════════════════════════════ */
 function addBlock(type) {
   const defaults = {
-    avatar:  { emoji: '👨‍💻' },
+    avatar:  { emoji: 'fluent:Technologist|👨‍💻' },
     name:    { username: '', name: '', role: '', handle: '' },
     stats:   { items: [{ label:'Stars', val:'2.8k' }, { label:'Repos', val:'142' }] },
     badges:  { tags: ['React', 'TypeScript'] },
@@ -484,7 +571,7 @@ function addBlock(type) {
     trophy:  { username: '', theme: 'flat' },
     snake:   { username: '', colorScheme: 'github' },
     hits:    { username: '', repo: '' },
-    coffee:  { cups: '2', maxCups: '4', drinkEmoji: '☕' },
+    coffee:  { cups: '2', maxCups: '4', drinkEmoji: 'fluent:Hot Beverage|☕' },
     banner:  { text: 'Hi! Welcome!', bannerType: 'wave', color: 'ED93B1', height: '160' },
     typing:  { lines: "I'm a Developer;I love Open Source", color: '4285F4', size: '22' },
   };
@@ -650,7 +737,18 @@ function renderBlockHTML(b) {
   switch (b.type) {
 
     case 'avatar':
-      return `<div class="wb-avatar">${d.emoji || '👨‍💻'}</div>`;
+      let content = d.emoji || 'fluent:Technologist|👨‍💻';
+      if (content.startsWith('fluent:')) {
+        const [name, char] = content.replace('fluent:','').split('|');
+        content = `<img src="${getFluentUrl(name)}" style="width:100%; height:100%; object-fit:contain;" alt="${char}">`;
+      } else if (content.startsWith('ms:')) {
+        const iconName = content.split(':')[1];
+        content = `<span class="material-symbols-rounded">${iconName}</span>`;
+      } else if (content.startsWith('fa:')) {
+        const iconName = content.split(':')[1];
+        content = `<i class="fa-solid fa-${iconName}"></i>`;
+      }
+      return `<div class="wb-avatar">${content}</div>`;
 
     case 'name':
       return `
@@ -763,14 +861,22 @@ function renderBlockHTML(b) {
     case 'coffee': {
       const cups = parseInt(d.cups) || 2;
       const max  = parseInt(d.maxCups) || 4;
-      const emoji = d.drinkEmoji || '☕';
+      let imgTag = '';
+      if (d.drinkEmoji && d.drinkEmoji.startsWith('fluent:')) {
+        const name = d.drinkEmoji.split('|')[0].replace('fluent:','');
+        imgTag = `<img src="${getFluentUrl(name)}" style="width:32px; height:32px; object-fit:contain;">`;
+      } else {
+        imgTag = `<img src="${getFluentUrl('Hot Beverage')}" style="width:32px; height:32px; object-fit:contain;">`;
+      }
+      
       const icons = Array.from({length: max}, (_, i) =>
-        `<span style="font-size:28px;opacity:${i < cups ? 1 : 0.18};transition:opacity .2s">${emoji}</span>`
+        `<div style="opacity:${i < cups ? 1 : 0.15}; transition:opacity .2s; width:32px; height:32px;">${imgTag}</div>`
       ).join('');
+      
       return `
         <div class="wb-coffee">
-          <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">${icons}</div>
-          <div style="font-size:12px;font-weight:700;color:${acc};margin-top:8px;text-align:center;">${cups} / ${max} ${emoji} Done</div>
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">${icons}</div>
+          <div style="font-size:12px; font-weight:700; color:${acc}; margin-top:10px; text-align:center; letter-spacing:0.5px;">${cups} / ${max} DONE</div>
         </div>`;
     }
 

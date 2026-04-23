@@ -72,17 +72,17 @@ const TEMPLATES = [
   { id:'banner-04', type:'banner', theme:'banner-egg',            layout:'banner-layout', title:'Egg Shape',       desc:'capsule-render egg 타입 소프트 배너',            badge:null,  accentColor:'#ED93B1', config:{text:'Hello World!',height:200} },
   { id:'banner-05', type:'banner', theme:'banner-cylinder',       layout:'banner-layout', title:'Cylinder',        desc:'capsule-render cylinder, 3D감 곡선',             badge:null,  accentColor:'#7EC8E3', config:{text:"Let's Code!",height:150} },
   { id:'banner-06', type:'banner', theme:'banner-shark',          layout:'banner-layout', title:'Shark Dark',      desc:'capsule-render shark 타입 다크모드',             badge:null,  accentColor:'#aaa',    config:{text:'Full Stack Dev',height:160} },
-  { id:'banner-07', type:'banner', theme:'banner-divider-hits',   layout:'banner-layout', title:'Hits Counter',    desc:'seeyoufarm Hits 방문자 카운터 배지',             badge:'HOT', accentColor:'#34A853', config:{text:''} },
+  { id:'banner-07', type:'creative', theme:'banner-divider-hits',   layout:'banner-layout', title:'Hits Counter',    desc:'seeyoufarm Hits 방문자 카운터 배지',             badge:'HOT', accentColor:'#34A853', config:{text:''} },
   { id:'banner-08', type:'banner', theme:'banner-typing',         layout:'banner-layout', title:'Typing SVG',      desc:'readme-typing-svg 애니메이션 타이핑 텍스트',    badge:null,  accentColor:'#4285F4', config:{text:"I'm a Developer;I love Open Source"} },
-  { id:'banner-09', type:'banner', theme:'banner-github-trophy',  layout:'banner-layout', title:'GitHub Trophy',   desc:'github-profile-trophy 업적 배지 모음',           badge:null,  accentColor:'#FFD700', config:{text:''} },
-  { id:'banner-10', type:'banner', theme:'banner-snake',          layout:'banner-layout', title:'Snake Game',      desc:'contribution-snake SVG 게임 애니메이션',         badge:'NEW', accentColor:'#34A853', config:{text:''} },
+  { id:'banner-09', type:'creative', theme:'banner-github-trophy',  layout:'banner-layout', title:'GitHub Trophy',   desc:'github-profile-trophy 업적 배지 모음',           badge:null,  accentColor:'#FFD700', config:{text:''} },
+  { id:'banner-10', type:'creative', theme:'banner-snake',          layout:'banner-layout', title:'Snake Game',      desc:'contribution-snake SVG 게임 애니메이션',         badge:'NEW', accentColor:'#34A853', config:{text:''} },
 
   /* ── NEW: CREATIVE & INTERACTIVE (7) ─────────────── */
   { id:'stats-11',   type:'stats',   theme:'glass-neon',    layout:'', title:'Glass Neon',     desc:'네온 글로우 + 글래스모피즘 조합 카드',      badge:'NEW', accentColor:'#9B8FE8', config:{stats:['Stars','Repos','Active']} },
   { id:'stats-12',   type:'stats',   theme:'aurora',        layout:'', title:'Aurora',         desc:'오로라 그라디언트 풀 카드',                 badge:'NEW', accentColor:'#7EC8E3', config:{stats:['Stars','Repos','Active']} },
   { id:'stats-13',   type:'stats',   theme:'mono-border',   layout:'', title:'Mono Border',    desc:'흑백 굵은 테두리, 타이포 중심 카드',        badge:null,  accentColor:'#08080F', config:{stats:['Stars','Repos','Active']} },
-  { id:'links-11',   type:'links',   theme:'coffee-meter',  layout:'links-layout', title:'Today Fuel',    desc:'오늘 마신 커피/음료 잔 수 카운터 뱃지',     badge:null,  accentColor:'#6f4e37', config:{links:['kakao']} },
-  { id:'banner-11',  type:'banner',  theme:'premium-hit',   layout:'banner-layout', title:'Premium Hit',  desc:'세련된 타이포그래피 유리 질감 카운터',      badge:'NEW', accentColor:'#4285F4', config:{text:'Visitors',height:100} },
+  { id:'links-11',   type:'creative', theme:'coffee-meter',  layout:'links-layout', title:'Today Fuel',    desc:'오늘 마신 커피/음료 잔 수 카운터 뱃지',     badge:null,  accentColor:'#6f4e37', config:{links:['kakao']} },
+  { id:'banner-11',  type:'creative', theme:'premium-hit',   layout:'banner-layout', title:'Premium Hit',  desc:'세련된 타이포그래피 유리 질감 카운터',      badge:'NEW', accentColor:'#4285F4', config:{text:'Visitors',height:100} },
 ];
 
 /* ── 헬퍼 함수 ───────────────────────────────────────── */

@@ -10,8 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/builder.css">
-  <!-- Google AdSense — pub-ID 발급 후 아래 코드 활성화 -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-REPLACE_WITH_YOUR_PUB_ID" crossorigin="anonymous"></script> -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <style>
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 24px;
+    }
+  </style>
 </head>
 <body>
 
@@ -41,6 +48,7 @@
         <button class="preset-filter"    data-f="tech"    onclick="switchPresetFilter(this,'tech')">Tech</button>
         <button class="preset-filter"    data-f="profile" onclick="switchPresetFilter(this,'profile')">Profile</button>
         <button class="preset-filter"    data-f="links"   onclick="switchPresetFilter(this,'links')">Links</button>
+        <button class="preset-filter"    data-f="creative" onclick="switchPresetFilter(this,'creative')">Creative</button>
       </div>
       <div class="preset-grid" id="preset-grid">
         <!-- JS가 렌더 -->
@@ -86,20 +94,20 @@
       <!-- ④ 블록 추가 -->
       <div class="section-label">블록 추가</div>
       <div class="block-add-grid">
-        <button class="block-add-btn" onclick="addBlock('avatar')">😀 이모지</button>
-        <button class="block-add-btn" onclick="addBlock('name')">✏️ 이름/직무</button>
-        <button class="block-add-btn" onclick="addBlock('stats')">📊 Stats</button>
-        <button class="block-add-btn" onclick="addBlock('badges')">🏷️ 기술 배지</button>
-        <button class="block-add-btn" onclick="addBlock('streak')">🔥 스트릭</button>
-        <button class="block-add-btn" onclick="addBlock('links')">🔗 링크</button>
-        <button class="block-add-btn" onclick="addBlock('bio')">📝 소개글</button>
-        <button class="block-add-btn" onclick="addBlock('divider')">➖ 구분선</button>
-        <button class="block-add-btn" onclick="addBlock('trophy')">🏆 GitHub Trophy</button>
-        <button class="block-add-btn" onclick="addBlock('snake')">🐍 Snake Game</button>
-        <button class="block-add-btn" onclick="addBlock('hits')">👁️ Hits 카운터</button>
-        <button class="block-add-btn" onclick="addBlock('coffee')">☕ 커피 카운터</button>
-        <button class="block-add-btn" onclick="addBlock('banner')">🎨 배너</button>
-        <button class="block-add-btn" onclick="addBlock('typing')">⌨️ 타이핑 SVG</button>
+        <button class="block-add-btn" onclick="addBlock('avatar')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Technologist/3D/technologist_3d.png" width="20"> 이모지</button>
+        <button class="block-add-btn" onclick="addBlock('name')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Writing%20Hand/3D/writing_hand_3d.png" width="20"> 이름/직무</button>
+        <button class="block-add-btn" onclick="addBlock('stats')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bar%20Chart/3D/bar_chart_3d.png" width="20"> Stats</button>
+        <button class="block-add-btn" onclick="addBlock('badges')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Label/3D/label_3d.png" width="20"> 기술 배지</button>
+        <button class="block-add-btn" onclick="addBlock('streak')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Fire/3D/fire_3d.png" width="20"> 스트릭</button>
+        <button class="block-add-btn" onclick="addBlock('links')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Link/3D/link_3d.png" width="20"> 링크</button>
+        <button class="block-add-btn" onclick="addBlock('bio')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Memo/3D/memo_3d.png" width="20"> 소개글</button>
+        <button class="block-add-btn" onclick="addBlock('divider')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Horizontal%20Line/3D/horizontal_line_3d.png" width="20"> 구분선</button>
+        <button class="block-add-btn" onclick="addBlock('trophy')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Trophy/3D/trophy_3d.png" width="20"> GitHub Trophy</button>
+        <button class="block-add-btn" onclick="addBlock('snake')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Snake/3D/snake_3d.png" width="20"> Snake Game</button>
+        <button class="block-add-btn" onclick="addBlock('hits')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Eye/3D/eye_3d.png" width="20"> Hits 카운터</button>
+        <button class="block-add-btn" onclick="addBlock('coffee')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Hot%20Beverage/3D/hot_beverage_3d.png" width="20"> 커피 카운터</button>
+        <button class="block-add-btn" onclick="addBlock('banner')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Artist%20Palette/3D/artist_palette_3d.png" width="20"> 배너</button>
+        <button class="block-add-btn" onclick="addBlock('typing')"><img src="https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Keyboard/3D/keyboard_3d.png" width="20"> 타이핑 SVG</button>
       </div>
 
       <div class="divider"></div>

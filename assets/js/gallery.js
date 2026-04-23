@@ -12,10 +12,16 @@ const CATEGORY_META = {
   stats:   { label: 'Stats',   cls: 'category-stats'   },
   tech:    { label: 'Tech',    cls: 'category-tech'    },
   profile: { label: 'Profile', cls: 'category-profile' },
-  streak:  { label: 'Streak',  cls: 'category-streak'  },
+  creative: { label: 'Creative', cls: 'category-creative' },
   links:   { label: 'Links',   cls: 'category-links'   },
   banner:  { label: 'Banner',  cls: 'category-banner'  },
 };
+
+function getFluentUrl(name) {
+  const folder = name.replace(/_/g, ' '); 
+  const file = name.toLowerCase().replace(/ /g, '_').replace(/%20/g, '_');
+  return `https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/${folder}/3D/${file}_3d.png`;
+}
 
 /* ── 썸네일 배경 ──────────────────────────────────────── */
 const PREVIEW_STYLES = {
@@ -132,7 +138,9 @@ function buildGalleryPreview(tpl) {
       return `
         <div style="width:82%;display:flex;flex-direction:column;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};display:flex;align-items:center;justify-content:center;font-size:16px;">👨‍💻</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};display:flex;align-items:center;justify-content:center;padding:4px;">
+              <img src="${getFluentUrl('Technologist')}" style="width:100%;height:100%;object-fit:contain;">
+            </div>
             <div>
               <div style="height:8px;border-radius:4px;background:${textColor}.3);width:60px;margin-bottom:4px;"></div>
               <div style="height:6px;border-radius:4px;background:${textColor}.15);width:44px;"></div>
@@ -154,7 +162,9 @@ function buildGalleryPreview(tpl) {
       return `
         <div style="width:85%;display:flex;flex-direction:column;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};font-size:14px;display:flex;align-items:center;justify-content:center;">🚀</div>
+            <div style="width:32px;height:32px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};display:flex;align-items:center;justify-content:center;padding:4px;">
+              <img src="${getFluentUrl('Rocket')}" style="width:100%;height:100%;object-fit:contain;">
+            </div>
             <div style="height:7px;border-radius:4px;background:${textColor}.25);width:55px;"></div>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:5px;">
@@ -170,7 +180,9 @@ function buildGalleryPreview(tpl) {
     case 'profile':
       return `
         <div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:82%">
-          <div style="width:44px;height:44px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};font-size:22px;display:flex;align-items:center;justify-content:center;">🎨</div>
+          <div style="width:48px;height:48px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};display:flex;align-items:center;justify-content:center;padding:6px;">
+            <img src="${getFluentUrl('Artist Palette')}" style="width:100%;height:100%;object-fit:contain;">
+          </div>
           <div style="height:9px;border-radius:5px;background:${textColor}.3);width:70%;"></div>
           <div style="height:6px;border-radius:4px;background:${textColor}.15);width:50%;"></div>
           <div style="height:5px;border-radius:4px;background:${textColor}.12);width:80%;margin-top:4px;"></div>
@@ -180,37 +192,59 @@ function buildGalleryPreview(tpl) {
           </div>
         </div>`;
 
-    case 'streak':
-      return `
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:80%">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;align-self:flex-start;">
-            <div style="width:28px;height:28px;border-radius:50%;background:${isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)'};font-size:14px;display:flex;align-items:center;justify-content:center;">🔥</div>
-            <div style="height:7px;border-radius:4px;background:${textColor}.25);width:55px;"></div>
-          </div>
-          <div style="font-size:36px;font-weight:800;color:${textColor}.75);">42</div>
-          <div style="height:5px;border-radius:3px;background:${textColor}.2);width:50%;"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;margin-top:4px;">
-            ${[['87','Longest'],['1,247','Total']].map(([v,l])=>`
-              <div style="background:${isDark?'rgba(255,255,255,.07)':'rgba(0,0,0,.06)'};border-radius:8px;padding:6px;text-align:center;">
-                <div style="font-size:12px;font-weight:700;color:${textColor}.7);">${v}</div>
-                <div style="font-size:8px;color:${textColor}.35);">${l}</div>
-              </div>`).join('')}
+    case 'creative':
+      if (tpl.theme === 'banner-divider-hits' || tpl.theme === 'premium-hit') {
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div style="font-size:9px;font-weight:700;color:${textColor}0.5);letter-spacing:1px;text-transform:uppercase;">Visitors</div>
+          <div style="display:flex;border-radius:10px;overflow:hidden;border:1px solid ${textColor}0.1);">
+            <div style="background:${textColor}0.1);color:${textColor}0.8);padding:6px 12px;font-size:11px;font-weight:700;">Hits</div>
+            <div style="background:${tpl.accentColor};color:#fff;padding:6px 12px;font-size:11px;font-weight:800;">1,247</div>
           </div>
         </div>`;
+      }
+      if (tpl.theme === 'banner-github-trophy') {
+        const trophyIcons = ['Trophy','Star','Fire','Gem Stone'].map(name => 
+          `<img src="${getFluentUrl(name)}" style="width:24px;height:24px;object-fit:contain;">`
+        );
+        return `<div style="display:flex;gap:8px;justify-content:center;">
+          ${trophyIcons.map(img => `
+            <div style="background:${isDark?'rgba(255,255,255,0.08)':'#fff'};border:1px solid ${tpl.accentColor}44;border-radius:12px;padding:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05);">${img}</div>`).join('')}
+        </div>`;
+      }
+      if (tpl.theme === 'banner-snake') {
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div style="display:flex;gap:4px;">${Array(7).fill(0).map((_,i)=>`<div style="width:14px;height:14px;background:${i===0?'#E53935':i<5?tpl.accentColor:'#C0DD97'};border-radius:4px;opacity:${1-i*.1}"></div>`).join('')}</div>
+          <div style="font-size:10px;font-weight:700;color:${textColor}0.4);letter-spacing:0.5px;">Contribution Snake</div>
+        </div>`;
+      }
+      if (tpl.theme === 'coffee-meter') {
+        const coffeeImg = `<img src="${getFluentUrl('Hot Beverage')}" style="width:20px;height:20px;">`;
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div style="display:flex;gap:4px;">${coffeeImg}${coffeeImg}<span style="opacity:0.2;">${coffeeImg}${coffeeImg}</span></div>
+          <div style="height:6px;width:50px;background:${tpl.accentColor}33;border-radius:3px;overflow:hidden;"><div style="width:50%;height:100%;background:${tpl.accentColor};"></div></div>
+          <div style="font-size:9px;font-weight:700;color:${tpl.accentColor};opacity:0.8;">2 CUPS TODAY</div>
+        </div>`;
+      }
+      return `<div style="font-size:32px;">✨</div>`;
 
     case 'links':
+      const linkIcons = [
+        { name: 'Gear',         label: 'GitHub' },
+        { name: 'Writing Hand', label: '블로그' },
+        { name: 'Envelope',     label: 'Email' },
+        { name: 'Briefcase',    label: 'LinkedIn' }
+      ].map(l => ({
+        ...l,
+        img: `<img src="${getFluentUrl(l.name)}" style="width:16px;height:16px;">`
+      }));
+
       return `
         <div style="display:flex;flex-direction:column;gap:7px;width:85%;">
-          ${[
-            { icon:'⚙', label:'GitHub',   color: isDark ? 'rgba(255,255,255,.85)' : '#181717', bg: isDark ? 'rgba(255,255,255,.1)' : 'rgba(0,0,0,.06)' },
-            { icon:'✍', label:'블로그',    color: isDark ? 'rgba(32,201,151,.9)'   : '#20c997', bg: isDark ? 'rgba(32,201,151,.12)' : 'rgba(32,201,151,.12)' },
-            { icon:'✉', label:'Email',    color: isDark ? 'rgba(234,67,53,.9)'     : '#EA4335', bg: isDark ? 'rgba(234,67,53,.12)'  : 'rgba(234,67,53,.1)' },
-            { icon:'💼', label:'LinkedIn', color: isDark ? 'rgba(10,102,194,.9)'   : '#0A66C2', bg: isDark ? 'rgba(10,102,194,.12)' : 'rgba(10,102,194,.1)' },
-          ].slice(0, tpl.theme.includes('icon-grid') ? 6 : 3).map(l=>`
+          ${linkIcons.slice(0, 3).map(l=>`
             <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;
-              border-radius:10px;background:${l.bg};border:1px solid ${l.color}22;">
-              <span style="font-size:13px;">${l.icon}</span>
-              <span style="font-size:10px;font-weight:700;color:${l.color};">${l.label}</span>
+              border-radius:10px;background:${isDark?'rgba(255,255,255,.08)':'rgba(0,0,0,.06)'};border:1px solid ${isDark?'rgba(255,255,255,.1)':'rgba(0,0,0,.1)'};">
+              ${l.img}
+              <span style="font-size:10px;font-weight:700;color:${textColor}0.8);">${l.label}</span>
               <span style="margin-left:auto;font-size:10px;color:${textColor}.3);">→</span>
             </div>`).join('')}
         </div>`;
@@ -245,9 +279,12 @@ function buildGalleryPreview(tpl) {
         </div>`;
       }
       if (tpl.theme === 'banner-github-trophy') {
+        const trophyImgs = ['Trophy','Star','Fire','Gem Stone'].map(name => 
+          `<img src="${getFluentUrl(name)}" style="width:20px;height:20px;">`
+        );
         return `<div style="display:flex;gap:5px;">
-          ${['🏆','⭐','🔥','💎'].map(e=>`
-            <div style="background:rgba(255,255,255,.9);border:1px solid rgba(255,200,0,.4);border-radius:8px;padding:6px;font-size:16px;">${e}</div>`).join('')}
+          ${trophyImgs.map(img => `
+            <div style="background:rgba(255,255,255,.9);border:1px solid rgba(255,200,0,.4);border-radius:8px;padding:6px;">${img}</div>`).join('')}
         </div>`;
       }
       if (tpl.theme === 'banner-snake') {
@@ -296,8 +333,9 @@ function buildGalleryPreview(tpl) {
         </div>`;
       }
       if (tpl.theme === 'coffee-meter') {
+        const coffeeImg = `<img src="${getFluentUrl('Hot Beverage')}" style="width:18px;height:18px;">`;
         return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-          <div style="font-size:18px;">☕☕<span style="opacity:0.2;">☕☕</span></div>
+          <div style="display:flex;gap:2px;">${coffeeImg}${coffeeImg}<span style="opacity:0.2;">${coffeeImg}${coffeeImg}</span></div>
           <div style="height:5px;width:40px;background:rgba(111,78,55,0.2);border-radius:3px;"></div>
         </div>`;
       }
