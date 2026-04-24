@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   GitGloss — templates.js  (Single Source of Truth)
+   ReadMe.kit — templates.js  (Single Source of Truth)
    60개 템플릿 전체 정의
    stats×10 · tech×10 · profile×10 · mix×10 · links×10 · banner×10
    ═══════════════════════════════════════════════════════ */
@@ -83,6 +83,28 @@ const TEMPLATES = [
   { id:'stats-13',   type:'stats',   theme:'mono-border',   layout:'', title:'Mono Border',    desc:'흑백 굵은 테두리, 타이포 중심 카드',        badge:null,  accentColor:'#08080F', config:{stats:['Stars','Repos','Active']} },
   { id:'links-11',   type:'creative', theme:'coffee-meter',  layout:'links-layout', title:'Today Fuel',    desc:'오늘 마신 커피/음료 잔 수 카운터 뱃지',     badge:null,  accentColor:'#6f4e37', config:{links:['kakao']} },
   { id:'banner-11',  type:'creative', theme:'premium-hit',   layout:'banner-layout', title:'Premium Hit',  desc:'세련된 타이포그래피 유리 질감 카운터',      badge:'NEW', accentColor:'#4285F4', config:{text:'Visitors',height:100} },
+/* ── VIBE (15) ───────────────────────────────────── */
+// 라이프스타일
+{ id:'vibe-lifestyle-glass', type:'vibe', theme:'badge-glass',   layout:'tech-layout', title:'라이프스타일 Glass',  desc:'Night Owl · Coffee · 고양이 집사 배지 세트', badge:'NEW', accentColor:'#9B8FE8', config:{stack:['Night Owl 🦉','Coffee ×3 ☕','고양이 집사 🐱']} },
+{ id:'vibe-lifestyle-dark',  type:'vibe', theme:'badge-dark-pro', layout:'tech-layout', title:'라이프스타일 Dark',   desc:'다크 코드 에디터 스타일 라이프스타일 배지',   badge:null,  accentColor:'#a0d0ff', config:{stack:['Night Owl 🦉','Coffee ×3 ☕','고양이 집사 🐱']} },
+{ id:'vibe-lifestyle-neu',   type:'vibe', theme:'badge-soft',     layout:'tech-layout', title:'라이프스타일 Soft',   desc:'소프트 뉴모피즘 라이프스타일 배지',           badge:null,  accentColor:'#ED93B1', config:{stack:['Night Owl 🦉','Coffee ×3 ☕','고양이 집사 🐱']} },
+// 커리어 성향
+{ id:'vibe-career-glass',    type:'vibe', theme:'badge-glass',   layout:'tech-layout', title:'커리어 성향 Glass',   desc:'Refactoring Lover · Unit Test · Docs Master', badge:null,  accentColor:'#4285F4', config:{stack:['Refactoring Lover','Unit Test 100%','Docs Master']} },
+{ id:'vibe-career-dark',     type:'vibe', theme:'badge-dark-pro', layout:'tech-layout', title:'커리어 성향 Dark',    desc:'다크 테마 커리어 성향 배지 세트',             badge:null,  accentColor:'#a0d0ff', config:{stack:['Refactoring Lover','Unit Test 100%','Docs Master']} },
+{ id:'vibe-career-neu',      type:'vibe', theme:'badge-soft',     layout:'tech-layout', title:'커리어 성향 Soft',    desc:'소프트 뉴모피즘 커리어 성향 배지',            badge:null,  accentColor:'#7EC8E3', config:{stack:['Refactoring Lover','Unit Test 100%','Docs Master']} },
+// 협업 스타일
+{ id:'vibe-collab-glass',    type:'vibe', theme:'badge-pastel',  layout:'tech-layout', title:'협업 스타일 Pastel',  desc:'PR Welcome · Code Review · 리모트 지향 배지', badge:null,  accentColor:'#34A853', config:{stack:['PR Welcome 🙏','Code Review 환영','리모트 지향 🏠']} },
+{ id:'vibe-collab-dark',     type:'vibe', theme:'badge-dark-pro', layout:'tech-layout', title:'협업 스타일 Dark',    desc:'다크 테마 협업 스타일 배지 세트',             badge:null,  accentColor:'#a0d0ff', config:{stack:['PR Welcome 🙏','Code Review 환영','리모트 지향 🏠']} },
+{ id:'vibe-collab-neu',      type:'vibe', theme:'badge-soft',     layout:'tech-layout', title:'협업 스타일 Soft',    desc:'소프트 뉴모피즘 협업 스타일 배지',            badge:null,  accentColor:'#ED93B1', config:{stack:['PR Welcome 🙏','Code Review 환영','리모트 지향 🏠']} },
+// 개발자 유머
+{ id:'vibe-humor-glass',     type:'vibe', theme:'badge-glass',   layout:'tech-layout', title:'개발자 유머 Glass',   desc:'Bug Hunter · I Hate Legacy · 1일 1커밋 배지', badge:'HOT', accentColor:'#EA4335', config:{stack:['Bug Hunter 🐛','I Hate Legacy 😤','1일 1커밋 🌱']} },
+{ id:'vibe-humor-dark',      type:'vibe', theme:'badge-dark-pro', layout:'tech-layout', title:'개발자 유머 Dark',    desc:'다크 테마 개발자 유머 배지 세트',             badge:null,  accentColor:'#a0d0ff', config:{stack:['Bug Hunter 🐛','I Hate Legacy 😤','1일 1커밋 🌱']} },
+{ id:'vibe-humor-neu',       type:'vibe', theme:'badge-soft',     layout:'tech-layout', title:'개발자 유머 Soft',    desc:'소프트 뉴모피즘 개발자 유머 배지',            badge:null,  accentColor:'#FBBC05', config:{stack:['Bug Hunter 🐛','I Hate Legacy 😤','1일 1커밋 🌱']} },
+// Daily Status
+{ id:'vibe-status-glass',    type:'vibe', theme:'badge-glass',   layout:'tech-layout', title:'Daily Status Glass',  desc:'지금은 집중 모드 · 커피 브레이크 · 마감 임박', badge:'NEW', accentColor:'#9B8FE8', config:{stack:['지금은 집중 모드 🤫','커피 브레이크 ☕','마감 임박 🔥']} },
+{ id:'vibe-status-dark',     type:'vibe', theme:'badge-dark-pro', layout:'tech-layout', title:'Daily Status Dark',   desc:'다크 테마 데일리 상태 배지',                  badge:null,  accentColor:'#a0d0ff', config:{stack:['지금은 집중 모드 🤫','커피 브레이크 ☕','마감 임박 🔥']} },
+{ id:'vibe-status-neu',      type:'vibe', theme:'badge-soft',     layout:'tech-layout', title:'Daily Status Soft',   desc:'소프트 뉴모피즘 데일리 상태 배지',            badge:null,  accentColor:'#ED93B1', config:{stack:['지금은 집중 모드 🤫','커피 브레이크 ☕','마감 임박 🔥']} },
+
 ];
 
 /* ── 헬퍼 함수 ───────────────────────────────────────── */

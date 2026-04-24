@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   GitGloss — gallery.js
+   ReadMe.kit — gallery.js
    갤러리 그리드 렌더링 + 필터 (links, banner 포함)
    ═══════════════════════════════════════════════════════ */
 
@@ -15,6 +15,7 @@ const CATEGORY_META = {
   creative: { label: 'Creative', cls: 'category-creative' },
   links:   { label: 'Links',   cls: 'category-links'   },
   banner:  { label: 'Banner',  cls: 'category-banner'  },
+  vibe:    { label: 'Vibe ✨', cls: 'category-vibe'    },
 };
 
 function getFluentUrl(name) {
