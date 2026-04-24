@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="naver-site-verification" content="d3cf9f8cacf2d3e321857160ba601cabeebcd3ba" />
   <!-- ================== 기본 메타 태그 (SEO) ================== -->
   <meta name="title" content="GitGloss — GitHub README 위젯 빌더 | 무료 프로필 꾸미기">
-  <meta name="description"
-    content="GitHub 프로필 README를 코딩 없이 꾸미세요. Stats 카드, Tech Stack 배지, Profile 카드 등 60개 이상의 프리미엄 위젯을 Markdown 한 줄로 바로 삽입할 수 있어요. 완전 무료, 회원가입 불필요.">
-  <meta name="keywords"
-    content="GitHub README, 깃허브 프로필 꾸미기, GitHub 위젯, README 꾸미기, GitHub Stats, Tech Stack Badge, 개발자 프로필, readme 위젯 생성">
+  <meta name="description" content="GitHub 프로필 README를 코딩 없이 꾸미세요. Stats 카드, Tech Stack 배지, Profile 카드 등 60개 이상의 프리미엄 위젯을 Markdown 한 줄로 바로 삽입할 수 있어요. 완전 무료, 회원가입 불필요.">
+  <meta name="keywords" content="GitHub README, 깃허브 프로필 꾸미기, GitHub 위젯, README 꾸미기, GitHub Stats, Tech Stack Badge, 개발자 프로필, readme 위젯 생성">
   <meta name="author" content="GitGloss">
   <meta name="robots" content="index, follow">
-  <meta name="msvalidate.01" content="A2891CCBCAC29E2D299E1DC3D15D3A97" />
   <!-- ================== Open Graph ================== -->
   <meta property="og:title" content="GitGloss — GitHub README 위젯 빌더 | 무료 프로필 꾸미기">
-  <meta property="og:description"
-    content="GitHub 프로필 README를 코딩 없이 꾸미세요. Stats 카드, Tech Stack 배지, Profile 카드 등 60개 이상의 프리미엄 위젯을 Markdown 한 줄로 바로 삽입할 수 있어요. 완전 무료, 회원가입 불필요.">
+  <meta property="og:description" content="GitHub 프로필 README를 코딩 없이 꾸미세요. Stats 카드, Tech Stack 배지, Profile 카드 등 60개 이상의 프리미엄 위젯을 Markdown 한 줄로 바로 삽입할 수 있어요. 완전 무료, 회원가입 불필요.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gitgloss.io/">
   <meta property="og:image" content="https://gitgloss.io/assets/images/og-image.png">
@@ -28,8 +22,7 @@
   <!-- ================== Twitter 카드 ================== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="GitGloss — GitHub README 위젯 빌더 | 무료 프로필 꾸미기">
-  <meta name="twitter:description"
-    content="GitHub 프로필 README를 코딩 없이 꾸미세요. Stats 카드, Tech Stack 배지, Profile 카드 등 60가지 이상의 위젯을 Markdown 한 줄로 바로 삽입할 수 있어요. 완전 무료, 회원가입 불필요.">
+  <meta name="twitter:description" content="GitHub 프로필 README를 코딩 없이 꾸미세요. Stats 카드, Tech Stack 배지, Profile 카드 등 60가지 이상의 위젯을 Markdown 한 줄로 바로 삽입할 수 있어요. 완전 무료, 회원가입 불필요.">
   <meta name="twitter:image" content="https://gitgloss.io/assets/images/og-image.png">
   <meta name="twitter:image:alt" content="GitGloss — GitHub README 위젯 빌더">
   <meta name="twitter:site" content="@gitgloss">
@@ -57,86 +50,102 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    * {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+    html { scroll-behavior: smooth; }
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 
     /* ── NAV ── */
-    /* ── NAV OVERRIDES ── */
     .nav-cta {
-      background: var(--m3-primary);
-      color: var(--m3-on-primary);
-      border-radius: 100px;
-      font: var(--label-lg);
-      box-shadow: var(--fluent-shadow-md);
-      transition: all 0.2s;
+      margin-left: auto;
+      padding: 10px 24px;
+      background: var(--google-blue);
+      color: #fff; border: none; border-radius: 12px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: var(--font-sans);
+      box-shadow: var(--shadow-depth);
+      position: relative;
+      overflow: hidden;
     }
 
-    .nav-cta:hover {
-      background: #0056a7;
-      transform: translateY(-1px);
-      box-shadow: var(--fluent-shadow-lg);
+    .nav-cta span {
+      position: relative;
+      z-index: 1;
     }
 
     /* ── HERO ── */
-    /* ── HERO REDESIGN ── */
     .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 80px;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
       padding: 120px 80px;
-      background: var(--m3-background);
-      background-image: var(--grid-pattern);
-      background-size: 40px 40px;
+      background: var(--bg-main);
+      background-image: var(--gradient-hero), var(--grid-pattern);
       position: relative;
-      max-width: 1440px;
-      margin: 0 auto;
     }
-
-    .m3-label-large {
-      font: var(--label-lg);
-      color: var(--m3-primary);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+    .eyebrow {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--google-blue); margin-bottom: 24px;
     }
-
-    .m3-display-large {
-      font: var(--display-lg);
-      color: var(--m3-on-background);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      margin-bottom: 24px;
+    .hero-h1 {
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 800; color: var(--text-main);
+      line-height: 1.1; letter-spacing: -.03em; margin-bottom: 24px;
     }
-
-    .text-gradient {
-      background: linear-gradient(135deg, var(--m3-primary), #6200EE);
+    .hero-h1 em {
+      font-style: normal;
+      background: var(--gradient-blue-red);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
     .hero-desc {
-      font: var(--body-lg);
-      color: var(--m3-on-surface-variant);
-      line-height: 1.6;
-      margin-bottom: 40px;
+      font-size: 18px; color: var(--text-sub);
+      line-height: 1.6; margin-bottom: 40px; font-weight: 500;
+    }
+    .hero-btns { display: flex; gap: 16px; }
+    .btn-primary-hero {
+      padding: 16px 32px;
+      background: var(--google-blue);
+      color: #fff; border: none; border-radius: 12px;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      font-family: var(--font-sans);
+      text-decoration: none; display: inline-block;
+      box-shadow: var(--shadow-depth);
+      position: relative;
+      overflow: hidden;
+      transition: all .2s;
     }
 
-    .hero-features {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
+    .btn-primary-hero::before {
+      display: none;
     }
 
-    .hero-btns {
-      display: flex;
-      gap: 16px;
+    .btn-primary-hero:hover::before {
+      display: none;
+    }
+
+    .btn-primary-hero:hover {
+      background: #3367d6;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-float);
+    }
+
+    .btn-primary-hero span {
+      position: relative;
+      z-index: 1;
+    }
+    .btn-ghost-hero {
+      padding: 16px 32px;
+      background: var(--glass-white);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main); border-radius: 12px;
+      font-size: 16px; cursor: pointer; font-weight: 600;
+      font-family: var(--font-sans);
+      text-decoration: none; display: inline-block;
+      backdrop-filter: var(--blur-effect);
+      transition: all .2s;
+    }
+    .btn-ghost-hero:hover {
+      background: rgba(0, 0, 0, 0.04);
     }
 
     /* Hero right — GitHub README Mockup (No Animation) */
@@ -285,7 +294,7 @@
       padding: 24px;
       margin: 20px 0;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
-        0 5px 10px rgba(0, 0, 0, 0.3);
+                  0 5px 10px rgba(0, 0, 0, 0.3);
       position: relative;
       /* transform, transition, hover 제거 */
     }
@@ -397,75 +406,32 @@
     .ad-banner {
       margin: 0 80px;
       padding: 16px 24px;
-      background: rgba(0, 0, 0, .02);
-      border: 1px dashed rgba(0, 0, 0, .1);
+      background: rgba(0,0,0,.02);
+      border: 1px dashed rgba(0,0,0,.1);
       border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       position: relative;
     }
-
     .ad-banner::before {
       content: 'Sponsored';
-      position: absolute;
-      top: 8px;
-      left: 16px;
-      font-size: 10px;
-      color: rgba(0, 0, 0, .35);
-      letter-spacing: .08em;
-      font-family: var(--font-mono);
-      font-weight: 600;
+      position: absolute; top: 8px; left: 16px;
+      font-size: 10px; color: rgba(0,0,0,.35);
+      letter-spacing: .08em; font-family: var(--font-mono); font-weight: 600;
     }
-
-    .ad-banner-text {
-      font-size: 13px;
-      color: var(--text-sub);
-      padding-top: 12px;
-      font-weight: 500;
-    }
-
-    .ad-banner-slot {
-      font-size: 11px;
-      color: var(--text-hint);
-      font-family: var(--font-mono);
-    }
+    .ad-banner-text { font-size: 13px; color: var(--text-sub); padding-top: 12px; font-weight: 500; }
+    .ad-banner-slot { font-size: 11px; color: var(--text-hint); font-family: var(--font-mono); }
 
     /* ── GALLERY ── */
-    .gallery-section {
-      padding: 80px 80px;
-      background: var(--bg-subtle);
-    }
-
+    .gallery-section { padding: 80px 80px; background: var(--bg-subtle); }
     .section-eyebrow {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--google-blue);
-      margin-bottom: 16px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--google-blue); margin-bottom: 16px;
     }
+    .section-title { font-size: 40px; font-weight: 800; color: var(--text-main); margin-bottom: 12px; letter-spacing: -.02em; }
+    .section-desc  { font-size: 18px; color: var(--text-sub); margin-bottom: 48px; font-weight: 500; }
 
-    .section-title {
-      font-size: 40px;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 12px;
-      letter-spacing: -.02em;
-    }
-
-    .section-desc {
-      font-size: 18px;
-      color: var(--text-sub);
-      margin-bottom: 48px;
-      font-weight: 500;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 
     /* Badge styles */
     .badge-blue {
@@ -521,11 +487,8 @@
     .g-card {
       background: var(--glass-white);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 24px;
-      cursor: pointer;
-      transition: all .3s;
-      position: relative;
+      border-radius: 20px; padding: 24px;
+      cursor: pointer; transition: all .3s; position: relative;
       backdrop-filter: var(--blur-effect);
       box-shadow: var(--shadow-depth);
       transform: translateZ(0);
@@ -549,72 +512,32 @@
     .g-card:hover {
       transform: translateY(-4px) translateZ(20px);
       box-shadow: var(--shadow-float);
-      border-color: rgba(66, 133, 244, .3);
+      border-color: rgba(66,133,244,.3);
     }
-
     .g-thumb {
-      height: 120px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: 120px; border-radius: 12px;
+      margin-bottom: 20px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
       position: relative;
       background: var(--bg-subtle);
     }
-
-    .g-thumb-bars {
-      width: 80%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .thumb-bar {
-      height: 8px;
-      border-radius: 4px;
-    }
-
-    .g-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 12px;
-    }
-
-    .g-meta {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
+    .g-thumb-bars { width: 80%; display: flex; flex-direction: column; gap: 8px; }
+    .thumb-bar { height: 8px; border-radius: 4px; }
+    .g-title { font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+    .g-meta  { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .card-new {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      font-size: 10px;
-      font-weight: 700;
-      background: rgba(52, 168, 83, .15);
-      color: #188038;
-      border: 1px solid rgba(52, 168, 83, .3);
-      border-radius: 8px;
-      padding: 4px 10px;
+      position: absolute; top: 16px; right: 16px;
+      font-size: 10px; font-weight: 700;
+      background: rgba(52,168,83,.15); color: #188038;
+      border: 1px solid rgba(52,168,83,.3);
+      border-radius: 8px; padding: 4px 10px;
     }
-
     .use-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
+      display: block; width: 100%; padding: 12px;
       background: var(--google-blue);
       border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #fff;
-      text-align: center;
-      cursor: pointer;
+      border-radius: 12px; font-size: 14px; font-weight: 600;
+      color: #fff; text-align: center; cursor: pointer;
       font-family: var(--font-sans);
       text-decoration: none;
       box-shadow: var(--shadow-subtle);
@@ -644,68 +567,29 @@
 
     /* Native ad card */
     .ad-native-card {
-      background: rgba(0, 0, 0, .02);
-      border: 1px dashed rgba(0, 0, 0, .1);
-      border-radius: 20px;
-      padding: 24px;
-      position: relative;
+      background: rgba(0,0,0,.02);
+      border: 1px dashed rgba(0,0,0,.1);
+      border-radius: 20px; padding: 24px; position: relative;
     }
-
     .ad-native-card::before {
-      content: 'Sponsored';
-      position: absolute;
-      top: 16px;
-      left: 20px;
-      font-size: 10px;
-      color: rgba(0, 0, 0, .35);
-      letter-spacing: .08em;
-      font-family: var(--font-mono);
-      font-weight: 600;
+      content: 'Sponsored'; position: absolute; top: 16px; left: 20px;
+      font-size: 10px; color: rgba(0,0,0,.35);
+      letter-spacing: .08em; font-family: var(--font-mono); font-weight: 600;
     }
-
-    .ad-native-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-top: 24px;
-      margin-bottom: 8px;
-    }
-
-    .ad-native-desc {
-      font-size: 14px;
-      color: var(--text-sub);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
+    .ad-native-title { font-size: 16px; font-weight: 700; color: var(--text-main); margin-top: 24px; margin-bottom: 8px; }
+    .ad-native-desc  { font-size: 14px; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px; font-weight: 500; }
 
     /* ── FOOTER ── */
     .page-footer {
       background: var(--bg-main);
       border-top: 1px solid var(--glass-border);
       padding: 32px 80px;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      font-size: 14px;
-      color: var(--text-hint);
-      font-weight: 500;
+      display: flex; align-items: center; gap: 32px;
+      font-size: 14px; color: var(--text-hint); font-weight: 500;
     }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-link {
-      color: var(--text-hint);
-      text-decoration: none;
-      transition: .2s;
-    }
-
-    .footer-link:hover {
-      color: var(--text-main);
-    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-link { color: var(--text-hint); text-decoration: none; transition: .2s; }
+    .footer-link:hover { color: var(--text-main); }
 
     /* ── HOW TO SECTION (Toss-style Detailed) ── */
     .how-to-section {
@@ -726,7 +610,7 @@
       direction: rtl;
     }
 
-    .step-detail.reverse>* {
+    .step-detail.reverse > * {
       direction: ltr;
     }
 
@@ -940,23 +824,10 @@
     }
 
     @keyframes cursor-click {
-
-      0%,
-      100% {
-        transform: translate(0, 0);
-      }
-
-      25% {
-        transform: translate(120px, 0);
-      }
-
-      50% {
-        transform: translate(120px, 0) scale(0.9);
-      }
-
-      75% {
-        transform: translate(120px, 0);
-      }
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(120px, 0); }
+      50% { transform: translate(120px, 0) scale(0.9); }
+      75% { transform: translate(120px, 0); }
     }
 
     /* Builder Mockup */
@@ -1007,16 +878,8 @@
     }
 
     @keyframes input-pulse {
-
-      0%,
-      100% {
-        border-color: var(--glass-border);
-      }
-
-      50% {
-        border-color: var(--google-blue);
-        box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
-      }
+      0%, 100% { border-color: var(--glass-border); }
+      50% { border-color: var(--google-blue); box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1); }
     }
 
     .theme-selector {
@@ -1057,25 +920,12 @@
       animation: typing-bounce 1.4s ease-in-out infinite;
     }
 
-    .typing-indicator .dot:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .typing-indicator .dot:nth-child(3) {
-      animation-delay: 0.4s;
-    }
+    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes typing-bounce {
-
-      0%,
-      60%,
-      100% {
-        transform: translateY(0);
-      }
-
-      30% {
-        transform: translateY(-8px);
-      }
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-8px); }
     }
 
     .builder-preview {
@@ -1154,15 +1004,8 @@
     }
 
     @keyframes pulse-ring {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(1.05);
-      }
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.05); }
     }
 
     /* README Comparison */
@@ -1255,15 +1098,8 @@
     }
 
     @keyframes arrow-pulse {
-
-      0%,
-      100% {
-        transform: translateX(0);
-      }
-
-      50% {
-        transform: translateX(8px);
-      }
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(8px); }
     }
 
     /* Embedded Widget in README */
@@ -1278,7 +1114,6 @@
         opacity: 0;
         transform: translateY(20px) scale(0.95);
       }
-
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -1294,15 +1129,8 @@
     }
 
     @keyframes glow-pulse {
-
-      0%,
-      100% {
-        opacity: 0.5;
-      }
-
-      50% {
-        opacity: 1;
-      }
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     .widget-card-embed {
@@ -1390,7 +1218,6 @@
         opacity: 0;
         transform: translateX(-50%) translateY(10px);
       }
-
       to {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
@@ -1417,191 +1244,594 @@
     }
 
     @media (max-width: 1024px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 80px 40px;
-      }
-
-      .gallery-section {
-        padding: 60px 40px;
-      }
-
-      .how-to-section {
-        padding: 80px 40px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .step-detail {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .step-detail.reverse {
-        direction: ltr;
-      }
-
-      .builder-split {
-        grid-template-columns: 1fr;
-      }
-
-      .builder-panel {
-        border-right: none;
-        border-bottom: 1px solid var(--glass-border);
-      }
-
-      .readme-comparison {
-        grid-template-columns: 1fr;
-      }
-
-      .transform-arrow {
-        transform: rotate(90deg);
-        margin: 16px 0;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .ad-banner {
-        margin: 0 40px;
-      }
-
-      .page-footer {
-        padding: 24px 40px;
-      }
+      .hero { grid-template-columns: 1fr; gap: 48px; padding: 80px 40px; }
+      .gallery-section { padding: 60px 40px; }
+      .how-to-section { padding: 80px 40px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .step-detail { grid-template-columns: 1fr; gap: 48px; }
+      .step-detail.reverse { direction: ltr; }
+      .builder-split { grid-template-columns: 1fr; }
+      .builder-panel { border-right: none; border-bottom: 1px solid var(--glass-border); }
+      .readme-comparison { grid-template-columns: 1fr; }
+      .transform-arrow { transform: rotate(90deg); margin: 16px 0; }
+      .nav-links { display: none; }
+      .ad-banner { margin: 0 40px; }
+      .page-footer { padding: 24px 40px; }
     }
-
     @media (max-width: 640px) {
-      .hero {
-        padding: 60px 24px;
-      }
-
-      .gallery-section {
-        padding: 48px 24px;
-      }
-
-      .how-to-section {
-        padding: 60px 24px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .step-title {
-        font-size: 28px;
-      }
-
-      .step-desc {
-        font-size: 16px;
-      }
-
-      .gallery-grid-mini {
-        grid-template-columns: 1fr;
-      }
-
-      .ad-banner {
-        margin: 0 24px;
-      }
-
-      .page-footer {
-        padding: 20px 24px;
-        flex-direction: column;
-        gap: 16px;
-      }
+      .hero { padding: 60px 24px; }
+      .gallery-section { padding: 48px 24px; }
+      .how-to-section { padding: 60px 24px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .step-title { font-size: 28px; }
+      .step-desc { font-size: 16px; }
+      .gallery-grid-mini { grid-template-columns: 1fr; }
+      .ad-banner { margin: 0 24px; }
+      .page-footer { padding: 20px 24px; flex-direction: column; gap: 16px; }
     }
+  </style>
+</head>
+<body>
 
-    </head><body>< !-- Schema.org WebSite 구조화 데이터 --><script type="application/ld+json"> {
-
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "GitGloss",
-      "url": "https://gitgloss.io",
-      "description": "GitHub README 위젯 생성 도구. 개발자 프로필을 프리미엄 위젯으로 꾸미세요.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://gitgloss.io/gallery.html?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+  <!-- Schema.org WebSite 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "GitGloss",
+    "url": "https://gitgloss.io",
+    "description": "GitHub README 위젯 생성 도구. 개발자 프로필을 프리미엄 위젯으로 꾸미세요.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://gitgloss.io/gallery.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <!-- Schema.org SoftwareApplication 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GitGloss Widget Builder",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "KRW"
+    },
+    "description": "GitHub README에 삽입할 수 있는 프리미엄 위젯을 무료로 만드는 온라인 빌더. Stats, Tech Stack, Profile, Streak 위젯 지원.",
+    "url": "https://gitgloss.io/builder.html"
+  }
+  </script>
 
-    </script>< !-- Schema.org SoftwareApplication 구조화 데이터 --><script type="application/ld+json"> {
+  <!-- NAV -->
+  <nav class="nav" aria-label="주요 내비게이션">
+    <a href="/" class="nav-logo" aria-label="GitGloss 홈으로 이동">GitGloss</a>
+    <div class="nav-right">
+      <a href="gallery.html"                        class="nav-link">갤러리</a>
+      <a href="docs/showcase/reviews.html"          class="nav-link">후기</a>
+      <a href="docs/showcase/notion-portfolio.html" class="nav-link">가이드</a>
+      <a href="about.html"                          class="nav-link">소개</a>
+      <a href="builder.html" class="nav-cta">위젯 만들기</a>
+    </div>
+  </nav>
 
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "GitGloss Widget Builder",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "KRW"
-      }
+  <!-- HERO with GitHub README Mockup -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div>
+      <p class="eyebrow">GITHUB README 위젯 빌더</p>
+      <h1 class="hero-h1" id="hero-heading">GitHub README를<br><em>유리알처럼</em><br>빛내세요</h1>
+      <p class="hero-desc">
+        GitHub 프로필 README를 코딩 없이 꾸밀 수 있는 무료 위젯 빌더예요.<br>
+        기술 블로그 연동, 스포티파이 연동, MBTI 상태 등 67가지 이상의 위젯을<br>
+        Markdown 한 줄로 바로 삽입할 수 있어요.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px">
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(66,133,244,.08);border:1px solid rgba(66,133,244,.15);font-size:13px;font-weight:600;color:#1967D2">✓ 완전 무료</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(52,168,83,.08);border:1px solid rgba(52,168,83,.15);font-size:13px;font-weight:600;color:#188038">✓ 회원가입 불필요</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(251,188,5,.1);border:1px solid rgba(251,188,5,.25);font-size:13px;font-weight:600;color:#E37400">✓ 67+ 위젯 템플릿</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(234,67,53,.08);border:1px solid rgba(234,67,53,.15);font-size:13px;font-weight:600;color:#C5221F">✓ Markdown 한 줄 삽입</span>
+      </div>
+      <div class="hero-btns">
+        <a href="gallery.html" class="btn-primary-hero"><span>갤러리 보기 →</span></a>
+        <a href="about.html" class="btn-ghost-hero">자세히 알아보기</a>
+      </div>
+    </div>
 
-      ,
-      "description": "GitHub README에 삽입할 수 있는 프리미엄 위젯을 무료로 만드는 온라인 빌더. Stats, Tech Stack, Profile, Streak 위젯 지원.",
-      "url": "https://gitgloss.io/builder.html"
-    }
+    <!-- GitHub README Mockup -->
+    <div class="hero-right">
+      <div class="github-mockup">
+        <div class="gh-mock-header">
+          <div class="gh-mock-avatar"></div>
+          <div class="gh-mock-info">
+            <div class="gh-mock-name">octocat</div>
+            <div class="gh-mock-bio">Full-stack Developer</div>
+          </div>
+        </div>
+        
+        <div class="gh-mock-tabs">
+          <span class="gh-mock-tab">Overview</span>
+          <span class="gh-mock-tab active">README</span>
+          <span class="gh-mock-tab">Repos</span>
+        </div>
 
-    </script>< !-- NAV --><nav class="nav" aria-label="주요 내비게이션"><a href="/" class="nav-logo" aria-label="GitGloss 홈으로 이동">GitGloss</a><div class="nav-right"><a href="gallery.html" class="nav-link">갤러리</a><a href="docs/showcase/reviews.html" class="nav-link">후기</a><a href="docs/showcase/notion-portfolio.html" class="nav-link">가이드</a><a href="about.html" class="nav-link">소개</a><a href="builder.html" class="nav-cta">위젯 만들기</a></div></nav>< !-- HERO with GitHub README Mockup --><section class="hero" aria-labelledby="hero-heading"><div class="hero-content"><p class="m3-label-large">GITHUB README 위젯 빌더</p><h1 class="m3-display-large" id="hero-heading">GitHub README를<br><span class="text-gradient">유리알처럼</span><br>빛내세요 </h1><p class="m3-body-large hero-desc">GitHub 프로필 README를 코딩 없이 꾸밀 수 있는 무료 위젯 빌더예요.<br>기술 블로그 연동,
-    스포티파이 연동,
-    MBTI 상태 등 67가지 이상의 위젯을<br>Markdown 한 줄로 바로 삽입할 수 있어요. </p><div class="hero-features"><span class="badge-blue">✓ 완전 무료</span><span class="badge-green">✓ 회원가입 불필요</span><span class="badge-yellow">✓ 67+위젯 템플릿</span><span class="badge-red">✓ Markdown 한 줄 삽입</span></div><div class="hero-btns"><a href="gallery.html" class="btn-primary">갤러리 보기 →</a><a href="about.html" class="btn-ghost">자세히 알아보기</a></div></div>< !-- GitHub README Mockup --><div class="hero-right"><div class="github-mockup"><div class="gh-mock-header"><div class="gh-mock-avatar"></div><div class="gh-mock-info"><div class="gh-mock-name">octocat</div><div class="gh-mock-bio">Full-stack Developer</div></div></div><div class="gh-mock-tabs"><span class="gh-mock-tab">Overview</span><span class="gh-mock-tab active">README</span><span class="gh-mock-tab">Repos</span></div><div class="gh-mock-readme"><div class="gh-mock-readme-header"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75z"></path></svg><span>README.md</span></div><div class="gh-mock-content"><div class="gh-mock-title">👋 Hi,
-    I'm @octocat</div>
- <div class="gh-mock-text">Welcome to my GitHub profile !</div>< !-- Embedded GitGloss Widget --><div class="gitgloss-widget-embed"><div class="widget-embed-header"><div class="widget-embed-avatar"></div><div><div class="widget-embed-name">octocat</div><div class="widget-embed-handle">@octocat · GitHub</div></div></div><div class="widget-embed-stats"><div class="widget-embed-stat"><div class="widget-embed-num">2.8k</div><div class="widget-embed-label">STARS</div></div><div class="widget-embed-stat"><div class="widget-embed-num">142</div><div class="widget-embed-label">REPOS</div></div><div class="widget-embed-stat"><div class="widget-embed-num">98%</div><div class="widget-embed-label">ACTIVE</div></div></div><div class="widget-embed-tags"><span class="widget-embed-badge badge-blue">React</span><span class="widget-embed-badge badge-red">TypeScript</span><span class="widget-embed-badge badge-green">Node.js</span></div></div><div class="gh-mock-subtitle">🚀 About Me</div><div class="gh-mock-list"><div class="gh-mock-list-item">🔭 Working on awesome-project</div><div class="gh-mock-list-item">🌱 Learning Rust & WebAssembly</div></div></div></div></div></div></section>< !-- 카카오 애드핏: Most Used 상단 영역 --><div class="ad-most-used" style="display:flex; justify-content:center; margin:24px 0;"><ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-vplpvxOSROG0Fz7S" data-ad-width="300"
-    data-ad-height="250"></ins><script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script></div>< !-- GALLERY --><section class="gallery-section" id="gallery" aria-labelledby="gallery-heading"><p class="section-eyebrow">위젯 갤러리</p><h2 class="section-title" id="gallery-heading">마음에 드는 위젯을 골라보세요</h2><p class="section-desc">클릭하면 빌더에서 해당 위젯이 바로 열려요</p><ul class="gallery-grid" role="list" style="list-style:none;padding:0;margin:0">< !-- 1: stats-01 Cotton Candy Stats --><li class="g-card" role="listitem"><span class="card-new" aria-label="신규 위젯">NEW</span><div class="g-thumb"
-    style="background:rgba(255,240,247,0.9);border:1px solid rgba(237,147,177,0.3);position:relative;overflow:hidden"
-    aria-hidden="true"><div style="position:absolute;top:-20px;right:-10px;width:60px;height:60px;background:radial-gradient(circle,rgba(237,147,177,0.4),transparent 70%);pointer-events:none"></div><div style="display:flex;flex-direction:column;gap:5px;width:82%;padding:4px 0"><div style="height:7px;border-radius:4px;background:rgba(237,147,177,0.35);width:55%"></div><div style="display:flex;gap:4px"><div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,0.85);border:1px solid rgba(237,147,177,0.2)"></div><div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,0.85);border:1px solid rgba(237,147,177,0.2)"></div></div></div></div><h3 class="g-title">Cotton Candy Stats</h3><div class="g-meta"><span class="badge-blue">Stats</span></div><a href="builder.html?template=stats-01" class="use-btn">이 위젯 사용하기 →</a></li>< !-- 2: tech-04 Pastel Burst --><li class="g-card" role="listitem"><span class="card-new" aria-label="신규 위젯">NEW</span><div class="g-thumb" style="background:linear-gradient(135deg,rgba(155,143,232,0.1),rgba(126,200,227,0.1))"
-    aria-hidden="true"><div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:8px"><div style="padding:3px 8px;border-radius:8px;background:rgba(155,143,232,0.2);font-size:9px;font-weight:700;color:#6a5fc1">React</div><div style="padding:3px 8px;border-radius:8px;background:rgba(126,200,227,0.2);font-size:9px;font-weight:700;color:#2a8caa">Node.js</div></div></div><h3 class="g-title">Pastel Burst Tech</h3><div class="g-meta"><span class="badge-blue">Tech</span></div><a href="builder.html?template=tech-04" class="use-btn">이 위젯 사용하기 →</a></li>< !-- 3: profile-02 Dark Hero --><li class="g-card" role="listitem"><div class="g-thumb" style="background:#0D0714;border:1px solid #30363d;" aria-hidden="true"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#9B8FE8,#ED93B1)"></div><div style="height:6px;width:50px;background:rgba(255,255,255,0.2);border-radius:3px;"></div></div></div><h3 class="g-title">Dark Hero Profile</h3><div class="g-meta"><span class="badge-blue">Profile</span></div><a href="builder.html?template=profile-02" class="use-btn">이 위젯 사용하기 →</a></li>< !-- 4: stats-13 Skill Radar --><li class="g-card" role="listitem"><span class="card-new"
-    style="background:var(--google-blue);color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:800;position:absolute;top:10px;right:10px;z-index:2;">HOT</span><div class="g-thumb"
-    style="background:rgba(66,133,244,0.05);display:flex;align-items:center;justify-content:center;"
-    aria-hidden="true"><div style="width:50px;height:50px;background:rgba(66,133,244,0.1);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);border:2px solid var(--google-blue);display:flex;align-items:center;justify-content:center;"><div style="width:30px;height:30px;background:rgba(66,133,244,0.3);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);"></div></div></div><h3 class="g-title">Skill Radar Chart</h3><div class="g-meta"><span class="badge-blue">Creative</span></div><a href="builder.html?template=stats-13" class="use-btn">이 위젯 사용하기 →</a></li>< !-- 5: links-02 Glass Card --><li class="g-card" role="listitem"><div class="g-thumb" style="background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);" aria-hidden="true"><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;width:70%;"><div style="height:14px;background:rgba(0,0,0,0.05);border-radius:4px;"></div><div style="height:14px;background:rgba(0,0,0,0.05);border-radius:4px;"></div></div></div><h3 class="g-title">Glass Card Links</h3><div class="g-meta"><span class="badge-blue">Links</span></div><a href="builder.html?template=links-02" class="use-btn">이 위젯 사용하기 →</a></li>< !-- 6: banner-01 Wave Pink --><li class="g-card" role="listitem"><div class="g-thumb" style="background:linear-gradient(135deg,#ED93B1,#FFF0F7);" aria-hidden="true"><div style="width:80%;height:30px;background:rgba(255,255,255,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;">WELCOME</div></div><h3 class="g-title">Wave Pink Banner</h3><div class="g-meta"><span class="badge-red">Banner</span></div><a href="builder.html?template=banner-01" class="use-btn">이 위젯 사용하기 →</a></li></ul>< !-- AD-4: 갤러리 하단 Leaderboard --><div class="ad-banner" style="margin:48px 0 0" aria-label="광고"><div class="ad-banner-text">Google AdSense 728×90 — 갤러리 하단</div><div class="ad-banner-slot"></div></div></section>< !-- HOW TO USE: Toss-style Detailed Steps --><section class="how-to-section" id="guide" aria-labelledby="guide-heading"><p class="section-eyebrow">사용 방법</p><h2 class="section-title" id="guide-heading">클릭 세 번이면 끝나요</h2><p class="section-desc">복잡한 설정 없이, 3분이면 프리미엄 README 완성</p>< !-- Step 1: 위젯 고르기 --><article class="step-detail" aria-labelledby="step1-heading"><div class="step-content"><p class="step-number">STEP 01</p><h3 class="m3-headline-lg" id="step1-heading">갤러리에서<br>마음에 드는 위젯을 고르세요</h3><p class="m3-body-large">67개 이상의 프리미엄 GitHub README 위젯 중에서 내 스타일에 맞는 걸 골라보세요. Stats 카드, Tech Stack 배지, Profile 카드, Streak 카운터 및 신규 창의적 위젯들을 제공합니다. 클릭하면 빌더가 바로 열려요. </p><ul class="step-features" aria-label="Step 1 주요 기능"><li class="feature-item"><span class="feature-icon" aria-hidden="true">✨</span><span>67+프리미엄 템플릿 무료 제공</span></li><li class="feature-item"><span class="feature-icon" aria-hidden="true">🎨</span><span>다크 모드 · 라이트 모드 · 뉴모피즘 테마 지원</span></li><li class="feature-item"><span class="feature-icon" aria-hidden="true">⚡</span><span>실시간 미리보기로 결과 즉시 확인</span></li></ul></div><div class="step-visual"><div class="ui-mockup gallery-mockup" aria-hidden="true"><div class="mockup-header"><div class="mockup-logo">GitGloss</div><div class="mockup-nav"><span class="nav-item active">갤러리</span><span class="nav-item">빌더</span></div></div><div class="mockup-content"><div class="gallery-grid-mini"><div class="widget-card-mini active"><div class="widget-thumb"
-    style="background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(234,67,53,.1))"><div class="thumb-bars"><div class="bar" style="width:100%;background:rgba(66,133,244,.5)"></div><div class="bar" style="width:75%;background:rgba(234,67,53,.4)"></div></div></div><div class="widget-label">GitHub Stats</div><div class="widget-badge">NEW</div></div><div class="widget-card-mini"><div class="widget-thumb"
-    style="background:linear-gradient(135deg,rgba(52,168,83,.2),rgba(251,188,5,.15))"><div class="badge-row-mini"><span class="badge-mini">React</span><span class="badge-mini">TS</span></div></div><div class="widget-label">Tech Stack</div></div><div class="widget-card-mini"><div class="widget-thumb"
-    style="background:linear-gradient(135deg,rgba(66,133,244,.12),rgba(234,67,53,.12))"><div class="profile-mini"><div class="avatar-mini"></div></div></div><div class="widget-label">Profile</div></div></div></div><div class="mockup-cursor"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--google-blue)"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" /></svg></div></div></div></article>< !-- Step 2: 사용자명 입력 --><article class="step-detail reverse" aria-labelledby="step2-heading"><div class="step-visual"><div class="ui-mockup builder-mockup" aria-hidden="true"><div class="builder-split"><div class="builder-panel"><div class="panel-header">설정</div><div class="input-group"><label>GitHub 사용자명</label><input type="text" value="octocat" class="input-animated" readonly /></div><div class="input-group"><label>테마</label><div class="theme-selector"><div class="theme-option active">Glass Light</div><div class="theme-option">Glass Dark</div></div></div><div class="typing-indicator"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div><div class="builder-preview"><div class="preview-label">실시간 미리보기</div><div class="preview-widget"><div class="widget-preview-card"><div class="preview-avatar"></div><div class="preview-stats"><div class="stat-item"><div class="stat-num">2.8k</div><div class="stat-label">Stars</div></div><div class="stat-item"><div class="stat-num">142</div><div class="stat-label">Repos</div></div></div></div></div><div class="preview-pulse"></div></div></div></div></div><div class="step-content"><p class="step-number">STEP 02</p><h3 class="step-title" id="step2-heading">GitHub 사용자명만<br>입력하면 끝이에요</h3><p class="step-desc">복잡한 설정은 필요 없어요. GitHub 사용자명 하나만 입력하면 위젯 미리보기가 실시간으로 바뀌어요. 테마, 색상, 레이아웃을 자유롭게 커스터마이징할 수 있고, 변경 사항이 즉시 반영됩니다. </p><ul class="step-features" aria-label="Step 2 주요 기능"><li class="feature-item"><span class="feature-icon" aria-hidden="true">🔄</span><span>입력값 변경 시 실시간 동기화</span></li><li class="feature-item"><span class="feature-icon" aria-hidden="true">🎯</span><span>GitHub API 자동 데이터 불러오기</span></li><li class="feature-item"><span class="feature-icon" aria-hidden="true">✏️</span><span>색상 · 폰트 · 레이아웃 커스터마이징</span></li></ul></div></article>< !-- Step 3: Copy & Paste --><article class="step-detail" aria-labelledby="step3-heading"><div class="step-content"><p class="step-number">STEP 03</p><h3 class="step-title" id="step3-heading">복사해서<br>README에 붙여넣기</h3><p class="step-desc">Markdown 코드 한 줄이면 돼요. 복사 버튼을 누르고 GitHub README에 붙여넣으세요. 위젯은 GitHub 서버에서 자동으로 렌더링되며, 데이터도 주기적으로 자동 업데이트됩니다. 별도 서버 설정이나 토큰 발급 없이 즉시 사용 가능합니다. </p><ul class="step-features" aria-label="Step 3 주요 기능"><li class="feature-item"><span class="feature-icon" aria-hidden="true">📋</span><span>원클릭 Markdown 코드 복사</span></li><li class="feature-item"><span class="feature-icon" aria-hidden="true">🚀</span><span>GitHub README에 붙여넣기만 하면 즉시 적용</span></li><li class="feature-item"><span class="feature-icon" aria-hidden="true">♻️</span><span>GitHub 통계 자동 업데이트</span></li></ul></div><div class="step-visual"><div class="readme-comparison" aria-hidden="true"><div class="readme-before"><div class="readme-header"><div class="readme-tabs"><span class="tab">Code</span><span class="tab active">README</span></div></div><div class="readme-content plain"><div class="readme-title">👋 Hi, I'm @octocat</div>
- <p class="readme-text">Welcome to my profile</p><div class="readme-stats-plain">⭐ 42 stars · 📦 12 repos</div></div><div class="before-label">Before</div></div><div class="transform-arrow"><svg width="40" height="40" viewBox="0 0 24 24" fill="var(--google-green)"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" /></svg></div><div class="readme-after"><div class="readme-header"><div class="readme-tabs"><span class="tab">Code</span><span class="tab active">README</span></div></div><div class="readme-content premium"><div class="readme-title">👋 Hi, I'm @octocat</div>
- <p class="readme-text">Welcome to my profile</p><div class="embedded-widget"><div class="widget-glow"></div><div class="widget-card-embed"><div class="embed-avatar"></div><div class="embed-stats"><div class="embed-stat"><div class="embed-num">2.8k</div><div class="embed-label">STARS</div></div><div class="embed-stat"><div class="embed-num">142</div><div class="embed-label">REPOS</div></div><div class="embed-stat"><div class="embed-num">98%</div><div class="embed-label">ACTIVE</div></div></div><div class="embed-badges"><span class="embed-badge">React</span><span class="embed-badge">TypeScript</span></div></div></div></div><div class="after-label">After</div></div></div><div class="copy-success-mini" aria-hidden="true"><div class="success-checkmark">✓</div><span>복사 완료 !</span></div></div></article></section>< !-- CTA 배너 --><section style="
- padding: 80px;
+        <div class="gh-mock-readme">
+          <div class="gh-mock-readme-header">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75z"></path>
+            </svg>
+            <span>README.md</span>
+          </div>
+
+          <div class="gh-mock-content">
+            <div class="gh-mock-title">👋 Hi, I'm @octocat</div>
+            <div class="gh-mock-text">Welcome to my GitHub profile!</div>
+
+            <!-- Embedded GitGloss Widget -->
+            <div class="gitgloss-widget-embed">
+              <div class="widget-embed-header">
+                <div class="widget-embed-avatar"></div>
+                <div>
+                  <div class="widget-embed-name">octocat</div>
+                  <div class="widget-embed-handle">@octocat · GitHub</div>
+                </div>
+              </div>
+              <div class="widget-embed-stats">
+                <div class="widget-embed-stat">
+                  <div class="widget-embed-num">2.8k</div>
+                  <div class="widget-embed-label">STARS</div>
+                </div>
+                <div class="widget-embed-stat">
+                  <div class="widget-embed-num">142</div>
+                  <div class="widget-embed-label">REPOS</div>
+                </div>
+                <div class="widget-embed-stat">
+                  <div class="widget-embed-num">98%</div>
+                  <div class="widget-embed-label">ACTIVE</div>
+                </div>
+              </div>
+              <div class="widget-embed-tags">
+                <span class="widget-embed-badge badge-blue">React</span>
+                <span class="widget-embed-badge badge-red">TypeScript</span>
+                <span class="widget-embed-badge badge-green">Node.js</span>
+              </div>
+            </div>
+
+            <div class="gh-mock-subtitle">🚀 About Me</div>
+            <div class="gh-mock-list">
+              <div class="gh-mock-list-item">🔭 Working on awesome-project</div>
+              <div class="gh-mock-list-item">🌱 Learning Rust & WebAssembly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 카카오 애드핏: Most Used 상단 영역 -->
+  <div class="ad-most-used" style="display:flex; justify-content:center; margin:24px 0;">
+    <ins class="kakao_ad_area" style="display:none;"
+    data-ad-unit = "DAN-vplpvxOSROG0Fz7S"
+    data-ad-width = "300"
+    data-ad-height = "250"></ins>
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+  </div>
+
+  <!-- GALLERY -->
+  <section class="gallery-section" id="gallery" aria-labelledby="gallery-heading">
+    <p class="section-eyebrow">위젯 갤러리</p>
+    <h2 class="section-title" id="gallery-heading">마음에 드는 위젯을 골라보세요</h2>
+    <p class="section-desc">클릭하면 빌더에서 해당 위젯이 바로 열려요</p>
+
+    <ul class="gallery-grid" role="list" style="list-style:none;padding:0;margin:0">
+
+      <!-- 1: stats-01 Cotton Candy Stats -->
+      <li class="g-card" role="listitem">
+        <span class="card-new" aria-label="신규 위젯">NEW</span>
+        <div class="g-thumb" style="background:rgba(255,240,247,0.9);border:1px solid rgba(237,147,177,0.3);position:relative;overflow:hidden" aria-hidden="true">
+          <div style="position:absolute;top:-20px;right:-10px;width:60px;height:60px;background:radial-gradient(circle,rgba(237,147,177,0.4),transparent 70%);pointer-events:none"></div>
+          <div style="display:flex;flex-direction:column;gap:5px;width:82%;padding:4px 0">
+            <div style="height:7px;border-radius:4px;background:rgba(237,147,177,0.35);width:55%"></div>
+            <div style="display:flex;gap:4px">
+              <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,0.85);border:1px solid rgba(237,147,177,0.2)"></div>
+              <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,0.85);border:1px solid rgba(237,147,177,0.2)"></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="g-title">Cotton Candy Stats</h3>
+        <div class="g-meta"><span class="badge-blue">Stats</span></div>
+        <a href="builder.html?template=stats-01" class="use-btn">이 위젯 사용하기 →</a>
+      </li>
+
+      <!-- 2: tech-04 Pastel Burst -->
+      <li class="g-card" role="listitem">
+        <span class="card-new" aria-label="신규 위젯">NEW</span>
+        <div class="g-thumb" style="background:linear-gradient(135deg,rgba(155,143,232,0.1),rgba(126,200,227,0.1))" aria-hidden="true">
+          <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:8px">
+            <div style="padding:3px 8px;border-radius:8px;background:rgba(155,143,232,0.2);font-size:9px;font-weight:700;color:#6a5fc1">React</div>
+            <div style="padding:3px 8px;border-radius:8px;background:rgba(126,200,227,0.2);font-size:9px;font-weight:700;color:#2a8caa">Node.js</div>
+          </div>
+        </div>
+        <h3 class="g-title">Pastel Burst Tech</h3>
+        <div class="g-meta"><span class="badge-blue">Tech</span></div>
+        <a href="builder.html?template=tech-04" class="use-btn">이 위젯 사용하기 →</a>
+      </li>
+
+      <!-- 3: profile-02 Dark Hero -->
+      <li class="g-card" role="listitem">
+        <div class="g-thumb" style="background:#0D0714;border:1px solid #30363d;" aria-hidden="true">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#9B8FE8,#ED93B1)"></div>
+            <div style="height:6px;width:50px;background:rgba(255,255,255,0.2);border-radius:3px;"></div>
+          </div>
+        </div>
+        <h3 class="g-title">Dark Hero Profile</h3>
+        <div class="g-meta"><span class="badge-blue">Profile</span></div>
+        <a href="builder.html?template=profile-02" class="use-btn">이 위젯 사용하기 →</a>
+      </li>
+
+      <!-- 4: stats-13 Skill Radar -->
+      <li class="g-card" role="listitem">
+        <span class="card-new" style="background:var(--google-blue);color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:800;position:absolute;top:10px;right:10px;z-index:2;">HOT</span>
+        <div class="g-thumb" style="background:rgba(66,133,244,0.05);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
+          <div style="width:50px;height:50px;background:rgba(66,133,244,0.1);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);border:2px solid var(--google-blue);display:flex;align-items:center;justify-content:center;">
+            <div style="width:30px;height:30px;background:rgba(66,133,244,0.3);clip-path:polygon(50% 0%, 100% 38%, 81% 91%, 19% 91%, 0% 38%);"></div>
+          </div>
+        </div>
+        <h3 class="g-title">Skill Radar Chart</h3>
+        <div class="g-meta"><span class="badge-blue">Creative</span></div>
+        <a href="builder.html?template=stats-13" class="use-btn">이 위젯 사용하기 →</a>
+      </li>
+
+      <!-- 5: links-02 Glass Card -->
+      <li class="g-card" role="listitem">
+        <div class="g-thumb" style="background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);" aria-hidden="true">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;width:70%;">
+            <div style="height:14px;background:rgba(0,0,0,0.05);border-radius:4px;"></div>
+            <div style="height:14px;background:rgba(0,0,0,0.05);border-radius:4px;"></div>
+          </div>
+        </div>
+        <h3 class="g-title">Glass Card Links</h3>
+        <div class="g-meta"><span class="badge-blue">Links</span></div>
+        <a href="builder.html?template=links-02" class="use-btn">이 위젯 사용하기 →</a>
+      </li>
+
+      <!-- 6: banner-01 Wave Pink -->
+      <li class="g-card" role="listitem">
+        <div class="g-thumb" style="background:linear-gradient(135deg,#ED93B1,#FFF0F7);" aria-hidden="true">
+          <div style="width:80%;height:30px;background:rgba(255,255,255,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;">WELCOME</div>
+        </div>
+        <h3 class="g-title">Wave Pink Banner</h3>
+        <div class="g-meta"><span class="badge-red">Banner</span></div>
+        <a href="builder.html?template=banner-01" class="use-btn">이 위젯 사용하기 →</a>
+      </li>
+
+    </ul>
+
+    <!-- AD-4: 갤러리 하단 Leaderboard -->
+    <div class="ad-banner" style="margin:48px 0 0" aria-label="광고">
+      <div class="ad-banner-text">Google AdSense 728×90 — 갤러리 하단</div>
+      <div class="ad-banner-slot"></div>
+    </div>
+  </section>
+
+  <!-- HOW TO USE: Toss-style Detailed Steps -->
+  <section class="how-to-section" id="guide" aria-labelledby="guide-heading">
+    <p class="section-eyebrow">사용 방법</p>
+    <h2 class="section-title" id="guide-heading">클릭 세 번이면 끝나요</h2>
+    <p class="section-desc">복잡한 설정 없이, 3분이면 프리미엄 README 완성</p>
+
+    <!-- Step 1: 위젯 고르기 -->
+    <article class="step-detail" aria-labelledby="step1-heading">
+      <div class="step-content">
+        <p class="step-number">STEP 01</p>
+        <h3 class="step-title" id="step1-heading">갤러리에서<br>마음에 드는 위젯을 고르세요</h3>
+        <p class="step-desc">
+          67개 이상의 프리미엄 GitHub README 위젯 중에서 내 스타일에 맞는 걸 골라보세요.
+          Stats 카드, Tech Stack 배지, Profile 카드, Streak 카운터 및 신규 창의적 위젯들을 제공합니다.
+          클릭하면 빌더가 바로 열려요.
+        </p>
+        <ul class="step-features" aria-label="Step 1 주요 기능">
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">✨</span>
+            <span>67+ 프리미엄 템플릿 무료 제공</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">🎨</span>
+            <span>다크 모드 · 라이트 모드 · 뉴모피즘 테마 지원</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">⚡</span>
+            <span>실시간 미리보기로 결과 즉시 확인</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="step-visual">
+        <div class="ui-mockup gallery-mockup" aria-hidden="true">
+          <div class="mockup-header">
+            <div class="mockup-logo">GitGloss</div>
+            <div class="mockup-nav">
+              <span class="nav-item active">갤러리</span>
+              <span class="nav-item">빌더</span>
+            </div>
+          </div>
+          <div class="mockup-content">
+            <div class="gallery-grid-mini">
+              <div class="widget-card-mini active">
+                <div class="widget-thumb" style="background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(234,67,53,.1))">
+                  <div class="thumb-bars">
+                    <div class="bar" style="width:100%;background:rgba(66,133,244,.5)"></div>
+                    <div class="bar" style="width:75%;background:rgba(234,67,53,.4)"></div>
+                  </div>
+                </div>
+                <div class="widget-label">GitHub Stats</div>
+                <div class="widget-badge">NEW</div>
+              </div>
+              <div class="widget-card-mini">
+                <div class="widget-thumb" style="background:linear-gradient(135deg,rgba(52,168,83,.2),rgba(251,188,5,.15))">
+                  <div class="badge-row-mini">
+                    <span class="badge-mini">React</span>
+                    <span class="badge-mini">TS</span>
+                  </div>
+                </div>
+                <div class="widget-label">Tech Stack</div>
+              </div>
+              <div class="widget-card-mini">
+                <div class="widget-thumb" style="background:linear-gradient(135deg,rgba(66,133,244,.12),rgba(234,67,53,.12))">
+                  <div class="profile-mini">
+                    <div class="avatar-mini"></div>
+                  </div>
+                </div>
+                <div class="widget-label">Profile</div>
+              </div>
+            </div>
+          </div>
+          <div class="mockup-cursor">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--google-blue)">
+              <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Step 2: 사용자명 입력 -->
+    <article class="step-detail reverse" aria-labelledby="step2-heading">
+      <div class="step-visual">
+        <div class="ui-mockup builder-mockup" aria-hidden="true">
+          <div class="builder-split">
+            <div class="builder-panel">
+              <div class="panel-header">설정</div>
+              <div class="input-group">
+                <label>GitHub 사용자명</label>
+                <input type="text" value="octocat" class="input-animated" readonly />
+              </div>
+              <div class="input-group">
+                <label>테마</label>
+                <div class="theme-selector">
+                  <div class="theme-option active">Glass Light</div>
+                  <div class="theme-option">Glass Dark</div>
+                </div>
+              </div>
+              <div class="typing-indicator">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+            <div class="builder-preview">
+              <div class="preview-label">실시간 미리보기</div>
+              <div class="preview-widget">
+                <div class="widget-preview-card">
+                  <div class="preview-avatar"></div>
+                  <div class="preview-stats">
+                    <div class="stat-item">
+                      <div class="stat-num">2.8k</div>
+                      <div class="stat-label">Stars</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-num">142</div>
+                      <div class="stat-label">Repos</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="step-content">
+        <p class="step-number">STEP 02</p>
+        <h3 class="step-title" id="step2-heading">GitHub 사용자명만<br>입력하면 끝이에요</h3>
+        <p class="step-desc">
+          복잡한 설정은 필요 없어요. GitHub 사용자명 하나만 입력하면 위젯 미리보기가 실시간으로 바뀌어요.
+          테마, 색상, 레이아웃을 자유롭게 커스터마이징할 수 있고, 변경 사항이 즉시 반영됩니다.
+        </p>
+        <ul class="step-features" aria-label="Step 2 주요 기능">
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">🔄</span>
+            <span>입력값 변경 시 실시간 동기화</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">🎯</span>
+            <span>GitHub API 자동 데이터 불러오기</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">✏️</span>
+            <span>색상 · 폰트 · 레이아웃 커스터마이징</span>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Step 3: Copy & Paste -->
+    <article class="step-detail" aria-labelledby="step3-heading">
+      <div class="step-content">
+        <p class="step-number">STEP 03</p>
+        <h3 class="step-title" id="step3-heading">복사해서<br>README에 붙여넣기</h3>
+        <p class="step-desc">
+          Markdown 코드 한 줄이면 돼요. 복사 버튼을 누르고 GitHub README에 붙여넣으세요.
+          위젯은 GitHub 서버에서 자동으로 렌더링되며, 데이터도 주기적으로 자동 업데이트됩니다.
+          별도 서버 설정이나 토큰 발급 없이 즉시 사용 가능합니다.
+        </p>
+        <ul class="step-features" aria-label="Step 3 주요 기능">
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">📋</span>
+            <span>원클릭 Markdown 코드 복사</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">🚀</span>
+            <span>GitHub README에 붙여넣기만 하면 즉시 적용</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">♻️</span>
+            <span>GitHub 통계 자동 업데이트</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="step-visual">
+        <div class="readme-comparison" aria-hidden="true">
+          <div class="readme-before">
+            <div class="readme-header">
+              <div class="readme-tabs">
+                <span class="tab">Code</span>
+                <span class="tab active">README</span>
+              </div>
+            </div>
+            <div class="readme-content plain">
+              <div class="readme-title">👋 Hi, I'm @octocat</div>
+              <p class="readme-text">Welcome to my profile</p>
+              <div class="readme-stats-plain">⭐ 42 stars · 📦 12 repos</div>
+            </div>
+            <div class="before-label">Before</div>
+          </div>
+          <div class="transform-arrow">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--google-green)">
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+            </svg>
+          </div>
+          <div class="readme-after">
+            <div class="readme-header">
+              <div class="readme-tabs">
+                <span class="tab">Code</span>
+                <span class="tab active">README</span>
+              </div>
+            </div>
+            <div class="readme-content premium">
+              <div class="readme-title">👋 Hi, I'm @octocat</div>
+              <p class="readme-text">Welcome to my profile</p>
+              <div class="embedded-widget">
+                <div class="widget-glow"></div>
+                <div class="widget-card-embed">
+                  <div class="embed-avatar"></div>
+                  <div class="embed-stats">
+                    <div class="embed-stat"><div class="embed-num">2.8k</div><div class="embed-label">STARS</div></div>
+                    <div class="embed-stat"><div class="embed-num">142</div><div class="embed-label">REPOS</div></div>
+                    <div class="embed-stat"><div class="embed-num">98%</div><div class="embed-label">ACTIVE</div></div>
+                  </div>
+                  <div class="embed-badges">
+                    <span class="embed-badge">React</span>
+                    <span class="embed-badge">TypeScript</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="after-label">After</div>
+          </div>
+        </div>
+        <div class="copy-success-mini" aria-hidden="true">
+          <div class="success-checkmark">✓</div>
+          <span>복사 완료!</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- CTA 배너 -->
+  <section style="
+    padding: 80px;
     background: linear-gradient(135deg, #08080F 0%, #1a0f2e 50%, #0d1a2e 100%);
     position: relative;
     overflow: hidden;
     text-align: center;
-    ">
- < !-- 배경 글로우 --><div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(155,143,232,0.18) 0%,transparent 70%);pointer-events:none;"></div><div style="position:absolute;bottom:-60px;left:20%;width:300px;height:300px;background:radial-gradient(circle,rgba(237,147,177,0.1) 0%,transparent 70%);pointer-events:none;"></div><div style="position:absolute;bottom:-60px;right:15%;width:250px;height:250px;background:radial-gradient(circle,rgba(126,200,227,0.1) 0%,transparent 70%);pointer-events:none;"></div><div style="position:relative;z-index:1;max-width:640px;margin:0 auto;">< !-- 뱃지 --><div style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:rgba(155,143,232,0.15);border:1px solid rgba(155,143,232,0.3);font-size:12px;font-weight:700;color:#C3B9F5;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;">✨ 무료 · 즉시 사용 가능 </div><h2 style="font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.03em;margin-bottom:16px;">지금 바로<br><span style="background:linear-gradient(135deg,#ED93B1,#9B8FE8,#7EC8E3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">위젯 만들기</span></h2><p style="font-size:17px;color:rgba(255,255,255,0.6);line-height:1.65;font-weight:500;margin-bottom:36px;">3분이면 GitHub 프로필이 완전히 달라져요.<br>60가지 이상의 템플릿 중에서 골라보세요. </p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"><a href="builder.html" style="
- display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:16px 32px;
-    border-radius:14px;
-    background:linear-gradient(135deg, #ED93B1, #9B8FE8);
-    color:#fff;
-    font-size:16px;
-    font-weight:700;
-    text-decoration:none;
-    box-shadow:0 8px 32px rgba(155, 143, 232, 0.35);
-    transition:transform .2s,
-    box-shadow .2s;
-    " onmouseover=" this.style.transform='translateY(-2px)';
-    this.style.boxShadow='0 12px 40px rgba(155,143,232,0.45)' "
- onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(155,143,232,0.35)'">위젯 만들기 → </a><a href="gallery.html" style="
- display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:16px 32px;
-    border-radius:14px;
-    background:rgba(255, 255, 255, 0.08);
-    border:1px solid rgba(255, 255, 255, 0.15);
-    color:#fff;
-    font-size:16px;
-    font-weight:600;
-    text-decoration:none;
-    transition:background .2s;
-    " onmouseover=" this.style.background='rgba(255,255,255,0.14)' "
- onmouseout="this.style.background='rgba(255,255,255,0.08)'">갤러리 구경하기 </a></div>< !-- 소셜 프루프 --><p style="margin-top:28px;font-size:13px;color:rgba(255,255,255,0.35);font-weight:500;">회원가입 불필요 · 완전 무료 · Markdown 한 줄 </p></div></section>< !-- FOOTER --><footer class="page-footer" id="footer" aria-label="사이트 하단 정보"><a href="/" class="footer-logo" aria-label="GitGloss 홈으로 이동">GitGloss</a><nav class="footer-links" aria-label="하단 내비게이션"><a href="gallery.html" class="footer-link">갤러리</a><a href="docs/showcase/reviews.html" class="footer-link">후기</a><a href="docs/showcase/notion-portfolio.html" class="footer-link">가이드</a><a href="about.html" class="footer-link">소개</a><a href="privacy.html" class="footer-link" rel="nofollow">개인정보처리방침</a><a href="terms.html" class="footer-link" rel="nofollow">이용약관</a></nav><small class="footer-copy">© 2026 GitGloss. All rights reserved.</small></footer><script src="assets/js/common.js"></script>< !-- ☕ 커피챗 플로팅 버튼+모달 --><style>
+  ">
+    <!-- 배경 글로우 -->
+    <div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(155,143,232,0.18) 0%,transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-60px;left:20%;width:300px;height:300px;background:radial-gradient(circle,rgba(237,147,177,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-60px;right:15%;width:250px;height:250px;background:radial-gradient(circle,rgba(126,200,227,0.1) 0%,transparent 70%);pointer-events:none;"></div>
 
+    <div style="position:relative;z-index:1;max-width:640px;margin:0 auto;">
+      <!-- 뱃지 -->
+      <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:rgba(155,143,232,0.15);border:1px solid rgba(155,143,232,0.3);font-size:12px;font-weight:700;color:#C3B9F5;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;">
+        ✨ 무료 · 즉시 사용 가능
+      </div>
+
+      <h2 style="font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.03em;margin-bottom:16px;">
+        지금 바로<br>
+        <span style="background:linear-gradient(135deg,#ED93B1,#9B8FE8,#7EC8E3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">위젯 만들기</span>
+      </h2>
+
+      <p style="font-size:17px;color:rgba(255,255,255,0.6);line-height:1.65;font-weight:500;margin-bottom:36px;">
+        3분이면 GitHub 프로필이 완전히 달라져요.<br>
+        60가지 이상의 템플릿 중에서 골라보세요.
+      </p>
+
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="builder.html" style="
+          display:inline-flex;align-items:center;gap:8px;
+          padding:16px 32px;border-radius:14px;
+          background:linear-gradient(135deg,#ED93B1,#9B8FE8);
+          color:#fff;font-size:16px;font-weight:700;
+          text-decoration:none;
+          box-shadow:0 8px 32px rgba(155,143,232,0.35);
+          transition:transform .2s,box-shadow .2s;
+        " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(155,143,232,0.45)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(155,143,232,0.35)'">
+          위젯 만들기 →
+        </a>
+        <a href="gallery.html" style="
+          display:inline-flex;align-items:center;gap:8px;
+          padding:16px 32px;border-radius:14px;
+          background:rgba(255,255,255,0.08);
+          border:1px solid rgba(255,255,255,0.15);
+          color:#fff;font-size:16px;font-weight:600;
+          text-decoration:none;
+          transition:background .2s;
+        " onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+          갤러리 구경하기
+        </a>
+      </div>
+
+      <!-- 소셜 프루프 -->
+      <p style="margin-top:28px;font-size:13px;color:rgba(255,255,255,0.35);font-weight:500;">
+        회원가입 불필요 · 완전 무료 · Markdown 한 줄
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer" id="footer" aria-label="사이트 하단 정보">
+    <a href="/" class="footer-logo" aria-label="GitGloss 홈으로 이동">GitGloss</a>
+    <nav class="footer-links" aria-label="하단 내비게이션">
+      <a href="gallery.html"                        class="footer-link">갤러리</a>
+      <a href="docs/showcase/reviews.html"          class="footer-link">후기</a>
+      <a href="docs/showcase/notion-portfolio.html" class="footer-link">가이드</a>
+      <a href="about.html"                          class="footer-link">소개</a>
+      <a href="privacy.html"  class="footer-link" rel="nofollow">개인정보처리방침</a>
+      <a href="terms.html"    class="footer-link" rel="nofollow">이용약관</a>
+    </nav>
+    <small class="footer-copy">© 2025 GitGloss. All rights reserved.</small>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+
+  <!-- ☕ 커피챗 플로팅 버튼 + 모달 -->
+  <style>
     /* ── 플로팅 커피 버튼 ── */
     .coffee-fab {
       position: fixed;
@@ -1612,30 +1842,26 @@
       border-radius: 50%;
       background: linear-gradient(145deg, #6f4e37, #c8813a);
       border: none;
-      box-shadow: 0 6px 24px rgba(111, 78, 55, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 24px rgba(111,78,55,0.4), 0 2px 8px rgba(0,0,0,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 999;
-      transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .2s;
+      transition: transform .25s cubic-bezier(0.34,1.56,0.64,1), box-shadow .2s;
       user-select: none;
     }
-
     .coffee-fab:hover {
       transform: translateY(-4px) scale(1.08);
-      box-shadow: 0 12px 32px rgba(111, 78, 55, 0.5);
+      box-shadow: 0 12px 32px rgba(111,78,55,0.5);
     }
-
-    .coffee-fab:active {
-      transform: scale(0.93);
-    }
+    .coffee-fab:active { transform: scale(0.93); }
 
     /* ── 모달 공통 오버레이 ── */
     .gg-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(8, 8, 15, 0.5);
+      background: rgba(8,8,15,0.5);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 1000;
@@ -1646,92 +1872,71 @@
       pointer-events: none;
       transition: opacity .25s;
     }
-
     .gg-modal-overlay.open {
       opacity: 1;
       pointer-events: all;
     }
-
     .gg-modal {
       background: #fff;
       border-radius: 28px;
       padding: 40px 36px 32px;
       max-width: 400px;
       width: calc(100% - 48px);
-      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08);
       position: relative;
       transform: translateY(20px) scale(0.96);
-      transition: transform .32s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform .32s cubic-bezier(0.34,1.56,0.64,1);
       text-align: center;
     }
-
     .gg-modal-overlay.open .gg-modal {
       transform: translateY(0) scale(1);
     }
-
     .gg-modal-close {
       position: absolute;
       top: 16px;
       right: 18px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,0.15);
       border: none;
       border-radius: 50%;
       width: 32px;
       height: 32px;
       font-size: 16px;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255,255,255,0.7);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background .15s, color .15s;
     }
-
-    .gg-modal-close:hover {
-      background: rgba(255, 255, 255, 0.25);
-      color: #fff;
-    }
+    .gg-modal-close:hover { background: rgba(255,255,255,0.25); color: #fff; }
 
     /* ── 커피챗 모달 ── */
     #coffee-modal-overlay .gg-modal {
       background: linear-gradient(160deg, #3d1f0a 0%, #6f4e37 35%, #a0522d 70%, #c8813a 100%);
-      box-shadow: 0 32px 80px rgba(111, 78, 55, 0.45), 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 32px 80px rgba(111,78,55,0.45), 0 4px 16px rgba(0,0,0,0.15);
       overflow: hidden;
     }
-
     #coffee-modal-overlay .gg-modal::before {
       content: '';
       position: absolute;
-      top: -60px;
-      right: -40px;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      top: -60px; right: -40px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .coffee-modal-img {
       width: 100px;
       height: 100px;
       object-fit: contain;
       display: block;
       margin: 0 auto 20px;
-      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
       animation: coffee-float 3s ease-in-out infinite;
     }
-
     @keyframes coffee-float {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-6px);
-      }
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
-
     .coffee-modal-title {
       font-size: 22px;
       font-weight: 800;
@@ -1739,21 +1944,18 @@
       letter-spacing: -.02em;
       margin-bottom: 10px;
     }
-
     .coffee-modal-desc {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255,255,255,0.75);
       line-height: 1.7;
       margin-bottom: 28px;
       font-weight: 500;
     }
-
     .coffee-modal-btns {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-
     .coffee-btn-chat {
       display: flex;
       align-items: center;
@@ -1761,22 +1963,20 @@
       gap: 8px;
       padding: 15px 24px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255,255,255,0.18);
       color: #fff;
       font-size: 15px;
       font-weight: 700;
       text-decoration: none;
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border: 1.5px solid rgba(255,255,255,0.3);
       cursor: pointer;
       transition: background .2s, transform .15s, box-shadow .2s;
     }
-
     .coffee-btn-chat:hover {
-      background: rgba(255, 255, 255, 0.28);
+      background: rgba(255,255,255,0.28);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
-
     .coffee-btn-buy {
       display: flex;
       align-items: center;
@@ -1784,7 +1984,7 @@
       gap: 8px;
       padding: 15px 24px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.95);
       color: #5c3317;
       font-size: 15px;
       font-weight: 800;
@@ -1792,18 +1992,16 @@
       border: none;
       cursor: pointer;
       transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
-
     .coffee-btn-buy:hover {
       background: #fff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
     }
-
     .coffee-modal-note {
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.45);
+      color: rgba(255,255,255,0.45);
       margin-top: 18px;
       font-weight: 500;
     }
@@ -1815,7 +2013,6 @@
       display: block;
       /* 추후 3D 박수 이모지 교체 예정 */
     }
-
     .congrats-title {
       font-size: 24px;
       font-weight: 800;
@@ -1823,7 +2020,6 @@
       letter-spacing: -.02em;
       margin-bottom: 8px;
     }
-
     .congrats-sub {
       font-size: 14px;
       color: var(--text-sub);
@@ -1831,7 +2027,6 @@
       margin-bottom: 24px;
       font-weight: 500;
     }
-
     .congrats-tips {
       background: var(--bg-subtle);
       border-radius: 14px;
@@ -1839,7 +2034,6 @@
       text-align: left;
       margin-bottom: 24px;
     }
-
     .congrats-tips-title {
       font-size: 11px;
       font-weight: 700;
@@ -1848,7 +2042,6 @@
       color: var(--text-hint);
       margin-bottom: 10px;
     }
-
     .congrats-tip-item {
       display: flex;
       align-items: flex-start;
@@ -1859,17 +2052,8 @@
       margin-bottom: 7px;
       line-height: 1.5;
     }
-
-    .congrats-tip-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .congrats-tip-icon {
-      font-size: 14px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
+    .congrats-tip-item:last-child { margin-bottom: 0; }
+    .congrats-tip-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
     .congrats-btn-primary {
       display: block;
       width: 100%;
@@ -1886,12 +2070,7 @@
       transition: background .2s, transform .15s;
       margin-bottom: 8px;
     }
-
-    .congrats-btn-primary:hover {
-      background: #3367d6;
-      transform: translateY(-1px);
-    }
-
+    .congrats-btn-primary:hover { background: #3367d6; transform: translateY(-1px); }
     .congrats-btn-ghost {
       display: block;
       width: 100%;
@@ -1906,22 +2085,16 @@
       cursor: pointer;
       transition: color .15s;
     }
-
-    .congrats-btn-ghost:hover {
-      color: var(--text-main);
-    }
+    .congrats-btn-ghost:hover { color: var(--text-main); }
 
     /* 컨페티 파티클 */
     .confetti-wrap {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 0;
       overflow: visible;
       pointer-events: none;
     }
-
     .confetti-dot {
       position: absolute;
       width: 7px;
@@ -1930,17 +2103,9 @@
       animation: confetti-fall 1.2s ease-out forwards;
       opacity: 0;
     }
-
     @keyframes confetti-fall {
-      0% {
-        opacity: 1;
-        transform: translateY(0) rotate(0deg);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(80px) rotate(360deg);
-      }
+      0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(80px) rotate(360deg); }
     }
   </style>
 
@@ -2031,7 +2196,7 @@
     function spawnConfetti() {
       const wrap = document.getElementById('confetti-wrap');
       wrap.innerHTML = '';
-      const colors = ['#ED93B1', '#9B8FE8', '#7EC8E3', '#FBBC05', '#34A853', '#EA4335'];
+      const colors = ['#ED93B1','#9B8FE8','#7EC8E3','#FBBC05','#34A853','#EA4335'];
       for (let i = 0; i < 22; i++) {
         const dot = document.createElement('div');
         dot.className = 'confetti-dot';
@@ -2058,6 +2223,5 @@
       }
     });
   </script>
-  </body>
-
+</body>
 </html>
