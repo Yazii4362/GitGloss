@@ -221,7 +221,7 @@
           <span>다크 테마 위젯은 GitHub 다크모드 사용자에게 특히 잘 어울려요</span>
         </div>
       </div>
-      <a href="gallery.html" class="congrats-btn-primary">더 많은 위젯 구경하기 →</a>
+      <button type="button" class="congrats-btn-primary" id="congrats-share-btn" onclick="shareReadmeKit()">🔗 친구에게 ReadMe.kit 공유하기</button>
       <button class="congrats-btn-ghost" onclick="closeCongratsModal()">닫기</button>
     </div>
   </div>
@@ -247,6 +247,36 @@
       if (e && e.target !== document.getElementById('congrats-modal-overlay')) return;
       document.getElementById('congrats-modal-overlay').classList.remove('open');
       document.body.style.overflow = '';
+    }
+
+    function shareReadmeKit() {
+      const url = 'https://readme.kit/';
+      const text = '깃허브 README를 1분 만에 — ReadMe.kit으로 위젯 만들어 봤어요';
+      const btn = document.getElementById('congrats-share-btn');
+      const restore = (label, ms) => setTimeout(() => {
+        if (btn) btn.innerHTML = label;
+      }, ms || 1800);
+      const original = btn ? btn.innerHTML : '';
+
+      if (navigator.share) {
+        navigator.share({ title: 'ReadMe.kit', text, url })
+          .catch(err => {
+            if (err && err.name === 'AbortError') return;
+            copyShareUrl(url, btn, original, restore);
+          });
+      } else {
+        copyShareUrl(url, btn, original, restore);
+      }
+    }
+
+    function copyShareUrl(url, btn, original, restore) {
+      navigator.clipboard.writeText(url).then(() => {
+        if (btn) btn.innerHTML = '✓ 링크가 복사됐어요';
+        restore(original, 1800);
+      }).catch(() => {
+        if (btn) btn.innerHTML = '복사 실패 — ' + url;
+        restore(original, 2400);
+      });
     }
 
     function spawnConfetti() {
@@ -280,6 +310,7 @@
     });
   </script>
 
+  <script src="assets/js/emoji-3d.js"></script>
   <script src="assets/data/templates.js"></script>
   <script src="assets/js/widget-engine.js"></script>
   <script>
@@ -398,6 +429,22 @@
         btn.textContent = '☰';
       });
     })();
+
+    /* ── 정적 인라인 이모지 → 3D PNG 자동 변환 ──
+       모달/축하 화면 등 HTML에 하드코딩된 이모지를 일괄 교체 */
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof emojify3D !== 'function') return;
+      // 큰 사이즈 (축하 메인 이모지)
+      document.querySelectorAll('.congrats-emoji-wrap').forEach(function (el) {
+        el.innerHTML = emojify3D(el.innerHTML, 80);
+      });
+      // 인라인 텍스트용 사이즈
+      const inlineSelector = '.coffee-modal-title, .coffee-btn-chat, .coffee-btn-buy, '
+                           + '.coffee-modal-note, .congrats-sub';
+      document.querySelectorAll(inlineSelector).forEach(function (el) {
+        el.innerHTML = emojify3D(el.innerHTML, 20);
+      });
+    });
   </script>
 </body>
 

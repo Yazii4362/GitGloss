@@ -3,6 +3,24 @@
    블록 조합 빌더 UI + 위젯 카드 스타일
    ═══════════════════════════════════════════════════════ */
 
+/* 빌더 chrome(좌패널·탑바·코드 스트립·우측 프리뷰 배경)은 라이트 전용 디자인이므로
+   token.css의 prefers-color-scheme: dark 토큰을 다시 라이트로 되돌린다.
+   위젯 카드 내부는 .ws-/.theme- 클래스가 색을 명시적으로 지정하므로 영향 없음. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-main: #09090E;
+    --text-sub:  rgba(9,9,14,0.65);
+    --text-hint: rgba(9,9,14,0.40);
+    --bg-main:   #FFFFFF;
+    --bg-subtle: #F8F8FC;
+    --m3-background: #FFFFFF;
+    --m3-on-background: #09090E;
+    --m3-surface: #FFFFFF;
+    --m3-on-surface: #09090E;
+  }
+  body { background: #F8F8FC !important; color: #09090E !important; }
+}
+
 /* ── 레이아웃 ────────────────────────────────────────── */
 .topbar {
   height: 52px;
@@ -3096,6 +3114,7 @@
   z-index: 1001 !important;
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3) !important;
   pointer-events: none;
+}
 
 
 /* ══════════════════════════════════════════════════════
@@ -3292,3 +3311,57 @@
   width: 20px; height: 20px;
 }
 .fluent-icon svg { width: 100%; height: 100%; fill: currentColor; }
+
+/* ═══════════════════════════════════════════════════════
+   THEME FILL-INS — 갤러리 PREVIEW_STYLES와 1:1 일치 (22종)
+   gallery.js에 인라인으로만 있던 theme들을 빌더 카드에도 적용
+   ═══════════════════════════════════════════════════════ */
+/* Banner */
+.widget-card.theme-banner-wave-pink      { background: linear-gradient(135deg, #FFF0F7, #F4C0D1); }
+.widget-card.theme-banner-wave-blue      { background: linear-gradient(135deg, #E6F1FB, #B5D4F4); }
+.widget-card.theme-banner-slice-gradient { background: linear-gradient(120deg, #9B8FE8, #4285F4, #ED93B1); color: #fff; }
+.widget-card.theme-banner-egg            { background: linear-gradient(135deg, #FFF5F9, #F0EEFF); }
+.widget-card.theme-banner-cylinder       { background: linear-gradient(135deg, #E1F5EE, #7EC8E3); }
+.widget-card.theme-banner-shark          { background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: #f0f4ff; }
+.widget-card.theme-banner-divider-hits   { background: #f0f4ff; }
+.widget-card.theme-banner-typing         { background: #0d1117; color: #c9d1d9; }
+.widget-card.theme-banner-github-trophy  { background: linear-gradient(135deg, #fff9e6, #fff3c0); }
+
+/* Links */
+.widget-card.theme-links-pill-row        { background: linear-gradient(135deg, #F0F4FF, #FFF0F7); }
+.widget-card.theme-links-glass-card      { background: linear-gradient(135deg, #FFF0F7, #F4C0D1); }
+.widget-card.theme-links-dark-row        { background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: #f0f4ff; }
+.widget-card.theme-links-icon-grid       { background: linear-gradient(135deg, #F0EEFF, #FFF0F9); }
+.widget-card.theme-links-minimal-list    { background: #fff; }
+.widget-card.theme-links-gradient-btns   { background: linear-gradient(135deg, #fff, #f8f0ff); }
+.widget-card.theme-links-bordered        { background: #F8FAFF; }
+.widget-card.theme-links-social-pack     { background: linear-gradient(135deg, #fff, #f0f9ff); }
+.widget-card.theme-links-contact-card    { background: linear-gradient(135deg, #EAF3DE, #E8F4FD); }
+.widget-card.theme-links-dev-hub         { background: #f9f9f9; }
+
+/* Creative */
+.widget-card.theme-coffee-meter          { background: linear-gradient(135deg, #fdf9f6, rgba(111, 78, 55, 0.03)); }
+.widget-card.theme-premium-hit           { background: linear-gradient(135deg, #f0f4ff, rgba(66, 133, 244, 0.03)); }
+.widget-card.theme-mbti-status           { background: linear-gradient(135deg, #f8f0ff, rgba(155, 143, 232, 0.03)); }
+
+/* 다크 theme의 텍스트 가독성 보강 */
+.widget-card.theme-banner-shark .wb-name,
+.widget-card.theme-banner-shark .wb-handle,
+.widget-card.theme-banner-shark .wb-role,
+.widget-card.theme-banner-typing .wb-name,
+.widget-card.theme-banner-typing .wb-handle,
+.widget-card.theme-banner-typing .wb-role,
+.widget-card.theme-links-dark-row .wb-name,
+.widget-card.theme-links-dark-row .wb-handle,
+.widget-card.theme-links-dark-row .wb-role { color: rgba(255, 255, 255, 0.95); }
+
+/* ═══════════════════════════════════════════════════════
+   3D EMOJI 유틸리티 — Microsoft Fluent Emoji 3D
+   ═══════════════════════════════════════════════════════ */
+.emoji-3d {
+  display: inline-block;
+  vertical-align: -0.15em;
+  image-rendering: -webkit-optimize-contrast;
+  user-select: none;
+  pointer-events: none;
+}

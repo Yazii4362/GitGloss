@@ -7,6 +7,7 @@
 /* ── 전역 상태 ───────────────────────────────────────── */
 const WE = {
   style:  'glass',      // glass | dark | neu | border | gradient | minimal
+  theme:  '',           // 갤러리 템플릿의 정밀 theme 키 (예: 'cream-glass') — 카드에 theme-XXX 클래스로 부여
   accent: '#4285F4',
   preset: null,         // 현재 적용된 프리셋 id
 
@@ -230,8 +231,9 @@ function renderBlockAddGrid(category = 'core') {
   const blocks = BLOCK_CATEGORIES[category]?.blocks || [];
   grid.innerHTML = blocks.map(type => {
     const meta = BLOCK_ADD_META[type] || { emoji: '▪', label: type };
+    const iconHTML = (typeof emoji3D === 'function') ? emoji3D(meta.emoji, 18) : meta.emoji;
     return `<button class="block-add-btn" onclick="addBlock('${type}')">
-      <span style="font-size:15px;">${meta.emoji}</span> ${meta.label}
+      <span style="font-size:15px;display:inline-flex;align-items:center;">${iconHTML}</span> ${meta.label}
     </button>`;
   }).join('');
 }
@@ -739,6 +741,7 @@ function applyPreset(templateId) {
   // 1. 카드 스타일 + 액센트 적용
   const style = THEME_TO_STYLE[tpl.theme] || 'glass';
   WE.style  = style;
+  WE.theme  = tpl.theme || '';
   WE.accent = tpl.accentColor || '#4285F4';
   WE.preset = templateId;
 
@@ -798,6 +801,7 @@ function initBuilder() {
 
       // 스타일 + 액센트 적용
       WE.style  = target.style || THEME_TO_STYLE[target.theme] || 'glass';
+      WE.theme  = target.theme || '';
       WE.accent = target.accentColor || '#4285F4';
       WE.preset = templateId;
 
@@ -1020,6 +1024,7 @@ function setStyle(el, style) {
   document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('on'));
   el.classList.add('on');
   WE.style = style;
+  WE.theme = '';   // 수동 스타일 변경 시 템플릿 theme 잠금 해제
   renderWidget();
 }
 
@@ -1041,8 +1046,10 @@ function renderWidget() {
   // 1. 인라인 스타일 완전 초기화
   card.removeAttribute('style');
 
-  // 2. 스타일 클래스 적용
-  card.className = 'widget-card ' + (STYLE_CLASS[WE.style] || 'ws-glass');
+  // 2. 스타일 클래스 적용 — generic style + 정밀 theme 클래스 동시 부여
+  const styleCls = STYLE_CLASS[WE.style] || 'ws-glass';
+  const themeCls = WE.theme ? `theme-${WE.theme}` : '';
+  card.className = ['widget-card', styleCls, themeCls].filter(Boolean).join(' ');
 
   // 3. CSS 변수 주입
   card.style.setProperty('--accent',        WE.accent);
@@ -1225,13 +1232,19 @@ function renderBlockHTML(b) {
         badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.mbti || 'ENFP'}</span>`;
       } else if (type === 'status') {
         const color = d.statusColor || '#34A853';
-        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.statusEmoji||'🟢'} ${d.statusMsg||'Coding'}</span>`;
+        const ch = d.statusEmoji || '🟢';
+        const ico = (typeof emoji3D === 'function') ? emoji3D(ch, 14) : ch;
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${ico} ${d.statusMsg||'Coding'}</span>`;
       } else if (type === 'role') {
         const color = d.roleColor || '#4285F4';
-        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.roleIcon||'🌐'} ${d.roleMsg||'Frontend Dev'}</span>`;
+        const ch = d.roleIcon || '🌐';
+        const ico = (typeof emoji3D === 'function') ? emoji3D(ch, 14) : ch;
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${ico} ${d.roleMsg||'Frontend Dev'}</span>`;
       } else if (type === 'vibe') {
         const color = d.vibeColor || '#1a1a2e';
-        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.vibeEmoji||'🦉'} ${d.vibeMsg||'Night Owl'}</span>`;
+        const ch = d.vibeEmoji || '🦉';
+        const ico = (typeof emoji3D === 'function') ? emoji3D(ch, 14) : ch;
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${ico} ${d.vibeMsg||'Night Owl'}</span>`;
       }
       return `<div class="wb-badges">${badgeHTML}</div>`;
     }
