@@ -442,7 +442,9 @@ function renderGallery() {
 
   const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-  let list = getByType(currentFilter);
+  const registry = window.TEMPLATE_REGISTRY || TEMPLATES;
+  const getFiltered = (type) => type === 'all' ? registry : registry.filter(t => t.type === type);
+  let list = getFiltered(currentFilter);
 
   if (query) {
     list = list.filter(t =>

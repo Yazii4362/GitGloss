@@ -15,7 +15,7 @@ const WE = {
     { id: 'b1', type: 'avatar',  data: { emoji: 'fluent:person' } },
     { id: 'b2', type: 'name',    data: { username: '', name: 'The Octocat', role: 'Full-stack Developer', handle: '@octocat' } },
     { id: 'b3', type: 'stats',   data: { items: [{ label:'Stars', val:'2.8k' }, { label:'Repos', val:'142' }, { label:'Active', val:'98%' }] } },
-    { id: 'b4', type: 'badges',  data: { tags: ['React', 'TypeScript', 'Node.js'] } },
+    { id: 'b4', type: 'badge',   data: { type:'tech', techs: ['React', 'TypeScript', 'Node.js'] } },
   ],
 
   _uid: 10,
@@ -170,25 +170,71 @@ function renderBlockList() {
 }
 
 const BLOCK_ICON  = { 
-  avatar: `<img src="${getFluentIconSVG('person', 20)}" style="width:18px;height:18px;">`, 
-  name:   `<img src="${getFluentIconSVG('text-edit-style', 20)}" style="width:18px;height:18px;">`, 
-  stats:  `<img src="${getFluentIconSVG('data-bar-vertical', 20)}" style="width:18px;height:18px;">`, 
-  badges: `<img src="${getFluentIconSVG('tag', 20)}" style="width:18px;height:18px;">`, 
-  streak: `<img src="${getFluentIconSVG('fire', 20)}" style="width:18px;height:18px;">`, 
-  links:  `<img src="${getFluentIconSVG('link', 20)}" style="width:18px;height:18px;">`, 
-  bio:    `<img src="${getFluentIconSVG('document-text', 20)}" style="width:18px;height:18px;">`, 
-  divider:`<img src="${getFluentIconSVG('line-horizontal-1', 20)}" style="width:18px;height:18px;">`, 
-  trophy: `<img src="${getFluentIconSVG('trophy', 20)}" style="width:18px;height:18px;">`, 
-  hits:   `<img src="${getFluentIconSVG('eye', 20)}" style="width:18px;height:18px;">`, 
-  coffee: `<img src="${getFluentIconSVG('drink-coffee', 20)}" style="width:18px;height:18px;">`, 
-  banner: `<img src="${getFluentIconSVG('image', 20)}" style="width:18px;height:18px;">`, 
-  typing: `<img src="${getFluentIconSVG('keyboard', 20)}" style="width:18px;height:18px;">`,
-  mbti:   `<img src="${getFluentIconSVG('person-tag', 20)}" style="width:18px;height:18px;">`,
-  status: `<img src="${getFluentIconSVG('presence-available', 20)}" style="width:18px;height:18px;">`,
-  role:   `<img src="${getFluentIconSVG('briefcase', 20)}" style="width:18px;height:18px;">`,
-  vibe:   `<img src="${getFluentIconSVG('sparkle', 20)}" style="width:18px;height:18px;">`
+  avatar:  `<img src="${getFluentIconSVG('person', 20)}" style="width:18px;height:18px;">`, 
+  name:    `<img src="${getFluentIconSVG('text-edit-style', 20)}" style="width:18px;height:18px;">`, 
+  stats:   `<img src="${getFluentIconSVG('data-bar-vertical', 20)}" style="width:18px;height:18px;">`, 
+  badge:   `<img src="${getFluentIconSVG('tag', 20)}" style="width:18px;height:18px;">`,
+  streak:  `<img src="${getFluentIconSVG('fire', 20)}" style="width:18px;height:18px;">`, 
+  links:   `<img src="${getFluentIconSVG('link', 20)}" style="width:18px;height:18px;">`, 
+  bio:     `<img src="${getFluentIconSVG('document-text', 20)}" style="width:18px;height:18px;">`, 
+  divider: `<img src="${getFluentIconSVG('line-horizontal-1', 20)}" style="width:18px;height:18px;">`, 
+  trophy:  `<img src="${getFluentIconSVG('trophy', 20)}" style="width:18px;height:18px;">`, 
+  hits:    `<img src="${getFluentIconSVG('eye', 20)}" style="width:18px;height:18px;">`, 
+  coffee:  `<img src="${getFluentIconSVG('drink-coffee', 20)}" style="width:18px;height:18px;">`, 
+  banner:  `<img src="${getFluentIconSVG('image', 20)}" style="width:18px;height:18px;">`, 
+  typing:  `<img src="${getFluentIconSVG('keyboard', 20)}" style="width:18px;height:18px;">`,
+  snake:   `<img src="${getFluentIconSVG('animal-cat', 20)}" style="width:18px;height:18px;">`,
 };
-const BLOCK_LABEL = { avatar:'이모지 아바타', name:'이름 / 직무', stats:'Stats 숫자', badges:'기술 배지', streak:'스트릭', links:'링크 버튼', bio:'소개글', divider:'구분선', trophy:'GitHub Trophy', hits:'Hits 카운터', coffee:'커피 카운터', banner:'배너', typing:'타이핑 SVG', mbti:'MBTI 배지', status:'현재 상태 배지', role:'역할 배지', vibe:'바이브 배지' };
+const BLOCK_LABEL = {
+  avatar:'이모지 아바타', name:'이름 / 직무', stats:'Stats 숫자',
+  badge:'배지', streak:'스트릭', links:'링크 버튼', bio:'소개글',
+  divider:'구분선', trophy:'GitHub Trophy', hits:'Hits 카운터',
+  coffee:'커피 카운터', banner:'배너', typing:'타이핑 SVG', snake:'Snake Game',
+};
+
+/* ── 블록 카테고리 (탭화용) ──────────────────────────── */
+const BLOCK_CATEGORIES = {
+  core:     { label: '기본',  blocks: ['avatar', 'name', 'bio', 'divider'] },
+  stats:    { label: '데이터', blocks: ['stats', 'streak', 'hits', 'coffee'] },
+  badge:    { label: '배지',  blocks: ['badge'] },
+  extended: { label: '확장',  blocks: ['banner', 'typing', 'trophy', 'snake'] },
+  links:    { label: 'Links', blocks: ['links'] },
+};
+
+const BLOCK_ADD_META = {
+  avatar:  { emoji: '👤', label: '이모지' },
+  name:    { emoji: '📝', label: '이름/직무' },
+  bio:     { emoji: '💬', label: '소개글' },
+  divider: { emoji: '━',  label: '구분선' },
+  stats:   { emoji: '📊', label: 'Stats' },
+  streak:  { emoji: '🔥', label: '스트릭' },
+  hits:    { emoji: '👁️', label: 'Hits' },
+  coffee:  { emoji: '☕', label: '커피' },
+  badge:   { emoji: '🏷️', label: '배지' },
+  links:   { emoji: '🔗', label: '링크' },
+  banner:  { emoji: '🎨', label: '배너' },
+  typing:  { emoji: '⌨️', label: '타이핑' },
+  trophy:  { emoji: '🏆', label: 'Trophy' },
+  snake:   { emoji: '🐍', label: 'Snake' },
+};
+
+function switchBlockTab(el, category) {
+  document.querySelectorAll('.block-tab-btn').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  renderBlockAddGrid(category);
+}
+
+function renderBlockAddGrid(category = 'core') {
+  const grid = document.getElementById('block-add-grid');
+  if (!grid) return;
+  const blocks = BLOCK_CATEGORIES[category]?.blocks || [];
+  grid.innerHTML = blocks.map(type => {
+    const meta = BLOCK_ADD_META[type] || { emoji: '▪', label: type };
+    return `<button class="block-add-btn" onclick="addBlock('${type}')">
+      <span style="font-size:15px;">${meta.emoji}</span> ${meta.label}
+    </button>`;
+  }).join('');
+}
 
 function renderBlockFields(b) {
   const d = b.data;
@@ -251,18 +297,6 @@ function renderBlockFields(b) {
         </div>
       `).join('') + `
         <button class="btn-add-row" onclick="addStatItem('${b.id}')">+ 항목 추가</button>`;
-
-    case 'badges':
-      return `
-        <div class="tag-wrap" id="tags-${b.id}">
-          ${d.tags.map((t,i) => `
-            <span class="tag tag-pk">${t}
-              <button class="tag-x" onclick="removeBadge('${b.id}',${i})">×</button>
-            </span>
-          `).join('')}
-        </div>
-        <input class="field-input" placeholder="기술명 입력 후 Enter" style="margin-top:6px"
-               onkeydown="addBadge(event,'${b.id}',this)">`;
 
     case 'streak':
       return `
@@ -433,142 +467,175 @@ function renderBlockFields(b) {
                  oninput="setBlockData('${b.id}','size',this.value)">
         </div>`;
 
-    case 'mbti':
+    case 'badge':
       return `
         <div class="field-row">
-          <label class="field-label">MBTI 유형</label>
-          <select class="field-select" onchange="setBlockData('${b.id}','mbtiType',this.value)">
-            ${Object.keys(IDENTITY_MBTI_COLORS).map(type =>
-              `<option value="${type}" ${(d.mbtiType||'ENFP')===type?'selected':''}>${type}</option>`
-            ).join('')}
+          <label class="field-label">배지 타입</label>
+          <select class="field-select" onchange="setBlockData('${b.id}','type',this.value);renderBlockList();">
+            <option value="tech"   ${(d.type||'tech')==='tech'  ?'selected':''}>기술 스택</option>
+            <option value="mbti"   ${d.type==='mbti'  ?'selected':''}>MBTI</option>
+            <option value="status" ${d.type==='status'?'selected':''}>현재 상태</option>
+            <option value="role"   ${d.type==='role'  ?'selected':''}>역할</option>
+            <option value="vibe"   ${d.type==='vibe'  ?'selected':''}>바이브</option>
           </select>
         </div>
-        <div class="field-row">
-          <label class="field-label">배지 스타일</label>
-          <select class="field-select" onchange="setBlockData('${b.id}','style',this.value)">
-            <option value="flat-square" ${(d.style||'flat-square')==='flat-square'?'selected':''}>Flat Square</option>
-            <option value="for-the-badge" ${d.style==='for-the-badge'?'selected':''}>For The Badge</option>
-            <option value="plastic" ${d.style==='plastic'?'selected':''}>Plastic</option>
-          </select>
-        </div>`;
-
-    case 'status':
-      return `
-        <div class="field-row">
-          <label class="field-label">프리셋 선택</label>
-          <select class="field-select" onchange="setIdentityStatusPreset('${b.id}', this.value)">
-            <option value="">커스텀</option>
-            ${IDENTITY_STATUS_PRESETS.map((p, i) =>
-              `<option value="${i}">${p.emoji} ${p.label}</option>`
-            ).join('')}
-          </select>
-        </div>
-        <div class="field-row">
-          <label class="field-label">상태 이모지</label>
-          <input class="field-input" value="${d.statusEmoji || '🟢'}" placeholder="🟢"
-                 oninput="setBlockData('${b.id}','statusEmoji',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">상태 메시지</label>
-          <input class="field-input" value="${d.statusMsg || 'Coding'}" placeholder="Coding"
-                 oninput="setBlockData('${b.id}','statusMsg',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">배경 색상 (hex)</label>
-          <input class="field-input" value="${d.statusColor || '#34A853'}" placeholder="#34A853"
-                 oninput="setBlockData('${b.id}','statusColor',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">배지 스타일</label>
-          <select class="field-select" onchange="setBlockData('${b.id}','style',this.value)">
-            <option value="flat-square" ${(d.style||'flat-square')==='flat-square'?'selected':''}>Flat Square</option>
-            <option value="for-the-badge" ${d.style==='for-the-badge'?'selected':''}>For The Badge</option>
-            <option value="plastic" ${d.style==='plastic'?'selected':''}>Plastic</option>
-          </select>
-        </div>`;
-
-    case 'role':
-      return `
-        <div class="field-row">
-          <label class="field-label">프리셋 선택</label>
-          <select class="field-select" onchange="setIdentityRolePreset('${b.id}', this.value)">
-            <option value="">커스텀</option>
-            ${IDENTITY_ROLE_PRESETS.map((p, i) =>
-              `<option value="${i}">${p.icon} ${p.label}</option>`
-            ).join('')}
-          </select>
-        </div>
-        <div class="field-row">
-          <label class="field-label">역할 아이콘</label>
-          <input class="field-input" value="${d.roleIcon || '🌐'}" placeholder="🌐"
-                 oninput="setBlockData('${b.id}','roleIcon',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">역할 라벨</label>
-          <input class="field-input" value="${d.roleLabel || 'Role'}" placeholder="Role"
-                 oninput="setBlockData('${b.id}','roleLabel',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">역할 메시지</label>
-          <input class="field-input" value="${d.roleMsg || 'Frontend Dev'}" placeholder="Frontend Dev"
-                 oninput="setBlockData('${b.id}','roleMsg',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">배경 색상 (hex)</label>
-          <input class="field-input" value="${d.roleColor || '#4285F4'}" placeholder="#4285F4"
-                 oninput="setBlockData('${b.id}','roleColor',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">배지 스타일</label>
-          <select class="field-select" onchange="setBlockData('${b.id}','style',this.value)">
-            <option value="flat-square" ${(d.style||'flat-square')==='flat-square'?'selected':''}>Flat Square</option>
-            <option value="for-the-badge" ${d.style==='for-the-badge'?'selected':''}>For The Badge</option>
-            <option value="plastic" ${d.style==='plastic'?'selected':''}>Plastic</option>
-          </select>
-        </div>`;
-
-    case 'vibe':
-      return `
-        <div class="field-row">
-          <label class="field-label">프리셋 선택</label>
-          <select class="field-select" onchange="setIdentityVibePreset('${b.id}', this.value)">
-            <option value="">커스텀</option>
-            ${IDENTITY_VIBE_PRESETS.map((p, i) =>
-              `<option value="${i}">${p.emoji} ${p.label}</option>`
-            ).join('')}
-          </select>
-        </div>
-        <div class="field-row">
-          <label class="field-label">바이브 이모지</label>
-          <input class="field-input" value="${d.vibeEmoji || '🦉'}" placeholder="🦉"
-                 oninput="setBlockData('${b.id}','vibeEmoji',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">바이브 메시지</label>
-          <input class="field-input" value="${d.vibeMsg || 'Night Owl'}" placeholder="Night Owl"
-                 oninput="setBlockData('${b.id}','vibeMsg',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">배경 색상 (hex)</label>
-          <input class="field-input" value="${d.vibeColor || '#1a1a2e'}" placeholder="#1a1a2e"
-                 oninput="setBlockData('${b.id}','vibeColor',this.value)">
-        </div>
-        <div class="field-row">
-          <label class="field-label">배지 스타일</label>
-          <select class="field-select" onchange="setBlockData('${b.id}','style',this.value)">
-            <option value="flat-square" ${(d.style||'flat-square')==='flat-square'?'selected':''}>Flat Square</option>
-            <option value="for-the-badge" ${d.style==='for-the-badge'?'selected':''}>For The Badge</option>
-            <option value="plastic" ${d.style==='plastic'?'selected':''}>Plastic</option>
-          </select>
-        </div>`;
+        ${renderBadgeSubFields(b, d)}`;
 
     default: return '';
   }
 }
 
-/* ══════════════════════════════════════════════════════
-   PRESET — 갤러리 템플릿 → 빌더 프리셋 적용
-══════════════════════════════════════════════════════ */
+/* ── badge 서브필드 헬퍼 ─────────────────────────────── */
+function renderBadgeSubFields(b, d) {
+  const type = d.type || 'tech';
+  if (type === 'tech') {
+    return `
+      <div class="tag-wrap" id="tags-${b.id}">
+        ${(d.techs||[]).map((t,i) => `
+          <span class="tag tag-pk">${t}
+            <button class="tag-x" onclick="removeBadgeTech('${b.id}',${i})">×</button>
+          </span>`).join('')}
+      </div>
+      <input class="field-input" placeholder="기술명 입력 후 Enter" style="margin-top:6px"
+             onkeydown="addBadgeTech(event,'${b.id}',this)">`;
+  }
+  if (type === 'mbti') {
+    return `
+      <div class="field-row">
+        <label class="field-label">MBTI 유형</label>
+        <select class="field-select" onchange="setBlockData('${b.id}','mbti',this.value)">
+          ${Object.keys(IDENTITY_MBTI_COLORS).map(t =>
+            `<option value="${t}" ${(d.mbti||'ENFP')===t?'selected':''}>${t}</option>`
+          ).join('')}
+        </select>
+      </div>`;
+  }
+  if (type === 'status') {
+    return `
+      <div class="field-row">
+        <label class="field-label">프리셋</label>
+        <select class="field-select" onchange="applyBadgeStatusPreset('${b.id}',this.value)">
+          <option value="">커스텀</option>
+          ${IDENTITY_STATUS_PRESETS.map((p,i) =>
+            `<option value="${i}">${p.emoji} ${p.label}</option>`
+          ).join('')}
+        </select>
+      </div>
+      <div class="field-row">
+        <label class="field-label">이모지</label>
+        <input class="field-input" value="${d.statusEmoji||'🟢'}" placeholder="🟢"
+               oninput="setBlockData('${b.id}','statusEmoji',this.value)">
+      </div>
+      <div class="field-row">
+        <label class="field-label">메시지</label>
+        <input class="field-input" value="${d.statusMsg||'Coding'}" placeholder="Coding"
+               oninput="setBlockData('${b.id}','statusMsg',this.value)">
+      </div>
+      <div class="field-row">
+        <label class="field-label">색상</label>
+        <input type="color" value="${d.statusColor||'#34A853'}"
+               oninput="setBlockData('${b.id}','statusColor',this.value)">
+      </div>`;
+  }
+  if (type === 'role') {
+    return `
+      <div class="field-row">
+        <label class="field-label">프리셋</label>
+        <select class="field-select" onchange="applyBadgeRolePreset('${b.id}',this.value)">
+          <option value="">커스텀</option>
+          ${IDENTITY_ROLE_PRESETS.map((p,i) =>
+            `<option value="${i}">${p.icon} ${p.label}</option>`
+          ).join('')}
+        </select>
+      </div>
+      <div class="field-row">
+        <label class="field-label">아이콘</label>
+        <input class="field-input" value="${d.roleIcon||'🌐'}" placeholder="🌐"
+               oninput="setBlockData('${b.id}','roleIcon',this.value)">
+      </div>
+      <div class="field-row">
+        <label class="field-label">역할명</label>
+        <input class="field-input" value="${d.roleMsg||'Frontend Dev'}" placeholder="Frontend Dev"
+               oninput="setBlockData('${b.id}','roleMsg',this.value)">
+      </div>
+      <div class="field-row">
+        <label class="field-label">색상</label>
+        <input type="color" value="${d.roleColor||'#4285F4'}"
+               oninput="setBlockData('${b.id}','roleColor',this.value)">
+      </div>`;
+  }
+  if (type === 'vibe') {
+    return `
+      <div class="field-row">
+        <label class="field-label">프리셋</label>
+        <select class="field-select" onchange="applyBadgeVibePreset('${b.id}',this.value)">
+          <option value="">커스텀</option>
+          ${IDENTITY_VIBE_PRESETS.map((p,i) =>
+            `<option value="${i}">${p.emoji} ${p.label}</option>`
+          ).join('')}
+        </select>
+      </div>
+      <div class="field-row">
+        <label class="field-label">이모지</label>
+        <input class="field-input" value="${d.vibeEmoji||'🦉'}" placeholder="🦉"
+               oninput="setBlockData('${b.id}','vibeEmoji',this.value)">
+      </div>
+      <div class="field-row">
+        <label class="field-label">메시지</label>
+        <input class="field-input" value="${d.vibeMsg||'Night Owl'}" placeholder="Night Owl"
+               oninput="setBlockData('${b.id}','vibeMsg',this.value)">
+      </div>
+      <div class="field-row">
+        <label class="field-label">색상</label>
+        <input type="color" value="${d.vibeColor||'#1a1a2e'}"
+               oninput="setBlockData('${b.id}','vibeColor',this.value)">
+      </div>`;
+  }
+  return '';
+}
+
+function addBadgeTech(e, id, input) {
+  if (e.key !== 'Enter' || !input.value.trim()) return;
+  const b = WE.blocks.find(b => b.id === id);
+  if (b) {
+    if (!b.data.techs) b.data.techs = [];
+    b.data.techs.push(input.value.trim());
+    input.value = '';
+    renderBlockList();
+    renderWidget();
+  }
+}
+
+function removeBadgeTech(id, i) {
+  const b = WE.blocks.find(b => b.id === id);
+  if (b && b.data.techs) { b.data.techs.splice(i, 1); renderBlockList(); renderWidget(); }
+}
+
+function applyBadgeStatusPreset(id, idx) {
+  if (idx === '') return;
+  const p = IDENTITY_STATUS_PRESETS[parseInt(idx)];
+  if (!p) return;
+  const b = WE.blocks.find(b => b.id === id);
+  if (b) { b.data.statusEmoji = p.emoji; b.data.statusMsg = p.label; b.data.statusColor = p.color; renderBlockList(); renderWidget(); }
+}
+
+function applyBadgeRolePreset(id, idx) {
+  if (idx === '') return;
+  const p = IDENTITY_ROLE_PRESETS[parseInt(idx)];
+  if (!p) return;
+  const b = WE.blocks.find(b => b.id === id);
+  if (b) { b.data.roleIcon = p.icon; b.data.roleMsg = p.label; b.data.roleColor = p.color; renderBlockList(); renderWidget(); }
+}
+
+function applyBadgeVibePreset(id, idx) {
+  if (idx === '') return;
+  const p = IDENTITY_VIBE_PRESETS[parseInt(idx)];
+  if (!p) return;
+  const b = WE.blocks.find(b => b.id === id);
+  if (b) { b.data.vibeEmoji = p.emoji; b.data.vibeMsg = p.label; b.data.vibeColor = p.color; renderBlockList(); renderWidget(); }
+}
+
+
 
 // 테마명 → 카드 스타일 매핑
 const THEME_TO_STYLE = {
@@ -594,18 +661,18 @@ const TYPE_TO_BLOCKS = {
     { id: uid(), type: 'avatar',  data: { emoji: 'fluent:person' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'Full-stack Developer', handle: '@octocat' }, collapsed: false },
     { id: uid(), type: 'stats',   data: { items: [{ label:'Stars', val:'2.8k' }, { label:'Repos', val:'142' }, { label:'Active', val:'98%' }] }, collapsed: false },
-    { id: uid(), type: 'badges',  data: { tags: ['React', 'TypeScript', 'Node.js'] }, collapsed: true },
+    { id: uid(), type: 'badge',   data: { type:'tech', techs: ['React', 'TypeScript', 'Node.js'] }, collapsed: true },
   ],
   tech: () => [
     { id: uid(), type: 'avatar',  data: { emoji: 'fluent:rocket' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'Tech Stack', handle: '' }, collapsed: false },
-    { id: uid(), type: 'badges',  data: { tags: ['React', 'TypeScript', 'Node.js', 'Python', 'Docker'] }, collapsed: false },
+    { id: uid(), type: 'badge',   data: { type:'tech', techs: ['React', 'TypeScript', 'Node.js', 'Python', 'Docker'] }, collapsed: false },
   ],
   profile: () => [
     { id: uid(), type: 'avatar',  data: { emoji: 'fluent:person' }, collapsed: false },
     { id: uid(), type: 'name',    data: { username: '', name: 'The Octocat', role: 'Full-stack Developer', handle: '@octocat' }, collapsed: false },
     { id: uid(), type: 'bio',     data: { text: 'Building amazing things with code ✨' }, collapsed: false },
-    { id: uid(), type: 'badges',  data: { tags: ['React', 'TypeScript'] }, collapsed: false },
+    { id: uid(), type: 'badge',   data: { type:'tech', techs: ['React', 'TypeScript'] }, collapsed: false },
     { id: uid(), type: 'links',   data: { items: [{ type:'github', url:'' }, { type:'blog', url:'' }] }, collapsed: false },
   ],
   links: () => [
@@ -629,8 +696,9 @@ const TYPE_TO_BLOCKS = {
 };
 
 function applyPreset(templateId) {
-  const tpl = (typeof TEMPLATES !== 'undefined') && TEMPLATES.find(t => t.id === templateId);
-  if (!tpl) { console.warn('[GitGloss] Template not found:', templateId); return; }
+  const registry = window.TEMPLATE_REGISTRY || window.TEMPLATES;
+  const tpl = registry && registry.find(t => t.id === templateId);
+  if (!tpl) { console.warn('[ReadMe.kit] Template not found:', templateId); return; }
 
   console.log('[GitGloss] Applying preset:', tpl.title, '| style:', THEME_TO_STYLE[tpl.theme] || 'glass');
 
@@ -640,10 +708,14 @@ function applyPreset(templateId) {
   WE.accent = tpl.accentColor || '#4285F4';
   WE.preset = templateId;
 
-  // 2. 블록 구성 — 타입에 맞는 팩토리 사용
-  const typeKey = ['stats','tech','profile','links','creative','banner'].includes(tpl.type)
-    ? tpl.type : 'stats';
-  WE.blocks = typeKey === 'creative' ? TYPE_TO_BLOCKS.creative(templateId) : TYPE_TO_BLOCKS[typeKey]();
+  // 2. 블록 구성 — 템플릿에 blocks 정의가 있으면 직접 사용, 없으면 팩토리 폴백
+  if (tpl.blocks && tpl.blocks.length > 0) {
+    WE.blocks = tpl.blocks.map(b => ({ ...b, id: uid(), collapsed: false }));
+  } else {
+    const typeKey = ['stats','tech','profile','links','creative','banner'].includes(tpl.type)
+      ? tpl.type : 'stats';
+    WE.blocks = typeKey === 'creative' ? TYPE_TO_BLOCKS.creative(templateId) : TYPE_TO_BLOCKS[typeKey]();
+  }
 
   // 3. 스타일 버튼 UI 동기화
   document.querySelectorAll('.style-btn').forEach(b => {
@@ -669,12 +741,50 @@ function applyPreset(templateId) {
   renderWidget();
 }
 
-// URL 파라미터로 프리셋 자동 적용
-function applyPresetFromURL() {
-  const params = new URLSearchParams(location.search);
-  const id = params.get('template') || params.get('preset');
-  if (id) applyPreset(id);
+/* ── URL 파라미터로 프리셋 초기화 ────────────────────── */
+function initBuilder() {
+  const params = new URLSearchParams(window.location.search);
+  const templateId = params.get('template') || params.get('preset');
+  if (templateId) {
+    const registry = window.TEMPLATE_REGISTRY || TEMPLATES;
+    const target = registry.find(t => t.id === templateId);
+    if (target) {
+      // 블록 데이터 교체 (깊은 복사로 원본 보호)
+      if (target.blocks && target.blocks.length > 0) {
+        WE.blocks = JSON.parse(JSON.stringify(target.blocks))
+          .map(b => ({ ...b, id: uid(), collapsed: false }));
+      } else {
+        // blocks 미정의 템플릿은 기존 팩토리 폴백
+        const typeKey = ['stats','tech','profile','links','creative','banner'].includes(target.type)
+          ? target.type : 'stats';
+        WE.blocks = typeKey === 'creative'
+          ? TYPE_TO_BLOCKS.creative(templateId)
+          : TYPE_TO_BLOCKS[typeKey]();
+      }
+
+      // 스타일 + 액센트 적용
+      WE.style  = target.style || THEME_TO_STYLE[target.theme] || 'glass';
+      WE.accent = target.accentColor || '#4285F4';
+      WE.preset = templateId;
+
+      // UI 동기화
+      document.querySelectorAll('.style-btn').forEach(b =>
+        b.classList.toggle('on', b.dataset.style === WE.style));
+      document.querySelectorAll('.sw').forEach(s =>
+        s.classList.toggle('on', s.title === WE.accent));
+      document.querySelectorAll('.preset-thumb').forEach(p =>
+        p.classList.toggle('on', p.dataset.id === templateId));
+
+      console.log(`[ReadMe.kit] Loaded: ${target.title}`);
+    }
+  }
+
+  renderBlockList();
+  renderWidget();
 }
+
+// 하위 호환 — applyPresetFromURL은 initBuilder로 위임
+function applyPresetFromURL() { initBuilder(); }
 
 function switchPresetFilter(el, type) {
   document.querySelectorAll('.preset-filter').forEach(b => b.classList.remove('on'));
@@ -682,10 +792,11 @@ function switchPresetFilter(el, type) {
   renderPresetGrid(type);
 
   // 해당 타입의 첫 번째 프리셋 자동 적용
-  if (typeof TEMPLATES !== 'undefined') {
+  const registry = window.TEMPLATE_REGISTRY || window.TEMPLATES;
+  if (registry) {
     const first = type === 'all'
-      ? TEMPLATES[0]
-      : TEMPLATES.find(t => t.type === type);
+      ? registry[0]
+      : registry.find(t => t.type === type);
     if (first) applyPreset(first.id);
   }
 }
@@ -695,11 +806,12 @@ function switchPresetFilter(el, type) {
 ══════════════════════════════════════════════════════ */
 function renderPresetGrid(filterType = 'all') {
   const grid = document.getElementById('preset-grid');
-  if (!grid || typeof TEMPLATES === 'undefined') return;
+  const registry = window.TEMPLATE_REGISTRY || window.TEMPLATES;
+  if (!grid || !registry) return;
 
   const list = filterType === 'all'
-    ? TEMPLATES
-    : TEMPLATES.filter(t => t.type === filterType);
+    ? registry
+    : registry.filter(t => t.type === filterType);
 
   grid.innerHTML = list.map(tpl => {
     const bg = getPresetThumbBg(tpl);
@@ -748,7 +860,14 @@ function addBlock(type) {
     avatar:  { emoji: 'fluent:person' },
     name:    { username: '', name: '', role: '', handle: '' },
     stats:   { items: [{ label:'Stars', val:'2.8k' }, { label:'Repos', val:'142' }] },
-    badges:  { tags: ['React', 'TypeScript'] },
+    badge:   {
+      type: 'tech',
+      techs: ['React', 'TypeScript'],
+      mbti: 'ENFP',
+      statusEmoji: '🟢', statusMsg: 'Coding',    statusColor: '#34A853',
+      roleIcon:    '🌐', roleMsg:   'Frontend Dev', roleColor: '#4285F4',
+      vibeEmoji:   '🦉', vibeMsg:   'Night Owl',  vibeColor: '#1a1a2e',
+    },
     streak:  { current: '42', longest: '87', total: '1,247' },
     links:   { items: [{ type:'github', url:'' }, { type:'blog', url:'' }] },
     bio:     { text: '' },
@@ -759,10 +878,6 @@ function addBlock(type) {
     coffee:  { cups: '2', maxCups: '4', drinkEmoji: 'fluent:drink-coffee' },
     banner:  { text: 'Hi! Welcome!', bannerType: 'wave', color: 'ED93B1', height: '160' },
     typing:  { lines: "I'm a Developer;I love Open Source", color: '4285F4', size: '22' },
-    mbti:    { mbtiType: 'ENFP', style: 'flat-square' },
-    status:  { statusEmoji: '🟢', statusMsg: 'Coding', statusColor: '#34A853', style: 'flat-square' },
-    role:    { roleIcon: '🌐', roleLabel: 'Role', roleMsg: 'Frontend Dev', roleColor: '#4285F4', style: 'flat-square' },
-    vibe:    { vibeEmoji: '🦉', vibeMsg: 'Night Owl', vibeColor: '#1a1a2e', style: 'flat-square' },
   };
   WE.blocks.push({ id: uid(), type, data: defaults[type] || {}, collapsed: false });
   renderBlockList();
@@ -947,18 +1062,6 @@ function renderBlockHTML(b) {
           `).join('')}
         </div>`;
 
-    case 'badges':
-      return `
-        <div class="wb-badges">
-          ${d.tags.map((t, i) => {
-            // 액센트 색상 기반 배지 — 밝은 배경 + 진한 텍스트
-            const bgColor = hexAlpha(acc, 0.15);
-            const textColor = darkenColor(acc, 0.6);
-            const borderColor = hexAlpha(acc, 0.35);
-            return `<span class="wb-badge" style="background:${bgColor};border:1px solid ${borderColor};color:${textColor}">${t}</span>`;
-          }).join('')}
-        </div>`;
-
     case 'streak':
       return `
         <div class="wb-streak">
@@ -1073,55 +1176,31 @@ function renderBlockHTML(b) {
         </div>`;
     }
 
-    case 'mbti': {
-      const mbtiType = d.mbtiType || 'ENFP';
-      const color = IDENTITY_MBTI_COLORS[mbtiType] || '#00C9A7';
-      const style = d.style || 'flat-square';
-      const url = `https://img.shields.io/badge/MBTI-${mbtiType}-${color.replace('#','')}.svg?style=${style}&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04IDh6bTAtMTRjLTMuMzEgMC02IDIuNjktNiA2czIuNjkgNiA2IDYgNi0yLjY5IDYtNi0yLjY5LTYtNi02eiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=&logoColor=white`;
-      return `
-        <div class="wb-external-block">
-          <img src="${url}" alt="MBTI ${mbtiType}" style="border-radius:4px;" loading="lazy">
-        </div>`;
+    case 'badge': {
+      const type = d.type || 'tech';
+      let badgeHTML = '';
+      if (type === 'tech') {
+        badgeHTML = (d.techs || []).map(tech => {
+          const bg     = hexAlpha(acc, 0.15);
+          const border = hexAlpha(acc, 0.35);
+          const color  = darkenColor(acc, 0.6);
+          return `<span class="wb-badge" style="background:${bg};border:1px solid ${border};color:${color}">${tech}</span>`;
+        }).join('');
+      } else if (type === 'mbti') {
+        const color = IDENTITY_MBTI_COLORS[d.mbti || 'ENFP'] || '#00C9A7';
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.mbti || 'ENFP'}</span>`;
+      } else if (type === 'status') {
+        const color = d.statusColor || '#34A853';
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.statusEmoji||'🟢'} ${d.statusMsg||'Coding'}</span>`;
+      } else if (type === 'role') {
+        const color = d.roleColor || '#4285F4';
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.roleIcon||'🌐'} ${d.roleMsg||'Frontend Dev'}</span>`;
+      } else if (type === 'vibe') {
+        const color = d.vibeColor || '#1a1a2e';
+        badgeHTML = `<span class="wb-badge" style="background:${hexAlpha(color,0.15)};border:1px solid ${hexAlpha(color,0.35)};color:${color}">${d.vibeEmoji||'🦉'} ${d.vibeMsg||'Night Owl'}</span>`;
+      }
+      return `<div class="wb-badges">${badgeHTML}</div>`;
     }
-
-    case 'status': {
-      const emoji = d.statusEmoji || '🟢';
-      const msg = d.statusMsg || 'Coding';
-      const color = (d.statusColor || '#34A853').replace('#','');
-      const style = d.style || 'flat-square';
-      const url = `https://img.shields.io/badge/${encodeURIComponent(emoji + ' ' + msg)}-${color}.svg?style=${style}&labelColor=555555&color=${color}`;
-      return `
-        <div class="wb-external-block">
-          <img src="${url}" alt="Status: ${msg}" style="border-radius:4px;" loading="lazy">
-        </div>`;
-    }
-
-    case 'role': {
-      const icon = d.roleIcon || '🌐';
-      const label = d.roleLabel || 'Role';
-      const msg = d.roleMsg || 'Frontend Dev';
-      const color = (d.roleColor || '#4285F4').replace('#','');
-      const style = d.style || 'flat-square';
-      const url = `https://img.shields.io/badge/${encodeURIComponent(icon + ' ' + label)}-${encodeURIComponent(msg)}-${color}.svg?style=${style}&labelColor=555555`;
-      return `
-        <div class="wb-external-block">
-          <img src="${url}" alt="Role: ${msg}" style="border-radius:4px;" loading="lazy">
-        </div>`;
-    }
-
-    case 'vibe': {
-      const emoji = d.vibeEmoji || '🦉';
-      const msg = d.vibeMsg || 'Night Owl';
-      const color = (d.vibeColor || '#1a1a2e').replace('#','');
-      const style = d.style || 'flat-square';
-      const url = `https://img.shields.io/badge/${encodeURIComponent(emoji + ' ' + msg)}-${color}.svg?style=${style}&labelColor=555555&color=${color}`;
-      return `
-        <div class="wb-external-block">
-          <img src="${url}" alt="Vibe: ${msg}" style="border-radius:4px;" loading="lazy">
-        </div>`;
-    }
-
-    default: return '';
   }
 }
 
@@ -1237,9 +1316,9 @@ function buildAPIUrl() {
           params.set('stats', d.items.map(s => `${s.label}:${s.val}`).join(','));
         }
         break;
-      case 'badges':
-        if (d.tags && d.tags.length > 0) {
-          params.set('badges', d.tags.join(','));
+      case 'badge':
+        if (d.type === 'tech' && d.techs && d.techs.length > 0) {
+          params.set('badges', d.techs.join(','));
         }
         break;
       case 'streak':
@@ -1317,48 +1396,28 @@ function generateCode(fmt) {
           : `![Typing SVG](${url})`);
         break;
       }
-      case 'mbti': {
-        const mbtiType = d.mbtiType || 'ENFP';
-        const color = (IDENTITY_MBTI_COLORS[mbtiType] || '#00C9A7').replace('#','');
-        const style = d.style || 'flat-square';
-        const url = `https://img.shields.io/badge/MBTI-${mbtiType}-${color}.svg?style=${style}&logoColor=white`;
-        lines.push(fmt === 'html'
-          ? `<img src="${url}" alt="MBTI ${mbtiType}" />`
-          : `![MBTI ${mbtiType}](${url})`);
-        break;
-      }
-      case 'status': {
-        const emoji = d.statusEmoji || '🟢';
-        const msg = d.statusMsg || 'Coding';
-        const color = (d.statusColor || '#34A853').replace('#','');
-        const style = d.style || 'flat-square';
-        const url = `https://img.shields.io/badge/${encodeURIComponent(emoji + ' ' + msg)}-${color}.svg?style=${style}&labelColor=555555`;
-        lines.push(fmt === 'html'
-          ? `<img src="${url}" alt="Status: ${msg}" />`
-          : `![Status: ${msg}](${url})`);
-        break;
-      }
-      case 'role': {
-        const icon = d.roleIcon || '🌐';
-        const label = d.roleLabel || 'Role';
-        const msg = d.roleMsg || 'Frontend Dev';
-        const color = (d.roleColor || '#4285F4').replace('#','');
-        const style = d.style || 'flat-square';
-        const url = `https://img.shields.io/badge/${encodeURIComponent(icon + ' ' + label)}-${encodeURIComponent(msg)}-${color}.svg?style=${style}&labelColor=555555`;
-        lines.push(fmt === 'html'
-          ? `<img src="${url}" alt="Role: ${msg}" />`
-          : `![Role: ${msg}](${url})`);
-        break;
-      }
-      case 'vibe': {
-        const emoji = d.vibeEmoji || '🦉';
-        const msg = d.vibeMsg || 'Night Owl';
-        const color = (d.vibeColor || '#1a1a2e').replace('#','');
-        const style = d.style || 'flat-square';
-        const url = `https://img.shields.io/badge/${encodeURIComponent(emoji + ' ' + msg)}-${color}.svg?style=${style}&labelColor=555555`;
-        lines.push(fmt === 'html'
-          ? `<img src="${url}" alt="Vibe: ${msg}" />`
-          : `![Vibe: ${msg}](${url})`);
+      case 'badge': {
+        const type = d.type || 'tech';
+        let url = '';
+        if (type === 'tech' && d.techs && d.techs.length > 0) {
+          lines.push(d.techs.map(t => fmt === 'html' ? `<code>${t}</code>` : `\`${t}\``).join(' '));
+        } else if (type === 'mbti') {
+          const color = (IDENTITY_MBTI_COLORS[d.mbti || 'ENFP'] || '#00C9A7').replace('#','');
+          url = `https://img.shields.io/badge/MBTI-${d.mbti||'ENFP'}-${color}.svg?style=flat-square&logoColor=white`;
+          lines.push(fmt === 'html' ? `<img src="${url}" alt="MBTI ${d.mbti||'ENFP'}" />` : `![MBTI ${d.mbti||'ENFP'}](${url})`);
+        } else if (type === 'status') {
+          const color = (d.statusColor || '#34A853').replace('#','');
+          url = `https://img.shields.io/badge/${encodeURIComponent((d.statusEmoji||'🟢') + ' ' + (d.statusMsg||'Coding'))}-${color}.svg?style=flat-square&labelColor=555555`;
+          lines.push(fmt === 'html' ? `<img src="${url}" alt="Status" />` : `![Status](${url})`);
+        } else if (type === 'role') {
+          const color = (d.roleColor || '#4285F4').replace('#','');
+          url = `https://img.shields.io/badge/${encodeURIComponent((d.roleIcon||'🌐') + ' ' + (d.roleMsg||'Frontend Dev'))}-${color}.svg?style=flat-square&labelColor=555555`;
+          lines.push(fmt === 'html' ? `<img src="${url}" alt="Role" />` : `![Role](${url})`);
+        } else if (type === 'vibe') {
+          const color = (d.vibeColor || '#1a1a2e').replace('#','');
+          url = `https://img.shields.io/badge/${encodeURIComponent((d.vibeEmoji||'🦉') + ' ' + (d.vibeMsg||'Night Owl'))}-${color}.svg?style=flat-square&labelColor=555555`;
+          lines.push(fmt === 'html' ? `<img src="${url}" alt="Vibe" />` : `![Vibe](${url})`);
+        }
         break;
       }
     }
@@ -1366,7 +1425,7 @@ function generateCode(fmt) {
 
   // 나머지 블록들은 GitGloss API URL로 생성
   const hasGitglossBlocks = WE.blocks.some(b =>
-    ['avatar','name','stats','badges','streak','links','bio','divider','coffee'].includes(b.type)
+    ['avatar','name','stats','badge','streak','links','bio','divider','coffee'].includes(b.type)
   );
 
   if (hasGitglossBlocks) {
@@ -1407,14 +1466,15 @@ function doCopy() {
    INIT
 ══════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  // templates.js 로드 확인
-  if (typeof TEMPLATES === 'undefined') {
-    console.error('TEMPLATES not loaded!');
+  const registry = window.TEMPLATE_REGISTRY || window.TEMPLATES;
+  if (!registry) {
+    console.error('[ReadMe.kit] TEMPLATES not loaded!');
     return;
   }
 
   renderPresetGrid('all');
   renderBlockList();
   renderWidget();
-  applyPresetFromURL();
+  renderBlockAddGrid('core');
+  initBuilder(); // URL 파라미터 기반 템플릿 로드 (마지막 실행)
 });

@@ -21,7 +21,9 @@
   <!-- TOPBAR -->
   <header class="topbar">
     <button class="panel-toggle-btn" id="panel-toggle" aria-label="패널 열기">☰</button>
-    <a href="index.html" class="topbar-logo">ReadMe.kit</a>
+    <a href="index.html" class="topbar-logo">
+      <img src="assets/images/readmekit.symbol.png" alt="ReadMe.kit" width="22" height="22" style="object-fit:contain;vertical-align:middle;margin-right:6px;">ReadMe.kit
+    </a>
     <div class="topbar-sep"></div>
     <span class="topbar-title">Widget Studio</span>
     <div class="topbar-actions">
@@ -94,60 +96,15 @@
 
       <!-- ④ 블록 추가 -->
       <div class="section-label">블록 추가</div>
-      <div class="block-add-grid">
-        <button class="block-add-btn" onclick="addBlock('avatar')">
-          <img src="https://api.iconify.design/fluent/person-20-filled.svg" width="16" height="16"> 이모지
-        </button>
-        <button class="block-add-btn" onclick="addBlock('name')">
-          <img src="https://api.iconify.design/fluent/text-edit-style-20-filled.svg" width="16" height="16"> 이름/직무
-        </button>
-        <button class="block-add-btn" onclick="addBlock('stats')">
-          <img src="https://api.iconify.design/fluent/data-bar-vertical-20-filled.svg" width="16" height="16"> Stats
-        </button>
-        <button class="block-add-btn" onclick="addBlock('badges')">
-          <img src="https://api.iconify.design/fluent/tag-20-filled.svg" width="16" height="16"> 기술 배지
-        </button>
-        <button class="block-add-btn" onclick="addBlock('streak')">
-          <img src="https://api.iconify.design/fluent/fire-20-filled.svg" width="16" height="16"> 스트릭
-        </button>
-        <button class="block-add-btn" onclick="addBlock('links')">
-          <img src="https://api.iconify.design/fluent/link-20-filled.svg" width="16" height="16"> 링크
-        </button>
-        <button class="block-add-btn" onclick="addBlock('bio')">
-          <img src="https://api.iconify.design/fluent/document-text-20-filled.svg" width="16" height="16"> 소개글
-        </button>
-        <button class="block-add-btn" onclick="addBlock('divider')">
-          <img src="https://api.iconify.design/fluent/line-horizontal-1-20-filled.svg" width="16" height="16"> 구분선
-        </button>
-        <button class="block-add-btn" onclick="addBlock('trophy')">
-          <img src="https://api.iconify.design/fluent/trophy-20-filled.svg" width="16" height="16"> GitHub Trophy
-        </button>
-        <button class="block-add-btn" onclick="addBlock('hits')">
-          <img src="https://api.iconify.design/fluent/eye-20-filled.svg" width="16" height="16"> Hits 카운터
-        </button>
-        <button class="block-add-btn" onclick="addBlock('coffee')">
-          <img src="https://api.iconify.design/fluent/drink-coffee-20-filled.svg" width="16" height="16"> 커피 카운터
-        </button>
-        <button class="block-add-btn" onclick="addBlock('banner')">
-          <img src="https://api.iconify.design/fluent/image-20-filled.svg" width="16" height="16"> 배너
-        </button>
-        <button class="block-add-btn" onclick="addBlock('typing')">
-          <img src="https://api.iconify.design/fluent/keyboard-20-filled.svg" width="16" height="16"> 타이핑 SVG
-        </button>
-
-        <!-- Identity 블록 ─────────────────── -->
-        <button class="block-add-btn" onclick="addBlock('mbti')" style="border-color:rgba(0,201,167,0.35);color:#047857;">
-          <img src="https://api.iconify.design/fluent/person-tag-20-filled.svg" width="16" height="16"> MBTI 배지
-        </button>
-        <button class="block-add-btn" onclick="addBlock('status')" style="border-color:rgba(52,168,83,0.35);color:#188038;">
-          <img src="https://api.iconify.design/fluent/presence-available-20-filled.svg" width="16" height="16"> 현재 상태
-        </button>
-        <button class="block-add-btn" onclick="addBlock('role')" style="border-color:rgba(66,133,244,0.35);color:#1967D2;">
-          <img src="https://api.iconify.design/fluent/briefcase-20-filled.svg" width="16" height="16"> 역할 배지
-        </button>
-        <button class="block-add-btn" onclick="addBlock('vibe')" style="border-color:rgba(155,143,232,0.35);color:#6a5fc1;">
-          <img src="https://api.iconify.design/fluent/sparkle-20-filled.svg" width="16" height="16"> 바이브 배지
-        </button>
+      <div class="block-tab-row">
+        <button class="block-tab-btn on" onclick="switchBlockTab(this,'core')">기본</button>
+        <button class="block-tab-btn" onclick="switchBlockTab(this,'stats')">데이터</button>
+        <button class="block-tab-btn" onclick="switchBlockTab(this,'badge')">배지</button>
+        <button class="block-tab-btn" onclick="switchBlockTab(this,'extended')">확장</button>
+        <button class="block-tab-btn" onclick="switchBlockTab(this,'links')">Links</button>
+      </div>
+      <div class="block-add-grid" id="block-add-grid">
+        <!-- JS가 렌더 (renderBlockAddGrid) -->
       </div>
 
       <div class="divider"></div>

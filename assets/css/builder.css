@@ -231,6 +231,33 @@
   box-shadow: 0 0 0 2px var(--text-main), 0 4px 12px rgba(0,0,0,0.25);
 }
 
+/* 블록 추가 탭 */
+.block-tab-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.block-tab-btn {
+  padding: 5px 10px;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.7);
+  font-weight: 600;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all .15s;
+}
+.block-tab-btn.on {
+  background: var(--google-blue);
+  border-color: var(--google-blue);
+  color: #fff;
+}
+.block-tab-btn:hover:not(.on) {
+  border-color: var(--google-blue);
+  color: var(--google-blue);
+}
+
 /* 블록 추가 버튼 */
 .block-add-grid {
   display: grid;

@@ -7,8 +7,20 @@
 const TEMPLATES = [
 
   /* ── STATS (10) ──────────────────────────────────── */
-  { id:'stats-01', type:'stats', theme:'cotton-candy',  layout:'', title:'Cotton Candy Stats', desc:'핑크 글래스모피즘 — 가장 인기 있는 스타일', badge:'NEW', accentColor:'#ED93B1', config:{stats:['Stars','Repos','Active']} },
-  { id:'stats-02', type:'stats', theme:'lavender-sky',  layout:'', title:'Lavender Sky',        desc:'라벤더→스카이 그라디언트 풀 카드',          badge:null,  accentColor:'#9B8FE8', config:{stats:['Stars','Repos','Active']} },
+  { id:'stats-01', type:'stats', theme:'cotton-candy',  layout:'', title:'Cotton Candy Stats', desc:'핑크 글래스모피즘 — 가장 인기 있는 스타일', badge:'NEW', accentColor:'#ED93B1', config:{stats:['Stars','Repos','Active']},
+    blocks:[
+      { id:'b1', type:'avatar', data:{ emoji:'fluent:person' } },
+      { id:'b2', type:'name',   data:{ username:'', name:'Your Name', role:'Developer', handle:'@id' } },
+      { id:'b3', type:'stats',  data:{ items:[{ label:'Stars', val:'1.2k' },{ label:'Repos', val:'40' },{ label:'Active', val:'98%' }] } },
+    ]
+  },
+  { id:'stats-02', type:'stats', theme:'lavender-sky',  layout:'', title:'Lavender Sky',        desc:'라벤더→스카이 그라디언트 풀 카드',          badge:null,  accentColor:'#9B8FE8', config:{stats:['Stars','Repos','Active']},
+    blocks:[
+      { id:'b1', type:'avatar', data:{ emoji:'fluent:star' } },
+      { id:'b2', type:'name',   data:{ username:'', name:'Your Name', role:'Developer', handle:'@id' } },
+      { id:'b3', type:'stats',  data:{ items:[{ label:'Stars', val:'1.2k' },{ label:'Repos', val:'40' },{ label:'Active', val:'98%' }] } },
+    ]
+  },
   { id:'stats-03', type:'stats', theme:'cream-glass',   layout:'', title:'Cream Glass',         desc:'웜 크림 앰버 글래스모피즘',                 badge:null,  accentColor:'#D4A017', config:{stats:['Stars','Repos','Active']} },
   { id:'stats-04', type:'stats', theme:'aqua-veil',     layout:'', title:'Aqua Veil',           desc:'딥 틸 다크 글래스, 시안 액센트',            badge:null,  accentColor:'#7EC8E3', config:{stats:['Stars','Repos','Active']} },
   { id:'stats-05', type:'stats', theme:'dark-candy',    layout:'', title:'Dark Candy',          desc:'다크 배경에 네온 캔디 컬러 팝',             badge:null,  accentColor:'#ED93B1', config:{stats:['Stars','Repos','Active']} },
@@ -19,8 +31,19 @@ const TEMPLATES = [
   { id:'stats-10', type:'stats', theme:'candy-burst',   layout:'', title:'Candy Burst',         desc:'레인보우 애니메이팅 그라디언트 테두리',      badge:'HOT', accentColor:'#9B8FE8', config:{stats:['Stars','Repos','Active']} },
 
   /* ── TECH BADGE (10) ─────────────────────────────── */
-  { id:'tech-01', type:'tech', theme:'badge-minimal',      layout:'tech-layout', title:'Minimal',       desc:'테두리만, 밑줄 텍스트 포커스 스타일',          badge:null,  accentColor:'#08080F', config:{stack:['React','TypeScript','Node.js']} },
-  { id:'tech-02', type:'tech', theme:'badge-glass',        layout:'tech-layout', title:'Glass Badge',   desc:'프로스티드 글래스 필 배지',                    badge:null,  accentColor:'#4285F4', config:{stack:['React','TypeScript','Node.js']} },
+  { id:'tech-01', type:'tech', theme:'badge-minimal',      layout:'tech-layout', title:'Minimal',       desc:'테두리만, 밑줄 텍스트 포커스 스타일',          badge:null,  accentColor:'#08080F', config:{stack:['React','TypeScript','Node.js']},
+    blocks:[
+      { id:'b1', type:'name',   data:{ username:'', name:'Your Name', role:'Tech Stack', handle:'' } },
+      { id:'b2', type:'badge', data:{ type:'tech', techs:['React','TypeScript','Node.js'] } },
+    ]
+  },
+  { id:'tech-02', type:'tech', theme:'badge-glass',        layout:'tech-layout', title:'Glass Badge',   desc:'프로스티드 글래스 필 배지',                    badge:null,  accentColor:'#4285F4', config:{stack:['React','TypeScript','Node.js']},
+    blocks:[
+      { id:'b1', type:'avatar', data:{ emoji:'fluent:rocket' } },
+      { id:'b2', type:'name',   data:{ username:'', name:'Your Name', role:'Tech Stack', handle:'' } },
+      { id:'b3', type:'badge', data:{ type:'tech', techs:['React','TypeScript','Node.js'] } },
+    ]
+  },
   { id:'tech-03', type:'tech', theme:'badge-soft',         layout:'tech-layout', title:'Soft Colors',   desc:'카테고리별 소프트 파스텔 사이클',              badge:null,  accentColor:'#ED93B1', config:{stack:['React','TypeScript','Node.js','Python','Go']} },
   { id:'tech-04', type:'tech', theme:'badge-pastel',       layout:'tech-layout', title:'Pastel Burst',  desc:'각 배지마다 고유한 파스텔 그라디언트',         badge:'NEW', accentColor:'#9B8FE8', config:{stack:['React','TypeScript','Node.js','Python','Docker']} },
   { id:'tech-05', type:'tech', theme:'badge-dark-pro',     layout:'tech-layout', title:'Dark Pro',      desc:'코드 에디터 스타일 다크 배지',                 badge:null,  accentColor:'#a0d0ff', config:{stack:['React','TypeScript','Node.js']} },
@@ -31,8 +54,20 @@ const TEMPLATES = [
   { id:'tech-10', type:'tech', theme:'badge-backend',      layout:'tech-layout', title:'Backend Pack',  desc:'서버/DB 전용 그린/그레이 팔레트',              badge:null,  accentColor:'#34A853', config:{stack:['Node.js','Go','PostgreSQL','Docker','AWS']} },
 
   /* ── PROFILE (10) ────────────────────────────────── */
-  { id:'profile-01', type:'profile', theme:'profile-minimal',      layout:'profile-layout', title:'Minimal',      desc:'이모지 + 이름 + 핸들만, 초미니멀 센터 정렬',    badge:null,  accentColor:'#08080F', config:{} },
-  { id:'profile-02', type:'profile', theme:'profile-dark-hero',    layout:'profile-layout', title:'Dark Hero',    desc:'다크 드라마틱, 그라디언트 네임 글로우',          badge:'HOT', accentColor:'#9B8FE8', config:{} },
+  { id:'profile-01', type:'profile', theme:'profile-minimal',      layout:'profile-layout', title:'Minimal',      desc:'이모지 + 이름 + 핸들만, 초미니멀 센터 정렬',    badge:null,  accentColor:'#08080F', config:{},
+    blocks:[
+      { id:'b1', type:'avatar', data:{ emoji:'fluent:person' } },
+      { id:'b2', type:'name',   data:{ username:'', name:'Your Name', role:'Developer', handle:'@id' } },
+    ]
+  },
+  { id:'profile-02', type:'profile', theme:'profile-dark-hero',    layout:'profile-layout', title:'Dark Hero',    desc:'다크 드라마틱, 그라디언트 네임 글로우',          badge:'HOT', accentColor:'#9B8FE8', config:{},
+    blocks:[
+      { id:'b1', type:'avatar', data:{ emoji:'fluent:person' } },
+      { id:'b2', type:'name',   data:{ username:'', name:'Your Name', role:'Full-stack Developer', handle:'@id' } },
+      { id:'b3', type:'bio',    data:{ text:'Building amazing things with code ✨' } },
+      { id:'b4', type:'badge', data:{ type:'tech', techs:['React','TypeScript','Node.js'] } },
+    ]
+  },
   { id:'profile-03', type:'profile', theme:'profile-soft',         layout:'profile-layout', title:'Soft Hero',    desc:'소프트 핑크 글래스, 따뜻한 분위기',             badge:null,  accentColor:'#ED93B1', config:{} },
   { id:'profile-04', type:'profile', theme:'profile-character',    layout:'profile-layout', title:'Character',    desc:'빅 이모지, 점선 테두리, 펀 스타일',             badge:null,  accentColor:'#ED93B1', config:{} },
   { id:'profile-05', type:'profile', theme:'profile-obsidian',     layout:'profile-layout', title:'Obsidian',     desc:'퓨어 블랙, 하이 콘트라스트, 럭셔리',           badge:'NEW', accentColor:'#fff',    config:{} },
@@ -54,7 +89,12 @@ const TEMPLATES = [
   { id:'mix-09', type:'stats',   theme:'dark-lite',   layout:'',            title:'Dark Lite',   desc:'경량 다크 컴팩트 카드 (300px)',            badge:null,  accentColor:'#aaa',    config:{stats:['Stars','Repos','Active']} },
 
   /* ── LINKS (10) ──────────────────────────────────── */
-  { id:'links-01', type:'links', theme:'links-pill-row',      layout:'links-layout', title:'Pill Row',       desc:'한 줄 가로 배열 라운드 필 버튼',                badge:'NEW', accentColor:'#4285F4', config:{links:['github','blog','email']} },
+  { id:'links-01', type:'links', theme:'links-pill-row',      layout:'links-layout', title:'Pill Row',       desc:'한 줄 가로 배열 라운드 필 버튼',                badge:'NEW', accentColor:'#4285F4', config:{links:['github','blog','email']},
+    blocks:[
+      { id:'b1', type:'name',  data:{ username:'', name:'Your Name', role:'', handle:'' } },
+      { id:'b2', type:'links', data:{ items:[{ type:'github', url:'' },{ type:'blog', url:'' },{ type:'email', url:'' }] } },
+    ]
+  },
   { id:'links-02', type:'links', theme:'links-glass-card',    layout:'links-layout', title:'Glass Card',     desc:'글래스모피즘 카드 안 그리드 버튼',              badge:null,  accentColor:'#ED93B1', config:{links:['github','blog','email','linkedin']} },
   { id:'links-03', type:'links', theme:'links-dark-row',      layout:'links-layout', title:'Dark Row',       desc:'다크 배경 심플 아이콘+텍스트 행',              badge:null,  accentColor:'#7EC8E3', config:{links:['github','blog','linkedin','twitter']} },
   { id:'links-04', type:'links', theme:'links-icon-grid',     layout:'links-layout', title:'Icon Grid',      desc:'아이콘 중심 2×N 그리드 레이아웃',              badge:null,  accentColor:'#9B8FE8', config:{links:['github','blog','email','linkedin','twitter','youtube']} },
@@ -478,3 +518,7 @@ if (typeof TEMPLATES !== 'undefined') {
 /* ── 헬퍼 함수 ───────────────────────────────────────── */
 const getByType = (type) => type === 'all' ? TEMPLATES : TEMPLATES.filter(t => t.type === type);
 const getById   = (id)   => TEMPLATES.find(t => t.id === id);
+
+/* ── 전역 노출 (Single Source of Truth) ─────────────── */
+window.TEMPLATES         = TEMPLATES;
+window.TEMPLATE_REGISTRY = TEMPLATES;
