@@ -653,6 +653,40 @@ const THEME_TO_STYLE = {
   'creator': 'border',       'tech-light': 'glass',      'tech-dark': 'dark',
   'tech-soft': 'neu',        'stats-lite': 'minimal',    'dark-lite': 'dark',
   'glass-neon': 'dark',      'aurora': 'dark',           'mono-border': 'border',
+  /* Profile 추가 */
+  'mbti-status': 'glass',
+  /* Links */
+  'links-pill-row': 'glass',     'links-glass-card': 'glass',   'links-dark-row': 'dark',
+  'links-icon-grid': 'glass',    'links-minimal-list': 'minimal','links-gradient-btns': 'gradient',
+  'links-bordered': 'border',    'links-social-pack': 'glass',  'links-contact-card': 'glass',
+  'links-dev-hub': 'minimal',
+  /* Banner */
+  'banner-wave-pink': 'gradient',     'banner-wave-blue': 'gradient',
+  'banner-slice-gradient': 'gradient','banner-egg': 'glass',
+  'banner-cylinder': 'gradient',      'banner-shark': 'dark',
+  'banner-divider-hits': 'minimal',   'banner-typing': 'dark',
+  'banner-github-trophy': 'gradient',
+  /* Creative */
+  'coffee-meter': 'glass',  'premium-hit': 'glass',
+  /* Identity — MBTI */
+  'identity-mbti-nf': 'glass',  'identity-mbti-nt': 'glass',
+  'identity-mbti-sj': 'glass',  'identity-mbti-sp': 'glass',
+  'identity-mbti-pack': 'glass',
+  /* Identity — Status */
+  'identity-status-green': 'glass',  'identity-status-purple': 'glass',
+  'identity-status-brown': 'glass',  'identity-status-dark': 'dark',
+  'identity-status-red': 'glass',    'identity-status-orange': 'glass',
+  'identity-status-blue': 'glass',   'identity-status-gray': 'glass',
+  /* Identity — Role */
+  'identity-role-blue': 'glass',   'identity-role-green': 'glass',
+  'identity-role-purple': 'glass', 'identity-role-pink': 'glass',
+  'identity-role-orange': 'glass', 'identity-role-red': 'glass',
+  'identity-role-teal': 'glass',   'identity-role-dark': 'dark',
+  /* Identity — Vibe */
+  'identity-vibe-dark': 'dark',    'identity-vibe-green': 'glass',
+  'identity-vibe-orange': 'glass', 'identity-vibe-brown': 'glass',
+  'identity-vibe-dark2': 'dark',   'identity-vibe-slate': 'glass',
+  'identity-vibe-gray': 'glass',
 };
 
 // 타입 → 기본 블록 구성

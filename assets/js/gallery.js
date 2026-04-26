@@ -95,6 +95,10 @@ const PREVIEW_STYLES = {
   'coffee-meter':          'background:linear-gradient(135deg,#fdf9f6,#6f4e3708);',
   'mbti-status':           'background:linear-gradient(135deg,#f8f0ff,#9b8fe808);',
   'premium-hit':           'background:linear-gradient(135deg,#f0f4ff,#4285f408);',
+  /* Stats — 누락 보강 */
+  'aurora':                'background:linear-gradient(135deg,#00C9A7,#4285F4,#9B8FE8);',
+  'glass-neon':            'background:linear-gradient(135deg,#0D0714,#1a1035);',
+  'mono-border':           'background:#fff;outline:2px solid #08080F;outline-offset:-2px;',
 
   /* ── Identity 신규 테마 ─────────────────────────────── */
   /* MBTI */
@@ -265,11 +269,100 @@ function renderCard(tpl) {
   `;
 }
 
+/* ── Links 10종 미리보기 ────────────────────────────── */
+function renderLinksPreview(tpl, isDark) {
+  const items = [
+    { label: 'GitHub',   color: '#181717', bg: '#f0f0f0' },
+    { label: 'Blog',     color: '#20c997', bg: '#e8fdf5' },
+    { label: 'Email',    color: '#EA4335', bg: '#fde8e6' },
+  ];
+
+  switch (tpl.theme) {
+    case 'links-pill-row':
+      return `<div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${items.map(i =>
+        `<span style="background:${i.color};color:#fff;padding:4px 12px;border-radius:99px;font-size:9px;font-weight:700;">${i.label}</span>`
+      ).join('')}</div>`;
+    case 'links-glass-card':
+      return `<div style="background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.7);padding:8px;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:5px;width:75%;">${items.concat([{label:'In',color:'#0077B5',bg:'#e8f4ff'}]).map(i =>
+        `<span style="background:rgba(255,255,255,0.6);color:${i.color};padding:4px 8px;border-radius:6px;font-size:9px;font-weight:700;text-align:center;">${i.label}</span>`
+      ).join('')}</div>`;
+    case 'links-dark-row':
+      return `<div style="display:flex;flex-direction:column;gap:4px;width:80%;">${items.map(i =>
+        `<div style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.85);padding:5px 10px;border-radius:6px;font-size:9px;font-weight:700;display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;background:${i.color};border-radius:50%;"></span>${i.label}</div>`
+      ).join('')}</div>`;
+    case 'links-icon-grid':
+      return `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:75%;">${['GH','Bl','✉','In','Tw','YT'].map((l,idx) => {
+        const c = ['#181717','#20c997','#EA4335','#0077B5','#1DA1F2','#FF0000'][idx];
+        return `<div style="background:${c}22;color:${c};border:1px solid ${c}44;border-radius:8px;padding:6px;font-size:11px;font-weight:800;text-align:center;">${l}</div>`;
+      }).join('')}</div>`;
+    case 'links-minimal-list':
+      return `<div style="display:flex;flex-direction:column;gap:3px;width:75%;font-family:monospace;">${items.map((i,idx) =>
+        `<div style="border-bottom:1px solid rgba(0,0,0,0.08);padding:3px 0;font-size:10px;color:#08080F;font-weight:600;">→ ${i.label}</div>`
+      ).join('')}</div>`;
+    case 'links-gradient-btns':
+      return `<div style="display:flex;flex-direction:column;gap:5px;width:75%;">${items.map((i,idx) => {
+        const grads = ['linear-gradient(90deg,#181717,#333)','linear-gradient(90deg,#20c997,#0d9970)','linear-gradient(90deg,#EA4335,#ff7a6f)'];
+        return `<div style="background:${grads[idx]};color:#fff;padding:5px 12px;border-radius:8px;font-size:9px;font-weight:700;text-align:center;">${i.label}</div>`;
+      }).join('')}</div>`;
+    case 'links-bordered':
+      return `<div style="display:flex;flex-direction:column;gap:4px;width:75%;">${items.map(i =>
+        `<div style="background:transparent;color:${i.color};border:2px solid ${i.color};padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;text-align:center;">${i.label}</div>`
+      ).join('')}</div>`;
+    case 'links-social-pack':
+      return `<div style="display:flex;gap:5px;justify-content:center;">${[
+        { l:'GH', c:'#181717' },{ l:'Tw', c:'#1DA1F2' },{ l:'IG', c:'#E4405F' },{ l:'YT', c:'#FF0000' }
+      ].map(s => `<div style="width:26px;height:26px;border-radius:50%;background:${s.c};color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;">${s.l}</div>`).join('')}</div>`;
+    case 'links-contact-card':
+      return `<div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px 10px;width:75%;display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:9px;font-weight:700;color:#34A853;">📧 Contact Me</div>
+        <div style="height:5px;width:60%;background:rgba(0,0,0,0.08);border-radius:2px;"></div>
+        <div style="height:5px;width:80%;background:rgba(0,0,0,0.08);border-radius:2px;"></div>
+      </div>`;
+    case 'links-dev-hub':
+      return `<div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:10px;padding:8px;width:75%;display:flex;flex-direction:column;gap:3px;">
+        ${['📦 npm','🌐 portfolio','✍️ blog'].map(l =>
+          `<div style="font-size:9px;color:#181717;font-weight:600;padding:2px 4px;border-bottom:1px solid rgba(0,0,0,0.04);">${l}</div>`
+        ).join('')}
+      </div>`;
+  }
+  // 폴백 (기본 generic)
+  return `<div style="display:flex;flex-direction:column;gap:5px;width:80%;">${items.map((i,idx) =>
+    `<div style="background:${isDark?'rgba(255,255,255,.1)':i.bg};color:${isDark?'rgba(255,255,255,.8)':i.color};padding:5px 10px;border-radius:8px;font-size:9px;font-weight:700;">${i.label}</div>`
+  ).join('')}</div>`;
+}
+
+/* ── Vibe 15종 미리보기 (라이프/커리어/협업/유머/상태 × glass/dark/neu) ─── */
+function renderVibePreview(tpl) {
+  const stack = (tpl.config && tpl.config.stack) || ['Vibe 1','Vibe 2','Vibe 3'];
+  const isDark = tpl.theme === 'badge-dark-pro';
+  const isPastel = tpl.theme === 'badge-pastel';
+  const isSoft = tpl.theme === 'badge-soft';
+  // 카테고리별 액센트
+  const categoryColor = (() => {
+    if (tpl.id.includes('lifestyle')) return '#9B8FE8';
+    if (tpl.id.includes('career'))    return '#4285F4';
+    if (tpl.id.includes('collab'))    return '#34A853';
+    if (tpl.id.includes('humor'))     return '#EA4335';
+    if (tpl.id.includes('status'))    return '#FF8C00';
+    return '#9B8FE8';
+  })();
+  const bg = isDark ? 'rgba(255,255,255,0.08)'
+            : isPastel ? `${categoryColor}26`
+            : `${categoryColor}1f`;
+  const fg = isDark ? '#a0d0ff' : categoryColor;
+  const border = isDark ? 'rgba(255,255,255,0.15)' : `${categoryColor}55`;
+  return `<div style="display:flex;flex-direction:column;gap:5px;width:85%;align-items:center;">
+    ${stack.map(label =>
+      `<span style="background:${bg};color:${fg};border:1px solid ${border};padding:3px 10px;border-radius:99px;font-size:9px;font-weight:700;letter-spacing:.2px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;">${label}</span>`
+    ).join('')}
+  </div>`;
+}
+
 /* ── 카테고리별 미리보기 빌더 ─────────────────────────── */
 function buildGalleryPreview(tpl) {
   const isDark = ['aqua-veil','dark-candy','plum-night','dusk-purple','profile-dark-hero',
     'profile-obsidian','profile-simple-dark','dev-card','engineer','tech-dark','dark-lite',
-    'links-dark-row','banner-shark','banner-typing',
+    'links-dark-row','banner-shark','banner-typing','badge-dark-pro',
     'identity-status-dark','identity-vibe-dark','identity-vibe-dark2','identity-role-dark',
   ].includes(tpl.theme);
   const textColor = isDark ? 'rgba(255,255,255,' : 'rgba(8,8,15,';
@@ -279,7 +372,16 @@ function buildGalleryPreview(tpl) {
     return renderIdentityPreview(tpl);
   }
 
-  switch (tpl.type) {
+  /* Vibe 카테고리 → 전용 렌더러 (creative case 안에 있던 분기 분리) */
+  if (tpl.type === 'vibe') {
+    return renderVibePreview(tpl);
+  }
+
+  /* 라우팅 버그 보정: type='creative' 인데 theme이 banner-* 면 banner case 로 보냄 */
+  const effectiveType = (tpl.type === 'creative' && /^banner-/.test(tpl.theme))
+    ? 'banner' : tpl.type;
+
+  switch (effectiveType) {
     case 'stats':
       return `
         <div style="width:82%;display:flex;flex-direction:column;gap:8px;">
@@ -330,7 +432,6 @@ function buildGalleryPreview(tpl) {
         </div>`;
 
     case 'creative':
-    case 'vibe':
       if (tpl.theme === 'blog-card') {
         return `<div style="width:85%;background:rgba(255,255,255,0.8);border-radius:12px;padding:10px;border:1px solid rgba(0,0,0,0.05);">
           <div style="height:6px;width:60%;background:rgba(0,0,0,0.1);border-radius:3px;margin-bottom:8px;"></div>
@@ -376,15 +477,7 @@ function buildGalleryPreview(tpl) {
       return `<div style="font-size:24px;">✨</div>`;
 
     case 'links':
-      return `
-        <div style="display:flex;flex-direction:column;gap:5px;width:80%;">
-          ${['GitHub','Blog','Email'].map((l,i)=>{
-            const colors=['#181717','#20c997','#EA4335'];
-            const bgs=['#f0f0f0','#e8fdf5','#fde8e6'];
-            const dark = isDark;
-            return `<div style="background:${dark?'rgba(255,255,255,.1)':bgs[i]};color:${dark?'rgba(255,255,255,.8)':colors[i]};padding:5px 10px;border-radius:8px;font-size:9px;font-weight:700;">${l}</div>`;
-          }).join('')}
-        </div>`;
+      return renderLinksPreview(tpl, isDark);
 
     case 'banner': {
       const bannerColors = {
@@ -415,6 +508,15 @@ function buildGalleryPreview(tpl) {
           <div style="font-size:9px;color:#555;">contribution snake</div>
         </div>`;
       }
+      if (tpl.theme === 'banner-divider-hits') {
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="display:flex;align-items:center;border-radius:6px;overflow:hidden;font-family:monospace;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <div style="background:#555;color:#fff;padding:5px 10px;font-size:9px;font-weight:700;">hits</div>
+            <div style="background:#34A853;color:#fff;padding:5px 10px;font-size:9px;font-weight:700;">1.2k</div>
+          </div>
+          <div style="font-size:8px;color:rgba(0,0,0,0.4);font-weight:600;letter-spacing:0.5px;">VISITOR COUNTER</div>
+        </div>`;
+      }
       if (tpl.theme === 'premium-hit') {
         return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;background:rgba(255,255,255,0.4);padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,0.6);backdrop-filter:blur(4px);">
           <div style="font-size:8px;font-weight:700;color:#4285F4;opacity:0.6;letter-spacing:1px;">VISITORS</div>
@@ -432,6 +534,43 @@ function buildGalleryPreview(tpl) {
 /* ── 빌더로 이동 ─────────────────────────────────────── */
 function goToBuilder(id) {
   window.location.href = `builder.html?template=${id}`;
+}
+
+/* ── 랜딩 페이지 추천 카드 렌더 (featured: true) ───────── */
+function renderLandingCard(tpl) {
+  const catMeta = CATEGORY_META[tpl.type] || { label: tpl.type };
+  const previewStyle = PREVIEW_STYLES[tpl.theme] || 'background:#f5f5f5;';
+  const previewContent = buildGalleryPreview(tpl);
+  return `
+    <article class="g-card" role="listitem">
+      <div class="g-thumb" style="${previewStyle}" aria-hidden="true">
+        ${previewContent}
+      </div>
+      <div class="g-info">
+        <div class="g-cat">${catMeta.label}</div>
+        <div class="g-name">${tpl.title}</div>
+        <a href="builder.html?template=${tpl.id}" class="g-use-btn">사용하기 →</a>
+      </div>
+    </article>`;
+}
+
+function renderLandingFeatured() {
+  const grid = document.querySelector('.page-landing .gallery-grid');
+  if (!grid) return;
+  const registry = window.TEMPLATE_REGISTRY || window.TEMPLATES;
+  if (!registry) return;
+  const featured = registry.filter(t => t.featured === true).slice(0, 6);
+  if (featured.length === 0) return;
+  grid.innerHTML = featured.map(renderLandingCard).join('');
+}
+
+/* 페이지 진입 시 자동 호출 — body에 page-landing 클래스가 있을 때만 */
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.body && document.body.classList.contains('page-landing')) {
+      renderLandingFeatured();
+    }
+  });
 }
 
 /* ── 갤러리 렌더링 (필터 + 검색) ─────────────────────── */

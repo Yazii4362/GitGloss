@@ -2427,6 +2427,77 @@
 .tpl-thumb[data-theme="stats-lite"]      .tpl-thumb-inner { background: rgba(255,255,255,0.9); color: var(--text-main); font-size: 9px; }
 .tpl-thumb[data-theme="dark-lite"]       .tpl-thumb-inner { background: rgba(14,14,22,0.95); color: rgba(255,255,255,0.7); font-size: 9px; }
 
+/* ── Stats / Creative 추가 (aurora, glass-neon, mono-border) ── */
+.tpl-thumb[data-theme="aurora"]          .tpl-thumb-inner { background: linear-gradient(135deg, #00C9A7, #4285F4, #9B8FE8); color: #fff; }
+.tpl-thumb[data-theme="glass-neon"]      .tpl-thumb-inner { background: linear-gradient(135deg, #0D0714, #1a1035); color: #9B8FE8; box-shadow: inset 0 0 20px rgba(155,143,232,0.3); }
+.tpl-thumb[data-theme="mono-border"]     .tpl-thumb-inner { background: #fff; color: var(--text-main); border: 2px solid #08080F; border-radius: 0; }
+
+/* ── Profile 추가 (mbti-status) ── */
+.tpl-thumb[data-theme="mbti-status"]     .tpl-thumb-inner { background: linear-gradient(135deg, #f8f0ff, #f0eeff); color: #5548aa; border: 1px solid rgba(155,143,232,0.3); }
+
+/* ── Links (10종) ─────────────────────────────────── */
+.tpl-thumb[data-theme="links-pill-row"]      .tpl-thumb-inner { background: linear-gradient(135deg, #F0F4FF, #FFF0F7); color: #4285F4; }
+.tpl-thumb[data-theme="links-glass-card"]    .tpl-thumb-inner { background: linear-gradient(135deg, #FFF0F7, #F4C0D1); color: #9c3060; backdrop-filter: blur(10px); }
+.tpl-thumb[data-theme="links-dark-row"]      .tpl-thumb-inner { background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: #7EC8E3; }
+.tpl-thumb[data-theme="links-icon-grid"]     .tpl-thumb-inner { background: linear-gradient(135deg, #F0EEFF, #FFF0F9); color: #5548aa; }
+.tpl-thumb[data-theme="links-minimal-list"]  .tpl-thumb-inner { background: #fff; color: var(--text-main); border-bottom: 2px solid var(--text-main); border-radius: 0; }
+.tpl-thumb[data-theme="links-gradient-btns"] .tpl-thumb-inner { background: linear-gradient(135deg, #fff, #f8f0ff); color: #FF006E; }
+.tpl-thumb[data-theme="links-bordered"]      .tpl-thumb-inner { background: #F8FAFF; color: #1967D2; border: 2px solid #4285F4; }
+.tpl-thumb[data-theme="links-social-pack"]   .tpl-thumb-inner { background: linear-gradient(135deg, #fff, #f0f9ff); color: #1DA1F2; }
+.tpl-thumb[data-theme="links-contact-card"]  .tpl-thumb-inner { background: linear-gradient(135deg, #EAF3DE, #E8F4FD); color: #34A853; }
+.tpl-thumb[data-theme="links-dev-hub"]       .tpl-thumb-inner { background: #f9f9f9; color: #181717; border: 1px solid rgba(0,0,0,0.1); }
+
+/* ── Banner (9종) ─────────────────────────────────── */
+.tpl-thumb[data-theme="banner-wave-pink"]      .tpl-thumb-inner { background: linear-gradient(135deg, #FFF0F7, #F4C0D1); color: #9c3060; }
+.tpl-thumb[data-theme="banner-wave-blue"]      .tpl-thumb-inner { background: linear-gradient(135deg, #E6F1FB, #B5D4F4); color: #1967D2; }
+.tpl-thumb[data-theme="banner-slice-gradient"] .tpl-thumb-inner { background: linear-gradient(120deg, #9B8FE8, #4285F4, #ED93B1); color: #fff; }
+.tpl-thumb[data-theme="banner-egg"]            .tpl-thumb-inner { background: linear-gradient(135deg, #FFF5F9, #F0EEFF); color: #9c3060; border-radius: 50% / 30%; }
+.tpl-thumb[data-theme="banner-cylinder"]       .tpl-thumb-inner { background: linear-gradient(135deg, #E1F5EE, #7EC8E3); color: #1a6e35; }
+.tpl-thumb[data-theme="banner-shark"]          .tpl-thumb-inner { background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: #aaa; }
+.tpl-thumb[data-theme="banner-divider-hits"]   .tpl-thumb-inner { background: #f0f4ff; color: #34A853; border-radius: 4px; font-family: monospace; }
+.tpl-thumb[data-theme="banner-typing"]         .tpl-thumb-inner { background: #0d1117; color: #61DAFB; font-family: monospace; font-size: 9px; }
+.tpl-thumb[data-theme="banner-github-trophy"]  .tpl-thumb-inner { background: linear-gradient(135deg, #fff9e6, #fff3c0); color: #FFD700; }
+
+/* ── Creative 추가 (coffee-meter, premium-hit) ─────── */
+.tpl-thumb[data-theme="coffee-meter"]    .tpl-thumb-inner { background: linear-gradient(135deg, #fdf9f6, #f5e6d8); color: #6f4e37; }
+.tpl-thumb[data-theme="premium-hit"]     .tpl-thumb-inner { background: linear-gradient(135deg, #f0f4ff, #fff0f7); color: #4285F4; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); }
+
+/* ── Identity — MBTI ─────────────────────────────── */
+.tpl-thumb[data-theme="identity-mbti-nf"]   .tpl-thumb-inner { background: linear-gradient(135deg, #edfff9, #a8f0dc); color: #00C9A7; font-family: monospace; }
+.tpl-thumb[data-theme="identity-mbti-nt"]   .tpl-thumb-inner { background: linear-gradient(135deg, #f0ecff, #c4b8ff); color: #483D8B; font-family: monospace; }
+.tpl-thumb[data-theme="identity-mbti-sj"]   .tpl-thumb-inner { background: linear-gradient(135deg, #e8f0fe, #bbd3ff); color: #1967D2; font-family: monospace; }
+.tpl-thumb[data-theme="identity-mbti-sp"]   .tpl-thumb-inner { background: linear-gradient(135deg, #fff5e6, #ffd0a0); color: #DAA520; font-family: monospace; }
+.tpl-thumb[data-theme="identity-mbti-pack"] .tpl-thumb-inner { background: linear-gradient(135deg, #f8f4ff, #f0e8ff); color: #9B8FE8; border-top: 2px solid #9B8FE8; }
+
+/* ── Identity — Status ──────────────────────────── */
+.tpl-thumb[data-theme="identity-status-green"]  .tpl-thumb-inner { background: linear-gradient(135deg, #f0fff4, #b2f5d3); color: #34A853; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-purple"] .tpl-thumb-inner { background: linear-gradient(135deg, #f4f0ff, #c4b8ff); color: #7B68EE; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-brown"]  .tpl-thumb-inner { background: linear-gradient(135deg, #fff9f5, #e8c9a8); color: #8B5A2B; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-dark"]   .tpl-thumb-inner { background: linear-gradient(135deg, #1a1030, #0a0818); color: #9B8FE8; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-red"]    .tpl-thumb-inner { background: linear-gradient(135deg, #fff5f5, #ffd0cc); color: #EA4335; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-orange"] .tpl-thumb-inner { background: linear-gradient(135deg, #fff8f0, #ffd8a8); color: #FF8C00; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-blue"]   .tpl-thumb-inner { background: linear-gradient(135deg, #f0f4ff, #bed3ff); color: #4285F4; font-family: monospace; }
+.tpl-thumb[data-theme="identity-status-gray"]   .tpl-thumb-inner { background: linear-gradient(135deg, #f8f9fa, #e2e8f0); color: #64748B; font-family: monospace; }
+
+/* ── Identity — Role ───────────────────────────── */
+.tpl-thumb[data-theme="identity-role-blue"]   .tpl-thumb-inner { background: linear-gradient(135deg, #eef3ff, #bdd1ff); color: #4285F4; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-green"]  .tpl-thumb-inner { background: linear-gradient(135deg, #effff4, #b2f5cc); color: #34A853; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-purple"] .tpl-thumb-inner { background: linear-gradient(135deg, #f2efff, #c8bcff); color: #7B68EE; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-pink"]   .tpl-thumb-inner { background: linear-gradient(135deg, #fff0f7, #ffc8e0); color: #ED93B1; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-orange"] .tpl-thumb-inner { background: linear-gradient(135deg, #fff8f0, #ffd0a0); color: #FF8C00; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-red"]    .tpl-thumb-inner { background: linear-gradient(135deg, #fff4f4, #ffc0bb); color: #EA4335; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-teal"]   .tpl-thumb-inner { background: linear-gradient(135deg, #edfafc, #a8e8f0); color: #00B4CC; font-family: monospace; }
+.tpl-thumb[data-theme="identity-role-dark"]   .tpl-thumb-inner { background: linear-gradient(135deg, #1e1630, #12102a); color: #C3B9F5; font-family: monospace; }
+
+/* ── Identity — Vibe ───────────────────────────── */
+.tpl-thumb[data-theme="identity-vibe-dark"]   .tpl-thumb-inner { background: linear-gradient(135deg, #0d0d1a, #1a1a2e); color: #9B8FE8; font-family: monospace; }
+.tpl-thumb[data-theme="identity-vibe-green"]  .tpl-thumb-inner { background: linear-gradient(135deg, #edfff9, #a8f0dc); color: #00C9A7; font-family: monospace; }
+.tpl-thumb[data-theme="identity-vibe-orange"] .tpl-thumb-inner { background: linear-gradient(135deg, #fff8f0, #ffd8a8); color: #FF8C00; font-family: monospace; }
+.tpl-thumb[data-theme="identity-vibe-brown"]  .tpl-thumb-inner { background: linear-gradient(135deg, #fdf9f5, #e8c9a8); color: #8B5A2B; font-family: monospace; }
+.tpl-thumb[data-theme="identity-vibe-dark2"]  .tpl-thumb-inner { background: #000; color: #fff; font-family: monospace; }
+.tpl-thumb[data-theme="identity-vibe-slate"]  .tpl-thumb-inner { background: linear-gradient(135deg, #f1f5f9, #cbd5e1); color: #64748B; font-family: monospace; }
+.tpl-thumb[data-theme="identity-vibe-gray"]   .tpl-thumb-inner { background: linear-gradient(135deg, #fff4f0, #ffd0c0); color: #F05032; font-family: monospace; }
+
 
 /* ═══════════════════════════════════════════════════════
    STATS LAYOUT VARIANTS (builder.js renderStatsLayout)
